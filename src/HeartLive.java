@@ -1,5 +1,6 @@
 import gnu.io.PortInUseException;
 import gnu.io.UnsupportedCommOperationException;
+import service.Settings;
 import ticom.TiComPort;
 
 import java.io.IOException;
@@ -14,8 +15,9 @@ public class HeartLive {
 //    public static List<Integer> list = new ArrayList();
 
     public static void main(String[] args) {
-        System.out.println("Begin of programm");
-        TiComPort tiComPort = new TiComPort();
+        Settings config =  new Settings("COM3");
+        TiComPort tiComPort = new TiComPort(config);
+
         try {
             tiComPort.findPorts();
         } catch (PortInUseException e) {
