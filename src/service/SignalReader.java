@@ -8,6 +8,6 @@ package service;
 public class SignalReader {
     private String readBehaviour;
     public SignalReader(Settings config) {
-
+        System.out.println();
     }
 }
