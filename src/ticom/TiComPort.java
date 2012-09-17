@@ -71,7 +71,7 @@ public class TiComPort {
             this.in = in;
         }
 
-        @Override
+        //@Override
           public void run() {
             //To change body of implemented methods use File | Settings | File Templates.
             byte[] buffer =  new byte[1024];
