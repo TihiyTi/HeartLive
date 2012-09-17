@@ -13,6 +13,7 @@ public class Settings {
     }
 
     private String comPortFinder;
+    private String fileReaderConfig = "single";
 
     public String getComPortFinder() {
         return comPortFinder;
@@ -20,6 +21,14 @@ public class Settings {
 
     public void setComPortFinder(String comPortFinder) {
         this.comPortFinder = comPortFinder;
+    }
+
+    public String getFileReaderConfig() {
+        return fileReaderConfig;
+    }
+
+    public void setFileReaderConfig(String fileReaderConfig) {
+        this.fileReaderConfig = fileReaderConfig;
     }
 
 
