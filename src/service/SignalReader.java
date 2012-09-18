@@ -16,7 +16,7 @@ public class SignalReader {
 
     public SignalReader(Settings config) {
         // Choose
-        File f = new File("C:\\Documents and Settings\\Tihiy\\IdeaProjects\\HeartLive\\src\\samples.txt");
+        File f = new File("C:\\Users\\Alex\\IdeaProjects\\HeartLive\\src\\samples.txt");
         TxtReader txtReader = new TxtReader(f, inputData);
         txtReader.run();
     }
@@ -57,11 +57,19 @@ class TxtReader extends Thread{
     private void phisioNetParser(BufferedReader buffer) throws IOException, InterruptedException {
         String s = buffer.readLine();
         while((s = buffer.readLine())!=null){
+            System.out.println(s);
             char[] chars = s.toCharArray();
-            for(int i = 0; i < chars.length; i++){
-                System.out.print(chars[i]);
+            int i = 0;
+            int n = 0;
+//            while(chars[i]==Character.)
+            for(i = 0; i < chars.length; i++){
+                if(chars[i]==32){
+                    n++;
+                }
+// System.out.print(" " + Character.getNumericValue(chars[i]));
+                System.out.print(" "+(int)chars[i]);
             }
-            System.out.println();
+            System.out.println(""+n);
             //inputData.put(Float.parseFloat(s));
         }
     }
