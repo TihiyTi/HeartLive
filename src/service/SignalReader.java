@@ -15,11 +15,26 @@ public class SignalReader {
     private String readBehaviour;
 
     public SignalReader(Settings config) {
-        // Choose
-        File f = new File("C:\\Users\\Alex\\IdeaProjects\\HeartLive\\src\\samples.txt");
-        TxtReader txtReader = new TxtReader(f, inputData);
+    }
+
+    public SignalReader(File file){
+        if(file.getName().endsWith("txt")){
+            startRead(file);
+        }else{
+            System.out.println("File's suffics doesn't contain TXT");
+        }
+    }
+
+
+    public BlockingQueue<Float> getInputData() {
+        return inputData;
+    }
+
+    private void startRead(File file){
+        TxtReader txtReader = new TxtReader(file, inputData);
         txtReader.run();
     }
+
 }
 
 class TxtReader extends Thread{
@@ -37,12 +52,9 @@ class TxtReader extends Thread{
             BufferedReader buffer = new BufferedReader(fileReader);
             String s = buffer.readLine();
             if(s.contains("Elapsed time")){
-                // File from PhisioNEt
                 phisioNetParser(buffer);
             }else{
-//                if(){
-//
-//                }
+                System.out.println("Unsupported file format");
             }
 
         } catch (FileNotFoundException e) {
@@ -57,20 +69,26 @@ class TxtReader extends Thread{
     private void phisioNetParser(BufferedReader buffer) throws IOException, InterruptedException {
         String s = buffer.readLine();
         while((s = buffer.readLine())!=null){
-            System.out.println(s);
             char[] chars = s.toCharArray();
-            int i = 0;
-            int n = 0;
-//            while(chars[i]==Character.)
-            for(i = 0; i < chars.length; i++){
-                if(chars[i]==32){
-                    n++;
-                }
-// System.out.print(" " + Character.getNumericValue(chars[i]));
-                System.out.print(" "+(int)chars[i]);
+            int i = 17;
+            String string = "";
+            while( chars[i] == 32 ){
+                i++;
             }
-            System.out.println(""+n);
-            //inputData.put(Float.parseFloat(s));
+            while( chars[i]!=32 ){
+                string = string + chars[i];
+                i++;
+            }
+            float pointInFloat = Float.parseFloat(string);
+            System.out.println(""+ pointInFloat);
+            inputData.put(pointInFloat);
+            string = "";
+            while( chars[i] == 32 ){
+                i++;
+            }
+            for(i = i; i<chars.length; i++){
+                string = string + chars[i];
+            }
         }
     }
 }
