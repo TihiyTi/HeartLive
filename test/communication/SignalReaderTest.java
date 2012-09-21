@@ -1,8 +1,8 @@
-package sirvice;
+package communication;
 
 import junit.framework.TestCase;
 import service.Settings;
-import service.SignalReader;
+import communication.SignalReader;
 
 import java.io.File;
 

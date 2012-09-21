@@ -1,4 +1,6 @@
-package service;
+package communication;
+
+import service.Settings;
 
 import java.io.*;
 import java.util.concurrent.BlockingQueue;

@@ -1,9 +1,5 @@
-import gnu.io.PortInUseException;
-import gnu.io.UnsupportedCommOperationException;
 import service.Settings;
-import ticom.TiComPort;
-
-import java.io.IOException;
+import communication.TiComPort;
 
 /**
  * Created with IntelliJ IDEA.
