@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Basic/Basic.iml" filepath="$PROJECT_DIR$/Basic/Basic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CommunicationBasic/CommunicationBasic.iml" filepath="$PROJECT_DIR$/CommunicationBasic/CommunicationBasic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CommunicationCore/CommunicationCore.iml" filepath="$PROJECT_DIR$/CommunicationCore/CommunicationCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CommunicationSerial/CommunicationSerial.iml" filepath="$PROJECT_DIR$/CommunicationSerial/CommunicationSerial.iml" />
+    </modules>
+  </component>
+</project>
+
