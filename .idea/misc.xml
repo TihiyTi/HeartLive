@@ -27,6 +27,7 @@
         <option value="$PROJECT_DIR$/CommunicationBasic/pom.xml" />
         <option value="$PROJECT_DIR$/CommunicationCore/pom.xml" />
         <option value="$PROJECT_DIR$/CommunicationSerial/pom.xml" />
+        <option value="$PROJECT_DIR$/CommunicationFile/pom.xml" />
       </list>
     </option>
   </component>

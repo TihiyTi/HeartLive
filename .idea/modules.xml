@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Basic/Basic.iml" filepath="$PROJECT_DIR$/Basic/Basic.iml" />
       <module fileurl="file://$PROJECT_DIR$/CommunicationBasic/CommunicationBasic.iml" filepath="$PROJECT_DIR$/CommunicationBasic/CommunicationBasic.iml" />
       <module fileurl="file://$PROJECT_DIR$/CommunicationCore/CommunicationCore.iml" filepath="$PROJECT_DIR$/CommunicationCore/CommunicationCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CommunicationFile/CommunicationFile.iml" filepath="$PROJECT_DIR$/CommunicationFile/CommunicationFile.iml" />
       <module fileurl="file://$PROJECT_DIR$/CommunicationSerial/CommunicationSerial.iml" filepath="$PROJECT_DIR$/CommunicationSerial/CommunicationSerial.iml" />
     </modules>
   </component>
