@@ -18,4 +18,9 @@ public final class SerialSignalReader implements SignalReader {
         return inputData;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
+    @Override
+    public Boolean isReadComplete() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
 }
