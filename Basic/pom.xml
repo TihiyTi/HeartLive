@@ -39,6 +39,7 @@
 
     <modules>
         <module>../CommunicationBasic</module>
+        <module>../EcgProcces</module>
     </modules>
 
     <dependencies>
