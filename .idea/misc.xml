@@ -29,6 +29,7 @@
         <option value="$PROJECT_DIR$/CommunicationSerial/pom.xml" />
         <option value="$PROJECT_DIR$/CommunicationFile/pom.xml" />
         <option value="$PROJECT_DIR$/EcgProcces/pom.xml" />
+        <option value="$PROJECT_DIR$/RichClient/pom.xml" />
       </list>
     </option>
   </component>

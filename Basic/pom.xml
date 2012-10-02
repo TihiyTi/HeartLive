@@ -40,6 +40,7 @@
     <modules>
         <module>../CommunicationBasic</module>
         <module>../EcgProcces</module>
+        <module>../RichClient</module>
     </modules>
 
     <dependencies>
