@@ -3,6 +3,8 @@ package com.tihiy.comm.parse;
 import com.tihiy.comm.SignalReader;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -14,6 +16,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * To change this template use File | Settings | File Templates.
  */
 public class FileSignalReader extends  Thread implements SignalReader {
+    private List<BlockingQueue> listOfSignal = new ArrayList<>();
     private BlockingQueue inputData = new LinkedBlockingQueue();
     private File file;
     private Boolean readComplete = false;
@@ -27,8 +30,13 @@ public class FileSignalReader extends  Thread implements SignalReader {
     }
 
     @Override
+    public List getAllData(File file) {
+        return listOfSignal;
+    }
+
+    @Override
     public Boolean isReadComplete() {
-        return readComplete;  //To change body of implemented methods use File | Settings | File Templates.
+        return readComplete;
     }
 
     public void run() {

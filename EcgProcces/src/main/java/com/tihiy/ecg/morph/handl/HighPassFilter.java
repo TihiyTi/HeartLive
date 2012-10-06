@@ -19,7 +19,7 @@ public class HighPassFilter implements Handler {
         int last = size - 1;
         float a = 0;
         if(last >= 0){
-//            a = startData.get(last)/ 32;
+            a = startData.get(last)/ 32;
             if(last >= 1){
 //                a += 2 * startData.get(last - 1);
                 if(last >= 2){
