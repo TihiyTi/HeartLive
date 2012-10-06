@@ -1,15 +1,12 @@
 package com.tihiy.comm.parse;
 
-import com.tihiy.comm.SignalReader;
+import junit.framework.Assert;
 import junit.framework.TestCase;
 import org.junit.Test;
 
-import javax.activation.URLDataSource;
 import java.io.File;
-import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,26 +16,30 @@ import java.util.concurrent.LinkedBlockingQueue;
  * To change this template use File | Settings | File Templates.
  */
 public class FileSignalReaderTest extends TestCase {
-    private  BlockingQueue<Float> data;
+    private List<BlockingQueue<Float>> listOfData;
     private File file;
 
     @Test(timeout = 1000, expected = NullPointerException.class)
     public void testReader() throws Exception {
         FileSignalReader signalReader = new FileSignalReader();
         file = new File(FileSignalReaderTest.class.getResource("signal.txt").getFile());
-        data = signalReader.getData(file);
-        System.out.println(" " + data.size());
-        for(int i = 0; i< data.size(); i++){
+        listOfData = signalReader.getAllData(file);
+        while(!signalReader.isReadComplete()) {}
+        System.out.println(" " + listOfData.size());
+        int size = listOfData.get(1).size();
+        for(int i = 0; i< size; i++){
             switch (i){
                 case 15:
-                    assertTrue(Float.compare(data.peek(), -0.175f) == 0);
+                    assertTrue(Float.compare(listOfData.get(0).peek(), -0.175f) == 0);
                     break;
                 case 21596:
-                    assertTrue(Float.compare(data.peek(), -0.210f) == 0);
+                    assertTrue(Float.compare(listOfData.get(0).peek(), -0.21f) == 0);
                     break;
             }
-            data.take();
+            listOfData.get(0).take();
+            listOfData.get(1).take();
         }
+        System.out.println("end");
     }
 
 }

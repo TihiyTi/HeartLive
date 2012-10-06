@@ -1,5 +1,6 @@
 package com.tihiy.comm.parse;
 
+import com.google.common.base.Splitter;
 import com.tihiy.comm.SignalReader;
 
 import java.io.*;
@@ -31,6 +32,8 @@ public class FileSignalReader extends  Thread implements SignalReader {
 
     @Override
     public List getAllData(File file) {
+        this.file = file;
+        this.run();
         return listOfSignal;
     }
 
@@ -45,6 +48,9 @@ public class FileSignalReader extends  Thread implements SignalReader {
             BufferedReader buffer = new BufferedReader(fileReader);
             String s = buffer.readLine();
             if(s.contains("Elapsed time")){
+                for(int i = 0 ; i<2; i++){
+                    listOfSignal.add(new LinkedBlockingQueue());
+                }
                 phisioNetParser(buffer);
             }else{
                 System.out.println("Unsupported file format");
@@ -62,26 +68,16 @@ public class FileSignalReader extends  Thread implements SignalReader {
     private void phisioNetParser(BufferedReader buffer) throws IOException, InterruptedException {
         String s = buffer.readLine();
         while((s = buffer.readLine())!=null){
-            char[] chars = s.toCharArray();
-            int i = 17;
-            String string = "";
-            while( chars[i] == 32 ){
-                i++;
-            }
-            while( chars[i]!=32 ){
-                string = string + chars[i];
-                i++;
-            }
-            float pointInFloat = Float.parseFloat(string);
-            //System.out.println(""+ pointInFloat);
-            inputData.put(pointInFloat);
-//            dataLength++;
-            string = "";
-            while( chars[i] == 32 ){
-                i++;
-            }
-            for(i = i; i<chars.length; i++){
-                string = string + chars[i];
+            Splitter splitter = Splitter.on('\t').trimResults().omitEmptyStrings();
+            Iterable listOfPoints = splitter.split(s);
+            int numOfSignal = 0;
+            for (Object point : listOfPoints) {
+                String pointInString = (String)point;
+                if(!pointInString.contains(":")){
+                    float pointInFloat =  Float.parseFloat(pointInString);
+                    listOfSignal.get(numOfSignal).add(pointInFloat);
+                    numOfSignal++;
+                }
             }
         }
         readComplete = true;
