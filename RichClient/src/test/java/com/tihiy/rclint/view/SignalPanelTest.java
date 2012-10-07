@@ -1,6 +1,7 @@
 package com.tihiy.rclint.view;
 
 import junit.framework.TestCase;
+import org.jfree.data.general.DefaultPieDataset;
 import org.junit.Test;
 
 import javax.swing.*;
@@ -30,5 +31,7 @@ public class SignalPanelTest extends TestCase {
         frame.pack();
         frame.setVisible(true);
 //        while(frame.isVisible()){}
+        DefaultPieDataset dataset;
+//        dataset.sortByKeys();
     }
 }

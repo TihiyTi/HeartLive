@@ -25,7 +25,6 @@ public class FileSignalReaderTest extends TestCase {
         file = new File(FileSignalReaderTest.class.getResource("signal.txt").getFile());
         listOfData = signalReader.getAllData(file);
         while(!signalReader.isReadComplete()) {}
-        System.out.println(" " + listOfData.size());
         int size = listOfData.get(1).size();
         for(int i = 0; i< size; i++){
             switch (i){
@@ -39,7 +38,5 @@ public class FileSignalReaderTest extends TestCase {
             listOfData.get(0).take();
             listOfData.get(1).take();
         }
-        System.out.println("end");
     }
-
 }
