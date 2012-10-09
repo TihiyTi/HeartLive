@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
+
  * User: aleksey
  * Date: 01.10.12
  * Time: 14:10
@@ -14,20 +15,21 @@ public class HighPassFilter implements Handler {
     private List<Float> startData;
     private List<Float> finishData = new ArrayList<Float>();
 
+    @Override
     public void toDoOperation(){
         int size = startData.size();
         int last = size - 1;
         float a = 0;
         if(last >= 0){
-            a = startData.get(last)/ 32;
+            a -= (startData.get(last) / 32);
             if(last >= 1){
-//                a += 2 * startData.get(last - 1);
-                if(last >= 2){
-//                    a -= startData.get(last - 2);
-                    if(last >= 6){
-//                        a -= startData.get(last - 6) / 16;
+                a += startData.get(last - 1);
+                if(last >= 16){
+                    a += startData.get(last - 16)/16;
+                    if(last >= 17){
+                        a -= startData.get(last - 17);
                         if(last >= 32){
-//                            a += 2 * startData.get(last - 12) / 32;
+                            a += startData.get(last - 32) / 32;
                         }
                     }
                 }

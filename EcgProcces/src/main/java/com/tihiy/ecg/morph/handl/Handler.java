@@ -11,6 +11,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface Handler {
-    public List<Float> getData();
-    public void setData(List<Float> data);
+    List<Float> getData();
+    void setData(List<Float> data);
+    void toDoOperation();
 }

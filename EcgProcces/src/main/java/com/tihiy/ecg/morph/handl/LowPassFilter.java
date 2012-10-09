@@ -21,6 +21,7 @@ public class LowPassFilter implements Handler{
     // To Do y = 2*x[i-1]...
     // 2*a - b + (c - 2*d +e)/32
 
+    @Override
     public void toDoOperation(){
         int size = startData.size();
         int last = size - 1;
