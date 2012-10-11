@@ -17,15 +17,27 @@ import java.util.List;
 public class HandlerTest {
     List<Float> startList = new ArrayList<Float>();
     List<Float> checkLowPassFilter = Arrays.asList(1f/32, 2.0625f, 3.09375f, 4.125f, 5.15625f);
-    List<Float> checkHighPassFilter = ArrayList.asList();
+    List<Float> checkHighPassFilter = Arrays.asList(-0.03125f, 0.9375f, 1.90625f,2.875f, 3.84375f);
+    List<Float> checkDerivativeFilter = Arrays.asList(0.2f, 0.5f, 0.8f, 1f, 1f);
     List<Float> returnList;
 
     @Test
     public void testLowPassFilter() throws Exception {
         Handler lowPassFilter = new LowPassFilter();
-        lowPassFilter.setData(startList);
         procces(lowPassFilter);
         Assert.assertArrayEquals(checkLowPassFilter.toArray(), returnList.toArray());
+    }
+    @Test
+    public void testHighPassFilter() throws  Exception{
+        Handler highPassFilter = new HighPassFilter();
+        procces(highPassFilter);
+        Assert.assertArrayEquals(checkHighPassFilter.toArray(), returnList.toArray());
+    }
+    @Test
+    public void testDerivativeFilter() throws Exception{
+        Handler derivativeFilter =  new DirivativeFilter();
+        procces(derivativeFilter);
+        Assert.assertArrayEquals(checkDerivativeFilter.toArray(),returnList.toArray());
     }
 
     private void procces(Handler filter){

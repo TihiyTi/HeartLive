@@ -10,8 +10,17 @@ import java.util.List;
  * Time: 12:01
  * To change this template use File | Settings | File Templates.
  */
-public interface Handler {
-    List<Float> getData();
-    void setData(List<Float> data);
-    void toDoOperation();
+public abstract class Handler {
+    protected List<Float> startData;
+    protected List<Float> finishData = new ArrayList<Float>();
+
+    public List<Float> getData(){
+        return finishData;
+    }
+
+    public void setData(List<Float> data){
+        startData = data;
+    }
+
+    public void toDoOperation(){}
 }

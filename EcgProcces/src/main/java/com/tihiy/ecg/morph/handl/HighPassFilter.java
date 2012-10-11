@@ -1,8 +1,5 @@
 package com.tihiy.ecg.morph.handl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created with IntelliJ IDEA.
 
@@ -11,9 +8,7 @@ import java.util.List;
  * Time: 14:10
  * To change this template use File | Settings | File Templates.
  */
-public class HighPassFilter implements Handler {
-    private List<Float> startData;
-    private List<Float> finishData = new ArrayList<Float>();
+public class HighPassFilter extends Handler {
 
     @Override
     public void toDoOperation(){
@@ -36,15 +31,5 @@ public class HighPassFilter implements Handler {
             }
         }
         finishData.add(a);
-    }
-
-    @Override
-    public List<Float> getData() {
-        return finishData;
-    }
-
-    @Override
-    public void setData(List<Float> data) {
-        startData = data;
     }
 }

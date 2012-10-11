@@ -13,10 +13,7 @@ import java.util.List;
  *
  */
 //LowPasFilter for algorithm Pan Tompkins
-public class LowPassFilter implements Handler{
-    private List<Float> startData;
-    private List<Float> finishData = new ArrayList<Float>();
-
+public class LowPassFilter extends Handler{
 
     // To Do y = 2*x[i-1]...
     // 2*a - b + (c - 2*d +e)/32
@@ -42,15 +39,5 @@ public class LowPassFilter implements Handler{
             }
         }
         finishData.add(a);
-    }
-
-    @Override
-    public List<Float> getData() {
-        return finishData;
-    }
-
-    @Override
-    public void setData(List<Float> data) {
-        startData = data;
     }
 }
