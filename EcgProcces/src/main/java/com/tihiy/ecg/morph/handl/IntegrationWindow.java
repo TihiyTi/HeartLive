@@ -8,6 +8,7 @@ package com.tihiy.ecg.morph.handl;
  * To change this template use File | Settings | File Templates.
  */
 public class IntegrationWindow extends Handler {
+    //Todo adjust windowWight from Fdiscret, W = 1,5QS = 150ms
     private int windowWight;
     @Override
     public void toDoOperation(){

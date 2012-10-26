@@ -20,7 +20,7 @@ public class RFinder  {
         this.data = data;
     }
 
-    public void initPanTomkins(){
+    public void initPanTompkins(){
         handlers.add(new LowPassFilter());
         handlers.add(new HighPassFilter());
         handlers.add(new DirivativeFilter());
@@ -34,9 +34,10 @@ public class RFinder  {
         }
 
         // ToDo Develop some object that POINT on the ECG.
+        // In this place create POINT and init thought method createPoint of DeciderPnT
     }
 
-    public void stopPanTomkins(){
+    public void stopPanTompkins(){
 
     }
 
