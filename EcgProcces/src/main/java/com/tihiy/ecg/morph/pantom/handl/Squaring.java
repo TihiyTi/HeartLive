@@ -1,4 +1,6 @@
-package com.tihiy.ecg.morph.handl;
+package com.tihiy.ecg.morph.pantom.handl;
+
+import com.tihiy.ecg.AbstractHandler;
 
 /**
  * Created with IntelliJ IDEA.
@@ -7,7 +9,7 @@ package com.tihiy.ecg.morph.handl;
  * Time: 17:49
  * To change this template use File | Settings | File Templates.
  */
-public class Squaring extends Handler {
+public class Squaring extends AbstractHandler {
     @Override
     public void toDoOperation(){
         int last = startData.size() - 1;

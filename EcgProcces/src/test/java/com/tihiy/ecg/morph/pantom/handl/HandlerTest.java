@@ -1,5 +1,6 @@
-package com.tihiy.ecg.morph.handl;
+package com.tihiy.ecg.morph.pantom.handl;
 
+import com.tihiy.ecg.AbstractHandler;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -23,24 +24,24 @@ public class HandlerTest {
 
     @Test
     public void testLowPassFilter() throws Exception {
-        Handler lowPassFilter = new LowPassFilter();
+        AbstractHandler lowPassFilter = new LowPassFilter();
         procces(lowPassFilter);
         Assert.assertArrayEquals(checkLowPassFilter.toArray(), returnList.toArray());
     }
     @Test
     public void testHighPassFilter() throws  Exception{
-        Handler highPassFilter = new HighPassFilter();
+        AbstractHandler highPassFilter = new HighPassFilter();
         procces(highPassFilter);
         Assert.assertArrayEquals(checkHighPassFilter.toArray(), returnList.toArray());
     }
     @Test
     public void testDerivativeFilter() throws Exception{
-        Handler derivativeFilter =  new DirivativeFilter();
+        AbstractHandler derivativeFilter =  new DirivativeFilter();
         procces(derivativeFilter);
         Assert.assertArrayEquals(checkDerivativeFilter.toArray(),returnList.toArray());
     }
 
-    private void procces(Handler filter){
+    private void procces(AbstractHandler filter){
         filter.setData(startList);
         returnList = filter.getData();
         for (int i = 1; i < 6; i++) {

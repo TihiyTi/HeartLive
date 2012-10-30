@@ -1,8 +1,7 @@
 
-package com.tihiy.ecg.morph.handl;
+package com.tihiy.ecg.morph.pantom.handl;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.tihiy.ecg.AbstractHandler;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +12,7 @@ import java.util.List;
  *
  */
 //LowPasFilter for algorithm Pan Tompkins
-public class LowPassFilter extends Handler{
+public class LowPassFilter extends AbstractHandler {
 
     // To Do y = 2*x[i-1]...
     // 2*a - b + (c - 2*d +e)/32

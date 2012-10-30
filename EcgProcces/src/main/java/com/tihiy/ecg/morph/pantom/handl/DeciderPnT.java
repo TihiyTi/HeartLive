@@ -1,19 +1,14 @@
-package com.tihiy.ecg.morph.handl;
+package com.tihiy.ecg.morph.pantom.handl;
 
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: aleksey
- * Date: 11.10.12
- * Time: 20:47
- * To change this template use File | Settings | File Templates.
- */
 public class DeciderPnT {
     enum SetProperties {DEFAULT, NOISE, SIGNAL}
 
     private List<Float> startData;
+
     private List<Float> originData;
+
     private int frequency;
     private float peak = 0;
     private float spki, npki, threshold_1, threshold_2;
@@ -21,12 +16,10 @@ public class DeciderPnT {
     // TODO QSms adjustable
     private final int QSms = 100; // max value of QRS length, Gabriel Khan Rapid ECG interpretation, p44
     private final int Wms = 150;
-
-
     public DeciderPnT(int frequency) {
         this.frequency = frequency;
-
     }
+
 
     public Integer findPoint(){
         int size = startData.size();
@@ -105,5 +98,9 @@ public class DeciderPnT {
 
     public void setData(List<Float> startData) {
         this.startData = startData;
+    }
+
+    public void setOriginData(List<Float> originData) {
+        this.originData = originData;
     }
 }

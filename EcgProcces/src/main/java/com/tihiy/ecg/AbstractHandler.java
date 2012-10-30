@@ -1,4 +1,4 @@
-package com.tihiy.ecg.morph.handl;
+package com.tihiy.ecg;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
  * Time: 12:01
  * To change this template use File | Settings | File Templates.
  */
-public abstract class Handler {
+public abstract class AbstractHandler {
     protected List<Float> startData;
     protected List<Float> finishData = new ArrayList<Float>();
 

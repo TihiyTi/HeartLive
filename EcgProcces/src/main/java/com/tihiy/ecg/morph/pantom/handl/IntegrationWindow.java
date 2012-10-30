@@ -1,4 +1,6 @@
-package com.tihiy.ecg.morph.handl;
+package com.tihiy.ecg.morph.pantom.handl;
+
+import com.tihiy.ecg.AbstractHandler;
 
 /**
  * Created with IntelliJ IDEA.
@@ -7,7 +9,7 @@ package com.tihiy.ecg.morph.handl;
  * Time: 18:21
  * To change this template use File | Settings | File Templates.
  */
-public class IntegrationWindow extends Handler {
+public class IntegrationWindow extends AbstractHandler {
     //Todo adjust windowWight from Fdiscret, W = 1,5QS = 150ms
     private int windowWight;
     @Override
