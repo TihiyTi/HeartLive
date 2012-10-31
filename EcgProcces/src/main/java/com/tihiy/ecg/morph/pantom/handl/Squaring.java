@@ -13,6 +13,6 @@ public class Squaring extends AbstractHandler {
     @Override
     public void toDoOperation(){
         int last = startData.size() - 1;
-        finishData.add((float)Math.sqrt(startData.get(last)));
+        finishData.add(startData.get(last)*startData.get(last));
     }
 }

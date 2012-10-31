@@ -5,14 +5,7 @@ import com.tihiy.ecg.AbstractHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: aleksey
- * Date: 26.10.12
- * Time: 16:57
- * To change this template use File | Settings | File Templates.
- */
-abstract public class AbstractRFinder {
+public abstract class AbstractRFinder {
     protected List<AbstractHandler> handlers = new ArrayList<>();
     protected List<Float> data;
     protected int frequency;

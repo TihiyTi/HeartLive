@@ -2,6 +2,8 @@ package com.tihiy.rclint.view;
 
 import junit.framework.TestCase;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeriesCollection;
 import org.junit.Test;
 
 import javax.swing.*;
@@ -9,13 +11,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: aleksey
- * Date: 03.10.12
- * Time: 15:30
- * To change this template use File | Settings | File Templates.
- */
 public class SignalPanelTest extends TestCase {
     @Test(timeout = 1000, expected = InterruptedException.class)
     public void testPanel(){
@@ -33,5 +28,9 @@ public class SignalPanelTest extends TestCase {
 //        while(frame.isVisible()){}
         DefaultPieDataset dataset;
 //        dataset.sortByKeys();
+    }
+
+    public void tryToJFreeChart(){
+        XYDataset xyDataset =  new XYSeriesCollection();
     }
 }

@@ -7,13 +7,6 @@ import com.tihiy.ecg.morph.pantom.handl.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: aleksey
- * Date: 28.09.12
- * Time: 11:47
- * To change this template use File | Settings | File Templates.
- */
 public class PanTompkinsAlgorithm extends AbstractRFinder {
     public DeciderPnT deciderPnT =  new DeciderPnT(frequency);
     List list = new ArrayList();
