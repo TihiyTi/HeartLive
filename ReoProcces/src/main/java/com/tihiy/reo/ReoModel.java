@@ -1,13 +1,25 @@
 package com.tihiy.reo;
 
-public class ReoModel {
+public class ReoModel implements InterfaceModel {
+
+    private double sphRadius;
+    private double h;
+    private double roBlood;
+    private double roTissue;
+//    private ElectrodeSystem electrodeSystem;
+
+    public ReoModel(double sphRadius, double h) {
+        this.sphRadius = sphRadius;
+        this.h = h;
+    }
+
     private double fromOtoElectrode(ElectrodeSystem e, double h, double sphRadius){
         double value;
-        value = fromOtoPoint(e.getElectrodeI(), h, sphRadius);
+        value = fromOtoPoint(e.getElectrodeI());
         return value;
     }
 
-    private double fromOtoPoint(ReoPoint point, double h, double sphRadius){
+    private double fromOtoPoint(ReoPoint point){
         double value;
         double x = point.getX();
         double y = point.getY();
@@ -15,65 +27,26 @@ public class ReoModel {
         value = Math.sqrt((sphRadius + h - z)*(sphRadius + h - z)+ y*y + x*x);
         return value;
     }
-}
-
-class ReoPoint{
-    private final double x;
-    private final double y;
-    private final double z;
-
-    ReoPoint(double x, double y, double z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
-
-    ReoPoint(double x, double y) {
-        this.x = x;
-        this.y = y;
-        z = 0;
+    private double potentialInPointFromElectrode(ReoPoint point, ReoPoint electrodeI){
+        double potentialValue = 0;
+        double toPoint = fromOtoPoint(point);
+        double toElectrode = fromOtoPoint(electrodeI);
+//        double sum
+        potentialValue = roTissue/(2*Math.PI*toElectrode)*
+        return 0;
     }
 
 
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public double getZ() {
-        return z;
+    @Override
+    public double getPotentialInPoint(ReoPoint point, ElectrodeSystem electrodeSystem) {
+        double potentialValue = 0;
+        double rUL;
+        double rUR;
+        double rIL;
+        double rIR;
+        potentialValue = potentialInPointFromElectrode(point, electrodeSystem.getElectrodeI());
+//        potentialValue += potentialInPointFromElectrode(point, electrodeSystem.getElectrodeI());
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }
 
-class ElectrodeSystem{
-    static enum El {RIGHT_I, LEFT_I}
-
-    private double x = 0;
-    private double y = 0;
-    private double a;
-    private double b;
-
-    ElectrodeSystem(double a, double b ,double x, double y) {
-        this.x = x;
-        this.y = y;
-        this.a = a;
-        this.b = b;
-    }
-
-    ElectrodeSystem(double a, double b) {
-        this.a = a;
-        this.b = b;
-    }
-
-    public void setPosition(double x, double y){
-        this.x = x;
-        this.y = y;
-    }
-    // Todo Realize for everyone electrodes
-    public ReoPoint getElectrodeI(){
-        return new ReoPoint(x, y + a);
-    }
-}
