@@ -8,6 +8,7 @@
     <file url="file://$PROJECT_DIR$/CommunicationSerial" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/EcgProcces" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/EcgProccesBasic" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ReoProcces" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/RichClient" charset="UTF-8" />
   </component>
 </project>
