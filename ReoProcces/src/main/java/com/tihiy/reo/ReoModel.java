@@ -1,19 +1,38 @@
 package com.tihiy.reo;
 
-public class ReoModel implements InterfaceModel {
+public final class ReoModel implements InterfaceModel {
 
-    private double sphRadius;
+    private double rSphera;
     private double h;
+
+    public void setrSphera(double rSphera) {
+        this.rSphera = rSphera;
+    }
+
+    public void setH(double h) {
+        this.h = h;
+    }
+
+    public void setRoBlood(double roBlood) {
+        this.roBlood = roBlood;
+    }
+
+    public void setRoTissue(double roTissue) {
+        this.roTissue = roTissue;
+    }
+
     private double roBlood;
     private double roTissue;
 //    private ElectrodeSystem electrodeSystem;
 
-    public ReoModel(double sphRadius, double h) {
-        this.sphRadius = sphRadius;
-        this.h = h;
+    public ReoModel(double rSphera, double h, double roBlood, double roTissue) {
+        setrSphera(rSphera);
+        setH(h);
+        setRoBlood(roBlood);
+        setRoTissue(roTissue);
     }
 
-    private double fromOtoElectrode(ElectrodeSystem e, double h, double sphRadius){
+    private double fromOtoElectrode(ElectrodeSystem e){
         double value;
         value = fromOtoPoint(e.getElectrodeI());
         return value;
@@ -24,29 +43,80 @@ public class ReoModel implements InterfaceModel {
         double x = point.getX();
         double y = point.getY();
         double z = point.getZ();
-        value = Math.sqrt((sphRadius + h - z)*(sphRadius + h - z)+ y*y + x*x);
+        value = Math.sqrt((rSphera + h - z)*(rSphera + h - z)+ y*y + x*x);
         return value;
     }
-    private double potentialInPointFromElectrode(ReoPoint point, ReoPoint electrodeI){
-        double potentialValue = 0;
-        double toPoint = fromOtoPoint(point);
-        double toElectrode = fromOtoPoint(electrodeI);
-//        double sum
-        potentialValue = roTissue/(2*Math.PI*toElectrode)*
-        return 0;
+    // Todo wokring for each electrode (view sign  ("znak"))
+    private static double fromPointToElectrode(ReoPoint point, ReoPoint electrode){
+        double value;
+        value = Math.sqrt((electrode.getY() - point.getY())*(electrode.getY() - point.getY())+ point.getZ()*point.getZ());
+        return value;
     }
 
+    private static double getCosinus(double toPoint, double toElectrode, double toPointElectrode){
+        double value;
+        value = toPoint*toPoint+toElectrode*toElectrode - toPointElectrode*toPointElectrode;
+        value /= (2 * toPoint * toElectrode);
+        return value;
+    }
+
+    private double potentialInPointFromElectrode(ReoPoint point, ReoPoint electrode){
+        double potentialValue;
+        double toPoint = fromOtoPoint(point);
+        double toElectrode = fromOtoPoint(electrode);
+        double cosinus = getCosinus(toPoint, toElectrode, fromPointToElectrode(point, electrode));
+        potentialValue = roTissue/(2*Math.PI*toElectrode)*summaPoN(10, toPoint,toElectrode,cosinus);
+//        System.out.println("toPoint = " +toPoint);
+//        System.out.println("toElectrode = " +toElectrode);
+//        System.out.println("cosinus = " +cosinus);
+        return potentialValue;
+    }
+    private double underSumm(int n, double toPoint, double toElectrode, double cosinus){
+        double value = 1;
+        for(int i = 0; i < n; i++){
+            value *= rSphera*rSphera/(toElectrode*toPoint);
+        }
+        value *= rSphera/toPoint;
+        value *= ((n*(roBlood - roTissue))/(n*(roBlood+roTissue)+roBlood));
+        value *= legandr(n,cosinus);
+//        System.out.println("value "+n+" = "+value);
+        return value;
+    }
+    private static double legandr(int n, double cosinus){
+        double element = 1;
+        double elementPrePre = 1;
+        double elementPre = cosinus;
+        for(int i = 2; i <= n; i++){
+            element = (2*i - 1)* cosinus *elementPre - (i - 1)*elementPrePre;
+            element /= i;
+            elementPrePre = elementPre;
+            elementPre = element;
+        }
+        if(n==1){
+            return cosinus;
+        }
+        return element;
+    }
+
+    private double summaPoN(int n, double toPoint, double toElectrode, double cosinus){
+        double value = 0;
+        for(int i = 0; i < n; i++){
+            value += underSumm(i, toPoint, toElectrode, cosinus);
+        }
+//        System.out.println("summaPo = " + value);
+        return value;
+    }
 
     @Override
     public double getPotentialInPoint(ReoPoint point, ElectrodeSystem electrodeSystem) {
-        double potentialValue = 0;
-        double rUL;
-        double rUR;
-        double rIL;
-        double rIR;
+        double potentialValue;
+//        double rUL;
+//        double rUR;
+//        double rIL;
+//        double rIR;
         potentialValue = potentialInPointFromElectrode(point, electrodeSystem.getElectrodeI());
 //        potentialValue += potentialInPointFromElectrode(point, electrodeSystem.getElectrodeI());
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return potentialValue;  //To chaqnge body of implemented methods use File | Settings | File Templates.
     }
 }
 
