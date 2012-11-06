@@ -86,7 +86,8 @@ public class TestXY extends JFrame {
 
             public Number getX(int i, int j)
             {
-                return new Double(getXValue(i, j));
+                return 100;
+//                return new Double(getXValue(i, j));
             }
 
             public double getXValue(int i, int j)
@@ -96,7 +97,8 @@ public class TestXY extends JFrame {
 
             public Number getY(int i, int j)
             {
-                return new Double(getYValue(i, j));
+                return 100;
+//                return new Double(getYValue(i, j));
             }
 
             public double getYValue(int i, int j)
