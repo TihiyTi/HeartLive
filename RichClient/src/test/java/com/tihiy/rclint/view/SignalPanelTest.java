@@ -14,20 +14,26 @@ import java.util.List;
 public class SignalPanelTest extends TestCase {
     @Test(timeout = 1000, expected = InterruptedException.class)
     public void testPanel(){
-        List list = new ArrayList();
-        SignalPanel panel = new SignalPanel(list);
-        panel.setPreferredSize(new Dimension(500, 300));
-//        panel.setBackground(Color.GREEN);
-        for(int i = 0; i < 300; i++ ){
-            list.add((float)Math.random()*100);
-        }
-        JFrame frame = new JFrame("testing");
-        frame.getContentPane().add(panel);
+//        List list = new ArrayList();
+//        SignalPanel panel = new SignalPanel(list);
+//        panel.setPreferredSize(new Dimension(500, 300));
+////        panel.setBackground(Color.GREEN);
+//        for(int i = 0; i < 300; i++ ){
+//            list.add((float)Math.random()*100);
+//        }
+//        JFrame frame = new JFrame("testing");
+//        frame.getContentPane().add(panel);
+//        frame.pack();
+//        frame.setVisible(true);
+////        while(frame.isVisible()){}
+        JFrame frame =  new JFrame("Test");
+        TestXY test =  new TestXY("Test");
+        JPanel jpanel = test.createDemoPanel();
+        jpanel.setPreferredSize(new Dimension(500, 270));
+        frame.getContentPane().add(jpanel);
         frame.pack();
         frame.setVisible(true);
-//        while(frame.isVisible()){}
-        DefaultPieDataset dataset;
-//        dataset.sortByKeys();
+        while(frame.isVisible()){}
     }
 
     public void tryToJFreeChart(){

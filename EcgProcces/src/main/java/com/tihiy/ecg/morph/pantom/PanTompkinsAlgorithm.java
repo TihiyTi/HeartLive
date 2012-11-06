@@ -9,13 +9,14 @@ import java.util.List;
 
 public class PanTompkinsAlgorithm extends AbstractRFinder {
     public DeciderPnT deciderPnT =  new DeciderPnT(frequency);
-    List list = new ArrayList();
+    List<Float> list = new ArrayList<Float>();
 
     public PanTompkinsAlgorithm(List<Float> data, int frequency) {
         super(data, frequency);
+        initPanTompkins();
     }
 
-    public void initPanTompkins(){
+    public final void initPanTompkins(){
         addHandler(new LowPassFilter());
         addHandler(new HighPassFilter());
         addHandler(new DirivativeFilter());
@@ -27,12 +28,13 @@ public class PanTompkinsAlgorithm extends AbstractRFinder {
     public void toDoOperation(){
         for (AbstractHandler handler : handlers) {
             handler.toDoOperation();
+            deciderPnT.findPoint();
         }
         // ToDo Develop some object that POINT on the ECG.
         // In this place create POINT and init thought method createPoint of DeciderPnT
     }
 
-    public void stopPanTompkins(){
-
-    }
+//    public void stopPanTompkins(){
+//
+//    }
 }
