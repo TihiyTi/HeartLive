@@ -2,21 +2,13 @@ package com.tihiy.rclint.view;
 
 import com.tihiy.rclint.mvcAbstract.AbstractViewPanel;
 
-import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: aleksey
- * Date: 03.10.12
- * Time: 14:59
- * To change this template use File | Settings | File Templates.
- */
 public class SignalPanel extends AbstractViewPanel {
-    private List<Float> signal;
+    private final List<Float> signal;
 
     public SignalPanel(List<Float> signal) {
         super();
@@ -24,12 +16,13 @@ public class SignalPanel extends AbstractViewPanel {
         setBackground(Color.orange);
     }
 
+    @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         g.setColor(Color.BLACK);
 
         int height = getHeight();
-        int width = getWidth();
+//        int width = getWidth();
 
         Float max = Collections.max(signal);
         Float min = Collections.min(signal);
