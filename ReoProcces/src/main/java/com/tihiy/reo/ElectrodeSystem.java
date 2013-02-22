@@ -29,7 +29,3 @@ class ElectrodeSystem{
         return new ReoPoint(x, y + a);
     }
 }
-
-class CurrentElectrode{
-
-}

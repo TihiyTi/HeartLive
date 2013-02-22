@@ -5,13 +5,17 @@ public class Measurement implements InterfaceMeasurement {
     InterfaceModel model;
 
     public Measurement(InterfaceModel model, ElectrodeSystem eSystem){
-        this.electrodeSystem = eSystem;
+        electrodeSystem = eSystem;
         this.model =  model;
     }
 
-    // return value of pulse impedance
-    public double test(){
+    @Override
+    public PotentialMap getPotentialMap() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 
-        return 0;
+    @Override
+    public float[][] MatrixResult() {
+        return new float[0][];  //To change body of implemented methods use File | Settings | File Templates.
     }
 }
