@@ -18,4 +18,7 @@ public class Measurement implements InterfaceMeasurement {
     public float[][] MatrixResult() {
         return new float[0][];  //To change body of implemented methods use File | Settings | File Templates.
     }
+
+
+
 }
