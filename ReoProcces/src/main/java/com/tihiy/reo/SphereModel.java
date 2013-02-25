@@ -87,19 +87,20 @@ public class SphereModel implements InterfaceModel {
         return potentialValue;
     }
 
+    @Override
+    public void setElectrodeSystem(ElectrodeSystem electrodeSystem) {
+        this.electrodeSystem = electrodeSystem;
+    }
+    @Override
+    public void setBodyGeometry(BodyGeometry bodyGeometry) {
+        this.bodyGeometry = bodyGeometry;
+    }
+
     public void setRoBlood(double roBlood) {
         this.roBlood = roBlood;
     }
 
     public void setRoTissue(double roTissue) {
         this.roTissue = roTissue;
-    }
-
-    public void setElectrodeSystem(ElectrodeSystem electrodeSystem) {
-        this.electrodeSystem = electrodeSystem;
-    }
-
-    public void setBodyGeometry(BodyGeometry bodyGeometry) {
-        this.bodyGeometry = bodyGeometry;
     }
 }

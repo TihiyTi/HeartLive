@@ -1,12 +1,16 @@
 package com.tihiy.reo;
 
 public class Measurement implements InterfaceMeasurement {
-    ElectrodeSystem electrodeSystem;
+//    ElectrodeSystem electrodeSystem;
     InterfaceModel model;
+//    BodyGeometry bodyGeometry;
 
-    public Measurement(InterfaceModel model, ElectrodeSystem eSystem){
-        electrodeSystem = eSystem;
+    public Measurement(InterfaceModel model, ElectrodeSystem eSystem, BodyGeometry bodyGeometry){
+//        electrodeSystem = eSystem;
         this.model =  model;
+        this.model.setBodyGeometry(bodyGeometry);
+        this.model.setElectrodeSystem(eSystem);
+//        this.bodyGeometry = bodyGeometry;
     }
 
     @Override

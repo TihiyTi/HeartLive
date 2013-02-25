@@ -10,6 +10,11 @@ public class BodyGeometry {
     private double rSphere;
     private double h;
 
+    public BodyGeometry(double rSphere, double h) {
+        this.rSphere = rSphere;
+        this.h = h;
+    }
+
     public double getrSphere() {
         return rSphere;
     }
