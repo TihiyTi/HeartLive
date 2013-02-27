@@ -1,16 +1,16 @@
 package com.tihiy.reo;
 
 class ElectrodeSystem{
-    static enum El {RIGHT_I, LEFT_I}
+    static enum El {PLUS, MINUS}
 
-    private double x = 0;
-    private double y = 0;
+    private double xShift = 0;
+    private double yShift = 0;
     private double a;
     private double b;
 
-    ElectrodeSystem(double a, double b ,double x, double y) {
-        this.x = x;
-        this.y = y;
+    ElectrodeSystem(double a, double b ,double xShift, double yShift) {
+        this.xShift = xShift;
+        this.yShift = yShift;
         this.a = a;
         this.b = b;
     }
@@ -21,15 +21,15 @@ class ElectrodeSystem{
     }
 
     public void setPosition(double x, double y){
-        this.x = x;
-        this.y = y;
+        this.xShift = x;
+        this.yShift = y;
     }
-    // Todo Realize for everyone electrodes
-    public ReoPoint getElectrodeI(){
-        return new ReoPoint(x, y + a);
+
+    public ReoPoint getElectrode(El el){
+        if(el==El.MINUS){
+            return new ReoPoint(xShift, yShift - a);
+        }else{
+            return new ReoPoint(xShift, yShift + a);
+        }
     }
-}
-
-class CurrentElectrode{
-
 }
