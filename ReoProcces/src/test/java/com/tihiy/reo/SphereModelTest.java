@@ -10,5 +10,6 @@ public class SphereModelTest extends TestCase {
         Measurement measurement = new Measurement(model , electrodeSystem, bodyGeometry);
         double value = model.getPotentialInPoint(new ReoPoint(0, -0.03));
         assertEquals(-1.646, value, 0.001);
+
     }
 }
