@@ -36,7 +36,7 @@ public class SphereModel implements InterfaceModel {
 
     private static double fromPointToElectrode(ReoPoint point, ReoPoint electrode){
         double value;
-        value = Math.sqrt((electrode.getY() + point.getY())*(electrode.getY() + point.getY())+ point.getZ()*point.getZ());
+        value = Math.sqrt((electrode.getY() - point.getY())*(electrode.getY() - point.getY())+ point.getZ()*point.getZ());
         return value;
     }
 
