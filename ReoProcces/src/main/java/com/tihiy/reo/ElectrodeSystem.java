@@ -20,9 +20,9 @@ class ElectrodeSystem{
         this.b = b;
     }
 
-    public void setPosition(double x, double y){
-        this.xShift = x;
-        this.yShift = y;
+    public void setPosition(double xShift, double yShift){
+        this.xShift = xShift;
+        this.yShift = yShift;
     }
 
     public ReoPoint getElectrode(El el){
