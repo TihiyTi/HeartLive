@@ -29,4 +29,5 @@ class ReoPoint{
     public double getZ() {
         return z;
     }
+
 }
