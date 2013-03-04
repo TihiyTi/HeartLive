@@ -21,7 +21,4 @@ public class SphereModelTest extends TestCase {
         double value = measurement.getMeasurement();
         assertEquals(-1.646, value, 0.001);
     }
-
-
-
 }
