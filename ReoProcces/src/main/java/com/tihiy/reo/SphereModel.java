@@ -90,8 +90,8 @@ public class SphereModel implements InterfaceModel {
     public double getPotentialInPoint(ReoPoint point) {
         double potentialValue;
         // todo Now used only one of two electrode
-        potentialValue = potentialInPointFromElectrode(point, electrodeSystem.getElectrode(ElectrodeSystem.El.MINUS));
-//        potentialValue -= potentialInPointFromElectrode(point, electrodeSystem.getElectrode(ElectrodeSystem.El.PLUS));
+        potentialValue = potentialInPointFromElectrode(point, electrodeSystem.getIElectrode(ElectrodeSystem.El.MINUS));
+//        potentialValue -= potentialInPointFromElectrode(point, electrodeSystem.getIElectrode(ElectrodeSystem.El.PLUS));
         return potentialValue;
     }
 
@@ -109,6 +109,11 @@ public class SphereModel implements InterfaceModel {
     }
 
     public void setRoTissue(double roTissue) {
+        this.roTissue = roTissue;
+    }
+
+    public void setRo(double roTissue, double roBlood){
+        this.roBlood = roBlood;
         this.roTissue = roTissue;
     }
 }

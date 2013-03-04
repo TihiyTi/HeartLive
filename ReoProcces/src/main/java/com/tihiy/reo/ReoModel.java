@@ -91,7 +91,7 @@
 //    @Override
 //    public double getPotentialInPoint(ReoPoint point, ElectrodeSystem electrodeSystem) {
 //        double potentialValue;
-//        potentialValue = potentialInPointFromElectrode(point, electrodeSystem.getElectrode(ElectrodeSystem.El.MINUS));
+//        potentialValue = potentialInPointFromElectrode(point, electrodeSystem.getIElectrode(ElectrodeSystem.El.MINUS));
 ////        potentialValue += potentialInPointFromElectrode(point, electrodeSystem.getMinusElectrode());
 //        return potentialValue;
 //    }

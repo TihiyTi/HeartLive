@@ -12,6 +12,16 @@ public class SphereModelTest extends TestCase {
         assertEquals(-1.646, value, 0.001);
     }
 
+    public void testMovingESystem(){
+        ElectrodeSystem electrodeSystem = new ElectrodeSystem(0.06, 0.03, 0, 0.01);
+        BodyGeometry bodyGeometry = new BodyGeometry(0.050, 0.020);
+        SphereModel model = new SphereModel();
+        model.setRo(5, 1.5);
+        Measurement measurement = new Measurement(model , electrodeSystem, bodyGeometry);
+        double value = measurement.getMeasurement();
+        assertEquals(-1.646, value, 0.001);
+    }
+
 
 
 }

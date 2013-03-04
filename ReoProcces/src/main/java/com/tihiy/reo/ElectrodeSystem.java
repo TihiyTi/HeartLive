@@ -25,11 +25,19 @@ class ElectrodeSystem{
         this.yShift = yShift;
     }
 
-    public ReoPoint getElectrode(El el){
+    public ReoPoint getIElectrode(El el){
         if(el==El.MINUS){
             return new ReoPoint(xShift, yShift - a);
         }else{
             return new ReoPoint(xShift, yShift + a);
+        }
+    }
+
+    public ReoPoint getUElectrode(El el){
+        if(el==El.MINUS){
+            return new ReoPoint(xShift, yShift - b);
+        }else{
+            return new ReoPoint(xShift, yShift + b);
         }
     }
 }
