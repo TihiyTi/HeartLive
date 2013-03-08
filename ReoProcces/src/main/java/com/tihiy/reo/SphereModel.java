@@ -12,14 +12,14 @@ public class SphereModel implements InterfaceModel {
     private double roTissue = 7;
 
 
-    private double potentialInPointFromElectrode(ReoPoint point, ReoPoint electrode){
+    public double potentialInPointFromElectrode(ReoPoint point, ReoPoint electrode){
         double potentialValue;
         double toPoint = toPoint(point);
         double toElectrode = toPoint(electrode);
         double cosinus = getCosinus(toPoint, toElectrode, fromPointToElectrode(point, electrode));
         potentialValue = roTissue/(2*Math.PI*toElectrode)*summaPoN(10, toPoint,toElectrode,cosinus);
-        log.info("ToPoint = "+ toPoint + "\n" + "ToElectrode = " + toElectrode + "\n"+ "Cosinus = " + cosinus +
-                "\n potentialValue" + potentialValue);
+//        log.info("ToPoint = "+ toPoint + "\n" + "ToElectrode = " + toElectrode + "\n"+ "Cosinus = " + cosinus +
+//                "\n potentialValue" + potentialValue);
         return potentialValue;
     }
 
@@ -91,7 +91,7 @@ public class SphereModel implements InterfaceModel {
         double potentialValue;
         // todo Now used only one of two electrode
         potentialValue = potentialInPointFromElectrode(point, electrodeSystem.getIElectrode(ElectrodeSystem.El.MINUS));
-//        potentialValue -= potentialInPointFromElectrode(point, electrodeSystem.getIElectrode(ElectrodeSystem.El.PLUS));
+        potentialValue -= potentialInPointFromElectrode(point, electrodeSystem.getIElectrode(ElectrodeSystem.El.PLUS));
         return potentialValue;
     }
 
