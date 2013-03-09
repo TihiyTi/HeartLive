@@ -102,6 +102,29 @@ public class SphereModelTest extends TestCase {
         assertEquals(-0.485, value, 0.001);
     }
 
+    public void test3dWithMove(){
+        ElectrodeSystem eSysytem = new ElectrodeSystem(0.06, 0, 0, 0);
+        BodyGeometry bodyGeometry = new BodyGeometry(0.04, 0.02);
+        SphereModel model = new SphereModel();
+        model.setRo(7, 1.35);
+        Measurement measurement = new Measurement(model, eSysytem, bodyGeometry);
+
+        eSysytem.setPosition(0, 0.01);
+        ReoPoint electrode = eSysytem.getIElectrode(ElectrodeSystem.El.MINUS);
+        double value = model.potentialInPointFromElectrode(new ReoPoint(0, 0, 0), electrode );
+        assertEquals(-1.674, value, 0.001);
+
+        eSysytem.setPosition(0, -0.02);
+        electrode = eSysytem.getIElectrode(ElectrodeSystem.El.MINUS);
+        value = model.potentialInPointFromElectrode(new ReoPoint(0, -0.02, 0), electrode );
+        assertEquals(-1.005, value, 0.001);
+
+        eSysytem.setPosition(0.02, 0.01);
+        electrode = eSysytem.getIElectrode(ElectrodeSystem.El.MINUS);
+        value = model.potentialInPointFromElectrode(new ReoPoint(0, -0.02, 0.01), electrode );
+        assertEquals(-2.936, value, 0.001);
+    }
+
     private double[] getPotentials(SphereModel model, ElectrodeSystem eSystem){
         double value[] = new double[4];
         value[0] = model.potentialInPointFromElectrode(eSystem.getUElectrode(ElectrodeSystem.El.MINUS), eSystem.getIElectrode(ElectrodeSystem.El.MINUS));
