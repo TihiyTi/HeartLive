@@ -11,11 +11,9 @@ import com.tihiy.rclint.mvcAbstract.AbstractController;
  */
 public class Controller extends AbstractController {
 
+    public static final String COMMAND_RANDOM_LIST = "randomList";
 
-//    public static final String
-
-    @Override
-    protected void setCommand(String command) {
-        //To change body of implemented methods use File | Settings | File Templates.
+    public void command(String command){
+        applyCommand(command);
     }
 }

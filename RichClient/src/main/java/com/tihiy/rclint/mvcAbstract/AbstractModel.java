@@ -71,6 +71,8 @@ public abstract class AbstractModel
         return returnObject;
     }
 
+    protected abstract void applyCommand(String command);
+
 }
     
 

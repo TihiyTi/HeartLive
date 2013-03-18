@@ -1,5 +1,6 @@
 package com.tihiy.rclint.view;
 
+import com.tihiy.rclint.mvcAbstract.AbstractController;
 import com.tihiy.rclint.mvcAbstract.AbstractViewPanel;
 
 import java.awt.*;
@@ -8,11 +9,21 @@ import java.util.Collections;
 import java.util.List;
 
 public class SignalPanel extends AbstractViewPanel {
-    private final List<Float> signal;
+    AbstractController mc;
 
-    public SignalPanel(List<Float> signal) {
+    private List<Float> signal;
+
+    public SignalPanel(AbstractController mc, List<Float> list) {
         super();
-        this.signal = signal;
+        this.mc = mc;
+        this.signal = list;
+        setBackground(Color.orange);
+        setPreferredSize(new Dimension(getWidth(), 200));
+    }
+
+    public SignalPanel(List<Float> list) {
+        super();
+        this.signal = list;
         setBackground(Color.orange);
     }
 
@@ -37,7 +48,10 @@ public class SignalPanel extends AbstractViewPanel {
 
     @Override
     public void modelPropertyChange(PropertyChangeEvent evt) {
-        repaint();
-        //To change body of implemented methods use File | Settings | File Templates.
+        if(evt.getPropertyName().equals("list")){
+            List<Float> list = (List)evt.getNewValue();
+            signal = list;
+            repaint();
+        };
     }
 }
