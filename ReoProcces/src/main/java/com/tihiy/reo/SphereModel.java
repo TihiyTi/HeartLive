@@ -23,6 +23,12 @@ public class SphereModel implements InterfaceModel {
         return potentialValue;
     }
 
+    public double basePotInPointFromElectrode(ReoPoint point, ReoPoint electrode){
+        double w = fromPointToElectrode(point, electrode);
+        double value = roTissue/(2*Math.PI*w*w);
+        return value;
+    }
+
     private double toPoint(ReoPoint point){
         double value;
         double x = point.getX();
@@ -91,10 +97,17 @@ public class SphereModel implements InterfaceModel {
     @Override
     public double getPotentialInPoint(ReoPoint point) {
         double potentialValue;
-        // todo Now used only one of two electrode
         potentialValue = potentialInPointFromElectrode(point, electrodeSystem.getIElectrode(ElectrodeSystem.El.MINUS));
         potentialValue -= potentialInPointFromElectrode(point, electrodeSystem.getIElectrode(ElectrodeSystem.El.PLUS));
         return potentialValue;
+    }
+
+    @Override
+    public double getBasePotInPoint(ReoPoint point) {
+        double value;
+        value = basePotInPointFromElectrode(point, electrodeSystem.getIElectrode(ElectrodeSystem.El.MINUS));
+        value -= basePotInPointFromElectrode(point, electrodeSystem.getIElectrode(ElectrodeSystem.El.PLUS));
+        return value;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
