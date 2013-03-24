@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="usb">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/jsr80-1.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$USER_HOME$/Downloads/javax-usb/src" />
+      <root url="file://$USER_HOME$/Downloads/javax-usb-libusb/src" />
+      <root url="file://$USER_HOME$/Downloads/javax-usb-libusb/test" />
+      <root url="jar://$USER_HOME$/Downloads/javax-usb-libusb.zip!/javax-usb-libusb/test" />
+      <root url="jar://$USER_HOME$/Downloads/javax-usb-libusb.zip!/javax-usb-libusb/src" />
+      <root url="jar://$USER_HOME$/Downloads/javax-usb.zip!/javax-usb/src" />
+    </SOURCES>
+  </library>
+</component>
