@@ -54,5 +54,8 @@ public class ComPortListener implements Runnable {
         this.signalManager = signalManager;
     }
 
+    public void createTestFlow(){
+
+    }
 
 }

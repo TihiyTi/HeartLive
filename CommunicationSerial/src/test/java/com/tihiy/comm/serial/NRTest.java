@@ -1,11 +1,8 @@
 package com.tihiy.comm.serial;
 
 import com.tihiy.comm.SignalReturn;
-import gnu.io.NRSerialPort;
 import gnu.io.PortInUseException;
 import org.junit.Test;
-
-import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,27 +14,25 @@ import java.util.Set;
 public class NRTest {
     @Test
     public void testTryToNrJavaSerial() throws PortInUseException {
-        //NRSerialPort port = new NRSerialPort("COM3", 9600);
-        Set<String> set = NRSerialPort.getAvailableSerialPorts();
-        System.out.println(set.toString());
-        //RXTXPort port = new RXTXPort("Com3");
-        SerialSignalReader reader = new SerialSignalReader("COM1", new SignalManager());
+        ComPortListener comPortListener =  ComPortListener.getInstance();
+        comPortListener.run();
+//        (new Thread(comPortListener)).start();
+        //SerialSignalReader reader = new SerialSignalReader("COM1", new SignalManager());
     }
 
-//    private byte[] createByteBuffer(int bufferSize){
-//        byte
-//        return
-//    }
+    @Test
+    public void testGenerator() throws InterruptedException {
+        SerialSignalReader reader = new SerialSignalReader("test", new SignalManager());
+        Thread.sleep(1000);
+    }
+
     private class SignalManager implements SignalReturn{
-
-    @Override
-    public void getSamples(double[] samples, String flowName) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        @Override
+        public void getSamples(double[] samples, String flowName) { }
+        @Override
+        public void getSamples(byte[] samples, String flowName) {  }
+        @Override
+        public void createSignal(String flowName) { }
     }
 
-    @Override
-    public void createSignal(String flowName) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-}
 }

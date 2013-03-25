@@ -18,7 +18,12 @@ public class SerialSignalReader implements SerialPortEventListener {
     public SerialSignalReader(String portName, SignalReturn signalManager) {
         this.portName = portName;
         this.signalManager = signalManager;
-        connect(portName);
+        if(!portName.equals("test")){
+            connect(portName);
+        }else{
+            TestGenerator generator = new TestGenerator();
+            (new Thread(generator)).start();
+        }
     }
 
     private boolean connect(String portName){
@@ -76,8 +81,7 @@ public class SerialSignalReader implements SerialPortEventListener {
         }
     }
 
-    private static class SerialReader implements SerialPortEventListener
-    {
+    private static class SerialReader implements SerialPortEventListener{
         private InputStream in;
         private byte[] buffer = new byte[1024];
 
@@ -99,5 +103,21 @@ public class SerialSignalReader implements SerialPortEventListener {
             }
         }
 
+    }
+
+    private class TestGenerator implements Runnable{
+        @Override
+        public void run() {
+            while(true){
+                byte[] b  = new byte[]{(byte)(Math.random()*255)};
+                System.out.println(b[0]);
+                signalManager.getSamples(new byte[]{(byte)(Math.random()*255)}, "test");
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        }
     }
 }

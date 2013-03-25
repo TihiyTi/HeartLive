@@ -11,6 +11,8 @@ public interface SignalReturn {
 
     public void getSamples(double[] samples, String flowName);
 
+    public void getSamples(byte[] samples, String flowName);
+
     public void createSignal(String flowName);
 
     // Todo maybe add STATIC return of data
