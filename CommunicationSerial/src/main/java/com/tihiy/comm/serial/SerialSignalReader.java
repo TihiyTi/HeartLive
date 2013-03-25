@@ -1,48 +1,103 @@
 package com.tihiy.comm.serial;
 
-import com.tihiy.comm.SignalReader;
-import gnu.io.NRSerialPort;
+import com.tihiy.comm.SignalReturn;
+import gnu.io.*;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.io.InputStream;
+import java.util.TooManyListenersException;
 
-public final class SerialSignalReader implements SignalReader {
-    private BlockingQueue<Float> inputData =  new LinkedBlockingQueue<Float>();
+public class SerialSignalReader implements SerialPortEventListener {
 
-    public SerialSignalReader() {
+    private RXTXPort serial;
+    private boolean connected = false;
+    private int baud = 9600;
+    private String portName;
+    private SignalReturn signalManager;
 
+    public SerialSignalReader(String portName, SignalReturn signalManager) {
+        this.portName = portName;
+        this.signalManager = signalManager;
+        connect(portName);
+    }
+
+    private boolean connect(String portName){
+        try
+        {
+            RXTXPort comm = null;
+            CommPortIdentifier ident = null;
+
+            ident = CommPortIdentifier.getPortIdentifier(portName);
+
+            try{
+                System.out.println("Try open port");
+                comm = ident.open("SerialSignalReader", 2000);
+                System.out.println("Port opened");
+            }catch (PortInUseException e) {
+                System.err.println("This is a bug, passed the ownership test above: " + e.getMessage());
+                return false;
+            }
+
+            if ( !(comm instanceof RXTXPort) ) {
+                throw new UnsupportedCommOperationException("Non-serial connections are unsupported.");
+            }
+
+            serial = (RXTXPort) comm;
+            serial.enableReceiveTimeout(100);
+            serial.setSerialPortParams(baud, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+            connected = true;
+        }catch(NativeResourceException e){
+            throw new NativeResourceException(e.getMessage());
+        }catch (Exception e) {
+            System.err.println("Failed to connect on port: "+portName+" exception: ");
+            e.printStackTrace();
+            connected =false;
+        }
+
+        try {
+            serial.addEventListener(new SerialReader(serial.getInputStream()));
+        } catch (TooManyListenersException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        if(isConnected()) {
+            serial.notifyOnDataAvailable(true);
+        }
+        return isConnected();
+    }
+
+    public boolean isConnected(){
+        return connected;
     }
 
     @Override
-    public BlockingQueue getData(File file) {
+    public void serialEvent(SerialPortEvent ev) {
+        if(ev.getEventType()==SerialPortEvent.DATA_AVAILABLE){
 
-        return inputData;  //To change body of implemented methods use File | Settings | File Templates.
+        }
     }
 
-    @Override
-    public List getAllData(File file) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+    private static class SerialReader implements SerialPortEventListener
+    {
+        private InputStream in;
+        private byte[] buffer = new byte[1024];
 
-    @Override
-    public Boolean isReadComplete() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+        public SerialReader ( InputStream in ){
+            this.in = in;
+        }
 
-    private void nothings() throws IOException {
-    //This is how to use NRSerialPort objects
-    NRSerialPort serial = new NRSerialPort("COM3", 115200);
-    serial.connect();
-    DataInputStream ins = new DataInputStream(serial.getInputStream());
-    DataOutputStream outs = new DataOutputStream(serial.getOutputStream());
-    byte b = (byte)ins.read();
-    outs.write(b);
-    serial.disconnect();
-    }
+        public void serialEvent(SerialPortEvent arg0) {
+            int data;
+            byte[] buffer = new byte[1024];
+            int len = -1;
+            try{
+                while ( ( len = this.in.read(buffer)) > -1 ){
+                    System.out.print(new String(buffer,0,len));
+                }
+            }
+            catch ( IOException e ){
+                e.printStackTrace();
+            }
+        }
 
+    }
 }
