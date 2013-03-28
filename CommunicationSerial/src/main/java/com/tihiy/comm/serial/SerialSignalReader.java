@@ -35,9 +35,9 @@ public class SerialSignalReader implements SerialPortEventListener {
             ident = CommPortIdentifier.getPortIdentifier(portName);
 
             try{
-                System.out.println("Try open port");
+                System.out.println("Try open port" + portName);
                 comm = ident.open("SerialSignalReader", 2000);
-                System.out.println("Port opened");
+                System.out.println("Port opened" + portName);
             }catch (PortInUseException e) {
                 System.err.println("This is a bug, passed the ownership test above: " + e.getMessage());
                 return false;
@@ -119,5 +119,9 @@ public class SerialSignalReader implements SerialPortEventListener {
                 }
             }
         }
+    }
+
+    public void closePort(){
+        serial.close();
     }
 }

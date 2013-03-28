@@ -28,21 +28,23 @@ public class ComPortListener implements Runnable {
 
     @Override
     public void run() {
-        Set<String> setOfPorts = NRSerialPort.getAvailableSerialPorts();
-        System.out.println(setOfPorts.toString());
-        for (String portName: setOfPorts){
-            if(!portMap.containsKey(portName)){
-                portMap.put(portName, new SerialSignalReader(portName, signalManager));
-            }else{
-                if(!portMap.get(portName).isConnected()){
-//                    portMap.get(portName).checkProtocol();
+        while(true){
+            Set<String> setOfPorts = NRSerialPort.getAvailableSerialPorts();
+            System.out.println(setOfPorts.toString());
+            for (String portName: setOfPorts){
+                if(!portMap.containsKey(portName)){
+                    portMap.put(portName, new SerialSignalReader(portName, signalManager));
+                }else{
+                    if(!portMap.get(portName).isConnected()){
+    //                    portMap.get(portName).checkProtocol();
+                    }
                 }
             }
-        }
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
         }
     }
 
