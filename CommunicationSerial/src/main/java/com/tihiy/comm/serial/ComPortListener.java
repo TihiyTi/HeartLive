@@ -6,6 +6,8 @@ import gnu.io.NRSerialPort;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,7 +18,7 @@ import java.util.Set;
 public class ComPortListener implements Runnable {
     private static ComPortListener ourInstance = new ComPortListener();
 
-    private Map<String, SerialSignalReader> portMap = new HashMap();
+    private Map<String, SerialSignalReader> portMap = new HashMap<>();
     private SignalReturn signalManager;
 
     public static ComPortListener getInstance() {
@@ -24,6 +26,12 @@ public class ComPortListener implements Runnable {
     }
 
     private ComPortListener() {
+        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }, 0L, 2L, TimeUnit.SECONDS);
     }
 
     @Override
@@ -40,7 +48,7 @@ public class ComPortListener implements Runnable {
             }
         }
         try {
-            Thread.sleep(1000);
+            TimeUnit.SECONDS.sleep(1L);
         } catch (InterruptedException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }

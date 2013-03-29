@@ -4,6 +4,8 @@ import com.tihiy.comm.SignalReturn;
 import gnu.io.PortInUseException;
 import org.junit.Test;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Aleksey
@@ -13,18 +15,20 @@ import org.junit.Test;
  */
 public class NRTest {
     @Test
-    public void testTryToNrJavaSerial() throws PortInUseException {
+    public void testTryToNrJavaSerial() throws PortInUseException, InterruptedException {
         ComPortListener comPortListener =  ComPortListener.getInstance();
         comPortListener.run();
+        TimeUnit.SECONDS.sleep(10L);
+
 //        (new Thread(comPortListener)).start();
         //SerialSignalReader reader = new SerialSignalReader("COM1", new SignalManager());
     }
 
-    @Test
-    public void testGenerator() throws InterruptedException {
-        SerialSignalReader reader = new SerialSignalReader("test", new SignalManager());
-        Thread.sleep(1000);
-    }
+//    @Test
+//    public void testGenerator() throws InterruptedException {
+//        SerialSignalReader reader = new SerialSignalReader("test", new SignalManager());
+//        Thread.sleep(1000);
+//    }
 
     private class SignalManager implements SignalReturn{
         @Override
