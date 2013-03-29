@@ -1,3 +1,8 @@
+#IDEA
+.idea/workspace.xml
+.idea/
+*.iml
+
 # osx noise
 .DS_Store
 profile
@@ -18,3 +23,5 @@ xcuserdata
 CVS
 */target/*
 .idea/workspace.xml
+.idea/
+*.iml

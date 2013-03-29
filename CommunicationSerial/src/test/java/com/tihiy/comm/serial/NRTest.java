@@ -19,7 +19,7 @@ public class NRTest {
         ComPortListener comPortListener =  ComPortListener.getInstance();
         comPortListener.run();
 //        (new Thread(comPortListener)).start();
-        Thread.sleep(1000);
+        Thread.sleep(10000);
     }
 //
 //    @Test
