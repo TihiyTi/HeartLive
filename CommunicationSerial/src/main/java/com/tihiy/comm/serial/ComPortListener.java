@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class ComPortListener implements Runnable {
     private static ComPortListener ourInstance = new ComPortListener();
 
-    private Map<String, SerialSignalReader> portMap = new HashMap<>();
+    private Map<String, SerialSignalReader> portMap = new HashMap();
     private SignalReturn signalManager;
 
     public static ComPortListener getInstance() {
@@ -48,7 +48,7 @@ public class ComPortListener implements Runnable {
             }
         }
         try {
-            TimeUnit.SECONDS.sleep(1L);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }

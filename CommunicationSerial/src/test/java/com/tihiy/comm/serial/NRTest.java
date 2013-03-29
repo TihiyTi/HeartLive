@@ -1,6 +1,7 @@
 package com.tihiy.comm.serial;
 
 import com.tihiy.comm.SignalReturn;
+import gnu.io.NRSerialPort;
 import gnu.io.PortInUseException;
 import org.junit.Test;
 
@@ -15,19 +16,19 @@ import java.util.concurrent.TimeUnit;
  */
 public class NRTest {
     @Test
-    public void testTryToNrJavaSerial() throws PortInUseException, InterruptedException {
+    public void testTryToNrJavaSerial() throws PortInUseException {
         ComPortListener comPortListener =  ComPortListener.getInstance();
         comPortListener.run();
-        TimeUnit.SECONDS.sleep(10L);
-
 //        (new Thread(comPortListener)).start();
         //SerialSignalReader reader = new SerialSignalReader("COM1", new SignalManager());
     }
 
 //    @Test
-//    public void testGenerator() throws InterruptedException {
-//        SerialSignalReader reader = new SerialSignalReader("test", new SignalManager());
-//        Thread.sleep(1000);
+//    public void testCom4() throws InterruptedException {
+//        SignalManager signalManager = new SignalManager();
+//        SerialSignalReader reader = new SerialSignalReader("COM6", signalManager);
+//        Thread.sleep(10000);
+//        reader.closePort();
 //    }
 
     private class SignalManager implements SignalReturn{
