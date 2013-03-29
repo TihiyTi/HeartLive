@@ -1,6 +1,7 @@
 #IDEA
 .idea/workspace.xml
 .idea/
+.idea\
 *.iml
 
 # osx noise
