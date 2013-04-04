@@ -5,7 +5,9 @@ import gnu.io.NRSerialPort;
 import gnu.io.PortInUseException;
 import org.junit.Test;
 
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,10 +18,19 @@ import java.util.concurrent.TimeUnit;
  */
 public class NRTest {
     @Test
-    public void testTryToNrJavaSerial() throws PortInUseException {
-        ComPortListener comPortListener =  ComPortListener.getInstance();
-        comPortListener.run();
+    public void findPort(){
+        System.out.println(NRSerialPort.getAvailableSerialPorts().toString());
+    }
+
+    @Test
+    public void testTryToNrJavaSerial() throws InterruptedException {
+        ComPortListener comPortListener =  ComPortListener.getInstance(new SignalManager());
+//        comPortListener.run();
 //        (new Thread(comPortListener)).start();
+        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(comPortListener, 0L, 2L, TimeUnit.SECONDS);
+        TimeUnit.SECONDS.sleep(40L);
+        comPortListener.closeAllPorts();
+
         //SerialSignalReader reader = new SerialSignalReader("COM1", new SignalManager());
     }
 

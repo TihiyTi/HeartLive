@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,52 +18,53 @@ import java.util.concurrent.TimeUnit;
  */
 public class ComPortListener implements Runnable {
     private static ComPortListener ourInstance = new ComPortListener();
+    private Logger log = Logger.getLogger(this.getClass().getName());
 
     private Map<String, SerialSignalReader> portMap = new HashMap();
     private SignalReturn signalManager;
 
-    public static ComPortListener getInstance() {
+    public static ComPortListener getInstance(SignalReturn signalManager) {
+        ourInstance.setSignalManager(signalManager);
         return ourInstance;
     }
 
     private ComPortListener() {
-        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(new Runnable() {
-            @Override
-            public void run() {
 
-            }
-        }, 0L, 2L, TimeUnit.SECONDS);
     }
 
     @Override
     public void run() {
         Set<String> setOfPorts = NRSerialPort.getAvailableSerialPorts();
-        System.out.println(setOfPorts.toString());
+        log.info(setOfPorts.toString());
         for (String portName: setOfPorts){
             if(!portMap.containsKey(portName)){
-                portMap.put(portName, new SerialSignalReader(portName, signalManager));
+                try {
+                    portMap.put(portName, new SerialSignalReader(portName, signalManager));
+                } catch (Exception e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
             }else{
-                if(!portMap.get(portName).isConnected()){
-//                    portMap.get(portName).checkProtocol();
+                if(portMap.get(portName)== null){
+                    try {
+                        portMap.put(portName, new SerialSignalReader(portName, signalManager));
+                    } catch (Exception e) {
+                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    }
                 }
             }
         }
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-    }
-
-    private void createSignal(String portName){
-        signalManager.createSignal(portName);
     }
 
     public void setSignalManager(SignalReturn signalManager) {
         this.signalManager = signalManager;
     }
 
-    public void createTestFlow(){
+    public void closeAllPorts(){
+        for(String s: portMap.keySet()){
+            if(portMap.get(s)!= null){
+                portMap.get(s).closePort();
+            }
+        }
 
     }
 
