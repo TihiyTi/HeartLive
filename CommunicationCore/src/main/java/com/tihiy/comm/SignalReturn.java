@@ -1,5 +1,7 @@
 package com.tihiy.comm;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Aleksey
@@ -12,6 +14,8 @@ public interface SignalReturn {
     public void getSamples(double[] samples, String flowName);
 
     public void getSamples(byte[] samples, String flowName);
+
+    public void getSamples(List<List<Integer>> samples);
 
     public void createSignal(String flowName);
 
