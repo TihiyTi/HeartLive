@@ -22,9 +22,7 @@ public class SimpleEcg implements ProtocolParser {
                 if(n > numOfBytes){
                     for(; (buf.length - i) > 3 ; i+=3){
                         if(buf[i]==sinchro){
-                            //todo what is this ?!?!
-                            int value = buf[i+1] << 8 ;
-                            value = buf[i+2] << 8;
+                            int value = buf[i+2] + (buf[i+1]<<8);
                             list.add(value);
                         }else {
                             Logger.getLogger(getClass().getName()).info("Protocol CRASH");
