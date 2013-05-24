@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface ProtocolParser {
     List<List<Integer>> getFormattedData(PushbackInputStream stream);
+    int getNumber();
 }

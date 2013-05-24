@@ -12,6 +12,7 @@ public class SerialSignalReader{
 
     private final SerialPort serial;
     private Protocol protocol;
+    Logger log = Logger.getLogger(this.getClass().getName());
 
     public SerialSignalReader(final String portName, final SignalReturn signalManager) throws Exception {
         int baud = 9600;
@@ -26,9 +27,12 @@ public class SerialSignalReader{
                             PushbackInputStream bufStream = new PushbackInputStream(serial.getInputStream());
                             if(protocol == null){
                                 for(Protocol p: Protocol.values()){
-                                    if(p.isProtocol(bufStream))
-                                        protocol = p;
+                                    if(p.getNumber()*2 <= bufStream.available()){
+                                        if(p.isProtocol(bufStream))
+                                            log.info("Find protocol " + p.name());
+                                            protocol = p;
                                         signalManager.createSignal(portName);
+                                    }
                                 }
                             }else{
                                 signalManager.getSamples(protocol.getFormattedData(bufStream));
@@ -51,7 +55,7 @@ public class SerialSignalReader{
         serial.close();
     }
 
-    // ToDo If SignalManager local varieble, then it can't use in TestGenerator.
+    // ToDo If SignalManager local variable, then it can't use in TestGenerator.
     private static class TestGenerator implements Runnable{
 
         @Override

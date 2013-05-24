@@ -50,6 +50,8 @@ public class ComPortListener implements Runnable {
                     } catch (Exception e) {
                         e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                     }
+                }else{
+//                    log.info("Port " + portName + " is already exist");
                 }
             }
         }

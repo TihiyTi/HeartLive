@@ -5,33 +5,31 @@ import java.io.PushbackInputStream;
 import java.util.List;
 
 public enum Protocol{
-    ByteFlow(), SimpleEcg(3, new byte[]{'1'}, new SimpleEcg());
+    /*ByteFlow(),*/ SimpleEcg(3, new byte[]{0x11}, new SimpleEcg());
 
     private int number;
     private byte[] sinchroBytes;
     private ProtocolParser protocolParser;
 
     Protocol(int number, byte[] sinchroBytes, ProtocolParser protocolParser){
-        this.number = number;
+        this.number = protocolParser.getNumber();
         this.sinchroBytes = sinchroBytes;
         this.protocolParser = protocolParser;
     }
     Protocol(){}
 
+    // Only for single sinchrobyte
     public boolean isProtocol(PushbackInputStream stream){
         try {
             byte[] buf = new byte[2*number];
-            if(stream.available() >= 2*number){
-                stream.read(buf);
-                int i = 0;
-                boolean isSynchro = false;
-                while((i < buf.length)||(!isSynchro)){
-                    if(buf[i] == sinchroBytes[0]){
-                        // Todo re-think how to check protocol
-                    }
-                    i++;
+            stream.read(buf);
+            for(int i = 0, len = buf.length/2; i < len; i++){
+                if((buf[i] == sinchroBytes[0]) && (buf[i + number] == sinchroBytes[0])){
+                    stream.unread(buf, i, len - i);
+                    return true;
                 }
             }
+            stream.unread(buf);
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
@@ -40,5 +38,9 @@ public enum Protocol{
 
     public List<List<Integer>> getFormattedData(PushbackInputStream bufStream) {
         return protocolParser.getFormattedData(bufStream);
+    }
+
+    public int getNumber(){
+        return number;
     }
 }
