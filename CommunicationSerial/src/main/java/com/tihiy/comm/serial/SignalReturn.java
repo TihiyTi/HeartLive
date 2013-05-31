@@ -1,4 +1,6 @@
-package com.tihiy.comm;
+package com.tihiy.comm.serial;
+
+import com.tihiy.comm.serial.protocols.Protocol;
 
 import java.util.List;
 
@@ -18,6 +20,8 @@ public interface SignalReturn {
     public void getSamples(List<List<Integer>> samples);
 
     public void createSignal(String flowName);
+
+    Protocol getProtocol();
 
     // Todo maybe add STATIC return of data
 //    public List[] getListSamples();

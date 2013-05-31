@@ -1,13 +1,10 @@
 package com.tihiy.comm.serial;
 
-import com.tihiy.comm.SignalReturn;
 import gnu.io.NRSerialPort;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 /**

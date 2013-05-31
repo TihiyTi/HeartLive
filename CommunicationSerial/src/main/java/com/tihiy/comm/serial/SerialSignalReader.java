@@ -1,6 +1,5 @@
 package com.tihiy.comm.serial;
 
-import com.tihiy.comm.SignalReturn;
 import com.tihiy.comm.serial.protocols.Protocol;
 import gnu.io.*;
 
@@ -25,6 +24,9 @@ public class SerialSignalReader{
                     if (event.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
                         try {
                             PushbackInputStream bufStream = new PushbackInputStream(serial.getInputStream());
+                            if(signalManager.getProtocol() != null){
+                                protocol = signalManager.getProtocol();
+                            }
                             if(protocol == null){
                                 for(Protocol p: Protocol.values()){
                                     if(p.getNumber()*2 <= bufStream.available()){
@@ -35,7 +37,8 @@ public class SerialSignalReader{
                                     }
                                 }
                             }else{
-                                signalManager.getSamples(protocol.getFormattedData(bufStream));
+//                                signalManager.getSamples(protocol.getFormattedData(bufStream));
+                                protocol.getProtocolParser().sendFormattedData(bufStream, signalManager, portName);
                             }
                         }
                         catch (Exception ex) {

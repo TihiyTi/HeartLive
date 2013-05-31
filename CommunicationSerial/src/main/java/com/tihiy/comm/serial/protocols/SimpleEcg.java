@@ -1,5 +1,7 @@
 package com.tihiy.comm.serial.protocols;
 
+import com.tihiy.comm.serial.SignalReturn;
+
 import java.io.IOException;
 import java.io.PushbackInputStream;
 import java.util.ArrayList;
@@ -37,6 +39,11 @@ public class SimpleEcg implements ProtocolParser {
         List<List<Integer>> returnValue = new ArrayList<>();
         returnValue.add(list);
         return returnValue;
+    }
+
+    @Override
+    public void sendFormattedData(PushbackInputStream stream, SignalReturn manager, String flowName) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
