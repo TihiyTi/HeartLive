@@ -2,6 +2,7 @@ package com.tihiy.comm.serial;
 
 import com.tihiy.comm.serial.protocols.Protocol;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,4 +25,5 @@ public abstract class AbstractSignalManager implements SignalReturn {
     public void setProtocol(Protocol protocol) {
         this.protocol = protocol;
     }
+
 }

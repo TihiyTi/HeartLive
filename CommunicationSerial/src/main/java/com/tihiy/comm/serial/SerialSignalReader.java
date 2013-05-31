@@ -17,6 +17,7 @@ public class SerialSignalReader{
         int baud = 9600;
         if(!"test".equals(portName)){
             serial = (new SimpleSerialPort()).open(portName);
+            log.info("Port" + portName + " opened!");
             serial.setSerialPortParams(baud, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
             serial.addEventListener(new SerialPortEventListener() {
                 @Override

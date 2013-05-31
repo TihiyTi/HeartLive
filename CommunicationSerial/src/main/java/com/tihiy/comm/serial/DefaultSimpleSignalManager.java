@@ -6,8 +6,8 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Logger;
 
-public class DefaultSimpleSignalManager extends AbstractSignalManager implements SignalReturn{
-    BlockingQueue queue;
+public class DefaultSimpleSignalManager extends AbstractSignalManager{
+    BlockingQueue<Integer> queue = new LinkedBlockingQueue<>();
     private Logger log = Logger.getLogger(this.getClass().getName());
 
     public BlockingQueue getQueue(){
@@ -21,12 +21,21 @@ public class DefaultSimpleSignalManager extends AbstractSignalManager implements
 
     @Override
     public void getSamples(byte[] samples, String flowName) {
-        Collections.addAll(queue, samples);
+//        Collections.addAll(queue, samples);
+        log.info("Protocol not supported");
     }
 
     @Override
-    public void getSamples(List<List<Integer>> samples) {
-        log.info("Protocol not supported");
+    public <T> void getSamples(List<T> samples) {
+        if(samples.size()!=0){
+            if(samples.get(0) instanceof Integer){
+                for(Object i: samples){
+                    Integer integer = (Integer)i;
+                    queue.add(integer);
+                    System.out.println(""+integer);
+                }
+            }
+        }
     }
 
     @Override

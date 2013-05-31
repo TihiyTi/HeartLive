@@ -25,6 +25,7 @@ public class SimpleEcg implements ProtocolParser {
                         if(buf[i]==sinchro){
                             int value = buf[i+2] + (buf[i+1]<<8);
                             list.add(value);
+//                            System.out.println(buf[i] + " "+ buf[i + 1] + " "+buf[i+2] + " itogo" + value);
                         }else {
                             stream.unread(buf);
                             Logger.getLogger(getClass().getName()).info("Protocol CRASH");
@@ -43,7 +44,31 @@ public class SimpleEcg implements ProtocolParser {
 
     @Override
     public void sendFormattedData(PushbackInputStream stream, SignalReturn manager, String flowName) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        List<Integer> list = new ArrayList<>();
+        try {
+            int numOfPackage = (stream.available()/numOfBytes);
+            if(numOfPackage > 0){
+                byte[] buf = new byte[numOfPackage*numOfBytes];
+                int n = stream.read(buf);
+                for(int i = 0; i < buf.length; i+=numOfBytes){
+                    if(buf[i]==sinchro){
+                        int value = buf[i+2] + (buf[i+1]<<8);
+                        list.add(value);
+//                        System.out.println(buf[i] + " "+ buf[i + 1] + " "+buf[i+2] + " itogo" + value);
+                    }else {
+                        stream.unread(buf);
+                        Logger.getLogger(getClass().getName()).info("Protocol CRASH");
+                    }
+                }
+
+            }
+        } catch (IOException e) {
+            Logger.getLogger(getClass().getName()).log(Level.FINE, String.format("%s %s", toString(), e.getMessage()), e);
+//            e.printStackTrace();
+        }
+        if(list.size()>0){
+            manager.getSamples(list);
+        }
     }
 
     @Override

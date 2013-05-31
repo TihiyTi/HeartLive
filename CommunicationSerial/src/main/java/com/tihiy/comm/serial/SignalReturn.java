@@ -17,11 +17,12 @@ public interface SignalReturn {
 
     public void getSamples(byte[] samples, String flowName);
 
-    public void getSamples(List<List<Integer>> samples);
-
     public void createSignal(String flowName);
 
     Protocol getProtocol();
+
+    <T> void  getSamples(List<T> samples);
+
 
     // Todo maybe add STATIC return of data
 //    public List[] getListSamples();

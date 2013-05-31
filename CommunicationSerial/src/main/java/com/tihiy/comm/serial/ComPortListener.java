@@ -36,6 +36,7 @@ public class ComPortListener implements Runnable {
         for (String portName: setOfPorts){
             if(!portMap.containsKey(portName)){
                 try {
+                    log.info("Port "+portName+ " add to map");
                     portMap.put(portName, new SerialSignalReader(portName, signalManager));
                 } catch (Exception e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
