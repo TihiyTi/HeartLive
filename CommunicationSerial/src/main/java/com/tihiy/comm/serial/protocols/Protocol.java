@@ -42,9 +42,9 @@ public enum Protocol{
         return false;
     }
 
-    public List<List<Integer>> getFormattedData(PushbackInputStream bufStream) {
-        return protocolParser.getFormattedData(bufStream);
-    }
+//    public List<List<Integer>> getFormattedData(PushbackInputStream bufStream) {
+//        return protocolParser.getFormattedData(bufStream);
+//    }
 
     public ProtocolParser getProtocolParser(){
         return protocolParser;
