@@ -11,7 +11,7 @@ import java.util.List;
  * Time: 16:48
  * To change this template use File | Settings | File Templates.
  */
-public interface SignalReturn {
+public interface SignalReturn<T extends Number> {
 
     public void getSamples(double[] samples, String flowName);
 
@@ -21,7 +21,7 @@ public interface SignalReturn {
 
     Protocol getProtocol();
 
-    <T> void  getSamples(List<T> samples);
+    void  getSamples(List<T> samples);
 
 
     // Todo maybe add STATIC return of data

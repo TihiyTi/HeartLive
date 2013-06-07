@@ -55,33 +55,16 @@ public class DefSignalManagerTest {
     }
 
 
-    class DafaulSignalManager extends AbstractSignalManager{
-        BlockingQueue<Integer> queue = new LinkedBlockingQueue<>();
-        private Logger log = Logger.getLogger(this.getClass().getName());
+    static class DafaulSignalManager extends AbstractSignalManager<Integer>{
+        private final Logger log = Logger.getLogger(getClass().getName());
         SignalModelIntRT model;
 
         DafaulSignalManager(SignalModelIntRT signalModel) {
             model = signalModel;
         }
 
-
-        public BlockingQueue getQueue(){
-            return queue;
-        }
-
         @Override
-        public void getSamples(double[] samples, String flowName) {
-            log.info("Protocol not supported");
-        }
-
-        @Override
-        public void getSamples(byte[] samples, String flowName) {
-//        Collections.addAll(queue, samples);
-            log.info("Protocol not supported");
-        }
-
-        @Override
-        public <T> void getSamples(List<T> samples) {
+        public  void getSamples(List<Integer> samples) {
 //            if(samples.size()!=0){
 //                if(samples.get(0) instanceof Integer){
 //                    for(Object i: samples){
@@ -92,15 +75,6 @@ public class DefSignalManagerTest {
 //                }
 //            }
             model.addToList(samples);
-        }
-
-        @Override
-        public void createSignal(String flowName) {
-            if (queue==null){
-                queue = new LinkedBlockingQueue();
-            }else{
-                log.info("Signal already exist");
-            }
         }
     }
 }
