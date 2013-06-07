@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.*;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
@@ -17,13 +18,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Aleksey
- * Date: 26.05.13
- * Time: 21:52
- * To change this template use File | Settings | File Templates.
- */
 public class DefSignalManagerTest {
     @Test
     public void simpleTest() throws InterruptedException {
@@ -61,20 +55,6 @@ public class DefSignalManagerTest {
 
         DafaulSignalManager(SignalModelIntRT signalModel) {
             model = signalModel;
-        }
-
-        @Override
-        public  void getSamples(List<Integer> samples) {
-//            if(samples.size()!=0){
-//                if(samples.get(0) instanceof Integer){
-//                    for(Object i: samples){
-//                        Integer integer = (Integer)i;
-//                        queue.add(integer);
-//                        System.out.println(""+integer);
-//                    }
-//                }
-//            }
-            model.addToList(samples);
         }
     }
 }

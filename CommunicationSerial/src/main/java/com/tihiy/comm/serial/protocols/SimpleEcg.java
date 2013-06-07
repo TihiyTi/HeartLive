@@ -1,6 +1,6 @@
 package com.tihiy.comm.serial.protocols;
 
-import com.tihiy.comm.serial.SignalReturn;
+import com.tihiy.comm.serial.SignalManagerInterface;
 
 import java.io.IOException;
 import java.io.PushbackInputStream;
@@ -15,7 +15,7 @@ public class SimpleEcg implements ProtocolParser {
     byte sinchro = 0x11;
 
     @Override
-    public void sendFormattedData(PushbackInputStream stream, SignalReturn manager, String flowName) {
+    public void sendFormattedData(PushbackInputStream stream, SignalManagerInterface manager, String flowName) {
         List<Integer> list = new ArrayList<>();
         try {
             int numOfPackage = (stream.available()/numOfBytes);
@@ -38,8 +38,9 @@ public class SimpleEcg implements ProtocolParser {
             Logger.getLogger(getClass().getName()).log(Level.FINE, String.format("%s %s", toString(), e.getMessage()), e);
 //            e.printStackTrace();
         }
-        if(list.size()>0){
-            manager.getSamples(list);
+        if(!list.isEmpty()){
+            System.out.println(""+list.toString());
+            manager.getQueue(flowName).addAll(list);
         }
     }
 

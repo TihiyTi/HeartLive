@@ -14,11 +14,12 @@ public class DefaultSimpleSignalManagerTest {
     @Test
     public void simpleTest() throws InterruptedException {
         DefaultSimpleSignalManager signalManager = new DefaultSimpleSignalManager();
+//        signalManager.setProtocol(Protocol.ByteFlow);
         signalManager.setProtocol(Protocol.SimpleEcg);
         ComPortListener comPortListener = ComPortListener.getInstance(signalManager);
         Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(comPortListener, 0L, 2L, TimeUnit.SECONDS);
 
-        SignalPanel view = new SignalPanel((BlockingQueue) ((DefaultSimpleSignalManager) signalManager).getQueue());
+        SignalPanel view = new SignalPanel((BlockingQueue<Integer>) signalManager.getQueue());
 
         JFrame frame = new JFrame("testing");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

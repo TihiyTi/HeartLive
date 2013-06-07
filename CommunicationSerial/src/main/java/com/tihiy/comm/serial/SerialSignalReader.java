@@ -13,9 +13,9 @@ public class SerialSignalReader {
 
     private final SerialPort serial;
     private Protocol protocol;
-    Logger log = Logger.getLogger(this.getClass().getName());
+    Logger log = Logger.getLogger(getClass().getName());
 
-    public SerialSignalReader(final String portName, final SignalReturn signalManager) throws Exception {
+    public SerialSignalReader(final String portName, final SignalManagerInterface signalManager) throws Exception {
         int baud = 9600;
         if (!"test".equals(portName)) {
             serial = (new SimpleSerialPort()).open(portName);
@@ -27,10 +27,11 @@ public class SerialSignalReader {
                     if (event.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
                         try {
                             PushbackInputStream bufStream = new PushbackInputStream(serial.getInputStream());
-                            if (signalManager.getProtocol() != null) {
+                            if ((signalManager.getProtocol() != null) && (protocol == null)) {
                                 protocol = signalManager.getProtocol();
+                                signalManager.createSignal(portName);
                             }
-                            if (protocol == null) {
+                            if (protocol == null){
                                 for (Protocol p : Protocol.values()) {
                                     if (p.getNumber() * 2 <= bufStream.available()) {
                                         if (p.isProtocol(bufStream)) {
@@ -42,7 +43,7 @@ public class SerialSignalReader {
                                     }
                                 }
                             } else {
-//                                signalManager.getSamples(protocol.getFormattedData(bufStream));
+//                                signalManager.putSamples(protocol.getFormattedData(bufStream));
                                 protocol.getProtocolParser().sendFormattedData(bufStream, signalManager, portName);
                             }
                         } catch (Exception ex) {
@@ -70,7 +71,7 @@ public class SerialSignalReader {
             while (true) {
                 byte[] b = {(byte) (Math.random() * 255)};
                 System.out.println(b[0]);
-//                signalManager.getSamples(b, "test");
+//                signalManager.putSamples(b, "test");
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {

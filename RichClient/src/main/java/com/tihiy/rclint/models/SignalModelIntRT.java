@@ -5,13 +5,6 @@ import com.tihiy.rclint.mvcAbstract.AbstractModel;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Home
- * Date: 31.05.13
- * Time: 18:19
- * To change this template use File | Settings | File Templates.
- */
 public class SignalModelIntRT extends AbstractModel{
 
     //    BlockingQueue queue1 = new LinkedBlockingQueue();

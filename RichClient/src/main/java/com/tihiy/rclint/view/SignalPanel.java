@@ -16,7 +16,7 @@ public class SignalPanel extends AbstractViewPanel {
     AbstractController mc;
 
     private List<Float> signal;
-    private BlockingQueue queue;
+    private BlockingQueue<Integer> queue;
     boolean queueFlag = false;
 
     public SignalPanel(AbstractController mc, List<Float> list) {
@@ -31,7 +31,7 @@ public class SignalPanel extends AbstractViewPanel {
         setBackground(Color.orange);
     }
 
-    public SignalPanel(BlockingQueue queue){
+    public SignalPanel(BlockingQueue<Integer> queue){
         this.queue = queue;
         queueFlag = true;
         Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(new Repainter(this), 0L, 1L, TimeUnit.SECONDS);
@@ -57,7 +57,7 @@ public class SignalPanel extends AbstractViewPanel {
                 }
             }
         }else{
-            if(signal.size() >0 ){
+            if(!signal.isEmpty()){
                 int height = getHeight();
 //        int width = getWidth();
 

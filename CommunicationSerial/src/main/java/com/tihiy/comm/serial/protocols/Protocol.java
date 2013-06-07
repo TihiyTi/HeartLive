@@ -1,10 +1,7 @@
 package com.tihiy.comm.serial.protocols;
 
-import com.tihiy.comm.serial.SignalReturn;
-
 import java.io.IOException;
 import java.io.PushbackInputStream;
-import java.util.List;
 
 public enum Protocol{
     ByteFlow(), SimpleEcg(3, new byte[]{0x11}, new SimpleEcg());

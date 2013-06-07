@@ -18,9 +18,9 @@ public class ComPortListener implements Runnable {
     private Logger log = Logger.getLogger(this.getClass().getName());
 
     private Map<String, SerialSignalReader> portMap = new HashMap();
-    private SignalReturn signalManager;
+    private SignalManagerInterface signalManager;
 
-    public static ComPortListener getInstance(SignalReturn signalManager) {
+    public static ComPortListener getInstance(SignalManagerInterface signalManager) {
         ourInstance.setSignalManager(signalManager);
         return ourInstance;
     }
@@ -55,7 +55,7 @@ public class ComPortListener implements Runnable {
         }
     }
 
-    public void setSignalManager(SignalReturn signalManager) {
+    public void setSignalManager(SignalManagerInterface signalManager) {
         this.signalManager = signalManager;
     }
 
