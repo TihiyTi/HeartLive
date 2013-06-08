@@ -12,6 +12,12 @@ public class DefaultSimpleSignalManager extends AbstractSignalManager<Integer> {
     }
 
     @Override
+    public void createSignal(String flowName){
+        super.createSignal(flowName);
+
+    }
+
+    @Override
     public Queue<Integer> getQueue(String flowName) {
         if(currentFlow == null){
             currentFlow = flowName;

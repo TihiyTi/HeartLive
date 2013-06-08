@@ -18,11 +18,11 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-public class DefSignalManagerTest {
+public class ModelSignalManagerTest {
     @Test
     public void simpleTest() throws InterruptedException {
         SignalModelIntRT modelIntRT = new SignalModelIntRT();
-        DafaulSignalManager signalManager = new DafaulSignalManager(modelIntRT);
+        DefaultSimpleSignalManager signalManager = new DefaultSimpleSignalManager();
         signalManager.setProtocol(Protocol.SimpleEcg);
         ComPortListener comPortListener =  ComPortListener.getInstance(signalManager);
         Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(comPortListener, 0L, 2L, TimeUnit.SECONDS);
@@ -46,15 +46,5 @@ public class DefSignalManagerTest {
         while (frame.isVisible());
 
         comPortListener.closeAllPorts();
-    }
-
-
-    static class DafaulSignalManager extends AbstractSignalManager<Integer>{
-        private final Logger log = Logger.getLogger(getClass().getName());
-        SignalModelIntRT model;
-
-        DafaulSignalManager(SignalModelIntRT signalModel) {
-            model = signalModel;
-        }
     }
 }

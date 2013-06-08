@@ -5,6 +5,7 @@ import com.tihiy.comm.serial.SignalManagerInterface;
 import java.io.IOException;
 import java.io.PushbackInputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +17,7 @@ public class SimpleEcg implements ProtocolParser {
 
     @Override
     public void sendFormattedData(PushbackInputStream stream, SignalManagerInterface manager, String flowName) {
-        List<Integer> list = new ArrayList<>();
+        Collection<Integer> list = new ArrayList<>();
         try {
             int numOfPackage = (stream.available()/numOfBytes);
             if(numOfPackage > 0){
@@ -26,7 +27,7 @@ public class SimpleEcg implements ProtocolParser {
                     if(buf[i]==sinchro){
                         int value = buf[i+2] + (buf[i+1]<<8);
                         list.add(value);
-                        System.out.println(buf[i] + " "+ buf[i + 1] + " "+buf[i+2] + " itogo" + value);
+//                        System.out.println(buf[i] + " "+ buf[i + 1] + " "+buf[i+2] + " itogo" + value);
                     }else {
                         stream.unread(buf);
                         Logger.getLogger(getClass().getName()).info("Protocol CRASH");
@@ -39,7 +40,7 @@ public class SimpleEcg implements ProtocolParser {
 //            e.printStackTrace();
         }
         if(!list.isEmpty()){
-            System.out.println(""+list.toString());
+//            System.out.println(""+list.toString());
             manager.getQueue(flowName).addAll(list);
         }
     }

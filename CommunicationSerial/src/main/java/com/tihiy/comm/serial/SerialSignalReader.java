@@ -28,6 +28,10 @@ public class SerialSignalReader {
                         try {
                             PushbackInputStream bufStream = new PushbackInputStream(serial.getInputStream());
                             if ((signalManager.getProtocol() != null) && (protocol == null)) {
+                                if (signalManager.getProtocol().isProtocol(bufStream)) {
+                                    log.info("Protocol  checked" + signalManager.getProtocol().name() );
+
+                                }
                                 protocol = signalManager.getProtocol();
                                 signalManager.createSignal(portName);
                             }
@@ -43,7 +47,6 @@ public class SerialSignalReader {
                                     }
                                 }
                             } else {
-//                                signalManager.putSamples(protocol.getFormattedData(bufStream));
                                 protocol.getProtocolParser().sendFormattedData(bufStream, signalManager, portName);
                             }
                         } catch (Exception ex) {

@@ -14,8 +14,8 @@ public class DefaultSimpleSignalManagerTest {
     @Test
     public void simpleTest() throws InterruptedException {
         DefaultSimpleSignalManager signalManager = new DefaultSimpleSignalManager();
-//        signalManager.setProtocol(Protocol.ByteFlow);
-        signalManager.setProtocol(Protocol.SimpleEcg);
+        signalManager.setProtocol(Protocol.ByteFlow);
+//        signalManager.setProtocol(Protocol.SimpleEcg);
         ComPortListener comPortListener = ComPortListener.getInstance(signalManager);
         Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(comPortListener, 0L, 2L, TimeUnit.SECONDS);
 

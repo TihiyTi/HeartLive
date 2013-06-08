@@ -8,5 +8,4 @@ public interface SignalManagerInterface<T extends Number> {
     Protocol getProtocol();
     void createSignal(String flowName);
     Queue<T> getQueue(String flowName);
-
 }

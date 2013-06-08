@@ -15,7 +15,6 @@ public class ByteFlow implements ProtocolParser {
             stream.read(buf);
             for(byte bt: buf){
                 Integer integer = (int) bt;
-                System.out.println("" + integer);
                 manager.getQueue(flowName).add(integer);
             }
         } catch (IOException e) {
