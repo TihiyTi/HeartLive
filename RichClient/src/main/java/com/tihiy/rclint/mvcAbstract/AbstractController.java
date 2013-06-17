@@ -13,6 +13,9 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * This class provides base level functionality for each controller. This includes the
@@ -27,7 +30,6 @@ public abstract class AbstractController implements PropertyChangeListener {
 
     private ArrayList<AbstractViewPanel> registeredViews;
     private ArrayList<AbstractModel> registeredModels;
-
 
     /** Creates a new instance of Controller */
     public AbstractController() {

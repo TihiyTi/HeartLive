@@ -9,13 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Aleksey
- * Date: 16.03.13
- * Time: 20:32
- * To change this template use File | Settings | File Templates.
- */
 public class ControlPanel extends AbstractViewPanel {
     private Controller mc;
 
