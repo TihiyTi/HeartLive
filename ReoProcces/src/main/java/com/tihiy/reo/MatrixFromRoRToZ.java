@@ -1,12 +1,5 @@
 package com.tihiy.reo;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Home
- * Date: 18.06.13
- * Time: 15:24
- * To change this template use File | Settings | File Templates.
- */
 public class MatrixFromRoRToZ {
 
     double [][] matrix;
@@ -27,9 +20,27 @@ public class MatrixFromRoRToZ {
         matrix = new double[numberOfStep][numberOfStep];
     }
 
-    public double[] getRZArray(double roCurrent){
-        int i = roCurrent - ro
-        return matrix[];
+    public double getRad(double roCurrent, double impedance){
+        int index = getIndexRZArray(roCurrent);
+        return getRadFromArray(index, impedance);
+    }
+
+    private int getIndexRZArray(double roCurrent){
+        return (int)Math.round((roCurrent - roBegin)/roDelta);
+    }
+
+    private double getRadFromArray(int indexRo ,double impedance){
+        double delta = Math.abs(impedance);
+        int indexImp = 0;
+        for(int i = 0; i < matrix[indexRo].length ; i++ ){
+            double valueImp = matrix[indexRo][i];
+            double newDelta = Math.abs(impedance - valueImp);
+            if(newDelta < delta){
+                delta = newDelta;
+                indexImp = i;
+            }
+        }
+        return matrix[indexRo][indexImp];
     }
 
 }
