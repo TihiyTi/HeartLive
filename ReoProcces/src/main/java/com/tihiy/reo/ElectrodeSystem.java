@@ -40,4 +40,12 @@ class ElectrodeSystem{
             return new ReoPoint(xShift, yShift + b);
         }
     }
+
+    public double getA(){
+        return a;
+    }
+
+    public double getB(){
+        return b;
+    }
 }

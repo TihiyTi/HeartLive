@@ -2,18 +2,20 @@ package com.tihiy.reo;
 
 public interface InterfaceMeasurement {
 
-    public PotentialMap getPotentialMap();
+    PotentialMap getPotentialMap();
 
-    public double getPotentialInPoint(ReoPoint point);
+    double getPotentialInPoint(ReoPoint point);
 
-    public double getMeasurement(ReoPoint firstPoint, ReoPoint secondPoint);
+    double getMeasurement(ReoPoint firstPoint, ReoPoint secondPoint);
 
-    public double getMeasurement();
+    double getMeasurement();
 
-    public float[][] MatrixResult();
+    float[][] MatrixResult();
 
-    public void setElectrodeSystem(ElectrodeSystem electrodeSystem);
+    void setElectrodeSystem(ElectrodeSystem electrodeSystem);
 
-    public void setBodyGeometry(BodyGeometry bodyGeometry);
+    void setBodyGeometry(BodyGeometry bodyGeometry);
+
+    InterfaceModel getModel();
 
 }

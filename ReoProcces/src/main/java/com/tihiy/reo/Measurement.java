@@ -15,13 +15,12 @@ public class Measurement implements InterfaceMeasurement {
 
     @Override
     public PotentialMap getPotentialMap() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;
     }
 
     @Override
     public double getPotentialInPoint(ReoPoint point) {
-        double value = model.getPotentialInPoint(point);
-        return value;
+        return model.getPotentialInPoint(point);
     }
 
     @Override
@@ -45,11 +44,16 @@ public class Measurement implements InterfaceMeasurement {
 
     @Override
     public void setElectrodeSystem(ElectrodeSystem electrodeSystem) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public void setBodyGeometry(BodyGeometry bodyGeometry) {
-        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+
+    // todo this method is bad method because we don't ask model about somethings
+    @Override
+    public InterfaceModel getModel(){
+        return model;
     }
 }

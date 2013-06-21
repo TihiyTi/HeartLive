@@ -14,4 +14,8 @@ public class ReoProcessorTest {
     public void radiusCalc(){
 
     }
+
+    private void getRadius(){
+
+    }
 }

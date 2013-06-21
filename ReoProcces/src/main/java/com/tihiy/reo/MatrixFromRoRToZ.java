@@ -43,6 +43,6 @@ public class MatrixFromRoRToZ {
         return matrix[indexRo][indexImp];
     }
 
-
+    private
 
 }

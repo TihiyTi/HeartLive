@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 public class SphereModel implements InterfaceModel {
 
-    private static Logger log = Logger.getLogger(SphereModel.class.getName());
+    private static final Logger log = Logger.getLogger(SphereModel.class.getName());
     private ElectrodeSystem electrodeSystem;
     private BodyGeometry bodyGeometry;
     private double roBlood = 1.35;
@@ -25,8 +25,7 @@ public class SphereModel implements InterfaceModel {
 
     public double basePotInPointFromElectrode(ReoPoint point, ReoPoint electrode){
         double w = fromPointToElectrode(point, electrode);
-        double value = roTissue/(2*Math.PI*w*w);
-        return value;
+        return roTissue/(2*Math.PI*w*w);
     }
 
     private double toPoint(ReoPoint point){
@@ -107,7 +106,7 @@ public class SphereModel implements InterfaceModel {
         double value;
         value = basePotInPointFromElectrode(point, electrodeSystem.getIElectrode(ElectrodeSystem.El.MINUS));
         value -= basePotInPointFromElectrode(point, electrodeSystem.getIElectrode(ElectrodeSystem.El.PLUS));
-        return value;  //To change body of implemented methods use File | Settings | File Templates.
+        return value;
     }
 
     @Override
