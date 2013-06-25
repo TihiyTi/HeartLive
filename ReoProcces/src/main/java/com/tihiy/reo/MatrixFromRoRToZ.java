@@ -20,6 +20,18 @@ public class MatrixFromRoRToZ {
         matrix = new double[numberOfStep][numberOfStep];
     }
 
+    public void fillMatrix(InterfaceMeasurement measurement){
+        for(int i = 0; i < numberOfStep; i++){
+            for(int j = 0; j < numberOfStep; j++){
+                double ro = roBegin + roDelta*i;
+                double rad = radBegin + radDelta*j;
+                measurement.getModel().setRoTissue(ro);
+                measurement.setRSphere(rad);
+                matrix[i][j] = measurement.getMeasurement();
+            }
+        }
+    }
+
     public double getRad(double roCurrent, double impedance){
         int index = getIndexRZArray(roCurrent);
         return getRadFromArray(index, impedance);
@@ -42,7 +54,5 @@ public class MatrixFromRoRToZ {
         }
         return matrix[indexRo][indexImp];
     }
-
-    private
 
 }

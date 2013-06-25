@@ -3,7 +3,6 @@ package com.tihiy.reo;
 public class Measurement implements InterfaceMeasurement {
     ElectrodeSystem electrodeSystem;
     InterfaceModel model;
-//    BodyGeometry bodyGeometry;
 
     public Measurement(InterfaceModel model, ElectrodeSystem eSystem, BodyGeometry bodyGeometry){
         electrodeSystem = eSystem;
@@ -48,6 +47,11 @@ public class Measurement implements InterfaceMeasurement {
 
     @Override
     public void setBodyGeometry(BodyGeometry bodyGeometry) {
+    }
+
+    @Override
+    public void setRSphere(double radius){
+        model.getBodyGeometry().setrSphere(radius);
     }
 
 

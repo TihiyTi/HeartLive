@@ -7,11 +7,11 @@ public class SphereModel implements InterfaceModel {
 
     private static final Logger log = Logger.getLogger(SphereModel.class.getName());
     private ElectrodeSystem electrodeSystem;
+
     private BodyGeometry bodyGeometry;
+
     private double roBlood = 1.35;
     private double roTissue = 7;
-
-
     public double potentialInPointFromElectrode(ReoPoint point, ReoPoint electrode){
         double potentialValue;
         double toPoint = toPoint(point);
@@ -22,6 +22,7 @@ public class SphereModel implements InterfaceModel {
 //                "\n potentialValue" + potentialValue);
         return potentialValue;
     }
+
 
     public double basePotInPointFromElectrode(ReoPoint point, ReoPoint electrode){
         double w = fromPointToElectrode(point, electrode);
@@ -113,15 +114,23 @@ public class SphereModel implements InterfaceModel {
     public void setElectrodeSystem(ElectrodeSystem electrodeSystem) {
         this.electrodeSystem = electrodeSystem;
     }
+
     @Override
     public void setBodyGeometry(BodyGeometry bodyGeometry) {
         this.bodyGeometry = bodyGeometry;
     }
 
+    @Override
+    public BodyGeometry getBodyGeometry() {
+        return bodyGeometry;
+    }
+
+
     public void setRoBlood(double roBlood) {
         this.roBlood = roBlood;
     }
 
+    @Override
     public void setRoTissue(double roTissue) {
         this.roTissue = roTissue;
     }

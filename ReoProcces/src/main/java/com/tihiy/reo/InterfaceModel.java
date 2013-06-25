@@ -6,4 +6,8 @@ public interface InterfaceModel {
 
     void setElectrodeSystem(ElectrodeSystem e);
     void setBodyGeometry(BodyGeometry b);
+
+    BodyGeometry getBodyGeometry();
+
+    void setRoTissue(double roTissue);
 }

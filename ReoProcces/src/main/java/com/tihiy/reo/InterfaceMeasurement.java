@@ -18,4 +18,5 @@ public interface InterfaceMeasurement {
 
     InterfaceModel getModel();
 
+    void setRSphere(double radius);
 }

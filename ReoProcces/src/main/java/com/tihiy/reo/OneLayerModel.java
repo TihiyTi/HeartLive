@@ -35,4 +35,14 @@ public class OneLayerModel implements InterfaceModel{
     @Override
     public void setBodyGeometry(BodyGeometry b) {
     }
+
+    @Override
+    public BodyGeometry getBodyGeometry() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void setRoTissue(double roTissue) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

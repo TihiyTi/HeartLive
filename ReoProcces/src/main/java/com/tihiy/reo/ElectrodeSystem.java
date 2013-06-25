@@ -1,6 +1,6 @@
 package com.tihiy.reo;
 
-class ElectrodeSystem{
+public class ElectrodeSystem{
     static enum El {PLUS, MINUS}
 
     private double xShift = 0;
@@ -8,14 +8,14 @@ class ElectrodeSystem{
     private double a;
     private double b;
 
-    ElectrodeSystem(double a, double b ,double xShift, double yShift) {
+    public ElectrodeSystem(double a, double b ,double xShift, double yShift) {
         this.xShift = xShift;
         this.yShift = yShift;
         this.a = a;
         this.b = b;
     }
 
-    ElectrodeSystem(double a, double b) {
+    public ElectrodeSystem(double a, double b) {
         this.a = a;
         this.b = b;
     }
