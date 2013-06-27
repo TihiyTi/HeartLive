@@ -10,6 +10,8 @@ public interface InterfaceMeasurement {
 
     double getMeasurement();
 
+    double getMeasurementFullImp();
+
     float[][] MatrixResult();
 
     void setElectrodeSystem(ElectrodeSystem electrodeSystem);

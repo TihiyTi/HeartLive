@@ -9,12 +9,12 @@ public class ReoProcessorTest {
     @Test
     public void radiusCalc(){
 
-        ElectrodeSystem eSystem = new ElectrodeSystem(0.06, 0.03, 0, 0.01);
-        BodyGeometry bodyGeometry = new BodyGeometry(0.050, 0.020);
+        ElectrodeSystem eSystem = new ElectrodeSystem(0.06, 0.03, 0, 0.05);
+        BodyGeometry bodyGeometry = new BodyGeometry(0.033, 0.038);
         SphereModel sphereModel = new SphereModel();
-        sphereModel.setRo(5, 1.5);
+        sphereModel.setRo(5, 1.35);
 
-        ElectrodeSystem roSystem = new ElectrodeSystem(0.06, 0.03, 0, 0.01);
+        ElectrodeSystem roSystem = new ElectrodeSystem(0.06, 0.03, 0, 0);
         OneLayerModel oneLayerModel = new OneLayerModel();
 
         ExpMeasurement<Double> mainImp =  new ExpMeasurement<Double>(sphereModel, eSystem, bodyGeometry, getListData());
@@ -34,7 +34,8 @@ public class ReoProcessorTest {
     private static List<Double> getListRo(){
         List<Double> list  =  new ArrayList<>();
         for(int i = 0; i < 100; i++){
-            list.add((double) i);
+            int value = (i%5)*2;
+            list.add((double) value);
         }
         return list;
     }

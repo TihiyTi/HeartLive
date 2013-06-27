@@ -27,7 +27,7 @@ public class MatrixFromRoRToZ {
                 double rad = radBegin + radDelta*j;
                 measurement.getModel().setRoTissue(ro);
                 measurement.setRSphere(rad);
-                matrix[i][j] = measurement.getMeasurement();
+                matrix[i][j] = measurement.getMeasurementFullImp();
             }
         }
     }

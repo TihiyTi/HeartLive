@@ -5,9 +5,9 @@ import junit.framework.TestCase;
 public class SphereModelTest extends TestCase {
     public void testSphereModel(){
         ElectrodeSystem eSystem = new ElectrodeSystem(0.06, 0.03, 0, 0);
-//        BodyGeometry bodyGeometry = new BodyGeometry(0.040, 0.020);
+        BodyGeometry bodyGeometry = new BodyGeometry(0.040, 0.020);
         SphereModel model = new SphereModel();
-//        Measurement measurement = new Measurement(model , eSystem, bodyGeometry);
+        Measurement measurement = new Measurement(model , eSystem, bodyGeometry);
         double[] value = getPotentials(model, eSystem);
         double[] expValue = {-1.646, -0.23, -0.23, -1.646};
         for(int i = 0; i < 4; i++){

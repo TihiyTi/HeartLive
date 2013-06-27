@@ -26,7 +26,7 @@ public class SphereModel implements InterfaceModel {
 
     public double basePotInPointFromElectrode(ReoPoint point, ReoPoint electrode){
         double w = fromPointToElectrode(point, electrode);
-        return roTissue/(2*Math.PI*w*w);
+        return roTissue/(2*Math.PI*w);
     }
 
     private double toPoint(ReoPoint point){

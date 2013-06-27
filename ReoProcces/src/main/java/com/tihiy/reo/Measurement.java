@@ -36,6 +36,16 @@ public class Measurement implements InterfaceMeasurement {
         return value;
     }
 
+
+    //Todo this method is bad for not sphere model, because it return something xxx
+    @Override
+    public double getMeasurementFullImp(){
+        double value = model.getBasePotInPoint(electrodeSystem.getUElectrode(ElectrodeSystem.El.MINUS));
+        value -= model.getBasePotInPoint(electrodeSystem.getUElectrode(ElectrodeSystem.El.PLUS));
+        value += getMeasurement();
+        return value;
+    }
+
     @Override
     public float[][] MatrixResult() {
         return new float[0][];  //To change body of implemented methods use File | Settings | File Templates.
