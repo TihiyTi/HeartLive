@@ -21,24 +21,27 @@ public class MatrixFromRoRToZ {
     }
 
     public void fillMatrix(InterfaceMeasurement measurement){
+        measurement.getModel().setRoTissue(roBegin);
+        measurement.setRSphere(radBegin);
+        double baseImp = measurement.getMeasurementFullImp();
         for(int i = 0; i < numberOfStep; i++){
             for(int j = 0; j < numberOfStep; j++){
-                double ro = roBegin + roDelta*i;
-                double rad = radBegin + radDelta*j;
+                double ro = roBegin + roDelta* (i - numberOfStep/2);
+                double rad = radBegin + radDelta*(j - numberOfStep/2);
                 measurement.getModel().setRoTissue(ro);
                 measurement.setRSphere(rad);
-                matrix[i][j] = measurement.getMeasurementFullImp();
+                matrix[i][j] = measurement.getMeasurementFullImp() - baseImp;
             }
         }
     }
 
-    public double getRad(double roCurrent, double impedance){
-        int index = getIndexRZArray(roCurrent);
+    public double getRad(double dRoCurrent, double impedance){
+        int index = getIndexRZArray(dRoCurrent);
         return getRadFromArray(index, impedance);
     }
 
-    private int getIndexRZArray(double roCurrent){
-        return (int)Math.round((roCurrent - roBegin)/roDelta);
+    private int getIndexRZArray(double dRoCurrent){
+        return (int)Math.round(dRoCurrent/roDelta) + numberOfStep/2;
     }
 
     private double getRadFromArray(int indexRo ,double impedance){
