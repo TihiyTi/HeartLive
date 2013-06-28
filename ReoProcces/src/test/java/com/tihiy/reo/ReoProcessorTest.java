@@ -2,12 +2,16 @@ package com.tihiy.reo;
 
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReoProcessorTest {
     @Test
-    public void radiusCalc(){
+    public void radiusCalc() throws IOException {
+
+        List<Double> listData = ReadingFiles.readFile("Imp.txt");
+        List<Double> listRo = ReadingFiles.readFile("ImpRo.txt");
 
         ElectrodeSystem eSystem = new ElectrodeSystem(0.06, 0.03, 0, 0.05);
         BodyGeometry bodyGeometry = new BodyGeometry(0.033, 0.038);
@@ -17,8 +21,8 @@ public class ReoProcessorTest {
         ElectrodeSystem roSystem = new ElectrodeSystem(0.06, 0.03, 0, 0);
         OneLayerModel oneLayerModel = new OneLayerModel();
 
-        ExpMeasurement<Double> mainImp =  new ExpMeasurement<Double>(sphereModel, eSystem, bodyGeometry, getListData());
-        ExpMeasurement<Double> roImp = new ExpMeasurement<Double>(oneLayerModel, eSystem, bodyGeometry, getListRo());
+        ExpMeasurement<Double> mainImp =  new ExpMeasurement<Double>(sphereModel, eSystem, bodyGeometry, listData);
+        ExpMeasurement<Double> roImp = new ExpMeasurement<Double>(oneLayerModel, eSystem, bodyGeometry, listRo);
         List<Double> listRadius = ReoPostProcessor.getRadiusWithRo1(mainImp, roImp);
 
     }

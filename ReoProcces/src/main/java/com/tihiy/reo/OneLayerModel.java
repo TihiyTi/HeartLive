@@ -12,7 +12,7 @@ public class OneLayerModel implements InterfaceModel{
         for(Double d: impedance){
             double value = d*Math.PI/(2*electrodeSystem.getB())*
                     (electrodeSystem.getA() * electrodeSystem.getA() - electrodeSystem.getB()*electrodeSystem.getB());
-            list.add(value);
+            list.add(value/1000);
         }
         return list;
     }

@@ -11,7 +11,7 @@ public class ReoPostProcessor {
         List<Double> list;
         list = ((OneLayerModel)roImpedance.getModel()).getRoDelta(roImpedance.getData());
 
-        MatrixFromRoRToZ matrix = new MatrixFromRoRToZ(0.033, 5, 0.0001, 0.001);
+        MatrixFromRoRToZ matrix = new MatrixFromRoRToZ(0.044, 5, 0.0001, 0.001);
         matrix.fillMatrix(mainImpedance);
 
         List<Double> listOfRo = ((OneLayerModel)roImpedance.model).getRoDelta(roImpedance.data);
