@@ -10,8 +10,8 @@ public class ReoProcessorTest {
     @Test
     public void radiusCalc() throws IOException {
 
-        List<Double> listData = ReadingFiles.readFile("Imp.txt");
-        List<Double> listRo = ReadingFiles.readFile("ImpRo.txt");
+        List<Double> listData = ReadingFiles.readFile("Exp_Imp.txt");
+        List<Double> listRo = ReadingFiles.readFile("Exp_ImpRo.txt");
 
         ElectrodeSystem eSystem = new ElectrodeSystem(0.06, 0.03, 0, 0.05);
         BodyGeometry bodyGeometry = new BodyGeometry(0.033, 0.038);

@@ -10,7 +10,7 @@ public class MatrixFromRoRToZ {
     private double roBegin  = 0;
     private double roEnd;
     private double roDelta;
-    private int numberOfStep = 100;
+    private int numberOfStep = 1000;
 
     public MatrixFromRoRToZ(double radBegin, double roBegin, double radDelta, double roDelta) {
         this.radBegin = radBegin;
@@ -35,9 +35,9 @@ public class MatrixFromRoRToZ {
         }
     }
 
-    public double getRad(double dRoCurrent, double impedance){
+    public double getRad(double dRoCurrent, double dImpedance){
         int index = getIndexRZArray(dRoCurrent);
-        return getRadFromArray(index, impedance);
+        return getRadFromArray(index, dImpedance);
     }
 
     private int getIndexRZArray(double dRoCurrent){
@@ -55,7 +55,7 @@ public class MatrixFromRoRToZ {
                 indexImp = i;
             }
         }
-        return matrix[indexRo][indexImp];
+        return (indexImp - numberOfStep/2)/10.;
     }
 
 }

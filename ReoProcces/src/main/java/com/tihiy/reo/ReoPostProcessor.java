@@ -16,8 +16,9 @@ public class ReoPostProcessor {
 
         List<Double> listOfRo = ((OneLayerModel)roImpedance.model).getRoDelta(roImpedance.data);
         for(int i = 0; i < listOfRo.size(); i++){
-
-            list.add(matrix.getRad(listOfRo.get(i), mainImpedance.data.get(i)));
+            double dRadius = matrix.getRad(listOfRo.get(i), mainImpedance.data.get(i)/1000);
+            list.add(dRadius);
+            System.out.println(""+i+"  "+dRadius);
         }
 
         return list;
