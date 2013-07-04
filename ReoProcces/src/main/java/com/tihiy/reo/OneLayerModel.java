@@ -7,12 +7,13 @@ public class OneLayerModel implements InterfaceModel{
     private ElectrodeSystem electrodeSystem;
     private static final double ro = 5;
 
+    // Return real dRo, inverse from <impedance>
     public List<Double> getRoDelta(Iterable<Double> impedance){
         List<Double> list =  new ArrayList<>();
         for(Double d: impedance){
             double value = d*Math.PI/(2*electrodeSystem.getB())*
                     (electrodeSystem.getA() * electrodeSystem.getA() - electrodeSystem.getB()*electrodeSystem.getB());
-            list.add(value/1000);
+            list.add(-value/1000);
         }
         return list;
     }

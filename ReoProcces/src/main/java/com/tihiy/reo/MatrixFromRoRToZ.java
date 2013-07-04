@@ -10,7 +10,7 @@ public class MatrixFromRoRToZ {
     private double roBegin  = 0;
     private double roEnd;
     private double roDelta;
-    private int numberOfStep = 1000;
+    private int numberOfStep = 100;
 
     public MatrixFromRoRToZ(double radBegin, double roBegin, double radDelta, double roDelta) {
         this.radBegin = radBegin;
@@ -35,6 +35,16 @@ public class MatrixFromRoRToZ {
         }
     }
 
+    public double impZmatrix(double dRo, double dRad, InterfaceMeasurement measurement){
+        measurement.getModel().setRoTissue(roBegin);
+        measurement.setRSphere(radBegin);
+        double baseImp = measurement.getMeasurementFullImp();
+        measurement.getModel().setRoTissue(roBegin + dRo);
+        measurement.setRSphere(radBegin + dRad);
+        double endImp = measurement.getMeasurementFullImp();
+        return (endImp - baseImp);
+    }
+
     public double getRad(double dRoCurrent, double dImpedance){
         int index = getIndexRZArray(dRoCurrent);
         return getRadFromArray(index, dImpedance);
@@ -44,7 +54,7 @@ public class MatrixFromRoRToZ {
         return (int)Math.round(dRoCurrent/roDelta) + numberOfStep/2;
     }
 
-    private double getRadFromArray(int indexRo ,double impedance){
+    private double getRadFromArray(int indexRo, double impedance){
         double delta = Math.abs(impedance);
         int indexImp = 0;
         for(int i = 0; i < matrix[indexRo].length ; i++ ){
@@ -55,7 +65,7 @@ public class MatrixFromRoRToZ {
                 indexImp = i;
             }
         }
-        return (indexImp - numberOfStep/2)/10.;
+        return (indexImp - numberOfStep/2)*radDelta*1000;
     }
 
 }
