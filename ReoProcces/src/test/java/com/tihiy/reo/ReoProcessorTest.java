@@ -29,7 +29,7 @@ public class ReoProcessorTest extends TestCase{
 
         ReoPostProcessor processor = new ReoPostProcessor();
         List<Double> listRadius = processor.getRadiusWithRo1(mainImp, roImp);
-
+        assertRadius(listRadius);
     }
 
     private static void assertReadFileTest(List<Double> imp, List<Double> roImp){
@@ -38,15 +38,15 @@ public class ReoProcessorTest extends TestCase{
         assertEquals(89.2, roImp.get(300), 0.01);
         assertEquals(-15.2, roImp.get(400), 0.01);
 
-        assertEquals(172.5, imp.get(1), 0.01);
-        assertEquals(149.5, imp.get(200), 0.01);
-        assertEquals(168.3, imp.get(300), 0.01);
-        assertEquals(5.111, imp.get(400), 0.01);
-
-//        assertEquals(82.98, imp.get(1), 0.001);
-//        assertEquals(59.99, imp.get(200), 0.001);
-//        assertEquals(78.82, imp.get(300), 0.001);
-//        assertEquals(-84.39, imp.get(400), 0.001);
+//        assertEquals(172.5, imp.get(1), 0.01);
+//        assertEquals(149.5, imp.get(200), 0.01);
+//        assertEquals(168.3, imp.get(300), 0.01);
+//        assertEquals(5.111, imp.get(400), 0.01);
+//
+        assertEquals(82.98, imp.get(1), 0.001);
+        assertEquals(59.99, imp.get(200), 0.001);
+        assertEquals(78.82, imp.get(300), 0.001);
+        assertEquals(-84.39, imp.get(400), 0.001);
     }
 
     private static void assertCalcRo(List<Double> listOfRo){
@@ -55,7 +55,7 @@ public class ReoProcessorTest extends TestCase{
         assertEquals(-0.012610, listOfRo.get(300), 0.000001);
         assertEquals(0.002148, listOfRo.get(400), 0.000001);
     }
-    private static void assertMatrix(){
+    private static void assertRadius(List<Double> list){
 
     }
 }

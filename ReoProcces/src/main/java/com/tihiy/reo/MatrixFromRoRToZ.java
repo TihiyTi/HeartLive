@@ -67,5 +67,4 @@ public class MatrixFromRoRToZ {
         }
         return (indexImp - numberOfStep/2)*radDelta*1000;
     }
-
 }
