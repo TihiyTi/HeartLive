@@ -17,18 +17,18 @@ public class ReoPostProcessor {
         matrix = new MatrixFromRoRToZ(0.04, 5, 0.0001, 0.001);
         matrix.fillMatrix(mainImpedance);
 
-        double impedance = matrix.impZmatrix(0.000339, 0.0032, mainImpedance);
-        double drad = matrix.getRad(0.000339, impedance);
-        System.out.println("Imp = " + impedance);
-        System.out.println("0.0032 = " + drad);
-        impedance = matrix.impZmatrix(0.009274, 0.00324, mainImpedance);
-        drad = matrix.getRad(0.009274, impedance);
-        System.out.println("Imp = " + impedance);
-        System.out.println("0.00324 = " + drad);
-        impedance = matrix.impZmatrix(0.009104, 0.00382, mainImpedance);
-        drad = matrix.getRad(0.009104, impedance);
-        System.out.println("Imp = " + impedance);
-        System.out.println("0.00382 = " + drad);
+//        double impedance = matrix.impZmatrix(0.000339, 0.0032, mainImpedance);
+//        double drad = matrix.getRad(0.000339, impedance);
+//        System.out.println("Imp = " + impedance);
+//        System.out.println("0.0032 = " + drad);
+//        impedance = matrix.impZmatrix(0.009274, 0.00324, mainImpedance);
+//        drad = matrix.getRad(0.009274, impedance);
+//        System.out.println("Imp = " + impedance);
+//        System.out.println("0.00324 = " + drad);
+//        impedance = matrix.impZmatrix(0.009104, 0.00382, mainImpedance);
+//        drad = matrix.getRad(0.009104, impedance);
+//        System.out.println("Imp = " + impedance);
+//        System.out.println("0.00382 = " + drad);
 
 
 
