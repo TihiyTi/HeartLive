@@ -32,6 +32,39 @@ public class ReoProcessorTest extends TestCase{
 
     }
 
+    public static void testExpCelc() throws  IOException {
+//        List<Double> listData = ReadingFiles.readFile("C:\\Users\\Home\\Documents\\My Box Files\\Asp\\RoChange\\Exp_Imp.txt");
+//        List<Double> listRo = ReadingFiles.readFile("C:\\Users\\Home\\Documents\\My Box Files\\Asp\\RoChange\\Exp_ImpRo.txt");
+
+        List<Double> listData = ReadingFiles.readFile("C:\\Users\\Home\\Documents\\My Box Files\\Asp\\RoChange\\Exp08_Prcg.txt");
+        List<Double> listRo = ReadingFiles.readFile("C:\\Users\\Home\\Documents\\My Box Files\\Asp\\RoChange\\Exp08_First.txt");
+
+
+//        ElectrodeSystem eSystem = new ElectrodeSystem(0.06, 0.03, 0, 0);
+//        BodyGeometry bodyGeometry = new BodyGeometry(0.04, 0.020);
+
+        ElectrodeSystem eSystem = new ElectrodeSystem(0.08, 0.04, 0, 0);
+        BodyGeometry bodyGeometry = new BodyGeometry(0.04, 0.020);
+
+        SphereModel sphereModel = new SphereModel();
+        sphereModel.setRo(5, 1.35);
+
+        ElectrodeSystem roSystem = new ElectrodeSystem(0.06, 0.03, 0, 0);
+        OneLayerModel oneLayerModel = new OneLayerModel();
+
+        ExpMeasurement<Double> mainImp =  new ExpMeasurement<>(sphereModel, eSystem, bodyGeometry, listData);
+        ExpMeasurement<Double> roImp = new ExpMeasurement<>(oneLayerModel, roSystem, bodyGeometry, listRo);
+
+        List<Double> listOfRo = ((OneLayerModel)roImp.getModel()).getRoDelta(roImp.getData());
+
+        ReoPostProcessor processor = new ReoPostProcessor();
+        processor.setUseFirstLayer(true);
+        List<Double> listRadius = processor.getRadiusWithRo1(mainImp, roImp);
+        for(Double sample: listRadius){
+            System.out.println(""+sample);
+        }
+    }
+
     private static void assertReadFileTest(List<Double> imp, List<Double> roImp){
         assertEquals(-2.4, roImp.get(1), 0.01);
         assertEquals(-64.4, roImp.get(200), 0.01);
@@ -49,7 +82,6 @@ public class ReoProcessorTest extends TestCase{
         assertEquals(78.82, imp.get(300), 0.001);
         assertEquals(-84.39, imp.get(400), 0.001);
     }
-
     private static void assertCalcRo(List<Double> listOfRo){
         assertEquals(0.000339, listOfRo.get(1), 0.000001);
         assertEquals(0.009104, listOfRo.get(200), 0.000001);
