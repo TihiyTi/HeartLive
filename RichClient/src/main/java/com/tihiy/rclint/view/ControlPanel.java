@@ -26,7 +26,7 @@ public class ControlPanel extends AbstractViewPanel {
         but1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mc.command(Controller.COMMAND_RANDOM_LIST);
+//                mc.command(Controller.COMMAND_RANDOM_LIST);
             }
         });
 

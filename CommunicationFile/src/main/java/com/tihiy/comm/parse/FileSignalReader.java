@@ -1,7 +1,6 @@
 package com.tihiy.comm.parse;
 
 import com.google.common.base.Splitter;
-import com.tihiy.comm.SignalReader;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -16,28 +15,25 @@ import java.util.concurrent.LinkedBlockingQueue;
  * Time: 0:31
  * To change this template use File | Settings | File Templates.
  */
-public class FileSignalReader extends  Thread implements SignalReader {
+public class FileSignalReader extends  Thread{
     private List<BlockingQueue> listOfSignal = new ArrayList<>();
     private BlockingQueue inputData = new LinkedBlockingQueue();
     private File file;
     private Boolean readComplete = false;
 //    public int dataLength = 0;
 
-    @Override
     public BlockingQueue getData(File file) {
         this.file = file;
         this.run();
         return inputData;
     }
 
-    @Override
     public List getAllData(File file) {
         this.file = file;
         this.run();
         return listOfSignal;
     }
 
-    @Override
     public Boolean isReadComplete() {
         return readComplete;
     }

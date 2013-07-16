@@ -39,4 +39,5 @@ public class FileSignalReaderTest extends TestCase {
             listOfData.get(1).take();
         }
     }
+
 }
