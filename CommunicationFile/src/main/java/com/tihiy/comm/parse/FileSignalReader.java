@@ -1,63 +1,47 @@
 package com.tihiy.comm.parse;
 
 import com.google.common.base.Splitter;
+import com.tihiy.comm.sig.Signal;
+import com.tihiy.comm.sig.SignalInterface;
 
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/**
- * Created with IntelliJ IDEA.
- * User: aleksey
- * Date: 25.09.12
- * Time: 0:31
- * To change this template use File | Settings | File Templates.
- */
-public class FileSignalReader extends  Thread{
-    private List<BlockingQueue> listOfSignal = new ArrayList<>();
-    private BlockingQueue inputData = new LinkedBlockingQueue();
-    private File file;
-    private Boolean readComplete = false;
-//    public int dataLength = 0;
+public class FileSignalReader implements Runnable{
+    private final SignalManager manager;
+    private final SignalInterface signal;
+    private final File file;
 
-    public BlockingQueue getData(File file) {
+    private Protocol protocol;
+
+    // todo probably change file and manager for SIGNAL
+    public FileSignalReader(File file, SignalManager manager) {
+        this.manager = manager;
         this.file = file;
-        this.run();
-        return inputData;
+        signal = manager.getSignal(file.getName());
     }
 
-    public List getAllData(File file) {
-        this.file = file;
-        this.run();
-        return listOfSignal;
-    }
 
-    public Boolean isReadComplete() {
-        return readComplete;
-    }
-
+    @Override
     public void run() {
         try {
-            FileReader fileReader = new FileReader(file);
-            BufferedReader buffer = new BufferedReader(fileReader);
-            String s = buffer.readLine();
-            if(s.contains("Elapsed time")){
-                for(int i = 0 ; i<2; i++){
-                    listOfSignal.add(new LinkedBlockingQueue());
-                }
-                phisioNetParser(buffer);
-            }else{
-                System.out.println("Unsupported file format");
+            FileChannel fci = new FileInputStream(file).getChannel();
+            long size = fci.size();
+            MappedByteBuffer byteBuffer = fci.map(FileChannel.MapMode.READ_ONLY, 0, size);
+            if(protocol == Protocol.Reo32){
+                protocol.parse(signal, byteBuffer);
             }
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
     }
 
@@ -71,12 +55,16 @@ public class FileSignalReader extends  Thread{
                 String pointInString = (String)point;
                 if(!pointInString.contains(":")){
                     float pointInFloat =  Float.parseFloat(pointInString);
-                    listOfSignal.get(numOfSignal).add(pointInFloat);
+//                    listOfSignal.get(numOfSignal).add(pointInFloat);
                     numOfSignal++;
                 }
             }
         }
-        readComplete = true;
+//        readComplete = true;
+    }
+
+    public void setProtocol(Protocol protocol) {
+        this.protocol = protocol;
     }
 
 }
