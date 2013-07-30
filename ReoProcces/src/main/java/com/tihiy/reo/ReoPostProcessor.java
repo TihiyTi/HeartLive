@@ -17,7 +17,7 @@ public class ReoPostProcessor {
         for(Double sample: listOfRo){
             listOfRoNull.add(0.0);
         }
-        if(useFirstLayer){
+        if(!useFirstLayer){
             listOfRo = listOfRoNull;
         }
         List<Double> listOfdRad = new ArrayList<>();
@@ -40,7 +40,7 @@ public class ReoPostProcessor {
         for(Double sample: listOfRo){
             listOfRoNull.add(0.0);
         }
-        if(useFirstLayer){
+        if(!useFirstLayer){
             listOfRo = listOfRoNull;
         }
         List<Double> listOfdRad = new ArrayList<>();
