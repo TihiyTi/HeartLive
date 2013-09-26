@@ -8,9 +8,9 @@
     <file url="file://$PROJECT_DIR$/CommunicationSerial" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/EcgProcces" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/EcgProccesBasic" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Imp.txt" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ImpRO.txt" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ReoProcces" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ReoProcces/src/test/resources/com/tihiy/reo/Imp.txt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ReoProcces/src/test/resources/com/tihiy/reo/ImpRO.txt" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/RichClient" charset="UTF-8" />
   </component>
 </project>

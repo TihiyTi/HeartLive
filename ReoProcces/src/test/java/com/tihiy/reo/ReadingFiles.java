@@ -31,5 +31,21 @@ public class ReadingFiles {
     }
     return xList; // возвращает список данных, записанных из файла
   }
+
+    static List<Double> readFile(File file) throws IOException {
+        List<Double> xList = new ArrayList<>(); // создание объекта списка xList
+        BufferedReader reader = null; // буффер для прочтения
+        try {
+            reader = new BufferedReader(new FileReader(file)); // загрузка файла в буфер
+            Scanner scanner = new Scanner(reader); // создание переменной для чтения строк из файла
+            while (scanner.hasNextLine()) {
+                xList.add(Double.valueOf(scanner.nextLine().trim())); // запись строки в i-ую ячейку списка
+            }
+        }
+        finally {
+            Closeables.close(reader, true);
+        }
+        return xList; // возвращает список данных, записанных из файла
+    }
 }
 
