@@ -9,27 +9,27 @@ import java.util.List;
 // Model for simple signal with 1 channel
 //
 public class SignalModel extends AbstractModel {
-    public List<Float> getList() {
+    public List<Double> getList() {
         return list;
     }
 
-    private List<Float> list = getTestList();
+    private List<Double> list = getTestList();
 
-    public void setList(List<Float> list) {
+    public void setList(List<Double> list) {
         firePropertyChange("list", this.list, list);
         this.list = list;
     }
 
-    private List<Float> getTestList(){
-        List<Float> value = new ArrayList<>();
+    private List<Double> getTestList(){
+        List<Double> value = new ArrayList<Double>();
         for(int i = 0; i < 300; i++ ){
-            value.add((float) Math.random() * 100);
+            value.add((double) Math.random() * 100);
         }
         return value;
     }
 
     public void randomList(){
-        List<Float> oldList = this.list;
+        List<Double> oldList = this.list;
         list = getTestList();
         firePropertyChange("list", oldList, list);
     }

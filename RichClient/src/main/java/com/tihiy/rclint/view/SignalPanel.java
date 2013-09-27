@@ -15,18 +15,18 @@ import java.util.concurrent.TimeUnit;
 public class SignalPanel extends AbstractViewPanel {
     AbstractController mc;
 
-    private List<Float> signal;
+    private List<Double> signal;
     private BlockingQueue<Integer> queue;
     boolean queueFlag = false;
 
-    public SignalPanel(AbstractController mc, List<Float> list) {
+    public SignalPanel(AbstractController mc, List<Double> list) {
         this.mc = mc;
         this.signal = list;
         setBackground(Color.orange);
         setPreferredSize(new Dimension(getWidth(), 200));
     }
 
-    public SignalPanel(List<Float> list) {
+    public SignalPanel(List<Double> list) {
         this.signal = list;
         setBackground(Color.orange);
     }
@@ -61,8 +61,8 @@ public class SignalPanel extends AbstractViewPanel {
                 int height = getHeight();
 //        int width = getWidth();
 
-                Float max = Collections.max(signal);
-                Float min = Collections.min(signal);
+                Double max = Collections.max(signal);
+                Double min = Collections.min(signal);
 
                 for (int i = 0; i < signal.size() - 1; i++) {
                     int yPoint_1 = (int)((0.1*height + (max - signal.get(i))*0.8*height)/(max - min));
@@ -76,7 +76,7 @@ public class SignalPanel extends AbstractViewPanel {
     @Override
     public void modelPropertyChange(PropertyChangeEvent evt) {
         if(evt.getPropertyName().equals("list")){
-            List<Float> list = (List)evt.getNewValue();
+            List<Double> list = (List)evt.getNewValue();
             signal = list;
             repaint();
         };

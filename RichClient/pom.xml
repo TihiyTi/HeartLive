@@ -22,6 +22,10 @@
             <artifactId>jfreechart</artifactId>
             <version>1.0.13</version>
         </dependency>
+        <dependency>
+            <groupId>com.tihiy.reoprocces</groupId>
+            <artifactId>reo-procces</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
