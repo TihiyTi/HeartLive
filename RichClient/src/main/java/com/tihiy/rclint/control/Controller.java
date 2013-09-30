@@ -30,6 +30,7 @@ public class Controller extends AbstractController {
         ((SignalModel)registeredModels.get(name)).setList(list);
     }
     public void calculate(){
+
         ReoPostProcessor rp = new ReoPostProcessor();
     }
 

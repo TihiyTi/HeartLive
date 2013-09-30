@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ExpMeasurement<T extends Number> extends Measurement {
 
-    List<T> data;
+    private List<T> data;
 
     public ExpMeasurement(InterfaceModel model, ElectrodeSystem eSystem, BodyGeometry bodyGeometry, List<T> list) {
         super(model, eSystem, bodyGeometry);
@@ -13,5 +13,8 @@ public class ExpMeasurement<T extends Number> extends Measurement {
 
     public List<T> getData(){
         return data;
+    }
+    public void setData(List<T> data){
+        this.data = data;
     }
 }
