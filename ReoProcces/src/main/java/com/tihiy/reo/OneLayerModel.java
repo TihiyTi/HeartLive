@@ -5,7 +5,7 @@ import java.util.List;
 
 public class OneLayerModel implements InterfaceModel{
     private ElectrodeSystem electrodeSystem;
-    private static final double ro = 5;
+    private  double roTissue = 5;
 
     // Return real dRo, inverse from <impedance>
     public List<Double> getRoDelta(Iterable<Double> impedance){
@@ -44,6 +44,6 @@ public class OneLayerModel implements InterfaceModel{
 
     @Override
     public void setRoTissue(double roTissue) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        this.roTissue = roTissue;
     }
 }

@@ -29,9 +29,18 @@ public class Controller extends AbstractController {
         List<Double> list =  ReadingFiles.readFile(file);
         ((SignalModel)registeredModels.get(name)).setList(list);
     }
-    public void calculate(){
-
+    public void calculate(double[] main, double[] first){
+        System.out.println("Size A = " + main[0]);
         ReoPostProcessor rp = new ReoPostProcessor();
+        rp.setMainMeasurement(main[0], main[1], main[2], main[3], main[4], main[5], ((SignalModel)registeredModels.get("sourceSignal")).getList());
+        rp.setFirstLayerMeasurement(first[0], first[1], first[2], first[3], first[5], ((SignalModel)registeredModels.get("targetSignal")).getList());
+        List<Double> result = rp.getRadiusWithRo1();
+        int i = 0;
+        for(Double r: result){
+            System.out.println(i + " " + r);
+            i++;
+        }
+        ((SignalModel)registeredModels.get("radiusSignal")).setList(result);
     }
 
 
