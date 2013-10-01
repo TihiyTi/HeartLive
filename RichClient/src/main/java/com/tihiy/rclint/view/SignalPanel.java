@@ -14,10 +14,18 @@ import java.util.concurrent.TimeUnit;
 
 public class SignalPanel extends AbstractViewPanel {
     AbstractController mc;
+    private String signalName;
 
     private List<Double> signal;
     private BlockingQueue<Integer> queue;
     boolean queueFlag = false;
+
+    public SignalPanel(AbstractController mc, List<Double> list, String name) {
+        this.mc = mc;
+        this.signal = list;
+        setBackground(Color.orange);
+        setPreferredSize(new Dimension(getWidth(), 200));
+    }
 
     public SignalPanel(AbstractController mc, List<Double> list) {
         this.mc = mc;
@@ -75,7 +83,7 @@ public class SignalPanel extends AbstractViewPanel {
 
     @Override
     public void modelPropertyChange(PropertyChangeEvent evt) {
-        if(evt.getPropertyName().equals("list")){
+        if(evt.getPropertyName().equals(signalName)){
             List<Double> list = (List)evt.getNewValue();
             signal = list;
             repaint();

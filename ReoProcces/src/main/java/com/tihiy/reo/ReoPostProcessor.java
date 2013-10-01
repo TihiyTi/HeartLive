@@ -10,6 +10,7 @@ public class ReoPostProcessor {
     private ExpMeasurement<Double> mainMeasurement;
     private ExpMeasurement<Double> firstLayerMeasurement;
     private boolean useFirstLayer = true;
+    private boolean useBaseImpedance = true;
 
     public List<Double> getRadiusWithRo1 (){
         if((mainMeasurement==null)||(firstLayerMeasurement==null)){

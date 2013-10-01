@@ -9,6 +9,16 @@ import java.util.List;
 // Model for simple signal with 1 channel
 //
 public class SignalModel extends AbstractModel {
+
+    private String signalName;
+
+    public SignalModel(){}
+
+    public SignalModel(String signalName) {
+        this.signalName = signalName;
+    }
+
+
     public List<Double> getList() {
         return list;
     }
@@ -16,7 +26,7 @@ public class SignalModel extends AbstractModel {
     private List<Double> list = getTestList();
 
     public void setList(List<Double> list) {
-        firePropertyChange("list", this.list, list);
+        firePropertyChange(signalName, this.list, list);
         this.list = list;
     }
 
@@ -31,7 +41,7 @@ public class SignalModel extends AbstractModel {
     public void randomList(){
         List<Double> oldList = this.list;
         list = getTestList();
-        firePropertyChange("list", oldList, list);
+        firePropertyChange(signalName, oldList, list);
     }
 
     @Override
@@ -45,6 +55,10 @@ public class SignalModel extends AbstractModel {
         } catch (Exception ex) {
             //  Handle exception
         }
+    }
+
+    public void setSignalName(String name){
+        signalName = name;
     }
 
     // todo method getSignalLink and getSignalValue
