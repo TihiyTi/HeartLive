@@ -34,6 +34,8 @@ public class Controller extends AbstractController {
         ReoPostProcessor rp = new ReoPostProcessor();
         rp.setMainMeasurement(main[0], main[1], main[2], main[3], main[4], main[5], ((SignalModel)registeredModels.get("sourceSignal")).getList());
         rp.setFirstLayerMeasurement(first[0], first[1], first[2], first[3], first[5], ((SignalModel)registeredModels.get("targetSignal")).getList());
+        rp.setUseFirstLayer(true);
+        rp.setUseBaseImpedance(true);
         List<Double> result = rp.getRadiusWithRo1();
         int i = 0;
         for(Double r: result){
