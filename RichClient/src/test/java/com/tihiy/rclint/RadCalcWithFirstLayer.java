@@ -27,7 +27,7 @@ public class RadCalcWithFirstLayer {
         JPanel panels = new JPanel();
         SignalPanel view = new SignalPanel(mc, sourceSignal.getList(), PULSE_SIGNAL);
         SignalPanel view2 = new SignalPanel(mc, targetSignal.getList(), FIRST_LAYER_SIGNAL);
-        SignalPanel view3 = new SignalPanel(mc, radiusSignal.getList());
+        SignalPanel view3 = new SignalPanel(mc, radiusSignal.getList(), RADIUS_SIGNAL);
         panels.add(view, BorderLayout.NORTH);
         panels.add(view2, BorderLayout.CENTER);
         panels.add(view3, BorderLayout.NORTH);
