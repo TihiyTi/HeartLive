@@ -38,6 +38,7 @@ public class RadCalcWithFirstLayer {
         mc.addModel(FIRST_LAYER_SIGNAL, targetSignal);
         mc.addModel(RADIUS_SIGNAL, radiusSignal);
         mc.addView(view);
+        mc.addView(view2);
         mc.addView(cp);
 
         JFrame frame = new JFrame("Radius Calculation with First Layer");

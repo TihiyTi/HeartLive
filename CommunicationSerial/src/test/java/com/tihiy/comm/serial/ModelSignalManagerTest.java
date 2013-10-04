@@ -30,16 +30,17 @@ public class ModelSignalManagerTest {
 //        SignalModel model = new SignalModel();
         Controller mc = new Controller();
 
-        SignalPanel view = new SignalPanel(mc, modelIntRT.getList());
+        // TODO Comment because getList return <Float> List, but model is <Double> List.
+//        SignalPanel view = new SignalPanel(mc, modelIntRT.getList());
         ControlPanel cp = new ControlPanel(mc);
 
         mc.addModel(modelIntRT);
-        mc.addView(view);
+//        mc.addView(view);
         mc.addView(cp);
 
         JFrame frame = new JFrame("testing");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.getContentPane().add(view, BorderLayout.CENTER);
+//        frame.getContentPane().add(view, BorderLayout.CENTER);
         frame.getContentPane().add(cp, BorderLayout.WEST);
         frame.pack();
         frame.setVisible(true);

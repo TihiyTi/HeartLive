@@ -25,6 +25,7 @@ public class SignalPanel extends AbstractViewPanel {
         this.signal = list;
         setBackground(Color.orange);
         setPreferredSize(new Dimension(getWidth(), 200));
+        signalName = name;
     }
 
     public SignalPanel(AbstractController mc, List<Double> list) {

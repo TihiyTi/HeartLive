@@ -131,12 +131,19 @@ public class ControlPanel extends AbstractViewPanel {
     private JTextField firstRSphere;
     private JTextField firstH;
 
+    private File defaultPath;
 
-    private static File chooseFile(){
+    private File chooseFile(){
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.changeToParentDirectory();
+        if(defaultPath!=null){
+            fileChooser.setCurrentDirectory( defaultPath);
+        }
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileChooser.showDialog(new JFrame(), "Choose signal!");
+        if(defaultPath==null){
+            defaultPath = fileChooser.getCurrentDirectory();
+        }
         return fileChooser.getSelectedFile();
     }
 }
