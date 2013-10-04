@@ -24,13 +24,13 @@ public class RadCalcWithFirstLayer {
 
         Controller mc = new Controller();
 
-//        JPanel panels = new JPanel();
+        JPanel panels = new JPanel();
         SignalPanel view = new SignalPanel(mc, sourceSignal.getList(), PULSE_SIGNAL);
         SignalPanel view2 = new SignalPanel(mc, targetSignal.getList(), FIRST_LAYER_SIGNAL);
-//        SignalPanel view3 = new SignalPanel(mc, radiusSignal.getList());
-//        panels.add(view, BorderLayout.NORTH);
-//        panels.add(view2, BorderLayout.CENTER);
-//        panels.add(view3, BorderLayout.NORTH);
+        SignalPanel view3 = new SignalPanel(mc, radiusSignal.getList());
+        panels.add(view, BorderLayout.NORTH);
+        panels.add(view2, BorderLayout.CENTER);
+        panels.add(view3, BorderLayout.NORTH);
 
         ControlPanel cp = new ControlPanel(mc);
 
@@ -39,27 +39,14 @@ public class RadCalcWithFirstLayer {
         mc.addModel(RADIUS_SIGNAL, radiusSignal);
         mc.addView(view);
         mc.addView(view2);
+        mc.addView(view3);
         mc.addView(cp);
 
-        JFrame frame = new JFrame("Radius Calculation with First Layer");
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.getContentPane().add(view, BorderLayout.CENTER);
-        frame.getContentPane().add(view2, BorderLayout.SOUTH);
-
-//        frame.getContentPane().add(view3, BorderLayout.NORTH);
-        frame.getContentPane().add(cp, BorderLayout.NORTH);
-        frame.pack();
+        RadCalcFrame frame = new RadCalcFrame("Radius", cp, panels);
         frame.setVisible(true);
         while (frame.isVisible());
 
     }
 
-//    class RadController extends Controller{
-//        public static final String COMMAND_ADD_
-//
-//        public void addSignal(String name, File file){
-//
-//        }
-//    }
 }
 
