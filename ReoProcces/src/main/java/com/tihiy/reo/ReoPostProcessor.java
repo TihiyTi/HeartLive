@@ -12,6 +12,8 @@ public class ReoPostProcessor {
     private boolean useFirstLayer = true;
     private boolean useBaseImpedance = true;
 
+    private double roEquivalent = 5;
+
     public List<Double> getRadiusWithRo1 (){
         if((mainMeasurement==null)||(firstLayerMeasurement==null)){
             log.info("One of two measurement don't configure");
@@ -19,9 +21,14 @@ public class ReoPostProcessor {
         return getRadiusWithRo1(mainMeasurement, firstLayerMeasurement);
     }
 
+
     public List<Double> getRadiusWithRo1(ExpMeasurement<Double> mainImpedance, ExpMeasurement<Double> roImpedance){
 
-        MatrixFromRoRToZ matrix = new MatrixFromRoRToZ(0.04, 5, 0.0001, 0.001);
+        if(useBaseImpedance){
+            roEquivalent = mainImpedance.getRoEquivalent();
+        }
+
+        MatrixFromRoRToZ matrix = new MatrixFromRoRToZ(0.04, roEquivalent, 0.0001, 0.001);
         matrix.fillMatrix(mainImpedance);
 
         List<Double> listOfRo = ((OneLayerModel)roImpedance.model).getRoDelta(roImpedance.getData());
@@ -72,6 +79,7 @@ public class ReoPostProcessor {
         sphereModel.setRo(5, 1.35);
         mainMeasurement = new ExpMeasurement<Double>(sphereModel, eSystem, bodyGeometry, list);
     }
+
     // Configure measurement from first layer
     public void setFirstLayerMeasurement(double a, double b, double xShift, double yShift, double h, List<Double> list){
         ElectrodeSystem eSystem = new ElectrodeSystem(a, b, xShift, yShift);
@@ -80,13 +88,20 @@ public class ReoPostProcessor {
         firstLayerMeasurement =  new ExpMeasurement<Double>(model, eSystem, null, list);
 //        model.setRo(5, 1.35);
     }
-
     public boolean isUseFirstLayer() {
         return useFirstLayer;
     }
 
     public void setUseFirstLayer(boolean useFirstLayer) {
         this.useFirstLayer = useFirstLayer;
+    }
+
+    public void setUseBaseImpedance(boolean useBaseImpedance){
+        this.useBaseImpedance = useBaseImpedance;
+    }
+
+    public void setRoEquivalent(double roEquivalent) {
+        this.roEquivalent = roEquivalent;
     }
 
 
