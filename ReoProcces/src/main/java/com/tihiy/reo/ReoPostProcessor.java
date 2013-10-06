@@ -28,7 +28,7 @@ public class ReoPostProcessor {
             roEquivalent = mainImpedance.getRoEquivalent();
         }
 
-        MatrixFromRoRToZ matrix = new MatrixFromRoRToZ(0.04, roEquivalent, 0.0001, 0.001);
+        MatrixFromRoRToZ matrix = new MatrixFromRoRToZ(0.045, roEquivalent, 0.0001, 0.001);
         matrix.fillMatrix(mainImpedance);
 
         List<Double> listOfRo = ((OneLayerModel)roImpedance.model).getRoDelta(roImpedance.getData());
@@ -59,7 +59,7 @@ public class ReoPostProcessor {
         for(Double sample: listOfRo){
             listOfRoNull.add(0.0);
         }
-        if(useFirstLayer){
+        if(!useFirstLayer){
             listOfRo = listOfRoNull;
         }
         List<Double> listOfdRad = new ArrayList<>();
@@ -78,6 +78,10 @@ public class ReoPostProcessor {
         SphereModel sphereModel = new SphereModel();
         sphereModel.setRo(5, 1.35);
         mainMeasurement = new ExpMeasurement<Double>(sphereModel, eSystem, bodyGeometry, list);
+    }
+    public void setMainMeasurement(double a, double b, double xShift, double yShift, double rSphere, double h, List<Double> list, List<Double> base){
+        setMainMeasurement(a,b,xShift,yShift,rSphere,h,list);
+        mainMeasurement.setBaseImp(base);
     }
 
     // Configure measurement from first layer

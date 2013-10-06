@@ -10,9 +10,13 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ControlPanel extends AbstractViewPanel {
     private final Controller mc;
+    private File defaultPath;
+    private File sourceFile;
 
     public ControlPanel(Controller mc) {
         this.mc = mc;
@@ -25,6 +29,7 @@ public class ControlPanel extends AbstractViewPanel {
     private void initComponent(){
         butChooseSignal = new JButton("Choose Signal");
         butChooseFirstLayerSignal = new JButton("First Layer Signal");
+        butChooseBaseSignal = new JButton("Base signal");
         butCalculate =  new JButton("Calculate");
         mainSizeA = new JTextField("main Size A");
         mainSizeB = new JTextField("main Size B");
@@ -43,7 +48,8 @@ public class ControlPanel extends AbstractViewPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    mc.addSignal("sourceSignal", chooseFile());
+                    sourceFile = chooseFile();
+                    mc.addSignal("sourceSignal", sourceFile);
                 } catch (IOException e1) {
                     e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
@@ -59,6 +65,16 @@ public class ControlPanel extends AbstractViewPanel {
                 }
             }
         });
+        butChooseBaseSignal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    mc.addSignal("baseSignal", chooseFile());
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
         butCalculate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -69,12 +85,12 @@ public class ControlPanel extends AbstractViewPanel {
 //                main[3] = Double.valueOf(mainYShift.getText());
 //                main[4] = Double.valueOf(mainRSphere.getText());
 //                main[5] = Double.valueOf(mainH.getText());
-                main[0] = 0.06;
-                main[1] = 0.03;
+                main[0] = 0.04;
+                main[1] = 0.02;
                 main[2] = 0;
-                main[3] = 0;
-                main[4] = 0.04;
-                main[5] = 0.02;
+                main[3] = 0.037;
+                main[4] = 0.045;
+                main[5] = 0.019;
                 double[] first = new double[6];
 //                first[0] = Double.valueOf(firstSizeA.getText());
 //                first[1] = Double.valueOf(firstSizeB.getText());
@@ -88,13 +104,15 @@ public class ControlPanel extends AbstractViewPanel {
                 first[3] = 0;
                 first[4] = 0;
                 first[5] = 0;
-                mc.calculate(main, first);
+                File targetFile = new File(defaultPath, "radius"+getData()+sourceFile.getName());
+                mc.calculate(main, first, targetFile);
             }
         });
 
 
         add(butChooseSignal);
         add(butChooseFirstLayerSignal);
+        add(butChooseBaseSignal);
         add(butCalculate);
         add(mainSizeA);
         add(mainSizeB);
@@ -114,9 +132,9 @@ public class ControlPanel extends AbstractViewPanel {
     public void modelPropertyChange(PropertyChangeEvent evt) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
-
     private JButton butChooseSignal;
     private JButton butChooseFirstLayerSignal;
+    private JButton butChooseBaseSignal;
     private JButton butCalculate;
     private JTextField mainSizeA;
     private JTextField mainSizeB;
@@ -129,21 +147,28 @@ public class ControlPanel extends AbstractViewPanel {
     private JTextField firstXShift;
     private JTextField firstYShift;
     private JTextField firstRSphere;
-    private JTextField firstH;
 
-    private File defaultPath;
+    private JTextField firstH;
 
     private File chooseFile(){
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.changeToParentDirectory();
-        if(defaultPath!=null){
-            fileChooser.setCurrentDirectory( defaultPath);
-        }
+        fileChooser.setCurrentDirectory(new File("C:\\Users\\Alex\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716"));
+        defaultPath = new File("C:\\Users\\Alex\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716");
+//        if(defaultPath!=null){
+//            fileChooser.setCurrentDirectory( defaultPath);
+//        }
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileChooser.showDialog(new JFrame(), "Choose signal!");
-        if(defaultPath==null){
-            defaultPath = fileChooser.getCurrentDirectory();
-        }
+//        if(defaultPath==null){
+//            defaultPath = fileChooser.getCurrentDirectory();
+//        }
         return fileChooser.getSelectedFile();
+    }
+
+    private String getData(){
+        Date dNow = new Date( );
+        SimpleDateFormat ft = new SimpleDateFormat ("_yyyy_MM_dd_hh_mm_ss");
+        return ft.format(dNow);
     }
 }

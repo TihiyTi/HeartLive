@@ -2,14 +2,14 @@ package com.tihiy.comm.parse;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Splitter;
-import junit.framework.TestCase;
+import com.tihiy.comm.ListWriter;
 import org.junit.Test;
 
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -154,6 +154,15 @@ public class FreeTest {
         fco.close();
 
 //        Arrays.copyOfRange()
+    }
+
+    @Test
+    public void testFileWriter() throws FileNotFoundException, UnsupportedEncodingException {
+        ListWriter<Double> fileWriter = new ListWriter<>();
+        List<Double> testList = new ArrayList<>();
+        testList.add(0.1);
+        testList.add(0.9);
+        fileWriter.writeListToFile(testList, "list");
     }
 
 }

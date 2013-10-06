@@ -20,6 +20,7 @@ public class RadCalcWithFirstLayer {
 
         SignalModel sourceSignal = new SignalModel(PULSE_SIGNAL);
         SignalModel targetSignal =  new SignalModel(FIRST_LAYER_SIGNAL);
+        SignalModel baseSignal = new SignalModel(BASE_SIGNAL);
         SignalModel radiusSignal = new SignalModel(RADIUS_SIGNAL);
 
         Controller mc = new Controller();
@@ -36,6 +37,7 @@ public class RadCalcWithFirstLayer {
 
         mc.addModel(PULSE_SIGNAL,sourceSignal);
         mc.addModel(FIRST_LAYER_SIGNAL, targetSignal);
+        mc.addModel(BASE_SIGNAL, baseSignal);
         mc.addModel(RADIUS_SIGNAL, radiusSignal);
         mc.addView(view);
         mc.addView(view2);
