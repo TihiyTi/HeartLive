@@ -31,19 +31,22 @@ public class Controller extends AbstractController {
         List<Double> list =  ReadingFiles.readFile(file);
         ((SignalModel)registeredModels.get(name)).setList(list);
     }
-    public void calculate(double[] main, double[] first, File radiusFile){
+    public void calculate(double[] main, double[] first, File radiusFile, String comment){
         System.out.println("Size A = " + main[0]);
         ReoPostProcessor rp = new ReoPostProcessor();
 //        rp.setMainMeasurement(main[0], main[1], main[2], main[3], main[4], main[5], ((SignalModel)registeredModels.get("sourceSignal")).getList());
         rp.setMainMeasurement(main[0], main[1], main[2], main[3], main[4], main[5], ((SignalModel)registeredModels.get("sourceSignal")).getList(), ((SignalModel)registeredModels.get("baseSignal")).getList());
         rp.setFirstLayerMeasurement(first[0], first[1], first[2], first[3], first[5], ((SignalModel)registeredModels.get("targetSignal")).getList());
-        rp.setUseFirstLayer(true);
-        rp.setUseBaseImpedance(true);
+        boolean useFirstLayer = true;
+        boolean useBaseImpedance = true;
+        rp.setUseFirstLayer(useFirstLayer);
+        rp.setUseBaseImpedance(useBaseImpedance);
+        comment = comment + " UseBaseImpedance="+useBaseImpedance+ " UseBaseImpedance="+useBaseImpedance;
         List<Double> result = rp.getRadiusWithRo1();
         int i = 0;
         ListWriter listWriter = new ListWriter();
         try {
-            listWriter.writeListToFile(result, radiusFile);
+            listWriter.writeListToFile(result, radiusFile, comment);
         } catch (FileNotFoundException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         } catch (UnsupportedEncodingException e) {

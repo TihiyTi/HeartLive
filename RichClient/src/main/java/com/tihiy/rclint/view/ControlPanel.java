@@ -31,6 +31,7 @@ public class ControlPanel extends AbstractViewPanel {
         butChooseFirstLayerSignal = new JButton("First Layer Signal");
         butChooseBaseSignal = new JButton("Base signal");
         butCalculate =  new JButton("Calculate");
+        butDefault = new JButton("Default signal");
         mainSizeA = new JTextField("main Size A");
         mainSizeB = new JTextField("main Size B");
         mainXShift = new JTextField("main XShift");
@@ -104,8 +105,28 @@ public class ControlPanel extends AbstractViewPanel {
                 first[3] = 0;
                 first[4] = 0;
                 first[5] = 0;
-                File targetFile = new File(defaultPath, "radius"+getData()+sourceFile.getName());
-                mc.calculate(main, first, targetFile);
+                File radiusFile = new File(defaultPath, "radius"+ getDate()+sourceFile.getName());
+                mc.calculate(main, first, radiusFile, null);
+            }
+        });
+        butDefault.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sourceFile = new File("C:\\Users\\Home\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716\\P1.txt");
+                File roFile = new File("C:\\Users\\Home\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716\\Ro.txt");
+                File baseFile = new File("C:\\Users\\Home\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716\\PB1.txt");
+                try {
+                    mc.addSignal("sourceSignal", sourceFile);
+                    mc.addSignal("targetSignal", roFile);
+                    mc.addSignal("baseSignal", baseFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+                double[] main = {0.04,0.02,0,0.037,0.045,0.019};
+                double[] first = {0.06, 0.03,0,0,0,0};
+                defaultPath = new File("C:\\Users\\Home\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716");
+                File radiusFile = new File(defaultPath, "radius"+getDate()+sourceFile.getName());
+                mc.calculate(main, first, radiusFile, getComment(roFile, baseFile, main, first));
             }
         });
 
@@ -114,6 +135,7 @@ public class ControlPanel extends AbstractViewPanel {
         add(butChooseFirstLayerSignal);
         add(butChooseBaseSignal);
         add(butCalculate);
+        add(butDefault);
         add(mainSizeA);
         add(mainSizeB);
         add(mainXShift);
@@ -136,6 +158,7 @@ public class ControlPanel extends AbstractViewPanel {
     private JButton butChooseFirstLayerSignal;
     private JButton butChooseBaseSignal;
     private JButton butCalculate;
+    private JButton butDefault;
     private JTextField mainSizeA;
     private JTextField mainSizeB;
     private JTextField mainXShift;
@@ -153,22 +176,31 @@ public class ControlPanel extends AbstractViewPanel {
     private File chooseFile(){
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.changeToParentDirectory();
-        fileChooser.setCurrentDirectory(new File("C:\\Users\\Alex\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716"));
-        defaultPath = new File("C:\\Users\\Alex\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716");
-//        if(defaultPath!=null){
-//            fileChooser.setCurrentDirectory( defaultPath);
-//        }
+//        fileChooser.setCurrentDirectory(new File("C:\\Users\\Home\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716"));
+//        defaultPath = new File("C:\\Users\\Home\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716");
+        if(defaultPath!=null){
+            fileChooser.setCurrentDirectory( defaultPath);
+        }
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fileChooser.showDialog(new JFrame(), "Choose signal!");
-//        if(defaultPath==null){
-//            defaultPath = fileChooser.getCurrentDirectory();
-//        }
+        if(defaultPath==null){
+            defaultPath = fileChooser.getCurrentDirectory();
+        }
         return fileChooser.getSelectedFile();
     }
 
-    private String getData(){
+    private static String getDate(){
         Date dNow = new Date( );
         SimpleDateFormat ft = new SimpleDateFormat ("_yyyy_MM_dd_hh_mm_ss");
         return ft.format(dNow);
+    }
+    private String getComment(File roFile, File baseFile, double[] main, double[] first){
+        String comment = "Pulse="+sourceFile.getName()+" Ro="+roFile.getName()+" Base="+baseFile.getName()+" ";
+        comment += "pulseES:";
+        for(double d:main){
+            comment += " "+d;
+        }
+        comment += " baseES" + first[0]+" "+first[1]+" ";
+        return comment;
     }
 }

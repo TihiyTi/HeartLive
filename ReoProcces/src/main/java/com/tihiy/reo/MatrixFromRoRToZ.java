@@ -10,7 +10,7 @@ public class MatrixFromRoRToZ {
     private double roBegin  = 0;
     private double roEnd;
     private double roDelta;
-    private int numberOfStep = 100;
+    private int numberOfStep = 200;
 
     public MatrixFromRoRToZ(double radBegin, double roBegin, double radDelta, double roDelta) {
         this.radBegin = radBegin;
