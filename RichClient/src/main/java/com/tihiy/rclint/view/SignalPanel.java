@@ -4,6 +4,8 @@ import com.tihiy.rclint.mvcAbstract.AbstractController;
 import com.tihiy.rclint.mvcAbstract.AbstractViewPanel;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,12 +22,15 @@ public class SignalPanel extends AbstractViewPanel {
     private BlockingQueue<Integer> queue;
     boolean queueFlag = false;
 
+    int mouseX = 0;
+
     public SignalPanel(AbstractController mc, List<Double> list, String name) {
         this.mc = mc;
         this.signal = list;
         setBackground(Color.orange);
         setPreferredSize(new Dimension(getWidth(), 200));
         signalName = name;
+        initComponent();
     }
 
     public SignalPanel(AbstractController mc, List<Double> list) {
@@ -33,11 +38,13 @@ public class SignalPanel extends AbstractViewPanel {
         this.signal = list;
         setBackground(Color.orange);
         setPreferredSize(new Dimension(getWidth(), 200));
+        initComponent();
     }
 
     public SignalPanel(List<Double> list) {
         this.signal = list;
         setBackground(Color.orange);
+        initComponent();
     }
 
     public SignalPanel(BlockingQueue<Integer> queue){
@@ -80,6 +87,8 @@ public class SignalPanel extends AbstractViewPanel {
                 }
             }
         }
+
+        g.drawString("Амплитуда сигнала: " + signal.get(mouseX), 50, getHeight() - 10);
     }
 
     @Override
@@ -88,7 +97,21 @@ public class SignalPanel extends AbstractViewPanel {
             List<Double> list = (List)evt.getNewValue();
             signal = list;
             repaint();
-        };
+        }
+    }
+
+    private void initComponent(){
+        addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                mouseX = (int)e.getPoint().getX();
+                repaint();
+            }
+        });
     }
 
     static class Repainter implements Runnable{
