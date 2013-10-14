@@ -36,7 +36,7 @@ public class Controller extends AbstractController {
         ReoPostProcessor rp = new ReoPostProcessor();
 //        rp.setMainMeasurement(main[0], main[1], main[2], main[3], main[4], main[5], ((SignalModel)registeredModels.get("sourceSignal")).getList());
         rp.setMainMeasurement(main[0], main[1], main[2], main[3], main[4], main[5], ((SignalModel)registeredModels.get("sourceSignal")).getList(), ((SignalModel)registeredModels.get("baseSignal")).getList());
-        rp.setFirstLayerMeasurement(first[0], first[1], first[2], first[3], first[5], ((SignalModel)registeredModels.get("targetSignal")).getList());
+        rp.setFirstLayerMeasurement(first[0], first[1], ((SignalModel)registeredModels.get("targetSignal")).getList());
         boolean useFirstLayer = true;
         boolean useBaseImpedance = true;
         rp.setUseFirstLayer(useFirstLayer);

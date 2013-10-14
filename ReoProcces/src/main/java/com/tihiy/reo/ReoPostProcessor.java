@@ -85,12 +85,10 @@ public class ReoPostProcessor {
     }
 
     // Configure measurement from first layer
-    public void setFirstLayerMeasurement(double a, double b, double xShift, double yShift, double h, List<Double> list){
-        ElectrodeSystem eSystem = new ElectrodeSystem(a, b, xShift, yShift);
-        BodyGeometry bodyGeometry = new BodyGeometry(0, h);
+    public void setFirstLayerMeasurement(double a, double b, List<Double> list){
+        ElectrodeSystem eSystem = new ElectrodeSystem(a, b, 0, 0);
         OneLayerModel model = new OneLayerModel();
-        firstLayerMeasurement =  new ExpMeasurement<Double>(model, eSystem, null, list);
-//        model.setRo(5, 1.35);
+        firstLayerMeasurement =  new ExpMeasurement<>(model, eSystem, null, list);
     }
     public boolean isUseFirstLayer() {
         return useFirstLayer;

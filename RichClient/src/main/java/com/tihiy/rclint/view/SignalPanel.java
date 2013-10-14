@@ -88,7 +88,9 @@ public class SignalPanel extends AbstractViewPanel {
             }
         }
 
-        g.drawString("Амплитуда сигнала: " + signal.get(mouseX), 50, getHeight() - 10);
+        if(mouseX < signal.size()){
+            g.drawString("Амплитуда сигнала: " + signal.get(mouseX), 50, getHeight() - 10);
+        }
     }
 
     @Override
