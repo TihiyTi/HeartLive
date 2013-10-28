@@ -1,4 +1,4 @@
-package com.tihiy.rclint.view;
+package com.tihiy.rclint.implement;
 
 import com.tihiy.rclint.control.Controller;
 import com.tihiy.rclint.mvcAbstract.AbstractViewPanel;
@@ -20,9 +20,9 @@ public class ControlPanel extends AbstractViewPanel {
 
     public ControlPanel(Controller mc) {
         this.mc = mc;
-        setBackground(Color.BLUE);
-        setPreferredSize(new Dimension(200, 400));
-        setLayout( new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBorder(BorderFactory.createLineBorder(Color.BLUE));
+//        setPreferredSize(new Dimension(200, 400));
+        setLayout(new GridBagLayout());
         initComponent();
     }
 
@@ -32,14 +32,14 @@ public class ControlPanel extends AbstractViewPanel {
         butChooseBaseSignal = new JButton("Base signal");
         butCalculate =  new JButton("Calculate");
         butDefault = new JButton("Default signal");
-        mainSizeA = new JTextField("main Size A");
-        mainSizeB = new JTextField("main Size B");
-        mainXShift = new JTextField("main XShift");
-        mainYShift = new JTextField("main YShift");
-        mainRSphere = new JTextField("mainRSphere");
-        mainH = new JTextField("mainH");
-        firstSizeA = new JTextField("first Size A");
-        firstSizeB = new JTextField("first Size B");
+        mainSizeA = new JTextField();
+        mainSizeB = new JTextField();
+        mainXShift = new JTextField();
+        mainYShift = new JTextField();
+        mainRSphere = new JTextField();
+        mainH = new JTextField();
+        firstSizeA = new JTextField();
+        firstSizeB = new JTextField();
 
         butChooseSignal.addActionListener(new ActionListener() {
             @Override
@@ -104,20 +104,58 @@ public class ControlPanel extends AbstractViewPanel {
             }
         });
 
-
-        add(butChooseSignal);
-        add(butChooseFirstLayerSignal);
-        add(butChooseBaseSignal);
-        add(butCalculate);
+        GridBagConstraints constraints = new GridBagConstraints(0,0, 1,1, 0,0,
+                GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(5,5,5,5), 0,0);
+        add(butChooseSignal, constraints);
+        constraints.gridy = 1;
+        add(butChooseFirstLayerSignal, constraints);
+        constraints.gridy = 2;
+        add(butChooseBaseSignal, constraints);
+        constraints.gridy = 3;
+        add(butCalculate, constraints);
+        constraints.gridy = 4;
         add(butDefault);
-        add(mainSizeA);
-        add(mainSizeB);
-        add(mainXShift);
-        add(mainYShift);
-        add(mainRSphere);
-        add(mainH);
-        add(firstSizeA);
-        add(firstSizeB);
+        constraints.gridy = 5;
+        constraints.gridx = 0;
+        constraints.insets = new Insets(0,5,0,5);
+        add(new Label("Size A(main)"), constraints);
+        constraints.gridx = 1;
+        add(mainSizeA, constraints);
+        constraints.gridy = 6;
+        constraints.gridx = 0;
+        add(new Label("Size B(main)"), constraints);
+        constraints.gridx = 1;
+        add(mainSizeB, constraints);
+        constraints.gridy = 7;
+        constraints.gridx = 0;
+        add(new Label("Shift X(main)"), constraints);
+        constraints.gridx = 1;
+        add(mainXShift, constraints);
+        constraints.gridy = 8;
+        constraints.gridx = 0;
+        add(new Label("Shift Y(main)"), constraints);
+        constraints.gridx = 1;
+        add(mainYShift, constraints);
+        constraints.gridy = 9;
+        constraints.gridx = 0;
+        add(new Label("R sphere(main)"), constraints);
+        constraints.gridx = 1;
+        add(mainRSphere, constraints);
+        constraints.gridy = 10;
+        constraints.gridx = 0;
+        add(new Label("H (main)"), constraints);
+        constraints.gridx = 1;
+        add(mainH, constraints);
+        constraints.gridy = 11;
+        constraints.gridx = 0;
+        add(new Label("Size A(FL)"), constraints);
+        constraints.gridx = 1;
+        add(firstSizeA, constraints);
+        constraints.gridy = 12;
+        constraints.gridx = 0;
+        add(new Label("Size B(FL)"), constraints);
+        constraints.gridx = 1;
+        add(firstSizeB, constraints);
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.tihiy.rclint;
 
 import com.tihiy.rclint.control.Controller;
 import com.tihiy.rclint.models.SignalModel;
-import com.tihiy.rclint.view.ControlPanel;
+import com.tihiy.rclint.implement.ControlPanel;
 import com.tihiy.rclint.view.SignalPanel;
 import org.junit.Test;
 

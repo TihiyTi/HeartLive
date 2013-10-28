@@ -26,7 +26,7 @@ public class RadCalcFrame extends JFrame {
 
     public void initComponent(){
 
-        controlPanel.setBackground(new Color(0, 153, 204));
+        controlPanel.setBorder(BorderFactory.createLineBorder(new Color(0, 153, 204)));
 
         BoxLayout panelLayout = new BoxLayout(signalsPanel, BoxLayout.Y_AXIS);
         signalsPanel.setLayout(panelLayout);

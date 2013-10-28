@@ -2,21 +2,14 @@ package com.tihiy.comm.serial;
 
 import com.tihiy.comm.serial.protocols.Protocol;
 import com.tihiy.rclint.control.Controller;
-import com.tihiy.rclint.models.SignalModel;
 import com.tihiy.rclint.models.SignalModelIntRT;
-import com.tihiy.rclint.view.ControlPanel;
-import com.tihiy.rclint.view.SignalPanel;
+import com.tihiy.rclint.implement.ControlPanel;
 import org.junit.Test;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
-import java.util.List;
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
 public class ModelSignalManagerTest {
     @Test
