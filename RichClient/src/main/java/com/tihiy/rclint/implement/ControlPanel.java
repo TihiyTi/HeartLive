@@ -21,7 +21,6 @@ public class ControlPanel extends AbstractViewPanel {
     public ControlPanel(Controller mc) {
         this.mc = mc;
         setBorder(BorderFactory.createLineBorder(Color.BLUE));
-//        setPreferredSize(new Dimension(200, 400));
         setLayout(new GridBagLayout());
         initComponent();
     }
