@@ -67,7 +67,7 @@ public class ControlPanel extends AbstractViewPanel {
                 try {
                     mc.addSignal("baseSignal", chooseFile());
                 } catch (IOException e1) {
-                    e1.printStackTrace();  //change body of catch statement use File | Settings | File Templates.
+                    e1.printStackTrace();  //hange body of catch statement use File | Settings | File Templates.
                 }
             }
         });
