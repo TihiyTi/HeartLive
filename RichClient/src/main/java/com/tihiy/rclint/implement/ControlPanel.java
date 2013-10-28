@@ -93,7 +93,7 @@ public class ControlPanel extends AbstractViewPanel {
                     mc.addSignal("targetSignal", roFile);
                     mc.addSignal("baseSignal", baseFile);
                 } catch (IOException e1) {
-                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    e1.printStackTrace();
                 }
                 double[] main = {0.04,0.02,0,0.037,0.045,0.019};
                 double[] first = {0.06, 0.03};
