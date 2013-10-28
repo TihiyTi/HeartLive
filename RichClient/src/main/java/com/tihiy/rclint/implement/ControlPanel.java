@@ -159,7 +159,6 @@ public class ControlPanel extends AbstractViewPanel {
 
     @Override
     public void modelPropertyChange(PropertyChangeEvent evt) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
     private JButton butChooseSignal;
     private JButton butChooseFirstLayerSignal;
