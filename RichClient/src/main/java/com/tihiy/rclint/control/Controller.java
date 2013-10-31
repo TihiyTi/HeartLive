@@ -21,11 +21,23 @@ public class Controller extends AbstractController {
     private final Map<String, AbstractModel> registeredModels = new HashMap<>();
     private final Map<String, BlockingQueue<Integer>> signalMap = new HashMap<>();
 
-//    public static final String COMMAND_RANDOM_LIST = "randomList";
-//
-//    public void command(String command){
-//        applyCommand(command);
-//    }
+    public static final String PRECARD_1 = "precard_1";
+    public static final String PRECARD_2 = "precard_2";
+    public static final String PRECARD_3 = "precard_3";
+    public static final String PRECARD_4 = "precard_4";
+    public static final String PRECARD_5 = "precard_5";
+    public static final String PRECARD_BASE_1 = "precard_base_1";
+    public static final String PRECARD_BASE_2 = "precard_base_2";
+    public static final String PRECARD_BASE_3 = "precard_base_3";
+    public static final String PRECARD_BASE_4 = "precard_base_4";
+    public static final String PRECARD_BASE_5 = "precard_base_5";
+    public static final String FIRST = "first";
+    public static final String RADIUS_1 = "radius_1";
+    public static final String RADIUS_2 = "radius_2";
+    public static final String RADIUS_3 = "radius_3";
+    public static final String RADIUS_4 = "radius_4";
+    public static final String RADIUS_5 = "radius_5";
+
 
     public void addSignal(String name, File file) throws IOException {
         List<Double> list =  ReadingFiles.readFile(file);

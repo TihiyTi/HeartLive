@@ -3,6 +3,7 @@ package com.tihiy.rclint.view;
 import com.tihiy.rclint.mvcAbstract.AbstractController;
 import com.tihiy.rclint.mvcAbstract.AbstractViewPanel;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -103,6 +104,7 @@ public class SignalPanel extends AbstractViewPanel {
     }
 
     private void initComponent(){
+        setBorder(BorderFactory.createLineBorder(Color.BLUE));
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
