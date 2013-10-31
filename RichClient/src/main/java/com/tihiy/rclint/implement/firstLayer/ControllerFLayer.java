@@ -1,8 +1,9 @@
-package com.tihiy.rclint.implement;
+package com.tihiy.rclint.implement.firstLayer;
 
 import com.tihiy.comm.ListWriter;
 import com.tihiy.rclint.ReadingFiles;
 import com.tihiy.rclint.models.SignalModel;
+import com.tihiy.rclint.mvcAbstract.AbstractController;
 import com.tihiy.rclint.mvcAbstract.AbstractModel;
 import com.tihiy.reo.ReoPostProcessor;
 
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 
-public class ControllerFLayer {
+public class ControllerFLayer extends AbstractController{
     private final Map<String, AbstractModel> registeredModels = new HashMap<>();
     private final Map<String, BlockingQueue<Integer>> signalMap = new HashMap<>();
 

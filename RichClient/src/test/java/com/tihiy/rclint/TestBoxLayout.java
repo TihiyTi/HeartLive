@@ -1,5 +1,7 @@
 package com.tihiy.rclint;
 
+import com.tihiy.rclint.implement.firstLayer.ParamPanel;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -58,9 +60,11 @@ public class TestBoxLayout {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Set up the content pane.
-        JPanel panel = new JPanel();
+//        JPanel panel = new JPanel();
+//        addComponentsToPane(frame.getContentPane());
 
-        addComponentsToPane(frame.getContentPane());
+        JPanel panel = new ParamPanel();
+        frame.getContentPane().add(panel);
 
         //Display the window.
         frame.pack();
