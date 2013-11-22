@@ -195,6 +195,7 @@ public class ControlPanel extends AbstractViewPanel {
         SimpleDateFormat ft = new SimpleDateFormat ("_yyyy_MM_dd_hh_mm_ss");
         return ft.format(dNow);
     }
+
     private String getComment(File roFile, File baseFile, double[] main, double[] first){
         String comment = "Pulse="+sourceFile.getName()+" Ro="+roFile.getName()+" Base="+baseFile.getName()+" ";
         comment += "pulseES:";

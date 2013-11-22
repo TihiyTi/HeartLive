@@ -1,8 +1,7 @@
 package com.tihiy.rclint.implement.firstLayer;
 
 import javax.swing.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class TabParamPanel extends JTabbedPane{
 
@@ -16,11 +15,11 @@ public class TabParamPanel extends JTabbedPane{
         }
     }
 
-    protected Map getParam(){
-        Map map = new HashMap<Integer, double[]>();
+    protected List getParam(){
+        List<double[]> list = new ArrayList<>();
         for(int i = 0; i < 5; i++){
-            map.put((i+1), ((ParamPanel)getTabComponentAt(i)).getParam());
+            list.add(((ParamPanel) getTabComponentAt(i)).getParam());
         }
-        return map;
+        return list;
     }
 }

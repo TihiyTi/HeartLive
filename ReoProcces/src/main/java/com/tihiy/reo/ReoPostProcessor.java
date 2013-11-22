@@ -83,6 +83,10 @@ public class ReoPostProcessor {
         setMainMeasurement(a,b,xShift,yShift,rSphere,h,list);
         mainMeasurement.setBaseImp(base);
     }
+//    public void setMainMeasurement(List<double[]> parameters, List<Double> list, List<Double> base){
+//        .
+//        setMainMeasurement();
+//    }
 
     // Configure measurement from first layer
     public void setFirstLayerMeasurement(double a, double b, List<Double> list){

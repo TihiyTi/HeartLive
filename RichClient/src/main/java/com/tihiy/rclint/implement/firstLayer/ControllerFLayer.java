@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +42,12 @@ public class ControllerFLayer extends AbstractController{
 
     public void addSignal(String name, File file) throws IOException {
         List<Double> list =  ReadingFiles.readFile(file);
-        ((SignalModel)registeredModels.get(name)).setList(list);
+        if(registeredModels.containsKey(name)){
+            ((SignalModel)registeredModels.get(name)).setList(list);
+        }else{
+            addModel(name, new SignalModel(name));
+            ((SignalModel)registeredModels.get(name)).setList(list);
+        }
     }
     public void calculate(double[] main, double[] first, File radiusFile, String comment){
         System.out.println("Size A = " + main[0]);
@@ -72,6 +79,30 @@ public class ControllerFLayer extends AbstractController{
 
 
 
+    public void calculate(List<double[]> list, File defaultPath){
+        ReoPostProcessor rp = new ReoPostProcessor();
+        for(int i = 0; i < 5; i++){
+            String precardio = "precard_"+i;
+            String base = "precard_base_"+i;
+            double[] array = list.get(i);
+            rp.setMainMeasurement(array[0], array[1], array[2], array[3], array[4], array[5], ((SignalModel)registeredModels.get(precardio)).getList(), ((SignalModel)registeredModels.get(base)).getList());
+            rp.setFirstLayerMeasurement(array[6], array[7], ((SignalModel)registeredModels.get(FIRST)).getList());
+            boolean useFirstLayer = true;
+            boolean useBaseImpedance = true;
+            rp.setUseFirstLayer(useFirstLayer);
+            rp.setUseBaseImpedance(useBaseImpedance);
+            List<Double> result = rp.getRadiusWithRo1();
+            ListWriter listWriter = new ListWriter();
+            try {
+                listWriter.writeListToFile(result, new File(defaultPath, "radius"+ getDate()+precardio));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
+    }
+
     public void createSignalModel(String flowName, AbstractModel model){
         addModel(model);
     }
@@ -83,5 +114,11 @@ public class ControllerFLayer extends AbstractController{
 
     public void modifyModel(String flowName){
 //        registeredModels.get(flowName).
+    }
+
+    private static String getDate(){
+        Date dNow = new Date( );
+        SimpleDateFormat ft = new SimpleDateFormat ("_yyyy_MM_dd_hh_mm_ss");
+        return ft.format(dNow);
     }
 }

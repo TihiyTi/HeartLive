@@ -8,9 +8,9 @@ import java.awt.*;
 import java.util.Collections;
 
 public class TabSignalPanel extends JTabbedPane {
-    Controller mc;
+    ControllerFLayer mc;
 
-    public TabSignalPanel(Controller mc) {
+    public TabSignalPanel(ControllerFLayer mc) {
         this.mc = mc;
         initComponent();
     }

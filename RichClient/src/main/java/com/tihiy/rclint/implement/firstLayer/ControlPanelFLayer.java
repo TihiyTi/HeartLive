@@ -8,12 +8,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ControlPanelFLayer  extends AbstractViewPanel{
 
     private final ControllerFLayer mc;
+    private File defaultPath;
 
     public ControlPanelFLayer(ControllerFLayer mc) {
         this.mc = mc;
@@ -24,22 +27,95 @@ public class ControlPanelFLayer  extends AbstractViewPanel{
     }
 
     private void initListeners() {
+        butChooseSignal_1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    File sourceFile = chooseFile();
+                    mc.addSignal(ControllerFLayer.PRECARD_1, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
         butCalculate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mc.calculate(paramPanel.getParam());
+                mc.calculate(paramPanel.getParam(), defaultPath);
             }
         });
     }
 
     private void initComponent() {
-        //To change body of created methods use File | Settings | File Templates.
+        butChooseSignal_1 = new JButton("Choose Signal 1");
+        butChooseSignal_2 = new JButton("Choose Signal 2");
+        butChooseSignal_3 = new JButton("Choose Signal 3");
+        butChooseSignal_4 = new JButton("Choose Signal 4");
+        butChooseSignal_5 = new JButton("Choose Signal 5");
+        butChooseFirstLayerSignal = new JButton("First Layer Signal");
+        butChooseBaseSignal_1 = new JButton("Base signal 1");
+        butChooseBaseSignal_2 = new JButton("Base signal 2");
+        butChooseBaseSignal_3 = new JButton("Base signal 3");
+        butChooseBaseSignal_4 = new JButton("Base signal 4");
+        butChooseBaseSignal_5 = new JButton("Base signal 5");
+        butCalculate =  new JButton("Calculate");
+        butDefault = new JButton("Default signal");
+
+        GridBagConstraints constraints = new GridBagConstraints(0,0, 1,1, 0,0,
+                GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(5,5,5,5), 0,0);
+        add(butChooseSignal_1, constraints);
+        constraints.gridy = 1;
+        add(butChooseSignal_2, constraints);
+        constraints.gridy = 2;
+        add(butChooseSignal_3, constraints);
+        constraints.gridy = 3;
+        add(butChooseSignal_4, constraints);
+        constraints.gridy = 4;
+        add(butChooseSignal_5, constraints);
+        constraints.gridy = 5;
+        add(butChooseFirstLayerSignal, constraints);
+
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        add(butChooseBaseSignal_1, constraints);
+        constraints.gridy = 1;
+        add(butChooseBaseSignal_2, constraints);
+        constraints.gridy = 2;
+        add(butChooseBaseSignal_3, constraints);
+        constraints.gridy = 3;
+        add(butChooseBaseSignal_4, constraints);
+        constraints.gridy = 4;
+        add(butChooseBaseSignal_5, constraints);
+        constraints.gridy = 5;
+        add(butCalculate, constraints);
+
+//        add(butDefault, /constraints);
+//        constraints.gridy = 5;
+//        constraints.gridx = 0;
+    }
+
+    private File chooseFile(){
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.changeToParentDirectory();
+        fileChooser.setCurrentDirectory(new File("C:\\Users\\Home\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716"));
+//        defaultPath = new File("C:\\Users\\Home\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716");
+        if(defaultPath!=null){
+            fileChooser.setCurrentDirectory( defaultPath);
+        }
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.showDialog(new JFrame(), "Choose signal!");
+        if(defaultPath==null){
+            defaultPath = fileChooser.getCurrentDirectory();
+        }
+        return fileChooser.getSelectedFile();
     }
 
     @Override
     public void modelPropertyChange(PropertyChangeEvent evt) {
-        //To change body of implemented methods use File | Settings | File Templates.
+
     }
+
+
 
     private JButton butChooseSignal_1;
     private JButton butChooseSignal_2;
