@@ -73,4 +73,14 @@ public class ParamPanel extends JPanel{
                 Double.valueOf(mainRSphere.getText()), Double.valueOf(mainH.getText()),
                 Double.valueOf(firstSizeA.getText()), Double.valueOf(firstSizeB.getText())};
     }
+    protected void loadParam(double[] paramArray){
+        mainSizeA.setText(String.valueOf(paramArray[0]));
+        mainSizeB.setText(String.valueOf(paramArray[1]));
+        mainXShift.setText(String.valueOf(paramArray[2]));
+        mainYShift.setText(String.valueOf(paramArray[3]));
+        mainRSphere.setText(String.valueOf(paramArray[4]));
+        mainH.setText(String.valueOf(paramArray[5]));
+        firstSizeA.setText(String.valueOf(paramArray[6]));
+        firstSizeB.setText(String.valueOf(paramArray[7]));
+    }
 }

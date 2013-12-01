@@ -38,6 +38,118 @@ public class ControlPanelFLayer  extends AbstractViewPanel{
                 }
             }
         });
+        butChooseSignal_2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.PRECARD_2, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+        butChooseSignal_3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.PRECARD_3, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+        butChooseSignal_4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.PRECARD_4, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+        butChooseSignal_5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.PRECARD_5, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+
+        butChooseBaseSignal_1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.PRECARD_BASE_1, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+        butChooseBaseSignal_2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.PRECARD_BASE_2, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+        butChooseBaseSignal_3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.PRECARD_BASE_3, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+        butChooseBaseSignal_4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.PRECARD_BASE_4, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+        butChooseBaseSignal_5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.PRECARD_BASE_5, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+
+        butChooseFirstLayerSignal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.FIRST, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
         butCalculate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,6 +172,7 @@ public class ControlPanelFLayer  extends AbstractViewPanel{
         butChooseBaseSignal_5 = new JButton("Base signal 5");
         butCalculate =  new JButton("Calculate");
         butDefault = new JButton("Default signal");
+        paramPanel = new TabParamPanel();
 
         GridBagConstraints constraints = new GridBagConstraints(0,0, 1,1, 0,0,
                 GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(5,5,5,5), 0,0);
@@ -88,6 +201,11 @@ public class ControlPanelFLayer  extends AbstractViewPanel{
         add(butChooseBaseSignal_5, constraints);
         constraints.gridy = 5;
         add(butCalculate, constraints);
+
+        constraints.gridy = 6;
+        constraints.gridx = 0;
+        constraints.gridwidth = 2;
+        add(paramPanel, constraints);
 
 //        add(butDefault, /constraints);
 //        constraints.gridy = 5;
