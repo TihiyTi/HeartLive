@@ -5,11 +5,11 @@
       <module fileurl="file://$PROJECT_DIR$/Basic/Basic.iml" filepath="$PROJECT_DIR$/Basic/Basic.iml" />
       <module fileurl="file://$PROJECT_DIR$/CommunicationBasic/CommunicationBasic.iml" filepath="$PROJECT_DIR$/CommunicationBasic/CommunicationBasic.iml" />
       <module fileurl="file://$PROJECT_DIR$/CommunicationCore/CommunicationCore.iml" filepath="$PROJECT_DIR$/CommunicationCore/CommunicationCore.iml" />
-      <module fileurl="file://$PROJECT_DIR$/CommunicationFile/CommunicationFile.iml" filepath="$PROJECT_DIR$/CommunicationFile/CommunicationFile.iml" />
       <module fileurl="file://$PROJECT_DIR$/CommunicationSerial/CommunicationSerial.iml" filepath="$PROJECT_DIR$/CommunicationSerial/CommunicationSerial.iml" />
       <module fileurl="file://$PROJECT_DIR$/EcgProcces/EcgProcces.iml" filepath="$PROJECT_DIR$/EcgProcces/EcgProcces.iml" />
       <module fileurl="file://$PROJECT_DIR$/ReoProcces/ReoProcces.iml" filepath="$PROJECT_DIR$/ReoProcces/ReoProcces.iml" />
       <module fileurl="file://$PROJECT_DIR$/RichClient/RichClient.iml" filepath="$PROJECT_DIR$/RichClient/RichClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CommunicationFile/communication-file.iml" filepath="$PROJECT_DIR$/CommunicationFile/communication-file.iml" />
       <module fileurl="file://$PROJECT_DIR$/CommunicationFile/communication-file.iml" filepath="$PROJECT_DIR$/CommunicationFile/communication-file.iml" />
       <module fileurl="file://$PROJECT_DIR$/ReoProcces/reo-procces.iml" filepath="$PROJECT_DIR$/ReoProcces/reo-procces.iml" />
       <module fileurl="file://$PROJECT_DIR$/RichClient/rich-client.iml" filepath="$PROJECT_DIR$/RichClient/rich-client.iml" />

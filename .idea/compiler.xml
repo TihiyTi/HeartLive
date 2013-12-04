@@ -11,10 +11,10 @@
       <directory url="file://$PROJECT_DIR$/RichClient/target/generated-test-sources/test-annotations" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/CommunicationCore/target/generated-sources/annotations" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/CommunicationCore/target/generated-test-sources/test-annotations" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/CommunicationFile/target/generated-sources/annotations" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/CommunicationFile/target/generated-test-sources/test-annotations" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/EcgProcces/target/generated-sources/annotations" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/EcgProcces/target/generated-test-sources/test-annotations" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/CommunicationFile/target/generated-sources/annotations" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/CommunicationFile/target/generated-test-sources/test-annotations" includeSubdirectories="true" />
     </excludeFromCompile>
     <resourceExtensions />
     <wildcardResourcePatterns>
@@ -40,13 +40,10 @@
         <processorPath useClasspath="true" />
         <module name="communication-file" />
         <module name="CommunicationCore" />
-        <module name="CommunicationFile" />
         <module name="CommunicationSerial" />
         <module name="EcgProcces" />
         <module name="reo-procces" />
-        <module name="ReoProcces" />
         <module name="rich-client" />
-        <module name="RichClient" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
