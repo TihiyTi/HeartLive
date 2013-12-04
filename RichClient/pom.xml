@@ -25,6 +25,12 @@
         <dependency>
             <groupId>com.tihiy.reoprocces</groupId>
             <artifactId>reo-procces</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.tihiy.communication</groupId>
+            <artifactId>communication-file</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 

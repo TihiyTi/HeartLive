@@ -38,22 +38,28 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="communication-file" />
         <module name="CommunicationCore" />
         <module name="CommunicationFile" />
         <module name="CommunicationSerial" />
         <module name="EcgProcces" />
+        <module name="reo-procces" />
         <module name="ReoProcces" />
+        <module name="rich-client" />
         <module name="RichClient" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Basic" target="1.7" />
+      <module name="communication-file" target="1.7" />
       <module name="CommunicationBasic" target="1.7" />
       <module name="CommunicationCore" target="1.7" />
       <module name="CommunicationFile" target="1.7" />
       <module name="CommunicationSerial" target="1.7" />
       <module name="EcgProcces" target="1.7" />
+      <module name="reo-procces" target="1.7" />
       <module name="ReoProcces" target="1.7" />
+      <module name="rich-client" target="1.7" />
       <module name="RichClient" target="1.7" />
     </bytecodeTargetLevel>
   </component>

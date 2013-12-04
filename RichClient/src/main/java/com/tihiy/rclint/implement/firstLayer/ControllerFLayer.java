@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
+import java.util.logging.Logger;
 
 public class ControllerFLayer extends AbstractController{
     private final Map<String, AbstractModel> registeredModels = new HashMap<>();
@@ -41,12 +42,16 @@ public class ControllerFLayer extends AbstractController{
 
 
     public void addSignal(String name, File file) throws IOException {
-        List<Double> list =  ReadingFiles.readFile(file);
-        if(registeredModels.containsKey(name)){
-            ((SignalModel)registeredModels.get(name)).setList(list);
+        if(file != null){
+            List<Double> list =  ReadingFiles.readFile(file);
+            if(registeredModels.containsKey(name)){
+                ((SignalModel)registeredModels.get(name)).setList(list);
+            }else{
+                addModel(name, new SignalModel(name));
+                ((SignalModel)registeredModels.get(name)).setList(list);
+            }
         }else{
-            addModel(name, new SignalModel(name));
-            ((SignalModel)registeredModels.get(name)).setList(list);
+            Logger.getLogger(getClass().getName()).info("File didn't choosen.");
         }
     }
     public void calculate(double[] main, double[] first, File radiusFile, String comment){
@@ -82,23 +87,33 @@ public class ControllerFLayer extends AbstractController{
     public void calculate(List<double[]> list, File defaultPath){
         ReoPostProcessor rp = new ReoPostProcessor();
         for(int i = 0; i < 5; i++){
-            String precardio = "precard_"+i;
-            String base = "precard_base_"+i;
+            String precardio = "precard_"+(i+1);
+            String base = "precard_base_"+(i+1);
+            String radius = "radius_"+(i+1);
             double[] array = list.get(i);
-            rp.setMainMeasurement(array[0], array[1], array[2], array[3], array[4], array[5], ((SignalModel)registeredModels.get(precardio)).getList(), ((SignalModel)registeredModels.get(base)).getList());
-            rp.setFirstLayerMeasurement(array[6], array[7], ((SignalModel)registeredModels.get(FIRST)).getList());
-            boolean useFirstLayer = true;
-            boolean useBaseImpedance = true;
-            rp.setUseFirstLayer(useFirstLayer);
-            rp.setUseBaseImpedance(useBaseImpedance);
-            List<Double> result = rp.getRadiusWithRo1();
-            ListWriter listWriter = new ListWriter();
-            try {
-                listWriter.writeListToFile(result, new File(defaultPath, "radius"+ getDate()+precardio));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            if(registeredModels.containsKey(precardio)){
+                rp.setMainMeasurement(array[0], array[1], array[2], array[3], array[4], array[5], ((SignalModel)registeredModels.get(precardio)).getList(), ((SignalModel)registeredModels.get(base)).getList());
+                rp.setFirstLayerMeasurement(array[6], array[7], ((SignalModel)registeredModels.get(FIRST)).getList());
+                boolean useFirstLayer = true;
+                boolean useBaseImpedance = true;
+                rp.setUseFirstLayer(useFirstLayer);
+                rp.setUseBaseImpedance(useBaseImpedance);
+                List<Double> result = rp.getRadiusWithRo1();
+
+                SignalModel model = new SignalModel(radius);
+                addModel(radius, model);
+                model.setList(result);
+
+                ListWriter listWriter = new ListWriter();
+                try {
+                    listWriter.writeListToFile(result, new File(defaultPath, "radius"+ getDate()+precardio));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }else{
+                Logger.getLogger(getClass().getName()).info("MapModel don't contain model '"+ precardio + "'! ");
             }
         }
     }

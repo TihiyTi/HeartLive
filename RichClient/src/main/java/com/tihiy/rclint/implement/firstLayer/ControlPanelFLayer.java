@@ -1,6 +1,5 @@
 package com.tihiy.rclint.implement.firstLayer;
 
-import com.tihiy.rclint.mvcAbstract.AbstractController;
 import com.tihiy.rclint.mvcAbstract.AbstractViewPanel;
 
 import javax.swing.*;
@@ -10,8 +9,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.logging.Logger;
 
 public class ControlPanelFLayer  extends AbstractViewPanel{
 
@@ -153,7 +151,22 @@ public class ControlPanelFLayer  extends AbstractViewPanel{
         butCalculate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(defaultPath == null){
+//                    JDialog dialog = new JDialog();
+//                    dialog.setTitle("No defaultPath, choose input signal");
+//                    dialog.add(new Label("No default Path!"));
+//                    dialog.setSize(100,100);
+//                    dialog.setVisible(true);
+                    Logger.getLogger(getClass().getName()).info("Warning! defaultPath == null");
+                }
                 mc.calculate(paramPanel.getParam(), defaultPath);
+            }
+        });
+        butDefault.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                paramPanel.setDefaultParam();
+
             }
         });
     }
@@ -202,14 +215,15 @@ public class ControlPanelFLayer  extends AbstractViewPanel{
         constraints.gridy = 5;
         add(butCalculate, constraints);
 
+
         constraints.gridy = 6;
         constraints.gridx = 0;
         constraints.gridwidth = 2;
         add(paramPanel, constraints);
 
-//        add(butDefault, /constraints);
-//        constraints.gridy = 5;
-//        constraints.gridx = 0;
+        constraints.gridy = 7;
+        constraints.gridx = 0;
+        add(butDefault, constraints);
     }
 
     private File chooseFile(){

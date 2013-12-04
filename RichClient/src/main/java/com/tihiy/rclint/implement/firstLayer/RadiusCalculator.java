@@ -24,7 +24,7 @@ public class RadiusCalculator {
 
                 JPanel panel = new JPanel();
                 panel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
-                panel.setPreferredSize(new Dimension(600, signalPanel.getHeight()));
+                panel.setPreferredSize(new Dimension(800, 600));
                 panel.setLayout(new BorderLayout());
                 panel.add(controlPanel, BorderLayout.EAST);
                 panel.add(signalPanel, BorderLayout.CENTER);

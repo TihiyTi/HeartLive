@@ -3,13 +3,18 @@ package com.tihiy.comm;
 import java.io.*;
 import java.util.List;
 
-public class ListWriter <T extends Number>{
+public class ListWriter <T>{
     private File fileDirectory;
 
     public ListWriter(){}
 
     public ListWriter(File fileDirectory) {
         this.fileDirectory = fileDirectory;
+    }
+
+    public void writeListToFile(List<T> data, String fileName) throws FileNotFoundException, UnsupportedEncodingException {
+        File targetFile = new File(fileDirectory, fileName + ".txt");
+        writeListToFile(data, targetFile);
     }
 
     public void writeListToFile(List<T> data, File targetFile) throws FileNotFoundException, UnsupportedEncodingException {
@@ -39,12 +44,7 @@ public class ListWriter <T extends Number>{
         }
     }
 
-    public void writeListToFile(List<T> data, String fileName) throws FileNotFoundException, UnsupportedEncodingException {
-        File targetFile = new File(fileDirectory, fileName + ".txt");
-        writeListToFile(data, targetFile);
-    }
-
-    public  void writeListToFile(List<T> data, File targetFile, String comment) throws FileNotFoundException, UnsupportedEncodingException {
+    public void writeListToFile(List<T> data, File targetFile, String comment) throws FileNotFoundException, UnsupportedEncodingException {
         FileOutputStream fileOutputStream = new FileOutputStream(targetFile);
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, "UTF-8"));
         try {
@@ -74,4 +74,5 @@ public class ListWriter <T extends Number>{
             }
         }
     }
+
 }

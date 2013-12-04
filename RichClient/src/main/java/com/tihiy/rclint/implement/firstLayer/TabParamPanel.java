@@ -1,10 +1,8 @@
 package com.tihiy.rclint.implement.firstLayer;
 
 import com.ak.util.GenericStorage;
-import sun.net.www.content.text.Generic;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -29,16 +27,28 @@ public class TabParamPanel extends JTabbedPane{
             double[] array = panel.getParam();
             list.add(array);
         }
-        GenericStorage.newMapStorage("param", "").save((Map<String, List<double[]>>) (new HashMap()).put("param",list));
+        Map<String, List<double[]>> map = new HashMap<>();
+        map.put("param", list);
+        GenericStorage.newMapStorage("param", "").save(map);
         return list;
     }
     protected void loadParam(){
         Map<String, List<double[]>> map = GenericStorage.newMapStorage("param", "").load();
         List<double[]> list = (List<double[]>) GenericStorage.newMapStorage("param", "").load().get("param");
         if(list!=null){
-            for(int i = 0; i < 5; i++){
-                ((ParamPanel)getTabComponentAt(i)).loadParam(list.get(i));
+            for(int i = 0; i < 5; i++ ){
+                setSelectedIndex(i);
+                ParamPanel panel = (ParamPanel) getSelectedComponent();
+                panel.setParam(list.get(i));
             }
+        }
+    }
+    protected void setDefaultParam(){
+        double[] mas = {0.04,0.02,0,0.037,0.045, 0.019, 0.06, 0.03};
+        for(int i = 0; i < 5; i++ ){
+            setSelectedIndex(i);
+            ParamPanel panel = (ParamPanel) getSelectedComponent();
+            panel.setParam(mas);
         }
     }
 }
