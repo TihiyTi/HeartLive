@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
-    <file url="file://$PROJECT_DIR$/Basic" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/CommunicationBasic" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/CommunicationCore" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/CommunicationFile" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/CommunicationSerial" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EcgProcces" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/EcgProccesBasic" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ReoProcces" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ReoProcces/src/test/resources/com/tihiy/reo/Imp.txt" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ReoProcces/src/test/resources/com/tihiy/reo/ImpRO.txt" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/RichClient" charset="UTF-8" />
-  </component>
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
 </project>
 

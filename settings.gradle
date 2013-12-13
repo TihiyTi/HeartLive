@@ -1,0 +1,7 @@
+include 'Basic'
+include 'CommunicationBasic'
+include 'CommunicationCore'
+include 'CommunicationFile'
+include 'CommunicationSerial'
+include 'ReoProcces'
+include 'RichClient'
