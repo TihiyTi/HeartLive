@@ -1,4 +1,4 @@
-package com.tihiy.rclint.implement.firstLayer;
+package firstLayer;
 
 import com.tihiy.rclint.control.Controller;
 import com.tihiy.rclint.view.SignalPanel;

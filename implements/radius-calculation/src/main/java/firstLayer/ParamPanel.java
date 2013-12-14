@@ -1,4 +1,4 @@
-package com.tihiy.rclint.implement.firstLayer;
+package firstLayer;
 
 import javax.swing.*;
 import java.awt.*;

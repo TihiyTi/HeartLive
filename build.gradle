@@ -2,6 +2,7 @@ apply plugin: 'idea'
 
 subprojects{
     apply plugin: 'java'
+    apply plugin: 'idea'
     repositories {
         mavenCentral()
     }
@@ -11,14 +12,7 @@ subprojects{
     }
 }
 project(':CommunicationFile'){
-    apply plugin: 'idea'
-//    sourceSets{
-//        main{
-//            java{
-//                exclude 'com/tihiy/comm/parse/fromak/**'
-//            }
-//        }
-//    }
+    version = '0.1'
     idea{
         module{
             excludeDirs += file('src/main/java/com/tihiy/comm/parse/fromak')
@@ -30,16 +24,56 @@ project(':CommunicationFile'){
     }
 }
 project(':CommunicationSerial'){
+    version = '0.1'
     dependencies{
         compile files('../lib/nrjavaserial-3.7.5.1.jar')
         testCompile project(':RichClient')
     }
 }
+project(':ReoProcces'){
+    version = '0.1'
+}
+
 project(':RichClient'){
+    version = '1.0'
+
     dependencies{
         compile group: 'org.jfree', name: 'jfreechart', version: '1.0.15'
         compile files('../lib/LocalStorage.jar')
         compile project(':CommunicationFile')
         compile project(':ReoProcces')
     }
+}
+
+project(':implements:radius-calculation'){
+    version = '0.0.1'
+    def reo = rootProject.childProjects.get('ReoProcces').version
+    dependencies{
+        compile project(':ReoProcces')
+        compile project(':RichClient')
+        compile project(':CommunicationFile')
+    }
+    jar.manifest{
+        attributes 'Created-By': 'AlexTi'
+        attributes 'Main-Class': 'firstLayer.RadiusCalculator'
+        attributes 'Class-Path': 'ReoProcces-' + reo +'.jar RichClient-1.0.jar LocalStorage.jar'
+    }
+    task createOut{
+        outDirect = new File('implements/radius-calculation/out')
+        if(!outDirect.isDirectory()){
+            println 'Create out directory'
+            outDirect.mkdir()
+        }
+    }
+}
+
+task RadiusCalculation(type:Copy, dependsOn: [':implements:radius-calculation:jar', ':implements:radius-calculation:createOut']){
+    from 'implements/radius-calculation/build/libs'
+    from 'ReoProcces/build/libs'
+    from 'RichClient/build/libs'
+    into 'implements/radius-calculation/out'
+    include '*.jar'
+    from 'lib'
+    into 'implements/radius-calculation/out'
+    include 'LocalStorage.jar'
 }

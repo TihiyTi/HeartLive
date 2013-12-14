@@ -1,4 +1,4 @@
-package com.tihiy.rclint.implement.firstLayer;
+package firstLayer;
 
 import com.tihiy.comm.ListWriter;
 import com.tihiy.rclint.ReadingFiles;
