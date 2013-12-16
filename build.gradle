@@ -48,6 +48,8 @@ project(':RichClient'){
 project(':implements:radius-calculation'){
     version = '0.0.1'
     def reo = rootProject.childProjects.get('ReoProcces').version
+    def rich = rootProject.childProjects.get('RichClient').version
+    def comFile = rootProject.childProjects.get('CommunicationFile').version
     dependencies{
         compile project(':ReoProcces')
         compile project(':RichClient')
@@ -56,7 +58,7 @@ project(':implements:radius-calculation'){
     jar.manifest{
         attributes 'Created-By': 'AlexTi'
         attributes 'Main-Class': 'firstLayer.RadiusCalculator'
-        attributes 'Class-Path': 'ReoProcces-' + reo +'.jar RichClient-1.0.jar LocalStorage.jar'
+        attributes 'Class-Path': 'ReoProcces-' + reo +'.jar RichClient-'+rich+'.jar LocalStorage.jar'
     }
     task createOut{
         outDirect = new File('implements/radius-calculation/out')
