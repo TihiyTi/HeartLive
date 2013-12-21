@@ -11,7 +11,6 @@ package com.tihiy.rclint.mvcAbstract;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.lang.reflect.Method;
 
 /**
  * This class provides base level functionality for all models, including a 
@@ -54,25 +53,6 @@ public abstract class AbstractModel
     protected final void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
         propertyChangeSupport.firePropertyChange(propertyName, oldValue, newValue);
     }
-
-    /**
-     *  TiDoIt
-     *  This method returns property that's name is known.
-     *  @param propertyName - name of property.
-     * */
-    protected final Object getProperty(String propertyName){
-        Object returnObject = null;
-        try {
-            Method method = this.getClass().getMethod("get"+propertyName);
-            returnObject = method.invoke(this);
-        } catch (Exception e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-        return returnObject;
-    }
-
-    protected abstract void applyCommand(String command);
-
 }
     
 

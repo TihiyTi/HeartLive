@@ -9,7 +9,7 @@ public class SignalModelIntRT extends AbstractModel{
 
     //    BlockingQueue queue1 = new LinkedBlockingQueue();
 //    BlockingQueue queue2 = new LinkedBlockingQueue();
-    final List<Float> list = new ArrayList();
+    final List<Float> list = new ArrayList<>();
 
     public List<Float> getList() {
         return list;
@@ -25,10 +25,5 @@ public class SignalModelIntRT extends AbstractModel{
             System.out.println("Value" + i);
         }
         firePropertyChange("list", oldlist, this.list);
-    }
-
-    @Override
-    protected void applyCommand(String command) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 }
