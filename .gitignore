@@ -3,6 +3,8 @@
 .idea/
 .idea\
 *.iml
+*/build/*
+out/
 
 # osx noise
 .DS_Store

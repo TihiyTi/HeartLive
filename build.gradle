@@ -26,7 +26,7 @@ project(':CommunicationFile'){
 project(':CommunicationSerial'){
     version = '0.1'
     dependencies{
-        compile files('../lib/nrjavaserial-3.7.5.1.jar')
+        compile group: 'com.neuronrobotics', name: 'nrjavaserial', version: '3.7.5.1'
         testCompile project(':RichClient')
     }
 }
