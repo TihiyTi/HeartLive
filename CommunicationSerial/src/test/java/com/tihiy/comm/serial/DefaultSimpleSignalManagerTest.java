@@ -19,11 +19,11 @@ public class DefaultSimpleSignalManagerTest {
         ComPortListener comPortListener = ComPortListener.getInstance(signalManager);
         Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(comPortListener, 0L, 2L, TimeUnit.SECONDS);
 
-        SignalPanel view = new SignalPanel((BlockingQueue<Integer>) signalManager.getQueue());
+//        SignalPanel view = new SignalPanel((BlockingQueue<Integer>) signalManager.getQueue());
 
         JFrame frame = new JFrame("testing");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.getContentPane().add(view, BorderLayout.CENTER);
+//        frame.getContentPane().add(view, BorderLayout.CENTER);
         frame.pack();
         frame.setVisible(true);
         while (frame.isVisible()) ;

@@ -1,13 +1,14 @@
 package com.tihiy.comm.serial;
 
 import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class DefaultSimpleSignalManager extends AbstractSignalManager<Integer> {
-    Queue<Integer> queue = new LinkedBlockingQueue<>();
+public class DefaultSimpleSignalManager<T extends Number> extends AbstractSignalManager<T> {
+    BlockingQueue<T> queue = new LinkedBlockingQueue<>();
     String currentFlow;
 
-    public  Queue<Integer> getQueue(){
+    public  BlockingQueue<T> getQueue(){
         return queue;
     }
 
@@ -18,7 +19,7 @@ public class DefaultSimpleSignalManager extends AbstractSignalManager<Integer> {
     }
 
     @Override
-    public Queue<Integer> getQueue(String flowName) {
+    public BlockingQueue<T> getQueue(String flowName) {
         if(currentFlow == null){
             currentFlow = flowName;
             return queue;
@@ -30,4 +31,5 @@ public class DefaultSimpleSignalManager extends AbstractSignalManager<Integer> {
             }
         }
     }
+
 }

@@ -7,9 +7,10 @@ import java.util.List;
 // Model for simple signal with 1 channel
 //
 public class SignalModel extends AbstractModel {
+    private List<Double> list = getTestList();
     private String signalName;
-
     public SignalModel(){}
+
     public SignalModel(String signalName) {
         this.signalName = signalName;
     }
@@ -23,11 +24,7 @@ public class SignalModel extends AbstractModel {
         return list;
     }
 
-//    public void setSignalName(String name){
-//        signalName = name;
 //    }
-
-    private List<Double> list = getTestList();
     private List<Double> getTestList(){
         List<Double> value = new ArrayList<>();
         for(int i = 0; i < 300; i++ ){

@@ -1,7 +1,5 @@
 package com.tihiy.rclint;
 
-import com.tihiy.rclint.implement.firstLayer.ParamPanel;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -63,8 +61,8 @@ public class TestBoxLayout {
 //        JPanel panel = new JPanel();
 //        addComponentsToPane(frame.getContentPane());
 
-        JPanel panel = new ParamPanel();
-        frame.getContentPane().add(panel);
+//        JPanel panel = new ParamPanel();
+//        frame.getContentPane().add(panel);
 
         //Display the window.
         frame.pack();

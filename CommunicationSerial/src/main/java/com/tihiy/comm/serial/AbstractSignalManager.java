@@ -4,6 +4,7 @@ import com.tihiy.comm.serial.protocols.Protocol;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Logger;
 
@@ -28,7 +29,7 @@ public abstract class AbstractSignalManager<T extends Number> implements SignalM
         log.info("Created signal " + flowName);
     }
     @Override
-    public Queue<T> getQueue(String flowName){
+    public BlockingQueue<T> getQueue(String flowName){
         return portMap.get(flowName);
     }
 }

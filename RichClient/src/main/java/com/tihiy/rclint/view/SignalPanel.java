@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class SignalPanel extends AbstractViewPanel {
-    AbstractController mc;
+    private AbstractController mc;
     private String signalName;
 
     private List<Double> signal;
@@ -28,7 +28,6 @@ public class SignalPanel extends AbstractViewPanel {
     public SignalPanel(AbstractController mc, List<Double> list, String name) {
         this.mc = mc;
         this.signal = list;
-        setBackground(Color.orange);
         setPreferredSize(new Dimension(getWidth(), 200));
         signalName = name;
         initComponent();
@@ -37,21 +36,28 @@ public class SignalPanel extends AbstractViewPanel {
     public SignalPanel(AbstractController mc, List<Double> list) {
         this.mc = mc;
         this.signal = list;
-        setBackground(Color.orange);
         setPreferredSize(new Dimension(getWidth(), 200));
         initComponent();
     }
 
     public SignalPanel(List<Double> list) {
         this.signal = list;
-        setBackground(Color.orange);
         initComponent();
     }
 
     public SignalPanel(BlockingQueue<Integer> queue){
         this.queue = queue;
         queueFlag = true;
-        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(new Repainter(this), 0L, 1L, TimeUnit.SECONDS);
+        setPreferredSize(new Dimension(getWidth(), 200));
+        initComponent();
+        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(new Repainter(this), 0L, 250L, TimeUnit.MILLISECONDS);
+    }
+
+    public SignalPanel(String name, boolean isQueue){
+        this.signalName = name;
+        queueFlag = isQueue;
+        initComponent();
+        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(new Repainter(this), 0L, 250L, TimeUnit.MILLISECONDS);
     }
 
     @Override
@@ -59,7 +65,7 @@ public class SignalPanel extends AbstractViewPanel {
         g.setColor(Color.BLACK);
         super.paintComponent(g);
         if(queueFlag){
-            if(!queue.isEmpty()){
+            if((queue!=null)&&(!queue.isEmpty())){
                 List<Integer> list = new ArrayList<>();
                 list.addAll(queue);
                 int height = getHeight();
@@ -76,7 +82,6 @@ public class SignalPanel extends AbstractViewPanel {
         }else{
             if(!signal.isEmpty()){
                 int height = getHeight();
-//        int width = getWidth();
 
                 Double max = Collections.max(signal);
                 Double min = Collections.min(signal);
@@ -87,18 +92,21 @@ public class SignalPanel extends AbstractViewPanel {
                     g.drawLine(i,yPoint_1, (i+1),yPoint_2);
                 }
             }
-        }
-
-        if(mouseX < signal.size()){
-            g.drawString("Амплитуда сигнала: " + signal.get(mouseX), 50, getHeight() - 10);
+            if(mouseX < signal.size()){
+                g.drawString("Амплитуда сигнала: " + signal.get(mouseX), 50, getHeight() - 10);
+            }
         }
     }
 
     @Override
     public void modelPropertyChange(PropertyChangeEvent evt) {
         if(evt.getPropertyName().equals(signalName)){
-            List<Double> list = (List)evt.getNewValue();
-            signal = list;
+            if(queueFlag){
+                queue = (BlockingQueue<Integer>)evt.getNewValue();
+            }else{
+                List<Double> list = (List)evt.getNewValue();
+                signal = list;
+            }
             repaint();
         }
     }

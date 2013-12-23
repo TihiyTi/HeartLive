@@ -127,9 +127,9 @@ public abstract class AbstractController implements PropertyChangeListener {
         }
     }
 
-    protected void applyCommand(String command){
-        for (AbstractModel model: registeredModels){
-            model.applyCommand(command);
-        }
-    }
+//    protected void applyCommand(String command){
+//        for (AbstractModel model: registeredModels){
+//            model.applyCommand(command);
+//        }
+//    }
 }
