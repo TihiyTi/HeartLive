@@ -20,6 +20,8 @@ public class SignalPanelLite extends AbstractViewPanel {
     @Override
     public void paintComponent(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
+        super.paintComponent(g2);
+        g2.setColor(Color.RED);
         if(signal.length > 0){
             int height = getHeight();
             double max = getMax(signal);
@@ -40,6 +42,7 @@ public class SignalPanelLite extends AbstractViewPanel {
         if(evt.getPropertyName().equals(signalName)){
             signal = (double[])evt.getNewValue();
         }
+        repaint();
     }
 
     private void initComponent(){
@@ -53,6 +56,7 @@ public class SignalPanelLite extends AbstractViewPanel {
             @Override
             public void mouseMoved(MouseEvent e) {
                 mouseX = (int)e.getPoint().getX();
+                repaint();
             }
         });
     }
@@ -69,7 +73,7 @@ public class SignalPanelLite extends AbstractViewPanel {
     private double getMin(double[] array){
         double min = array[0];
         for(int i= 1; i < array.length; i++){
-            if(min < array[i]){
+            if(min > array[i]){
                 min = array[i];
             }
         }
