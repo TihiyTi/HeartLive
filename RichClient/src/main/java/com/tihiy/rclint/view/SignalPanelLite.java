@@ -1,13 +1,20 @@
 package com.tihiy.rclint.view;
 
+import com.sun.java.swing.SwingUtilities3;
+import com.tihiy.rclint.control.SimpleController;
+import com.tihiy.rclint.models.SignalDynamicModel;
+import com.tihiy.rclint.models.SignalModelLite;
+import com.tihiy.rclint.mvcAbstract.AbstractController;
 import com.tihiy.rclint.mvcAbstract.AbstractViewPanel;
+import com.tihiy.rclint.mvcAbstract.DynamicModelInterface;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 
 public class SignalPanelLite extends AbstractViewPanel {
+    private SimpleController mc;
     private double[] signal = new double[0];
     private String signalName;
     private int mouseX = 0;
@@ -49,14 +56,51 @@ public class SignalPanelLite extends AbstractViewPanel {
         setBorder(BorderFactory.createLineBorder(Color.BLUE));
         addMouseMotionListener(new MouseMotionListener() {
             @Override
-            public void mouseDragged(MouseEvent e) {
-
-            }
-
+            public void mouseDragged(MouseEvent e) {}
             @Override
             public void mouseMoved(MouseEvent e) {
                 mouseX = (int)e.getPoint().getX();
                 repaint();
+            }
+        });
+    }
+
+    public void initFeedback(SimpleController controller){
+        mc = controller;
+//        SignalDynamicModel model = (SignalDynamicModel) mc.getModel(signalName);
+//        model.setArraySize(getWidth());
+        addMouseWheelListener(new MouseWheelListener() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        SignalDynamicModel model = (SignalDynamicModel) mc.getModel(signalName);
+                        model.scaleArray(0);
+                    }
+                });
+            }
+        });
+        addComponentListener(new ComponentListener() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                SignalDynamicModel model = (SignalDynamicModel) mc.getModel(signalName);
+                model.setArraySize(getWidth());
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {
+
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+
             }
         });
     }

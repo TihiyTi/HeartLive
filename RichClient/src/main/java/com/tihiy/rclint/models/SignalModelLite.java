@@ -6,17 +6,18 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class SignalModelLite extends AbstractModel{
-    private double[] signalArray;
-    private String signalName;
+    protected double[] signalArray;
+    protected String signalName;
 
     public SignalModelLite(String signalName){
         this.signalName = signalName;
-        autoFillingArray();
     }
 
-    public void setList(double[] array){
-        firePropertyChange(signalName, new double[0], array);
+    public void setArray(double[] array){
         signalArray = array;
+        double[] newArray = new double[array.length];
+        System.arraycopy(array, 0, newArray, 0, array.length);
+        firePropertyChange(signalName, new double[0], newArray);
     }
 
     public double[] getList(){
@@ -31,7 +32,7 @@ public class SignalModelLite extends AbstractModel{
                 for(int i = 0; i< 1000; i++){
                     array[i] = Math.random()*400;
                 }
-                setList(array);
+                setArray(array);
             }
         },0L, 40L, TimeUnit.MILLISECONDS);
     }

@@ -9,8 +9,11 @@ import java.util.Map;
 public class SimpleController extends AbstractController {
     private final Map<String, AbstractModel> registeredModels = new HashMap<>();
 
-    public void addModel(String flowName, AbstractModel model){
-        registeredModels.put(flowName, model);
+    public void addModel(String modelName, AbstractModel model){
+        registeredModels.put(modelName, model);
         model.addPropertyChangeListener(this);
+    }
+    public AbstractModel getModel(String modelName){
+        return registeredModels.get(modelName);
     }
 }
