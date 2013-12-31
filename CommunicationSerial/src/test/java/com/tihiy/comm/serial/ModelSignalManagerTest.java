@@ -27,7 +27,7 @@ public class ModelSignalManagerTest {
 //        SignalPanel view = new SignalPanel(mc, modelIntRT.getList());
         ControlPanel cp = new ControlPanel(mc);
 
-        mc.addModel(modelIntRT);
+//        mc.addModel(modelIntRT);
 //        mc.addView(view);
         mc.addView(cp);
 

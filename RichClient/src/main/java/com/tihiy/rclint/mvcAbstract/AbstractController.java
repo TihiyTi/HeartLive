@@ -29,12 +29,14 @@ public abstract class AbstractController implements PropertyChangeListener {
     //  Vectors that hold a list of the registered models and views for this controller.
 
     private ArrayList<AbstractViewPanel> registeredViews;
-    private ArrayList<AbstractModel> registeredModels;
+    private final Map<String, AbstractModel> registeredModels;
+//    private ArrayList<AbstractModel> registeredModels;
 
     /** Creates a new instance of Controller */
     public AbstractController() {
         registeredViews = new ArrayList<AbstractViewPanel>();
-        registeredModels = new ArrayList<AbstractModel>();
+//        registeredModels = new ArrayList<AbstractModel>();
+        registeredModels =  new HashMap<>();
     }
 
 
@@ -45,8 +47,12 @@ public abstract class AbstractController implements PropertyChangeListener {
      * state.
      * @param model The model to be added
      */
-    public void addModel(AbstractModel model) {
-        registeredModels.add(model);
+//    public void addModel(AbstractModel model) {
+//        registeredModels.add(model);
+//        model.addPropertyChangeListener(this);
+//    }
+    public void addModel(String modelName, AbstractModel model){
+        registeredModels.put(modelName, model);
         model.addPropertyChangeListener(this);
     }
 
@@ -78,10 +84,12 @@ public abstract class AbstractController implements PropertyChangeListener {
     }
 
     // TI return list of models
-    protected  ArrayList<AbstractModel> getModelsList(){
-        return registeredModels;
+//    protected  ArrayList<AbstractModel> getModelsList(){
+//        return registeredModels;
+//    }
+    public AbstractModel getModel(String modelName){
+        return registeredModels.get(modelName);
     }
-
 
 
     //  Used to observe property changes from registered models and propogate
@@ -109,21 +117,21 @@ public abstract class AbstractController implements PropertyChangeListener {
      * @param propertyName The name of the property
      * @param newValue An object that represents the new value of the property.
      */
-    protected void setModelProperty(String propertyName, Object newValue) {
-
-        for (AbstractModel model: registeredModels) {
-            try {
-
-                Method method = model.getClass().
-                    getMethod("set" + propertyName, new Class[]{
-                            newValue.getClass()
-                    }
-                    );
-                method.invoke(model, newValue);
-
-            } catch (Exception ex) {
-                //  Handle exception
-            }
-        }
-    }
+//    protected void setModelProperty(String propertyName, Object newValue) {
+//
+//        for (AbstractModel model: registeredModels) {
+//            try {
+//
+//                Method method = model.getClass().
+//                    getMethod("set" + propertyName, new Class[]{
+//                            newValue.getClass()
+//                    }
+//                    );
+//                method.invoke(model, newValue);
+//
+//            } catch (Exception ex) {
+//                  Handle exception
+//            }
+//        }
+//    }
 }

@@ -74,7 +74,7 @@ public class Controller extends AbstractController {
 
 
     public void createSignalModel(String flowName, AbstractModel model){
-        addModel(model);
+        addModel(flowName, model);
     }
 
     public void addModel(String flowName, AbstractModel model){
