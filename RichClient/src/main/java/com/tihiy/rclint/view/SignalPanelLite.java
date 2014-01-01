@@ -1,6 +1,7 @@
 package com.tihiy.rclint.view;
 
 import com.sun.java.swing.SwingUtilities3;
+import com.tihiy.rclint.addon.AddOn;
 import com.tihiy.rclint.control.SimpleController;
 import com.tihiy.rclint.models.SignalDynamicModel;
 import com.tihiy.rclint.models.SignalModelLite;
@@ -18,6 +19,7 @@ public class SignalPanelLite extends AbstractViewPanel {
     private double[] signal = new double[0];
     private String signalName;
     private int mouseX = 0;
+    public AddOn addon = new AddOn(signalName);
 
     public SignalPanelLite(String signalName){
         this.signalName = signalName;
@@ -42,6 +44,7 @@ public class SignalPanelLite extends AbstractViewPanel {
         if(mouseX < signal.length){
             g2.drawString("Амплитуда сигнала: " + signal[mouseX], 50, getHeight() - 10);
         }
+        addon.paint(g, this);
     }
 
     @Override
