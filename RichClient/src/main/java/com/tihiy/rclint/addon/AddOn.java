@@ -1,20 +1,27 @@
 package com.tihiy.rclint.addon;
-import com.tihiy.rclint.mvcAbstract.AbstractModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class AddOn extends AbstractModel{
-    private String addOnName;
-    private Integer value = 20;
-    public AddOn(String parentModelName){
-        this.addOnName = parentModelName + "addOn";
-    }
-    public void setValue(int value){
-        firePropertyChange(addOnName, 0, value);
-    }
-    public void paint(Graphics g, JPanel comp){
+public class AddOn implements AddOnInterface<List<Integer>>{
+
+    List<Integer> max;
+
+
+    @Override
+    public void paint(Graphics g, JComponent component) {
         g.setColor(Color.GREEN);
-        g.drawLine(value, 0, value, comp.getHeight());
+        if(max != null){
+            for(Integer value: max){
+                g.drawLine(value, 0, value, component.getHeight());
+            }
+        }
+    }
+
+    @Override
+    public void setState(List<Integer> state) {
+        max = state;
     }
 }

@@ -1,28 +1,23 @@
 package com.tihiy.rclint.view;
 
-import com.sun.java.swing.SwingUtilities3;
-import com.tihiy.rclint.addon.AddOn;
+import com.tihiy.rclint.addon.AddOnInterface;
 import com.tihiy.rclint.control.SimpleController;
 import com.tihiy.rclint.models.SignalDynamicModel;
-import com.tihiy.rclint.models.SignalModelLite;
-import com.tihiy.rclint.mvcAbstract.AbstractController;
 import com.tihiy.rclint.mvcAbstract.AbstractViewPanel;
-import com.tihiy.rclint.mvcAbstract.DynamicModelInterface;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.IndexedPropertyChangeEvent;
 import java.beans.PropertyChangeEvent;
 
 public class SignalPanelLite extends AbstractViewPanel {
     private SimpleController mc;
     private double[] signal = new double[0];
-    private String signalName;
     private int mouseX = 0;
-    public AddOn addon = new AddOn(signalName);
 
     public SignalPanelLite(String signalName){
-        this.signalName = signalName;
+        viewName = signalName;
         initComponent();
     }
 
@@ -44,13 +39,23 @@ public class SignalPanelLite extends AbstractViewPanel {
         if(mouseX < signal.length){
             g2.drawString("Амплитуда сигнала: " + signal[mouseX], 50, getHeight() - 10);
         }
-        addon.paint(g, this);
+        // ToDo add on support
+        if(null!=addOns){
+            for (AddOnInterface addon: addOns){
+                addon.paint(g, this);
+            }
+        }
     }
 
     @Override
     public void modelPropertyChange(PropertyChangeEvent evt) {
-        if(evt.getPropertyName().equals(signalName)){
-            signal = (double[])evt.getNewValue();
+        if(evt.getPropertyName().equals(viewName)){
+            if((null!=addOns) && evt instanceof IndexedPropertyChangeEvent){
+                int index = ((IndexedPropertyChangeEvent) evt).getIndex();
+                addOns.get(index).setState(evt.getNewValue());
+            }else {
+                signal = (double[])evt.getNewValue();
+            }
         }
         repaint();
     }
@@ -78,7 +83,7 @@ public class SignalPanelLite extends AbstractViewPanel {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        SignalDynamicModel model = (SignalDynamicModel) mc.getModel(signalName);
+                        SignalDynamicModel model = (SignalDynamicModel) mc.getModel(viewName);
                         model.scaleArray(0);
                     }
                 });
@@ -87,7 +92,7 @@ public class SignalPanelLite extends AbstractViewPanel {
         addComponentListener(new ComponentListener() {
             @Override
             public void componentResized(ComponentEvent e) {
-                SignalDynamicModel model = (SignalDynamicModel) mc.getModel(signalName);
+                SignalDynamicModel model = (SignalDynamicModel) mc.getModel(viewName);
                 model.setArraySize(getWidth());
             }
 

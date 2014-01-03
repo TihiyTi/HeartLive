@@ -9,8 +9,12 @@
 
 package com.tihiy.rclint.mvcAbstract;
 
+import com.tihiy.rclint.addon.AddOnInterface;
+
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class provides the base level abstraction for views in this example. All
@@ -24,14 +28,23 @@ import java.beans.PropertyChangeEvent;
 
 public abstract class AbstractViewPanel extends JPanel {
 
+    protected List<AddOnInterface> addOns;
+
+    protected String viewName;
     /**
      * Called by the controller when it needs to pass along a property change 
      * from a model.
      *
      * @param evt The property change event from the model
      */
-    
     public abstract void modelPropertyChange(PropertyChangeEvent evt);
     
-    
+    public void addAddOn(AddOnInterface addOn, String modelName){
+        if(modelName.equals(viewName)){
+            if(addOns ==  null){
+                addOns = new ArrayList<>();
+            }
+            addOns.add(addOn);
+        }
+    }
 }

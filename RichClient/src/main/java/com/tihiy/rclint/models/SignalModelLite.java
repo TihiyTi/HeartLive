@@ -1,5 +1,6 @@
 package com.tihiy.rclint.models;
 
+import com.tihiy.rclint.addon.AddOnModelInterface;
 import com.tihiy.rclint.mvcAbstract.AbstractModel;
 
 import java.util.concurrent.Executors;
@@ -17,6 +18,14 @@ public class SignalModelLite extends AbstractModel{
         signalArray = array;
         double[] newArray = new double[array.length];
         System.arraycopy(array, 0, newArray, 0, array.length);
+        int i = 0;
+        if(addOns!=null){
+            for(AddOnModelInterface addOn: addOns){
+                addOn.prepareState(signalArray);
+                fireIndexedPropertyChange(signalName, i, new Object(), addOn.getState());
+                i++;
+            }
+        }
         firePropertyChange(signalName, new double[0], newArray);
     }
 
@@ -29,11 +38,12 @@ public class SignalModelLite extends AbstractModel{
             @Override
             public void run() {
                 double[] array = new double[1000];
+                double phase = 2*Math.PI*Math.random();
                 for(int i = 0; i< 1000; i++){
-                    array[i] = Math.random()*400;
+                    array[i] = 100*(Math.sin(2*Math.PI*i/200 + phase)+1);
                 }
                 setArray(array);
             }
-        },0L, 40L, TimeUnit.MILLISECONDS);
+        },0L, 50L, TimeUnit.MILLISECONDS);
     }
 }

@@ -9,6 +9,9 @@
 
 package com.tihiy.rclint.mvcAbstract;
 
+import com.tihiy.rclint.addon.AddOnInterface;
+import com.tihiy.rclint.addon.AddOnModelInterface;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.lang.reflect.Method;
@@ -25,20 +28,15 @@ import java.util.Set;
  * @author Robert Eckstein
  */
 public abstract class AbstractController implements PropertyChangeListener {
-
     //  Vectors that hold a list of the registered models and views for this controller.
-
     private ArrayList<AbstractViewPanel> registeredViews;
     private final Map<String, AbstractModel> registeredModels;
-//    private ArrayList<AbstractModel> registeredModels;
 
     /** Creates a new instance of Controller */
     public AbstractController() {
         registeredViews = new ArrayList<AbstractViewPanel>();
-//        registeredModels = new ArrayList<AbstractModel>();
         registeredModels =  new HashMap<>();
     }
-
 
     /**
      * Binds a model to this controller. Once added, the controller will listen for all
@@ -47,10 +45,6 @@ public abstract class AbstractController implements PropertyChangeListener {
      * state.
      * @param model The model to be added
      */
-//    public void addModel(AbstractModel model) {
-//        registeredModels.add(model);
-//        model.addPropertyChangeListener(this);
-//    }
     public void addModel(String modelName, AbstractModel model){
         registeredModels.put(modelName, model);
         model.addPropertyChangeListener(this);
@@ -64,7 +58,6 @@ public abstract class AbstractController implements PropertyChangeListener {
         registeredModels.remove(model);
         model.removePropertyChangeListener(this);
     }
-
 
     /**
      * Binds a view to this controller. The controller will propogate all model property
@@ -91,9 +84,16 @@ public abstract class AbstractController implements PropertyChangeListener {
         return registeredModels.get(modelName);
     }
 
-
-    //  Used to observe property changes from registered models and propogate
-    //  them on to all the views.
+    /**
+     * Add "addOn's" functionality,
+     * registered addOn in model and view
+     */
+    public void addAddOn(String name, AddOnInterface addOn, AddOnModelInterface addOnModel){
+        registeredModels.get(name).addAddOn(addOnModel);
+        for(AbstractViewPanel el: registeredViews){
+            el.addAddOn(addOn, name);
+        }
+    }
 
     /**
      * This method is used to implement the PropertyChangeListener interface. Any model
@@ -106,32 +106,4 @@ public abstract class AbstractController implements PropertyChangeListener {
             view.modelPropertyChange(evt);
         }
     }
-
-
-    /**
-     * Convienence method that subclasses can call upon to fire off property changes
-     * back to the models. This method used reflection to inspect each of the model
-     * classes to determine if it is the owner of the property in question. If it
-     * isn't, a NoSuchMethodException is throws (which the method ignores).
-     *
-     * @param propertyName The name of the property
-     * @param newValue An object that represents the new value of the property.
-     */
-//    protected void setModelProperty(String propertyName, Object newValue) {
-//
-//        for (AbstractModel model: registeredModels) {
-//            try {
-//
-//                Method method = model.getClass().
-//                    getMethod("set" + propertyName, new Class[]{
-//                            newValue.getClass()
-//                    }
-//                    );
-//                method.invoke(model, newValue);
-//
-//            } catch (Exception ex) {
-//                  Handle exception
-//            }
-//        }
-//    }
 }

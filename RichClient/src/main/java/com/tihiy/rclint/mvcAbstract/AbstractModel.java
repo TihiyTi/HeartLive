@@ -9,8 +9,12 @@
 
 package com.tihiy.rclint.mvcAbstract;
 
+import com.tihiy.rclint.addon.AddOnModelInterface;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class provides base level functionality for all models, including a 
@@ -20,7 +24,15 @@ import java.beans.PropertyChangeSupport;
  */
 public abstract class AbstractModel
 {
-    
+    protected List<AddOnModelInterface> addOns;
+
+    public void addAddOn(AddOnModelInterface addOn){
+        if(addOns == null){
+            addOns =  new ArrayList<>();
+        }
+        addOns.add(addOn);
+    }
+
     /**
      * Convenience class that allow others to observe changes to the model properties
      */
@@ -52,6 +64,9 @@ public abstract class AbstractModel
      */
     protected final void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
         propertyChangeSupport.firePropertyChange(propertyName, oldValue, newValue);
+    }
+    protected final void fireIndexedPropertyChange(String propertyName, int index, Object oldValue, Object newValue){
+        propertyChangeSupport.fireIndexedPropertyChange(propertyName, index, oldValue, newValue);
     }
 }
     
