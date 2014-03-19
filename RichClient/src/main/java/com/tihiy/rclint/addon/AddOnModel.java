@@ -1,9 +1,11 @@
 package com.tihiy.rclint.addon;
 
+import com.tihiy.rclint.mvcAbstract.AddOnModelInterface;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddOnModel implements AddOnModelInterface<double[]>{
+public class AddOnModel implements AddOnModelInterface<double[]> {
 
     List<Integer> max;
 

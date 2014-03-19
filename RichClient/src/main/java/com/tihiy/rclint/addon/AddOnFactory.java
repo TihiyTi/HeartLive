@@ -15,6 +15,6 @@ public class AddOnFactory {
     }
 
     public void addSimpleAddOn(String modelName){
-        mc.addAddOn(modelName, new AddOn(), new AddOnModel());
+        mc.addAddOn(modelName, new MaximumAddOn(), new AddOnModel());
     }
 }

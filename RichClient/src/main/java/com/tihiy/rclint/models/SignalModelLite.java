@@ -1,6 +1,6 @@
 package com.tihiy.rclint.models;
 
-import com.tihiy.rclint.addon.AddOnModelInterface;
+import com.tihiy.rclint.mvcAbstract.AddOnModelInterface;
 import com.tihiy.rclint.mvcAbstract.AbstractModel;
 
 import java.util.concurrent.Executors;

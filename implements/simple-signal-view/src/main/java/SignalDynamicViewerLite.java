@@ -15,10 +15,10 @@ public class SignalDynamicViewerLite {
     public static void main(String[] args) {
         SimpleController mc = new SimpleController();
         SignalPanelLite panel = new SignalPanelLite("signal");
-        panel.initFeedback(mc);
         SignalDynamicModel<Double> model = new SignalDynamicModel<>("signal");
         mc.addModel("signal", model);
         mc.addView(panel);
+        panel.initFeedback(mc);
         final BlockingQueue<Double> queue = new LinkedBlockingQueue<>();
         model.setBufferQueue(queue);
         Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(new Runnable() {
@@ -28,9 +28,6 @@ public class SignalDynamicViewerLite {
                 i++;
             }
         }, 0L, 5L, TimeUnit.MILLISECONDS);
-
-
-
         JFrame frame = new JFrame();
         frame.setSize(300,300);
         frame.getContentPane().add(panel);

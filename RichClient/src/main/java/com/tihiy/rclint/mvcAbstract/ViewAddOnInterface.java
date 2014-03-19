@@ -1,9 +1,9 @@
-package com.tihiy.rclint.addon;
+package com.tihiy.rclint.mvcAbstract;
 
 import javax.swing.*;
 import java.awt.*;
 
-public interface AddOnInterface <T> {
+public interface ViewAddOnInterface<T> {
     public void paint(Graphics g, JComponent component);
     public void setState(T state);
 }

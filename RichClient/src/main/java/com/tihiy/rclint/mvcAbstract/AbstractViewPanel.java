@@ -9,8 +9,6 @@
 
 package com.tihiy.rclint.mvcAbstract;
 
-import com.tihiy.rclint.addon.AddOnInterface;
-
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
@@ -28,7 +26,7 @@ import java.util.List;
 
 public abstract class AbstractViewPanel extends JPanel {
 
-    protected List<AddOnInterface> addOns;
+    protected List<ViewAddOnInterface> addOns;
 
     protected String viewName;
     /**
@@ -39,7 +37,7 @@ public abstract class AbstractViewPanel extends JPanel {
      */
     public abstract void modelPropertyChange(PropertyChangeEvent evt);
     
-    public void addAddOn(AddOnInterface addOn, String modelName){
+    public void addAddOn(ViewAddOnInterface addOn, String modelName){
         if(modelName.equals(viewName)){
             if(addOns ==  null){
                 addOns = new ArrayList<>();

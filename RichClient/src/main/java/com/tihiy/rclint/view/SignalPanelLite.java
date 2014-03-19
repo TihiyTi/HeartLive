@@ -1,6 +1,6 @@
 package com.tihiy.rclint.view;
 
-import com.tihiy.rclint.addon.AddOnInterface;
+import com.tihiy.rclint.mvcAbstract.ViewAddOnInterface;
 import com.tihiy.rclint.control.SimpleController;
 import com.tihiy.rclint.models.SignalDynamicModel;
 import com.tihiy.rclint.mvcAbstract.AbstractViewPanel;
@@ -41,7 +41,7 @@ public class SignalPanelLite extends AbstractViewPanel {
         }
         // ToDo add on support
         if(null!=addOns){
-            for (AddOnInterface addon: addOns){
+            for (ViewAddOnInterface addon: addOns){
                 addon.paint(g, this);
             }
         }
@@ -75,8 +75,8 @@ public class SignalPanelLite extends AbstractViewPanel {
 
     public void initFeedback(SimpleController controller){
         mc = controller;
-//        SignalDynamicModel model = (SignalDynamicModel) mc.getModel(signalName);
-//        model.setArraySize(getWidth());
+        SignalDynamicModel model = (SignalDynamicModel) mc.getModel(viewName);
+        model.setScaleSize(0, getWidth());
         addMouseWheelListener(new MouseWheelListener() {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
@@ -84,7 +84,7 @@ public class SignalPanelLite extends AbstractViewPanel {
                     @Override
                     public void run() {
                         SignalDynamicModel model = (SignalDynamicModel) mc.getModel(viewName);
-                        model.scaleArray(0);
+                        model.setScaleSize(0, getWidth());
                     }
                 });
             }
@@ -93,7 +93,7 @@ public class SignalPanelLite extends AbstractViewPanel {
             @Override
             public void componentResized(ComponentEvent e) {
                 SignalDynamicModel model = (SignalDynamicModel) mc.getModel(viewName);
-                model.setArraySize(getWidth());
+                model.setScaleSize(0, getWidth());
             }
 
             @Override

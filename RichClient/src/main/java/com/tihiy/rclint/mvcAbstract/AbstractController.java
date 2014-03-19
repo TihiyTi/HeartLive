@@ -9,16 +9,11 @@
 
 package com.tihiy.rclint.mvcAbstract;
 
-import com.tihiy.rclint.addon.AddOnInterface;
-import com.tihiy.rclint.addon.AddOnModelInterface;
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * This class provides base level functionality for each controller. This includes the
@@ -88,7 +83,7 @@ public abstract class AbstractController implements PropertyChangeListener {
      * Add "addOn's" functionality,
      * registered addOn in model and view
      */
-    public void addAddOn(String name, AddOnInterface addOn, AddOnModelInterface addOnModel){
+    public void addAddOn(String name, ViewAddOnInterface addOn, AddOnModelInterface addOnModel){
         registeredModels.get(name).addAddOn(addOnModel);
         for(AbstractViewPanel el: registeredViews){
             el.addAddOn(addOn, name);

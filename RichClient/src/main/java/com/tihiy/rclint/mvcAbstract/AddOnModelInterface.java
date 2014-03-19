@@ -1,4 +1,4 @@
-package com.tihiy.rclint.addon;
+package com.tihiy.rclint.mvcAbstract;
 
 public interface AddOnModelInterface <T> {
     public void prepareState(T dataForState);

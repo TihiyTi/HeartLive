@@ -1,14 +1,13 @@
 package com.tihiy.rclint.addon;
 
+import com.tihiy.rclint.mvcAbstract.ViewAddOnInterface;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
-public class AddOn implements AddOnInterface<List<Integer>>{
-
+public class MaximumAddOn implements ViewAddOnInterface<List<Integer>> {
     List<Integer> max;
-
 
     @Override
     public void paint(Graphics g, JComponent component) {

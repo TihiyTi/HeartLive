@@ -18,7 +18,7 @@ public class CircleArrayLite {
         array = new double[fullSize];
     }
 
-    public synchronized void addArray(double[] buffer){
+    public void addArray(double[] buffer){
         if(fullSize > buffer.length){
             if(buffer.length <= (fullSize - fullPointer)){
                 System.arraycopy(buffer, 0, array, fullPointer, buffer.length);
@@ -33,7 +33,7 @@ public class CircleArrayLite {
             log.info("Unsupported operation: buffer.length > array.length");
         }
     }
-    public synchronized double[] copyArray(){
+    public double[] copyArray(){
         double[] newArray = new double[size];
         if(fullPointer >= size){
             System.arraycopy(array, fullPointer - pointer, newArray, 0, pointer);
