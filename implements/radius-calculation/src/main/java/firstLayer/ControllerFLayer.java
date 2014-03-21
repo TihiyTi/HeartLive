@@ -95,8 +95,9 @@ public class ControllerFLayer extends AbstractController{
                 rp.setMainMeasurement(array[0], array[1], array[2], array[3], array[4], array[5], ((SignalModel)registeredModels.get(precardio)).getList(), ((SignalModel)registeredModels.get(base)).getList());
                 rp.setFirstLayerMeasurement(array[6], array[7], ((SignalModel)registeredModels.get(FIRST)).getList());
                 boolean useFirstLayer = true;
-                boolean useBaseImpedance = true;
+                boolean useBaseImpedance = false;
                 rp.setUseFirstLayer(useFirstLayer);
+                rp.setRoEquivalent(array[8]);
                 rp.setUseBaseImpedance(useBaseImpedance);
                 List<Double> result = rp.getRadiusWithRo1();
 
@@ -118,9 +119,9 @@ public class ControllerFLayer extends AbstractController{
         }
     }
 
-    public void createSignalModel(String flowName, AbstractModel model){
-        addModel(model);
-    }
+//    public void createSignalModel(String flowName, AbstractModel model){
+//        addModel(model);
+//    }
 
     public void addModel(String flowName, AbstractModel model){
         registeredModels.put(flowName, model);

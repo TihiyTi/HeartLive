@@ -2,6 +2,7 @@ package firstLayer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Arc2D;
 
 public class ParamPanel extends JPanel{
 
@@ -13,6 +14,7 @@ public class ParamPanel extends JPanel{
     private final JTextField mainH = new JTextField();
     private final JTextField firstSizeA = new JTextField();
     private final JTextField firstSizeB = new JTextField();
+    private final JTextField ro1 = new JTextField();
 
     public ParamPanel() {
         setBorder(BorderFactory.createLineBorder(Color.RED));
@@ -64,6 +66,12 @@ public class ParamPanel extends JPanel{
         add(new Label("Size B(FL)"), constraints);
         constraints.gridx = 1;
         add(firstSizeB, constraints);
+        constraints.gridy = 9;
+        constraints.gridx = 0;
+        add(new Label("Ro1 equval"), constraints);
+        constraints.gridx = 1;
+        add(ro1, constraints);
+
 
     }
 
@@ -71,7 +79,8 @@ public class ParamPanel extends JPanel{
         return new double[]{Double.valueOf(mainSizeA.getText()), Double.valueOf(mainSizeB.getText()),
                 Double.valueOf(mainXShift.getText()), Double.valueOf(mainYShift.getText()),
                 Double.valueOf(mainRSphere.getText()), Double.valueOf(mainH.getText()),
-                Double.valueOf(firstSizeA.getText()), Double.valueOf(firstSizeB.getText())};
+                Double.valueOf(firstSizeA.getText()), Double.valueOf(firstSizeB.getText()),
+                Double.valueOf(ro1.getText())};
     }
     protected void setParam(double[] paramArray){
         mainSizeA.setText(String.valueOf(paramArray[0]));
@@ -82,5 +91,6 @@ public class ParamPanel extends JPanel{
         mainH.setText(String.valueOf(paramArray[5]));
         firstSizeA.setText(String.valueOf(paramArray[6]));
         firstSizeB.setText(String.valueOf(paramArray[7]));
+        ro1.setText(String.valueOf(paramArray[8]));
     }
 }

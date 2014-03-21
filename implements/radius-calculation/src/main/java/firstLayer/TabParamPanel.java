@@ -44,7 +44,7 @@ public class TabParamPanel extends JTabbedPane{
         }
     }
     protected void setDefaultParam(){
-        double[] mas = {0.04,0.02,0,0.037,0.045, 0.019, 0.06, 0.03};
+        double[] mas = {0.04,0.02,0,0.037,0.045, 0.019, 0.06, 0.03, 5};
         for(int i = 0; i < 5; i++ ){
             setSelectedIndex(i);
             ParamPanel panel = (ParamPanel) getSelectedComponent();
