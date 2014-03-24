@@ -8,18 +8,18 @@ import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
 /**
- * Created with IntelliJ IDEA.
- * User: aleksey
- * Date: 25.09.12
- * Time: 0:31
- * To change this template use File | Settings | File Templates.
- */
+* Created with IntelliJ IDEA.
+* User: aleksey
+* Date: 25.09.12
+* Time: 0:31
+* To change this template use File | Settings | File Templates.
+*/
 public class FileSignalReaderTest extends TestCase {
-    private List<BlockingQueue<Float>> listOfData;
-    private File file;
-
+//    private List<BlockingQueue<Float>> listOfData;
+//    private File file;
+//
 //    @Test(timeout = 1000, expected = NullPointerException.class)
-//    public void testReader() throws Exception {
+    public void testReader() throws Exception {
 //        FileSignalReader signalReader = new FileSignalReader(manager);
 //        file = new File(FileSignalReaderTest.class.getResource("signal.txt").getFile());
 //        listOfData = signalReader.getAllData(file);
@@ -37,6 +37,6 @@ public class FileSignalReaderTest extends TestCase {
 //            listOfData.get(0).take();
 //            listOfData.get(1).take();
 //        }
-//    }
-
+    }
+//
 }

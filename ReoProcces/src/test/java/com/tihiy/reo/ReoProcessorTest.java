@@ -14,23 +14,23 @@ public class ReoProcessorTest extends TestCase{
 
         assertReadFileTest(listData, listRo);
 
-        ElectrodeSystem eSystem = new ElectrodeSystem(0.06, 0.03, 0, 0);
-        BodyGeometry bodyGeometry = new BodyGeometry(0.04, 0.020);
-        SphereModel sphereModel = new SphereModel();
-        sphereModel.setRo(5, 1.35);
-
-        ElectrodeSystem roSystem = new ElectrodeSystem(0.06, 0.03, 0, 0);
-        OneLayerModel oneLayerModel = new OneLayerModel();
-
-        ExpMeasurement<Double> mainImp =  new ExpMeasurement<>(sphereModel, eSystem, bodyGeometry, listData);
-        ExpMeasurement<Double> roImp = new ExpMeasurement<>(oneLayerModel, roSystem, bodyGeometry, listRo);
-
-        List<Double> listOfRo = ((OneLayerModel)roImp.getModel()).getRoDelta(roImp.getData());
-        assertCalcRo(listOfRo);
-
-        ReoPostProcessor processor = new ReoPostProcessor();
-        List<Double> listRadius = processor.getRadiusWithRo1(mainImp, roImp);
-        assertRadius(listRadius);
+//        ElectrodeSystem eSystem = new ElectrodeSystem(0.06, 0.03, 0, 0);
+//        BodyGeometry bodyGeometry = new BodyGeometry(0.04, 0.020);
+//        SphereModel sphereModel = new SphereModel();
+//        sphereModel.setRo(5, 1.35);
+//
+//        ElectrodeSystem roSystem = new ElectrodeSystem(0.06, 0.03, 0, 0);
+//        OneLayerModel oneLayerModel = new OneLayerModel();
+//
+//        ExpMeasurement<Double> mainImp =  new ExpMeasurement<>(sphereModel, eSystem, bodyGeometry, listData);
+//        ExpMeasurement<Double> roImp = new ExpMeasurement<>(oneLayerModel, roSystem, bodyGeometry, listRo);
+//
+//        List<Double> listOfRo = ((OneLayerModel)roImp.getModel()).getRoDelta(roImp.getData());
+//        assertCalcRo(listOfRo);
+//
+//        ReoPostProcessor processor = new ReoPostProcessor();
+//        List<Double> listRadius = processor.getRadiusWithRo1(mainImp, roImp);
+//        assertRadius(listRadius);
     }
 
 //    public static void testExpCelc() throws  IOException {

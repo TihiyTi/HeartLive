@@ -1,12 +1,9 @@
 package com.tihiy.comm.serial;
 
 import com.tihiy.comm.serial.protocols.Protocol;
-import com.tihiy.rclint.view.SignalPanel;
 import org.junit.Test;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 

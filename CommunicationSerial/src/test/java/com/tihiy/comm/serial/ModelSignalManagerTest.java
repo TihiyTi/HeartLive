@@ -37,7 +37,7 @@ public class ModelSignalManagerTest {
         frame.getContentPane().add(cp, BorderLayout.WEST);
         frame.pack();
         frame.setVisible(true);
-        while (frame.isVisible());
+//        while (frame.isVisible());
 
         comPortListener.closeAllPorts();
     }

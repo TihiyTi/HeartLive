@@ -54,7 +54,7 @@ project(':RichClient'){
 }
 
 project(':implements:radius-calculation'){
-    version = '0.0.1'
+    version = '0.0.2'
     def reo = rootProject.childProjects.get('ReoProcces').version
     def rich = rootProject.childProjects.get('RichClient').version
     def comFile = rootProject.childProjects.get('CommunicationFile').version
