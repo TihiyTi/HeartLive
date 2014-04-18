@@ -23,23 +23,22 @@ public class FreeTest {
     @Test
     public void testFirst(){
 //       Test GUAVA function
-        Splitter splitter;
         String s = "       0:00.011\t -0.145\t -0.065";
         //System.out.println(s.split("."));
         Splitter MY_SPLITTER = Splitter.on('\t').trimResults().omitEmptyStrings();
         Iterable list = MY_SPLITTER.split(s);
         for (Object s1 : list) {
-            System.out.println("{"+s1+"}");
+            System.out.println("Test1{"+s1+"}");
         }
     }
     @Test
     public void testTwo(){
         System.out.println("Test TWO");
         CharMatcher trimmer = CharMatcher.anyOf("-.0123456789");
-        Splitter splitter = Splitter.on('\t').trimResults().omitEmptyStrings().trimResults(trimmer);
+        Splitter splitter = Splitter.on('\t').trimResults(trimmer).omitEmptyStrings();
         Iterable list = splitter.split("       0:00.011\t -0.145\t -0.065");
         for (Object s1 : list) {
-            System.out.println("{"+s1+"}");
+            System.out.println("Test2{"+s1+"}");
         }
     }
     @Test
