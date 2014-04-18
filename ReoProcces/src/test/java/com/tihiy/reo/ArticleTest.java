@@ -7,12 +7,13 @@ import java.util.List;
 
 public class ArticleTest extends TestCase {
     public void testArticle_1() throws IOException {
-        List<Double> listData_1 = ReadingFiles.readFile("C:\\Users\\Aleksey\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716\\P1.txt");
-        List<Double> listData_2 = ReadingFiles.readFile("C:\\Users\\Aleksey\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716\\P2.txt");
-        List<Double> listData_3 = ReadingFiles.readFile("C:\\Users\\Aleksey\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716\\P3.txt");
-        List<Double> listData_4 = ReadingFiles.readFile("C:\\Users\\Aleksey\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716\\P4.txt");
-        List<Double> listData_5 = ReadingFiles.readFile("C:\\Users\\Aleksey\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716\\P5.txt");
-        List<Double> listRo = ReadingFiles.readFile("C:\\Users\\Aleksey\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716\\Ro.txt");
+        String userName = System.getProperties().getProperty("user.name");
+        List<Double> listData_1 = ReadingFiles.readFile("C:\\Users\\"+userName+"\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716\\P1.txt");
+        List<Double> listData_2 = ReadingFiles.readFile("C:\\Users\\"+userName+"\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716\\P2.txt");
+        List<Double> listData_3 = ReadingFiles.readFile("C:\\Users\\"+userName+"\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716\\P3.txt");
+        List<Double> listData_4 = ReadingFiles.readFile("C:\\Users\\"+userName+"\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716\\P4.txt");
+        List<Double> listData_5 = ReadingFiles.readFile("C:\\Users\\"+userName+"\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716\\P5.txt");
+        List<Double> listRo = ReadingFiles.readFile("C:\\Users\\"+userName+"\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716\\Ro.txt");
 
         ElectrodeSystem eSystem_1 = new ElectrodeSystem(0.04, 0.02, 0, 0.037);
         ElectrodeSystem eSystem_2 = new ElectrodeSystem(0.04, 0.02, 0, 0.043);

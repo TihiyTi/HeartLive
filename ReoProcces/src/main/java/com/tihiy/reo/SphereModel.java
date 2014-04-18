@@ -17,7 +17,7 @@ public class SphereModel implements InterfaceModel {
         double toPoint = toPoint(point);
         double toElectrode = toPoint(electrode);
         double cosinus = getCosinus(toPoint, toElectrode, fromPointToElectrode(point, electrode));
-        potentialValue = roTissue/(2*Math.PI*toElectrode)*summaPoN(10, toPoint,toElectrode,cosinus);
+        potentialValue = roTissue/(Math.PI*toElectrode)*summaPoN(10, toPoint,toElectrode,cosinus);
 //        log.info("ToPoint = "+ toPoint + "\n" + "ToElectrode = " + toElectrode + "\n"+ "Cosinus = " + cosinus +
 //                "\n potentialValue" + potentialValue);
         return potentialValue;
