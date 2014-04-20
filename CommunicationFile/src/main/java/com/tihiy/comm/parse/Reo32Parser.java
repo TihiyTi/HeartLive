@@ -1,31 +1,45 @@
 package com.tihiy.comm.parse;
 
-import com.google.common.base.CharMatcher;
 import com.google.common.base.Splitter;
-
 import java.util.*;
 
 public class Reo32Parser {
-    Map<Signal, List<Number>> map;
+    List<List<Double>> listOfList;
+    int unuseLine = 2;
+    int unuseCol = 1;
 
     public Reo32Parser() {
-        map = new HashMap<>();
-        map.put(Signal.ECG, new ArrayList<Number>());
-        map.put(Signal.P_TRCG, new ArrayList<Number>());
+        listOfList = new ArrayList<>();
     }
 
-
-    public Map<Signal,List<Number>> parse(String string){
-//        CharMatcher trimmer = CharMatcher.JAVA_LETTER;
-        Splitter splitter = Splitter.on("\n").trimResults().omitEmptyStrings();
-        List<String> list = splitter.splitToList(string);
-        for(int i = 2 ; i < list.size(); i++){
-            splitter = Splitter.on("\t").trimResults().omitEmptyStrings();
-            List<String> st = splitter.splitToList(list.get(i));
-            map.get(Signal.ECG).add(Double.valueOf(st.get(1)));
-            map.get(Signal.P_TRCG).add(Double.valueOf(st.get(2)));
+    public List<List<Double>> parse(String string){
+        List<String> strings = Splitter.on("\n").trimResults().omitEmptyStrings().splitToList(string);
+        checkColumn(strings.get(unuseLine));
+        for(int i = unuseLine + 1; i < strings.size(); i++){
+            List<String> st = Splitter.on("\t").trimResults().omitEmptyStrings().splitToList(strings.get(i));
+            int currentColumn = unuseCol;
+            for(List<Double> list: listOfList){
+                list.add(Double.valueOf(st.get(currentColumn)));
+                currentColumn++;
+            }
         }
-        return new HashMap<Signal,List<Number>>();
+        return listOfList;
+    }
+
+    public Reo32Parser skipLine(int unuseLine){
+        this.unuseLine = unuseLine;
+        return this;
+    }
+    public Reo32Parser skipColumn(int unuseCol){
+        this.unuseCol = unuseCol;
+        return this;
+    }
+
+    private void checkColumn(String string){
+        int size = Splitter.on("\t").trimResults().omitEmptyStrings().splitToList(string).size();
+        for(int i = 0; i < size - unuseCol; i++){
+            listOfList.add(new ArrayList<Double>());
+        }
     }
 
     enum Signal {
