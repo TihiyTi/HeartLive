@@ -1,5 +1,3 @@
-package firstLayer;
-
 import com.ak.util.GenericStorage;
 
 import javax.swing.*;

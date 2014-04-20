@@ -37,7 +37,7 @@ public class SignalPanelLite extends AbstractViewPanel {
             }
         }
         if(mouseX < signal.length){
-            g2.drawString("Амплитуда сигнала: " + signal[mouseX], 50, getHeight() - 10);
+            g2.drawString("Signal amplitude: " + signal[mouseX], 50, getHeight() - 10);
         }
         // ToDo add on support
         if(null!=addOns){

@@ -1,5 +1,3 @@
-package firstLayer;
-
 import com.tihiy.comm.ListWriter;
 import com.tihiy.rclint.ReadingFiles;
 import com.tihiy.rclint.models.SignalModel;

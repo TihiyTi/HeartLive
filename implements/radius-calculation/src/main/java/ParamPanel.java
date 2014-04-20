@@ -1,5 +1,3 @@
-package firstLayer;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Arc2D;
