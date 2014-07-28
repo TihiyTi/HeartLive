@@ -1,11 +1,6 @@
 package com.tihiy.comm.parse;
 
 import junit.framework.TestCase;
-import org.junit.Test;
-
-import java.io.File;
-import java.util.List;
-import java.util.concurrent.BlockingQueue;
 
 /**
 * Created with IntelliJ IDEA.
@@ -21,7 +16,7 @@ public class FileSignalReaderTest extends TestCase {
 //    @Test(timeout = 1000, expected = NullPointerException.class)
     public void testReader() throws Exception {
 //        FileSignalReader signalReader = new FileSignalReader(manager);
-//        file = new File(FileSignalReaderTest.class.getResource("signal.txt").getFile());
+//        file = new File(FileSignalReaderTest.class.getResource("signal1.txt").getFile());
 //        listOfData = signalReader.getAllData(file);
 //        while(!signalReader.isReadComplete()) {}
 //        int size = listOfData.get(1).size();
