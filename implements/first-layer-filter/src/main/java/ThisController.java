@@ -1,5 +1,4 @@
 import com.tihiy.comm.FileSignalReader;
-import com.tihiy.comm.ListWriter;
 import com.tihiy.comm.parse.Reo32Parser;
 import com.tihiy.rclint.models.SignalModel;
 import com.tihiy.rclint.mvcAbstract.AbstractController;
@@ -7,8 +6,6 @@ import com.tihiy.rclint.mvcAbstract.AbstractModel;
 import com.tihiy.reo.ReoPostProcessor;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,30 +76,17 @@ public class ThisController extends AbstractController {
                     rp.setMainMeasurement(array[0], array[1], array[2], array[3], array[4], array[5], ((SignalModel)registeredModels.get(precardio)).getList());
                 }
                 rp.setFirstLayerMeasurement(array[6], array[7], ((SignalModel)registeredModels.get(FIRST)).getList());
-                rp.setRoEquivalent(array[8]);
+//                rp.setRoEquivalent(array[8]);
                 List<Double> result = rp.getRadiusWithRo1();
 
                 SignalModel model = new SignalModel(radius);
                 addModel(radius, model);
                 model.setList(result);
 
-                ListWriter listWriter = new ListWriter();
-                try {
-                    listWriter.writeListToFile(result, new File(defaultPath, "radius"+ getDate()+precardio));
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                }
             }else{
                 Logger.getLogger(getClass().getName()).info("MapModel don't contain model '"+ precardio + "'! ");
             }
         }
-
-        rp.setUseFirstLayer(true);
-        rp.setUseBaseImpedance(true);
-        rp.setMainMeasurement();
-
     }
 
     public void addModel(String flowName, AbstractModel model){

@@ -23,17 +23,20 @@ public class GroupSignalPanel extends JPanel{
     }
 
     private void initComponent() {
-        add(addPanel(mc.FIRST));
-        add(addPanel(mc.PRECARD_1));
-        add(addPanel(mc.PRECARD_2));
-        add(addPanel(mc.PRECARD_3));
-        add(addPanel(mc.PRECARD_4));
-        add(addPanel(mc.PRECARD_5));
+        add(addPanel(mc.FIRST, null));
+        add(addPanel(mc.PRECARD_1, mc.RADIUS_1));
+        add(addPanel(mc.PRECARD_2, mc.RADIUS_2));
+        add(addPanel(mc.PRECARD_3, mc.RADIUS_3));
+        add(addPanel(mc.PRECARD_4, mc.RADIUS_4));
+        add(addPanel(mc.PRECARD_5, mc.RADIUS_5));
     }
-    private JScrollPane addPanel(String nameSignal){
+    private JScrollPane addPanel(String nameSignal, String nameSignal_2){
         Map<String, List<Double>> tempMap = new HashMap<>();
         tempMap.put(mc.ECG, Collections.<Double>emptyList());
         tempMap.put(nameSignal, Collections.<Double>emptyList());
+        if(nameSignal_2!=null){
+            tempMap.put(nameSignal_2, Collections.<Double>emptyList());
+        }
         MultiSignalPanel tempPanel = new MultiSignalPanel(mc,tempMap);
         JScrollPane pane = new JScrollPane(tempPanel);
         tempPanel.setPreferredSize(new Dimension(5000, tempPanel.getHeight()));
