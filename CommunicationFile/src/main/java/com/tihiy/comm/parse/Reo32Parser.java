@@ -5,8 +5,8 @@ import java.util.*;
 
 public class Reo32Parser {
     List<List<Double>> listOfList;
-    int unuseLine = 2;
-    int unuseCol = 1;
+    int unuseLine = 1;
+    int unuseCol = 0;
 
     public Reo32Parser() {
         listOfList = new ArrayList<>();

@@ -1,6 +1,9 @@
+import com.tihiy.comm.FileSignalReader;
 import com.tihiy.comm.ListWriter;
+import com.tihiy.comm.parse.Reo32Parser;
 import com.tihiy.rclint.ReadingFiles;
 import com.tihiy.rclint.models.SignalModel;
+import com.tihiy.rclint.models.SignalModelLite;
 import com.tihiy.rclint.mvcAbstract.AbstractController;
 import com.tihiy.rclint.mvcAbstract.AbstractModel;
 import com.tihiy.reo.ReoPostProcessor;
@@ -18,41 +21,53 @@ import java.util.concurrent.BlockingQueue;
 import java.util.logging.Logger;
 
 public class ControllerFLayer extends AbstractController{
+    //    }
+//        addModel(model);
+//    public static final String FIRST = "first";
+//    public static final String PRECARD_BASE_5 = "precard_base_5";
+//    public static final String PRECARD_BASE_4 = "precard_base_4";
+//    public static final String PRECARD_BASE_3 = "precard_base_3";
+//    public static final String PRECARD_BASE_2 = "precard_base_2";
+//    public static final String PRECARD_BASE_1 = "precard_base_1";
+//    public static final String PRECARD_5 = "precard_5";
+//    public static final String PRECARD_4 = "precard_4";
+//    public static final String PRECARD_3 = "precard_3";
+//    public static final String PRECARD_2 = "precard_2";
+//    private final Map<String, BlockingQueue<Integer>> signalMap = new HashMap<>();
+
+
+    private SignalMapper signalMapper;
     private final Map<String, AbstractModel> registeredModels = new HashMap<>();
-    private final Map<String, BlockingQueue<Integer>> signalMap = new HashMap<>();
 
-    public static final String PRECARD_1 = "precard_1";
-    public static final String PRECARD_2 = "precard_2";
-    public static final String PRECARD_3 = "precard_3";
-    public static final String PRECARD_4 = "precard_4";
-    public static final String PRECARD_5 = "precard_5";
-    public static final String PRECARD_BASE_1 = "precard_base_1";
-    public static final String PRECARD_BASE_2 = "precard_base_2";
-    public static final String PRECARD_BASE_3 = "precard_base_3";
-    public static final String PRECARD_BASE_4 = "precard_base_4";
-    public static final String PRECARD_BASE_5 = "precard_base_5";
-    public static final String FIRST = "first";
-    public static final String RADIUS_1 = "radius_1";
-    public static final String RADIUS_2 = "radius_2";
-    public static final String RADIUS_3 = "radius_3";
-    public static final String RADIUS_4 = "radius_4";
-    public static final String RADIUS_5 = "radius_5";
+//    public static final String PRECARD_1 = "precard_1";
 
-
-    public void addSignal(String name, File file) throws IOException {
-        if(file != null){
-            List<Double> list =  ReadingFiles.readFile(file);
+//    public void addSignal(String name, File file) throws IOException {
+//        if(file != null){
+//            List<Double> list =  ReadingFiles.readFile(file);
+//            if(registeredModels.containsKey(name)){
+//                ((SignalModel)registeredModels.get(name)).setList(list);
+//            }else{
+//                addModel(name, new SignalModel(name));
+//                ((SignalModel)registeredModels.get(name)).setList(list);
+//            }
+//        }else{
+//            Logger.getLogger(getClass().getName()).info("File didn't choosen.");
+//        }
+//    }
+    public void addSignals(File file) throws IOException {
+        Reo32Parser parser = new Reo32Parser();
+        List<List<Double>> lists =  parser.parse((new FileSignalReader()).readFile(file));
+        for(String name: signalMapper.getMapSet()){
             if(registeredModels.containsKey(name)){
-                ((SignalModel)registeredModels.get(name)).setList(list);
+                ((SignalModelLite)registeredModels.get(name)).setArray(lists.get(signalMapper.getIndex(name)));
             }else{
-                addModel(name, new SignalModel(name));
-                ((SignalModel)registeredModels.get(name)).setList(list);
+                addModel(name, new SignalModelLite(name));
+                ((SignalModelLite)registeredModels.get(name)).setArray(lists.get(signalMapper.getIndex(name)));
             }
-        }else{
-            Logger.getLogger(getClass().getName()).info("File didn't choosen.");
         }
     }
-    public void calculate(double[] main, double[] first, File radiusFile, String comment){
+
+/*    public void calculate(double[] main, double[] first, File radiusFile, String comment){
         System.out.println("Size A = " + main[0]);
         ReoPostProcessor rp = new ReoPostProcessor();
 //        rp.setMainMeasurement(main[0], main[1], main[2], main[3], main[4], main[5], ((SignalModel)registeredModels.get("sourceSignal")).getList());
@@ -79,7 +94,7 @@ public class ControllerFLayer extends AbstractController{
         }
         ((SignalModel)registeredModels.get("radiusSignal")).setList(result);
     }
-
+  */
 
 
     public void calculate(List<double[]> list, File defaultPath){
@@ -99,7 +114,7 @@ public class ControllerFLayer extends AbstractController{
                 }else{
                     rp.setMainMeasurement(array[0], array[1], array[2], array[3], array[4], array[5], ((SignalModel)registeredModels.get(precardio)).getList());
                 }
-                rp.setFirstLayerMeasurement(array[6], array[7], ((SignalModel)registeredModels.get(FIRST)).getList());
+//                rp.setFirstLayerMeasurement(array[6], array[7], ((SignalModel)registeredModels.get(FIRST)).getList());
                 rp.setRoEquivalent(array[8]);
                 List<Double> result = rp.getRadiusWithRo1();
 
@@ -122,8 +137,6 @@ public class ControllerFLayer extends AbstractController{
     }
 
 //    public void createSignalModel(String flowName, AbstractModel model){
-//        addModel(model);
-//    }
 
     public void addModel(String flowName, AbstractModel model){
         registeredModels.put(flowName, model);
@@ -138,5 +151,9 @@ public class ControllerFLayer extends AbstractController{
         Date dNow = new Date( );
         SimpleDateFormat ft = new SimpleDateFormat ("_yyyy_MM_dd_hh_mm_ss");
         return ft.format(dNow);
+    }
+
+    public void setSignalMapper(SignalMapper signalMapper) {
+        this.signalMapper = signalMapper;
     }
 }

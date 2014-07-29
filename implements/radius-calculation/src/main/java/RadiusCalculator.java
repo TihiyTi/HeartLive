@@ -16,7 +16,10 @@ public class RadiusCalculator {
                 ControllerFLayer mc = new ControllerFLayer();
                 ControlPanelFLayer controlPanel = new ControlPanelFLayer(mc);
                 controlPanel.setBorder(BorderFactory.createLineBorder(Color.RED));
-                TabSignalPanel signalPanel = new TabSignalPanel(mc);
+                ReoMapper mapper = new ReoMapper();
+                TabSignalPanel signalPanel = new TabSignalPanel(mc, mapper);
+                //todo добавить задание маппера в tabsignalpanel
+                mc.setSignalMapper(mapper);
                 signalPanel.setBorder(BorderFactory.createLineBorder(Color.RED));
 //
 //

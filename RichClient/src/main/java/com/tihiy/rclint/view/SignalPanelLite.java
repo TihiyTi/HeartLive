@@ -18,6 +18,7 @@ public class SignalPanelLite extends AbstractViewPanel {
 
     public SignalPanelLite(String signalName){
         viewName = signalName;
+        setPreferredSize(new Dimension(getWidth(), 200));
         initComponent();
     }
 

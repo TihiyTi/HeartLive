@@ -3,6 +3,7 @@ package com.tihiy.rclint.models;
 import com.tihiy.rclint.mvcAbstract.AddOnModelInterface;
 import com.tihiy.rclint.mvcAbstract.AbstractModel;
 
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -27,6 +28,13 @@ public class SignalModelLite extends AbstractModel{
             }
         }
         firePropertyChange(signalName, new double[0], newArray);
+    }
+    public void setArray(List<? extends Number> list){
+        double[] newArray = new double[list.size()];
+        for(int i = 0; i < list.size(); i++){
+            newArray[i] = list.get(i).doubleValue();
+        }
+        setArray(newArray);
     }
 
     public double[] getList(){
