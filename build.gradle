@@ -82,6 +82,9 @@ project(':implements:simple-signal-view'){
         compile project(':CommunicationSerial')
     }
 }
+project(':implements:first-layer-filter'){
+    version = '0.0.1'
+}
 
 task RadiusCalculation(type:Copy, dependsOn: [':implements:radius-calculation:jar', ':implements:radius-calculation:createOut']){
     from 'implements/radius-calculation/build/libs'

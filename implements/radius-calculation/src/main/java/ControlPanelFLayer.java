@@ -1,9 +1,14 @@
+
 import com.tihiy.rclint.mvcAbstract.AbstractViewPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Logger;
 
 public class ControlPanelFLayer  extends AbstractViewPanel{
 
@@ -15,156 +20,156 @@ public class ControlPanelFLayer  extends AbstractViewPanel{
         setLayout(new GridBagLayout());
         setBorder(BorderFactory.createLineBorder(Color.BLUE));
         initComponent();
-//        initListeners();
+        initListeners();
     }
 
-//    private void initListeners() {
-//        butChooseSignal_1.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                try {
-//                    File sourceFile = chooseFile();
-//                    mc.addSignal(ControllerFLayer.PRECARD_1, sourceFile);
-//                } catch (IOException e1) {
-//                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//                }
-//            }
-//        });
-//        butChooseSignal_2.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                File sourceFile = chooseFile();
-//                try {
-//                    mc.addSignal(ControllerFLayer.PRECARD_2, sourceFile);
-//                } catch (IOException e1) {
-//                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//                }
-//            }
-//        });
-//        butChooseSignal_3.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                File sourceFile = chooseFile();
-//                try {
-//                    mc.addSignal(ControllerFLayer.PRECARD_3, sourceFile);
-//                } catch (IOException e1) {
-//                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//                }
-//            }
-//        });
-//        butChooseSignal_4.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                File sourceFile = chooseFile();
-//                try {
-//                    mc.addSignal(ControllerFLayer.PRECARD_4, sourceFile);
-//                } catch (IOException e1) {
-//                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//                }
-//            }
-//        });
-//        butChooseSignal_5.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                File sourceFile = chooseFile();
-//                try {
-//                    mc.addSignal(ControllerFLayer.PRECARD_5, sourceFile);
-//                } catch (IOException e1) {
-//                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//                }
-//            }
-//        });
-//
-//        butChooseBaseSignal_1.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                File sourceFile = chooseFile();
-//                try {
-//                    mc.addSignal(ControllerFLayer.PRECARD_BASE_1, sourceFile);
-//                } catch (IOException e1) {
-//                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//                }
-//            }
-//        });
-//        butChooseBaseSignal_2.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                File sourceFile = chooseFile();
-//                try {
-//                    mc.addSignal(ControllerFLayer.PRECARD_BASE_2, sourceFile);
-//                } catch (IOException e1) {
-//                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//                }
-//            }
-//        });
-//        butChooseBaseSignal_3.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                File sourceFile = chooseFile();
-//                try {
-//                    mc.addSignal(ControllerFLayer.PRECARD_BASE_3, sourceFile);
-//                } catch (IOException e1) {
-//                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//                }
-//            }
-//        });
-//        butChooseBaseSignal_4.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                File sourceFile = chooseFile();
-//                try {
-//                    mc.addSignal(ControllerFLayer.PRECARD_BASE_4, sourceFile);
-//                } catch (IOException e1) {
-//                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//                }
-//            }
-//        });
-//        butChooseBaseSignal_5.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                File sourceFile = chooseFile();
-//                try {
-//                    mc.addSignal(ControllerFLayer.PRECARD_BASE_5, sourceFile);
-//                } catch (IOException e1) {
-//                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//                }
-//            }
-//        });
-//
-//        butChooseFirstLayerSignal.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                File sourceFile = chooseFile();
-//                try {
-//                    mc.addSignal(ControllerFLayer.FIRST, sourceFile);
-//                } catch (IOException e1) {
-//                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//                }
-//            }
-//        });
-//        butCalculate.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                if(defaultPath == null){
+    private void initListeners() {
+        butChooseSignal_1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    File sourceFile = chooseFile();
+                    mc.addSignal(ControllerFLayer.PRECARD_1, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+        butChooseSignal_2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.PRECARD_2, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+        butChooseSignal_3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.PRECARD_3, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+        butChooseSignal_4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.PRECARD_4, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+        butChooseSignal_5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.PRECARD_5, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+
+        butChooseBaseSignal_1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.PRECARD_BASE_1, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+        butChooseBaseSignal_2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.PRECARD_BASE_2, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+        butChooseBaseSignal_3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.PRECARD_BASE_3, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+        butChooseBaseSignal_4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.PRECARD_BASE_4, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+        butChooseBaseSignal_5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.PRECARD_BASE_5, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+
+        butChooseFirstLayerSignal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File sourceFile = chooseFile();
+                try {
+                    mc.addSignal(ControllerFLayer.FIRST, sourceFile);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+        butCalculate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(defaultPath == null){
 //                    JDialog dialog = new JDialog();
 //                    dialog.setTitle("No defaultPath, choose input signal");
 //                    dialog.add(new Label("No default Path!"));
 //                    dialog.setSize(100,100);
 //                    dialog.setVisible(true);
-//                    Logger.getLogger(getClass().getName()).info("Warning! defaultPath == null");
-//                }
-//                mc.calculate(paramPanel.getParam(), defaultPath);
-//            }
-//        });
-//        butDefault.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                paramPanel.setDefaultParam();
-//
-//            }
-//        });
-//    }
-//
+                    Logger.getLogger(getClass().getName()).info("Warning! defaultPath == null");
+                }
+                mc.calculate(paramPanel.getParam(), defaultPath);
+            }
+        });
+        butDefault.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                paramPanel.setDefaultParam();
+
+            }
+        });
+    }
+
     private void initComponent() {
         butChooseSignal_1 = new JButton("Choose Signal 1");
         butChooseSignal_2 = new JButton("Choose Signal 2");
@@ -220,29 +225,29 @@ public class ControlPanelFLayer  extends AbstractViewPanel{
         add(butDefault, constraints);
     }
 
-//    private File chooseFile(){
-//        JFileChooser fileChooser = new JFileChooser();
-//        fileChooser.changeToParentDirectory();
-//        fileChooser.setCurrentDirectory(new File("C:\\Users\\Home\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716"));
+    private File chooseFile(){
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.changeToParentDirectory();
+        fileChooser.setCurrentDirectory(new File("C:\\Users\\Home\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716"));
 //        defaultPath = new File("C:\\Users\\Home\\Documents\\My Box Files\\Asp\\RoChange\\Rad 20130716");
-//        if(defaultPath!=null){
-//            fileChooser.setCurrentDirectory( defaultPath);
-//        }
-//        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-//        fileChooser.showDialog(new JFrame(), "Choose signal!");
-//        if(defaultPath==null){
-//            defaultPath = fileChooser.getCurrentDirectory();
-//        }
-//        return fileChooser.getSelectedFile();
-//    }
-//
+        if(defaultPath!=null){
+            fileChooser.setCurrentDirectory( defaultPath);
+        }
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.showDialog(new JFrame(), "Choose signal!");
+        if(defaultPath==null){
+            defaultPath = fileChooser.getCurrentDirectory();
+        }
+        return fileChooser.getSelectedFile();
+    }
+
     @Override
     public void modelPropertyChange(PropertyChangeEvent evt) {
 
     }
-//
-//
-//
+
+
+
     private JButton butChooseSignal_1;
     private JButton butChooseSignal_2;
     private JButton butChooseSignal_3;

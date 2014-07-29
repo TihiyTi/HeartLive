@@ -80,7 +80,7 @@ public class FreeTest {
 //        fco.close();
 //        File inFile = new File("outFile.dat");
 //        System.out.println(""+ inFile.getPath());
-//        new File(FileSignalReaderTest.class.getResource("signal.txt").getFile());
+//        new File(FileSignalReaderTest.class.getResource("signal1.txt").getFile());
     }
     @Test
     public void testWrite_1() throws IOException {
