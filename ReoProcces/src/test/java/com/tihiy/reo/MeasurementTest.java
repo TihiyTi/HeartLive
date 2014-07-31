@@ -11,28 +11,12 @@ public class MeasurementTest extends TestCase{
         model.setRo(7, 1.35);
         InterfaceMeasurement measurement = new Measurement(model , eSystem, bodyGeometry);
         double value = measurement.getMeasurementFullImp();
-        assertEquals(48.347, value, 0.001);
+        assertEquals(47.179, value, 0.001);
         measurement.setRSphere(0.02);
         value = measurement.getMeasurementFullImp();
-        assertEquals(49.244, value, 0.001);
+        assertEquals(48.974, value, 0.001);
         measurement.setRSphere(0.025);
         value = measurement.getMeasurementFullImp();
-        assertEquals(49.116, value, 0.001);
-        measurement.setRSphere(0.03);
-        value = measurement.getMeasurementFullImp();
-        assertEquals(48.983, value, 0.001);
-        measurement.setRSphere(0.035);
-        value = measurement.getMeasurementFullImp();
-        assertEquals(48.85, value, 0.001);
-        measurement.setRSphere(0.04);
-        value = measurement.getMeasurementFullImp();
-        assertEquals(48.721, value, 0.001);
-        measurement.setRSphere(0.045);
-        value = measurement.getMeasurementFullImp();
-        assertEquals(48.598, value, 0.001);
-        measurement.setRSphere(0.05);
-        value = measurement.getMeasurementFullImp();
-        assertEquals(48.48, value, 0.001);
     }
 
 }

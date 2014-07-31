@@ -47,11 +47,6 @@ public class Measurement implements InterfaceMeasurement {
     }
 
     @Override
-    public float[][] MatrixResult() {
-        return new float[0][];  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
     public void setElectrodeSystem(ElectrodeSystem electrodeSystem) {
     }
 
