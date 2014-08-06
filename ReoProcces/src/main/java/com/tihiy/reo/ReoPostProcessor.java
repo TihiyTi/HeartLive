@@ -28,7 +28,7 @@ public class ReoPostProcessor {
             roEquivalent = mainImpedance.getRoEquivalent();
         }
 
-        MatrixFromRoRToZ matrix = new MatrixFromRoRToZ(0.045, roEquivalent, 0.0001, 0.001);
+        MatrixFromRoRToZ matrix = new MatrixFromRoRToZ(mainImpedance.getModel().getBodyGeometry().getrSphere(), roEquivalent, 0.0001, 0.001);
         matrix.fillMatrix(mainImpedance);
 
         List<Double> listOfRo = ((OneLayerModel)roImpedance.model).getRoDelta(roImpedance.getData());
@@ -41,6 +41,7 @@ public class ReoPostProcessor {
         }
         List<Double> listOfdRad = new ArrayList<>();
         for(int i = 0; i < listOfRo.size(); i++){
+            System.out.println("Imp = "+ (-mainImpedance.getData().get(i) / 1000) + " dRo = " + listOfRo.get(i));
             double dRadius = matrix.getRad(listOfRo.get(i), -mainImpedance.getData().get(i) / 1000);
             listOfdRad.add(dRadius);
         }

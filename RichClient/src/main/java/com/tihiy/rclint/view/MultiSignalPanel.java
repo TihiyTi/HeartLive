@@ -21,7 +21,7 @@ import java.util.Map;
 public class MultiSignalPanel extends AbstractViewPanel{
     private AbstractController mc;
     private Map<String, List<Double>> signalMap;
-    private int scale = 2;
+    private int scale = 1;
     private int mouseX = 0;
     private int mouseY = 0;
 
