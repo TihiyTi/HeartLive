@@ -1,4 +1,5 @@
 import com.tihiy.rclint.view.MultiSignalPanel;
+import com.tihiy.rclint.view.MultiSignalPanel2;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,12 +24,39 @@ public class GroupSignalPanel extends JPanel{
     }
 
     private void initComponent() {
-        add(addPanel(mc.FIRST, null));
-        add(addPanel(mc.PRECARD_1, mc.RADIUS_1));
-        add(addPanel(mc.PRECARD_2, mc.RADIUS_2));
-        add(addPanel(mc.PRECARD_3, mc.RADIUS_3));
-        add(addPanel(mc.PRECARD_4, mc.RADIUS_4));
-        add(addPanel(mc.PRECARD_5, mc.RADIUS_5));
+        String[] signalsArray = new String[]{ThisController.ECG, ThisController.FIRST,
+            ThisController.PRECARD_1, ThisController.PRECARD_2,ThisController.PRECARD_3, ThisController.PRECARD_4, ThisController.PRECARD_5,
+                ThisController.RADIUS_1, ThisController.RADIUS_2,ThisController.RADIUS_3, ThisController.RADIUS_4, ThisController.RADIUS_5
+        };
+        Map<String, Integer>  signalMap = new HashMap<String, Integer>(){{
+            put(ThisController.ECG, 1);
+            put(ThisController.FIRST, 1);
+            put(ThisController.PRECARD_1, 2);
+            put(ThisController.PRECARD_2, 3);
+            put(ThisController.PRECARD_3, 4);
+            put(ThisController.PRECARD_4, 5);
+            put(ThisController.PRECARD_5, 6);
+            put(ThisController.RADIUS_1, 2);
+            put(ThisController.RADIUS_2, 3);
+            put(ThisController.RADIUS_3, 4);
+            put(ThisController.RADIUS_4, 5);
+            put(ThisController.RADIUS_5, 6);
+        }};
+        Map<String, Color>  colorMap = new HashMap<String, Color>(){{
+            put(ThisController.ECG, Color.RED);
+            put(ThisController.FIRST, Color.BLUE);
+//            put(ThisController.PRECARD_1, 2);
+//            put(ThisController.PRECARD_2, 3);
+//            put(ThisController.PRECARD_3, 4);
+//            put(ThisController.PRECARD_4, 5);
+//            put(ThisController.PRECARD_5, 6);
+            put(ThisController.RADIUS_1, Color.GREEN.darker());
+            put(ThisController.RADIUS_2, Color.GREEN.darker());
+            put(ThisController.RADIUS_3, Color.GREEN.darker());
+            put(ThisController.RADIUS_4, Color.GREEN.darker());
+            put(ThisController.RADIUS_5, Color.GREEN.darker());
+        }};
+        add(addMultiPanel2(signalsArray, signalMap, colorMap));
     }
     private JScrollPane addPanel(String nameSignal, String nameSignal_2){
         Map<String, List<Double>> tempMap = new HashMap<>();
@@ -38,6 +66,20 @@ public class GroupSignalPanel extends JPanel{
             tempMap.put(nameSignal_2, Collections.<Double>emptyList());
         }
         MultiSignalPanel tempPanel = new MultiSignalPanel(mc,tempMap);
+        JScrollPane pane = new JScrollPane(tempPanel);
+        tempPanel.setPreferredSize(new Dimension(5000, tempPanel.getHeight()));
+        mc.addView(tempPanel);
+        return pane;
+    }
+    private JScrollPane addMultiPanel2(String[] signals, Map<String, Integer> tempMapPosition, Map<String, Color> mapColor){
+        Map<String, List<Double>> tempMap = new HashMap<>();
+        tempMap.put(mc.ECG, Collections.<Double>emptyList());
+        for(int i = 0; i < signals.length; i++){
+            tempMap.put(signals[i], Collections.<Double>emptyList());
+        }
+
+        MultiSignalPanel2 tempPanel = new MultiSignalPanel2(mc,tempMap,tempMapPosition);
+        tempPanel.colorSignal(mapColor);
         JScrollPane pane = new JScrollPane(tempPanel);
         tempPanel.setPreferredSize(new Dimension(5000, tempPanel.getHeight()));
         mc.addView(tempPanel);
