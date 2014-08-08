@@ -1,6 +1,9 @@
 package com.tihiy.fxclient;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Bounds;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polyline;
@@ -10,14 +13,22 @@ import java.util.Collections;
 import java.util.List;
 
 public class SignalPanel extends ScrollPane {
+    boolean inverseSignals = true;
     private List<Signal> listOfSignal = new ArrayList<>();
     private int numOfSignal =0;
 
     public SignalPanel(List<List<Double>> list){
+        numOfSignal = list.size();
         int i = 1;
         for(List<Double> signal: list){
             listOfSignal.add(new Signal(signal, i));
+            i++;
         }
+        Pane pane = new Pane();
+        for(Signal signal: listOfSignal){
+            pane.getChildren().addAll(signal.getPolyline());
+        }
+        setContent(pane);
     }
 
     public SignalPanel(int num, boolean flag){
@@ -47,9 +58,23 @@ public class SignalPanel extends ScrollPane {
             this.position = position;
         }
         Signal(List<Double> signal, int position){
-            line = fillPolyline(signal);
             this.position = position;
+            line = fillPolyline(signal);
+            settings();
+            layoutBoundsProperty().addListener(new ChangeListener<Bounds>() {
+                @Override
+                public void changed(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
+                    for (Signal signal : listOfSignal) {
+                        Polyline line = signal.getPolyline();
+                        System.out.println("Signal " + signal.position + " from " + numOfSignal +" max="+max+" min="+min +" itog=" +(numOfSignal * (max - min)));
+                        System.out.println("Panel height = " + heightProperty().getValue());
+                        System.out.println("Line scale = " + line.scaleYProperty().getValue());
+                        System.out.println("Line translate = " + line.translateYProperty().getValue());
+                    }
+                }
+            });
         }
+
         Signal(int position){
             this.position = position;
             autoFillPolyline();
@@ -74,7 +99,7 @@ public class SignalPanel extends ScrollPane {
             return line;
         }
         private Polyline fillPolyline(List<Double> signal){
-            double[] polyArray = new double[signal.size()];
+            double[] polyArray = new double[signal.size()*2];
             max = Collections.max(signal);
             min = Collections.min(signal);
             for(int i = 1; i < signal.size(); i++){
@@ -82,6 +107,7 @@ public class SignalPanel extends ScrollPane {
                 polyArray[i*2 + 1] = signal.get(i);
             }
             line = new Polyline(polyArray);
+
             return line;
         }
 
@@ -96,9 +122,10 @@ public class SignalPanel extends ScrollPane {
         }
 
         private void settings(){
-            line.scaleYProperty().bind(Bindings.divide(Bindings.add(heightProperty(), -50), numOfSignal * (max - min)));
+            System.out.println("ITOG = "+ numOfSignal * (max - min));
+            line.scaleYProperty().bind(Bindings.divide(Bindings.add(heightProperty(), -50), -numOfSignal * (max - min)));
             line.translateYProperty().bind(
-                    Bindings.add(-0.5 * (max - min),
+                    Bindings.add( -0.5 * (max + min),
                             Bindings.multiply((double) position - 0.5,
                                     Bindings.divide(heightProperty(), numOfSignal))));
         }
