@@ -48,6 +48,16 @@ public class ReoPostProcessor {
 
         return listOfdRad;
     }
+    public List<Double> getImpedance(List<Double> listOfDr){
+        List<Double> listOfImpedance;
+        if(mainMeasurement!=null){
+            listOfImpedance = mainMeasurement.getListOfImpedance(listOfDr);
+            return listOfImpedance;
+        }else{
+            System.out.println("Перед тем как запрашивать ListOfImpedance необходимо установить измерение(measurement), т.е. модель и все параметры.");
+            return null;
+        }
+    }
 
     //todo delete this method because mainImpedance contains data about radBegin and roBegin
     public List<Double> badGetRadiusWithRo1(ExpMeasurement<Double> mainImpedance, ExpMeasurement<Double> roImpedance, double rad, double ro){
@@ -84,11 +94,6 @@ public class ReoPostProcessor {
         setMainMeasurement(a,b,xShift,yShift,rSphere,h,list);
         mainMeasurement.setBaseImp(base);
     }
-//    public void setMainMeasurement(List<double[]> parameters, List<Double> list, List<Double> base){
-//        .
-//        setMainMeasurement();
-//    }
-
     // Configure measurement from first layer
     public void setFirstLayerMeasurement(double a, double b, List<Double> list){
         ElectrodeSystem eSystem = new ElectrodeSystem(a, b, 0, 0);
@@ -98,18 +103,13 @@ public class ReoPostProcessor {
     public boolean isUseFirstLayer() {
         return useFirstLayer;
     }
-
     public void setUseFirstLayer(boolean useFirstLayer) {
         this.useFirstLayer = useFirstLayer;
     }
-
     public void setUseBaseImpedance(boolean useBaseImpedance){
         this.useBaseImpedance = useBaseImpedance;
     }
-
     public void setRoEquivalent(double roEquivalent) {
         this.roEquivalent = roEquivalent;
     }
-
-
 }

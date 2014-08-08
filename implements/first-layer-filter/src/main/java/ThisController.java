@@ -77,11 +77,13 @@ public class ThisController extends AbstractController {
                 }
                 rp.setFirstLayerMeasurement(array[6], array[7], ((SignalModel)registeredModels.get(FIRST)).getList());
                 rp.setRoEquivalent(array[8]);
-                List<Double> result = rp.getRadiusWithRo1();
+                List<Double> listOfRadius = rp.getRadiusWithRo1();
+                List<Double> listOfImpedance = rp.getImpedance(listOfRadius);
 
-                SignalModel model = new SignalModel(radius);
-                addModel(radius, model);
-                model.setList(result);
+                SignalModel modelRad = new SignalModel(radius);
+                addModel(radius, modelRad);
+                SignalModel modelImpedance = new SignalModel(radius);
+                modelRad.setList(listOfRadius);
 
             }else{
                 Logger.getLogger(getClass().getName()).info("MapModel don't contain model '"+ precardio + "'! ");
