@@ -68,11 +68,7 @@ project(':implements:radius-calculation'){
         attributes 'Class-Path': 'ReoProcces-' + reo +'.jar RichClient-'+rich+'.jar LocalStorage.jar'
     }
     task createOut{
-        outDirect = new File('implements/radius-calculation/out')
-        if(!outDirect.isDirectory()){
-            println 'Create out directory'
-            outDirect.mkdir()
-        }
+        
     }
 }
 project(':implements:simple-signal-view'){
@@ -83,6 +79,9 @@ project(':implements:simple-signal-view'){
     }
 }
 project(':implements:first-layer-filter'){
+    version = '0.0.1'
+}
+project(':implements:fx-application'){
     version = '0.0.1'
 }
 

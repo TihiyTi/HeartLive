@@ -43,7 +43,14 @@ public class ThisControlPanel extends AbstractViewPanel {
         chooseSignal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File sourceFile = chooseFile();
+                File sourceFile;
+
+                boolean autoChooseFile = true;
+                if(autoChooseFile){
+                    sourceFile = new File("C:\\Users\\Alex\\Documents\\My Box Files\\Asp\\Experiment\\20140724\\2rad.txt");
+                }else{
+                    sourceFile = chooseFile();
+                }
                 mc.addSignals(sourceFile);
             }
         });

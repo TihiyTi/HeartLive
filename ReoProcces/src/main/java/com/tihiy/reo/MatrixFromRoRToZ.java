@@ -55,7 +55,7 @@ public class MatrixFromRoRToZ {
     }
 
     private double getRadFromArray(int indexRo, double impedance){
-        double delta = Math.abs(impedance);
+        double delta = Math.abs(impedance - matrix[indexRo][0]);
         int indexImp = 0;
         for(int i = 0; i < matrix[indexRo].length ; i++ ){
             double valueImp = matrix[indexRo][i];

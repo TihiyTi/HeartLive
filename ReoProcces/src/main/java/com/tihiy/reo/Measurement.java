@@ -1,5 +1,8 @@
 package com.tihiy.reo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Measurement implements InterfaceMeasurement {
     ElectrodeSystem electrodeSystem;
     InterfaceModel model;
@@ -9,7 +12,6 @@ public class Measurement implements InterfaceMeasurement {
         this.model =  model;
         this.model.setBodyGeometry(bodyGeometry);
         this.model.setElectrodeSystem(electrodeSystem);
-//        this.bodyGeometry = bodyGeometry;
     }
 
     @Override
@@ -36,7 +38,6 @@ public class Measurement implements InterfaceMeasurement {
         return value;
     }
 
-
     //Todo this method is bad for not sphere model, because it return something xxx
     @Override
     public double getMeasurementFullImp(){
@@ -46,25 +47,26 @@ public class Measurement implements InterfaceMeasurement {
         return value;
     }
 
-    @Override
-    public float[][] MatrixResult() {
-        return new float[0][];  //To change body of implemented methods use File | Settings | File Templates.
+    public List<Double> getListOfImpedance(List<Double> drValueList){
+        List<Double> listOfImpedance = new ArrayList<>();
+        double radiusDiastole = getModel().getBodyGeometry().getrSphere();
+        for(Double drValue: drValueList){
+            setRSphere(radiusDiastole+drValue);
+            listOfImpedance.add(getMeasurement());
+        }
+        return listOfImpedance;
     }
 
     @Override
     public void setElectrodeSystem(ElectrodeSystem electrodeSystem) {
     }
-
     @Override
     public void setBodyGeometry(BodyGeometry bodyGeometry) {
     }
-
     @Override
     public void setRSphere(double radius){
         model.getBodyGeometry().setrSphere(radius);
     }
-
-
     // todo this method is bad method because we don't ask model about somethings
     @Override
     public InterfaceModel getModel(){

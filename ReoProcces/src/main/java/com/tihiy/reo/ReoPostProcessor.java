@@ -28,7 +28,7 @@ public class ReoPostProcessor {
             roEquivalent = mainImpedance.getRoEquivalent();
         }
 
-        MatrixFromRoRToZ matrix = new MatrixFromRoRToZ(0.045, roEquivalent, 0.0001, 0.001);
+        MatrixFromRoRToZ matrix = new MatrixFromRoRToZ(mainImpedance.getModel().getBodyGeometry().getrSphere(), roEquivalent, 0.0001, 0.001);
         matrix.fillMatrix(mainImpedance);
 
         List<Double> listOfRo = ((OneLayerModel)roImpedance.model).getRoDelta(roImpedance.getData());
@@ -41,11 +41,22 @@ public class ReoPostProcessor {
         }
         List<Double> listOfdRad = new ArrayList<>();
         for(int i = 0; i < listOfRo.size(); i++){
+            System.out.println("Imp = "+ (-mainImpedance.getData().get(i) / 1000) + " dRo = " + listOfRo.get(i));
             double dRadius = matrix.getRad(listOfRo.get(i), -mainImpedance.getData().get(i) / 1000);
             listOfdRad.add(dRadius);
         }
 
         return listOfdRad;
+    }
+    public List<Double> getImpedance(List<Double> listOfDr){
+        List<Double> listOfImpedance;
+        if(mainMeasurement!=null){
+            listOfImpedance = mainMeasurement.getListOfImpedance(listOfDr);
+            return listOfImpedance;
+        }else{
+            System.out.println("Перед тем как запрашивать ListOfImpedance необходимо установить измерение(measurement), т.е. модель и все параметры.");
+            return null;
+        }
     }
 
     //todo delete this method because mainImpedance contains data about radBegin and roBegin
@@ -83,11 +94,6 @@ public class ReoPostProcessor {
         setMainMeasurement(a,b,xShift,yShift,rSphere,h,list);
         mainMeasurement.setBaseImp(base);
     }
-//    public void setMainMeasurement(List<double[]> parameters, List<Double> list, List<Double> base){
-//        .
-//        setMainMeasurement();
-//    }
-
     // Configure measurement from first layer
     public void setFirstLayerMeasurement(double a, double b, List<Double> list){
         ElectrodeSystem eSystem = new ElectrodeSystem(a, b, 0, 0);
@@ -97,18 +103,13 @@ public class ReoPostProcessor {
     public boolean isUseFirstLayer() {
         return useFirstLayer;
     }
-
     public void setUseFirstLayer(boolean useFirstLayer) {
         this.useFirstLayer = useFirstLayer;
     }
-
     public void setUseBaseImpedance(boolean useBaseImpedance){
         this.useBaseImpedance = useBaseImpedance;
     }
-
     public void setRoEquivalent(double roEquivalent) {
         this.roEquivalent = roEquivalent;
     }
-
-
 }

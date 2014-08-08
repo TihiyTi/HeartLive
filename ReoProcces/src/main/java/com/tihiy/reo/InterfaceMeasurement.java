@@ -12,8 +12,6 @@ public interface InterfaceMeasurement {
 
     double getMeasurementFullImp();
 
-    float[][] MatrixResult();
-
     void setElectrodeSystem(ElectrodeSystem electrodeSystem);
 
     void setBodyGeometry(BodyGeometry bodyGeometry);

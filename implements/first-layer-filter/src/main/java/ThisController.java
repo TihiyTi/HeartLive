@@ -50,12 +50,12 @@ public class ThisController extends AbstractController {
         addModel(FIRST, new SignalModel(FIRST));
         addModel(ECG, new SignalModel(ECG));
 
-        ((SignalModel)registeredModels.get(FIRST)).setList(map.get(Reo32Parser.Signal.Pulse_1));
-        ((SignalModel)registeredModels.get(PRECARD_1)).setList(map.get(Reo32Parser.Signal.Pulse_2));
-        ((SignalModel)registeredModels.get(PRECARD_2)).setList(map.get(Reo32Parser.Signal.Pulse_3));
-        ((SignalModel)registeredModels.get(PRECARD_3)).setList(map.get(Reo32Parser.Signal.Pulse_4));
-        ((SignalModel)registeredModels.get(PRECARD_4)).setList(map.get(Reo32Parser.Signal.Pulse_5));
-        ((SignalModel)registeredModels.get(PRECARD_5)).setList(map.get(Reo32Parser.Signal.Pulse_6));
+        ((SignalModel)registeredModels.get(FIRST)).setList(map.get(Reo32Parser.Signal.Pulse_6));
+        ((SignalModel)registeredModels.get(PRECARD_1)).setList(map.get(Reo32Parser.Signal.Pulse_1));
+        ((SignalModel)registeredModels.get(PRECARD_2)).setList(map.get(Reo32Parser.Signal.Pulse_2));
+        ((SignalModel)registeredModels.get(PRECARD_3)).setList(map.get(Reo32Parser.Signal.Pulse_3));
+        ((SignalModel)registeredModels.get(PRECARD_4)).setList(map.get(Reo32Parser.Signal.Pulse_4));
+        ((SignalModel)registeredModels.get(PRECARD_5)).setList(map.get(Reo32Parser.Signal.Pulse_5));
         ((SignalModel)registeredModels.get(ECG)).setList(map.get(Reo32Parser.Signal.ECG));
     }
     public void clearSignal(List<double[]> listOfParam){
@@ -76,12 +76,14 @@ public class ThisController extends AbstractController {
                     rp.setMainMeasurement(array[0], array[1], array[2], array[3], array[4], array[5], ((SignalModel)registeredModels.get(precardio)).getList());
                 }
                 rp.setFirstLayerMeasurement(array[6], array[7], ((SignalModel)registeredModels.get(FIRST)).getList());
-//                rp.setRoEquivalent(array[8]);
-                List<Double> result = rp.getRadiusWithRo1();
+                rp.setRoEquivalent(array[8]);
+                List<Double> listOfRadius = rp.getRadiusWithRo1();
+                List<Double> listOfImpedance = rp.getImpedance(listOfRadius);
 
-                SignalModel model = new SignalModel(radius);
-                addModel(radius, model);
-                model.setList(result);
+                SignalModel modelRad = new SignalModel(radius);
+                addModel(radius, modelRad);
+                SignalModel modelImpedance = new SignalModel(radius);
+                modelRad.setList(listOfRadius);
 
             }else{
                 Logger.getLogger(getClass().getName()).info("MapModel don't contain model '"+ precardio + "'! ");
