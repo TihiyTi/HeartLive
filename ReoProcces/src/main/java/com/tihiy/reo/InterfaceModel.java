@@ -10,4 +10,5 @@ public interface InterfaceModel {
     BodyGeometry getBodyGeometry();
 
     void setRoTissue(double roTissue);
+    void resetRoTissue();
 }

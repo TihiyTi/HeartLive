@@ -64,6 +64,7 @@ public class ThisController extends AbstractController {
             String precardio = "precard_"+(i+1);
             String base = "precard_base_"+(i+1);
             String radius = "radius_"+(i+1);
+            String clear = "clear_"+(i+1);
             double[] array = listOfParam.get(i);
             if(registeredModels.containsKey(precardio)){
                 boolean useFirstLayer = true;
@@ -82,8 +83,11 @@ public class ThisController extends AbstractController {
 
                 SignalModel modelRad = new SignalModel(radius);
                 addModel(radius, modelRad);
-                SignalModel modelImpedance = new SignalModel(radius);
                 modelRad.setList(listOfRadius);
+
+                SignalModel modelImpedance = new SignalModel(clear);
+                addModel(clear, modelImpedance);
+                modelImpedance.setList(listOfImpedance);
 
             }else{
                 Logger.getLogger(getClass().getName()).info("MapModel don't contain model '"+ precardio + "'! ");

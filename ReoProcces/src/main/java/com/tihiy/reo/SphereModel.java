@@ -10,8 +10,10 @@ public class SphereModel implements InterfaceModel {
 
     private BodyGeometry bodyGeometry;
 
+    private double roBloodReal = 7;
     private double roBlood = 1.35;
     private double roTissue = 7;
+
     public double potentialInPointFromElectrode(ReoPoint point, ReoPoint electrode){
         double potentialValue;
         double toPoint = toPoint(point);
@@ -133,6 +135,18 @@ public class SphereModel implements InterfaceModel {
     @Override
     public void setRoTissue(double roTissue) {
         this.roTissue = roTissue;
+    }
+
+    // Flag @isRealValue@ used to check if it's setting real value or it's setting for various calculation
+    public void setRoTissue(double roTissue, boolean isRealValue) {
+        if(isRealValue){
+            roBloodReal = roTissue;
+        }
+        this.roTissue = roTissue;
+    }
+    @Override
+    public void resetRoTissue(){
+        roBlood = roBloodReal;
     }
 
     public void setRo(double roTissue, double roBlood){

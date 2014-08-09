@@ -47,7 +47,8 @@ public class ThisControlPanel extends AbstractViewPanel {
 
                 boolean autoChooseFile = true;
                 if(autoChooseFile){
-                    sourceFile = new File("C:\\Users\\Alex\\Documents\\My Box Files\\Asp\\Experiment\\20140724\\2rad.txt");
+                    String userName = System.getProperties().getProperty("user.name");
+                    sourceFile = new File("C:\\Users\\" + userName + "\\Documents\\My Box Files\\Asp\\Experiment\\20140724\\2rad.txt");
                 }else{
                     sourceFile = chooseFile();
                 }

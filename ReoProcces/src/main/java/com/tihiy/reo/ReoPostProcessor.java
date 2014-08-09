@@ -13,6 +13,7 @@ public class ReoPostProcessor {
     private boolean useBaseImpedance = true;
 
     private double roEquivalent = 5;
+    private double roEquivalentFix = 5;
 
     public List<Double> getRadiusWithRo1 (){
         if((mainMeasurement==null)||(firstLayerMeasurement==null)){
@@ -41,11 +42,11 @@ public class ReoPostProcessor {
         }
         List<Double> listOfdRad = new ArrayList<>();
         for(int i = 0; i < listOfRo.size(); i++){
-            System.out.println("Imp = "+ (-mainImpedance.getData().get(i) / 1000) + " dRo = " + listOfRo.get(i));
+//            System.out.println("Imp = "+ (-mainImpedance.getData().get(i) / 1000) + " dRo = " + listOfRo.get(i));
             double dRadius = matrix.getRad(listOfRo.get(i), -mainImpedance.getData().get(i) / 1000);
             listOfdRad.add(dRadius);
         }
-
+        roEquivalent = roEquivalentFix;
         return listOfdRad;
     }
     public List<Double> getImpedance(List<Double> listOfDr){
@@ -111,5 +112,6 @@ public class ReoPostProcessor {
     }
     public void setRoEquivalent(double roEquivalent) {
         this.roEquivalent = roEquivalent;
+        roEquivalentFix = roEquivalent;
     }
 }

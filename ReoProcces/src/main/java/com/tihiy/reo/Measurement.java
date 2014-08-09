@@ -49,9 +49,10 @@ public class Measurement implements InterfaceMeasurement {
 
     public List<Double> getListOfImpedance(List<Double> drValueList){
         List<Double> listOfImpedance = new ArrayList<>();
+        resetRSphere();
         double radiusDiastole = getModel().getBodyGeometry().getrSphere();
         for(Double drValue: drValueList){
-            setRSphere(radiusDiastole+drValue);
+            setRSphere(radiusDiastole+drValue/1000);
             listOfImpedance.add(getMeasurement());
         }
         return listOfImpedance;
@@ -67,6 +68,7 @@ public class Measurement implements InterfaceMeasurement {
     public void setRSphere(double radius){
         model.getBodyGeometry().setrSphere(radius);
     }
+    public void resetRSphere(){model.getBodyGeometry().resetRSphere();}
     // todo this method is bad method because we don't ask model about somethings
     @Override
     public InterfaceModel getModel(){

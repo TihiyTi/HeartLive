@@ -9,9 +9,11 @@ package com.tihiy.reo;
 public class BodyGeometry {
     private double rSphere;
     private double h;
+    private double rSphereDiastole;
 
     public BodyGeometry(double rSphere, double h) {
         this.rSphere = rSphere;
+        this.rSphereDiastole = rSphere;
         this.h = h;
     }
 
@@ -21,6 +23,9 @@ public class BodyGeometry {
 
     public void setrSphere(double rSphere) {
         this.rSphere = rSphere;
+    }
+    public void resetRSphere(){
+        rSphere = rSphereDiastole;
     }
 
     public double getH() {
