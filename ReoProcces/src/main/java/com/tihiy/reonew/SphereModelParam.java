@@ -10,7 +10,7 @@ public class SphereModelParam {
     double roBlood;
     double roTissue;
 
-    public SphereModelParam(double b, double a, double roTissue, double xShift, double rSphere, double roBlood, double yShift, double h) {
+    public SphereModelParam(double roTissue, double roBlood, double a, double b, double rSphere, double h, double xShift, double yShift) {
         this.b = b;
         this.a = a;
         this.roTissue = roTissue;

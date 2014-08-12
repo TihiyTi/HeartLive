@@ -1,30 +1,47 @@
 package com.tihiy.reonew;
 
 public class SphereModelSimple {
-    SphereModelParam param;
-    SphereModelParam paramFix;
-    SphereCalc calc = new SphereCalc(param);
+    private SphereModelParam param;
+    private SphereModelParam paramFix;
+    private SphereCalc calc;
     public SphereModelSimple(SphereModelParam param){
         this.param = param;
-        this.paramFix = param;
+        fixParam();
+        calc = new SphereCalc(param);
     }
 
     public double getImpedance(){
-        return 0;
+        double result = calc.getMeasurement();
+        resetParam();
+        return result;
     }
 
 
     public void resetParam(){
-        param = paramFix;
+        param.a = paramFix.a;
+        param.b = paramFix.b;
+        param.rSphere = paramFix.rSphere;
+        param.h = paramFix.h;
+        param.roBlood = paramFix.roBlood;
+        param.roTissue = paramFix.roTissue;
+        param.xShift = paramFix.xShift;
+        param.yShift = paramFix .yShift;
     }
     public void fixParam(){
-        paramFix = param;
+        paramFix = new SphereModelParam(param.roTissue, param.roBlood, param.a, param.b,
+                param.rSphere, param.h, param.xShift, param.yShift);
     }
 
-    public SphereModelSimple setRo(double roBlood, double roTissue){
+    public SphereModelSimple setRoBlood(double roBlood){
         param.roBlood = roBlood;
+        return this;
+    }
+    public SphereModelSimple setRoTissue(double roTissue){
         param.roTissue = roTissue;
         return this;
+    }
+    public double getRoTissue(){
+        return param.roTissue;
     }
     public SphereModelSimple setAB(double a, double b){
         param.a = a;
@@ -35,6 +52,13 @@ public class SphereModelSimple {
         param.rSphere = r;
         return this;
     }
+    public double getR(){
+        return param.rSphere;
+    }
+//    public SphereModelSimple setDeltaR(double dr){
+//        param.rSphere = param.rSphere + dr;
+//        return this;
+//    }
     public SphereModelSimple setH(double h){
         param.h = h;
         return this;
