@@ -46,4 +46,9 @@ public class OneLayerModel implements InterfaceModel{
     public void setRoTissue(double roTissue) {
         this.roTissue = roTissue;
     }
+
+    @Override
+    public void resetRoTissue() {
+        System.out.println("Not support in this model");
+    }
 }
