@@ -4,6 +4,10 @@ import com.tihiy.rclint.models.SignalModel;
 import com.tihiy.rclint.mvcAbstract.AbstractController;
 import com.tihiy.rclint.mvcAbstract.AbstractModel;
 import com.tihiy.reo.ReoPostProcessor;
+import com.tihiy.reonew.OneLayerModelSimple;
+import com.tihiy.reonew.ReoProcessor;
+import com.tihiy.reonew.SphereModelParam;
+import com.tihiy.reonew.SphereModelSimple;
 
 import java.io.File;
 import java.util.HashMap;
@@ -58,7 +62,7 @@ public class ThisController extends AbstractController {
         ((SignalModel)registeredModels.get(PRECARD_5)).setList(map.get(Reo32Parser.Signal.Pulse_5));
         ((SignalModel)registeredModels.get(ECG)).setList(map.get(Reo32Parser.Signal.ECG));
     }
-    public void clearSignal(List<double[]> listOfParam){
+    public void clearSignalOld(List<double[]> listOfParam){
         ReoPostProcessor rp = new ReoPostProcessor();
         for(int i = 0; i < 5; i++){
             String precardio = "precard_"+(i+1);
@@ -80,6 +84,51 @@ public class ThisController extends AbstractController {
                 rp.setRoEquivalent(array[8]);
                 List<Double> listOfRadius = rp.getRadiusWithRo1();
                 List<Double> listOfImpedance = rp.getImpedance(listOfRadius);
+
+                SignalModel modelRad = new SignalModel(radius);
+                addModel(radius, modelRad);
+                modelRad.setList(listOfRadius);
+
+                SignalModel modelImpedance = new SignalModel(clear);
+                addModel(clear, modelImpedance);
+                modelImpedance.setList(listOfImpedance);
+
+            }else{
+                Logger.getLogger(getClass().getName()).info("MapModel don't contain model '"+ precardio + "'! ");
+            }
+        }
+    }
+    public void clearSignal(List<double[]> listOfParam){
+        for(int i = 0; i < 5; i++){
+            System.out.println("Signal #"+ (i+1));
+
+            String precardio = "precard_"+(i+1);
+            String base = "precard_base_"+(i+1);
+            String radius = "radius_"+(i+1);
+            String clear = "clear_"+(i+1);
+
+            double[] array = listOfParam.get(i);
+            SphereModelParam param = new SphereModelParam(array[8], 1.35, array[0], array[1], array[4], array[5], array[2],array[3]);
+            SphereModelSimple model = new SphereModelSimple(param);
+            ReoProcessor processor = new ReoProcessor(model);
+            OneLayerModelSimple oneModel = new OneLayerModelSimple(array[6], array[7]);
+
+            if(registeredModels.containsKey(precardio)){
+                List<Double> listOfDeltaRo = oneModel.getDeltaRoList(((SignalModel)registeredModels.get(FIRST)).getList());
+
+//                List<Double> listOfRadius = processor.getDeltaRadiusList(
+//                        ((SignalModel)registeredModels.get(precardio)).getList(),
+//                        ReoProcessor.MILLI_OMH
+//                );
+//
+                List<Double> listOfRadius = processor.getDeltaRadiusList(
+                        ((SignalModel)registeredModels.get(precardio)).getList(),
+                        listOfDeltaRo,
+                        ReoProcessor.MILLI_OMH
+                );
+
+                List<Double> listOfImpedance = processor.getImpedanceList(listOfRadius);
+
 
                 SignalModel modelRad = new SignalModel(radius);
                 addModel(radius, modelRad);
