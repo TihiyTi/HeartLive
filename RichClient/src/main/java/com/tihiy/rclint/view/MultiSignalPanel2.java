@@ -2,6 +2,8 @@ package com.tihiy.rclint.view;
 
 import com.tihiy.rclint.mvcAbstract.AbstractController;
 import com.tihiy.rclint.mvcAbstract.AbstractViewPanel;
+import com.tihiy.reonew.utils.DxMatrixFinder;
+import org.ejml.simple.SimpleMatrix;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,10 +11,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.beans.PropertyChangeEvent;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -132,39 +132,40 @@ public class MultiSignalPanel2 extends AbstractViewPanel{
                     List<Double> list4 = signalMap.get("clear_4");
                     List<Double> list5 = signalMap.get("clear_5");
                     int[] indexes = new int[10];
-                    for(int i = 0; i < 10; i++){
+                    List<Integer> counts = Arrays.asList(2,4,5,7,9);
+                    SimpleMatrix dz = new SimpleMatrix(5, 5);
+                    int j = 0;
+                    for(int i = 0; i <10; i++){
                         indexes[i] = firstPoint + i*(secondPoint-firstPoint)/10;
-                        System.out.println("   "+ indexes[i]
-                                +"  " + (int)((list1.get(indexes[i])-list1.get(indexes[0]))*1000)
-                                + "   "+ (int)((list2.get(indexes[i])-list2.get(indexes[0]))*1000)
-                                + "   "+ (int)((list3.get(indexes[i])-list3.get(indexes[0]))*1000)
-                                + "   "+ (int)((list4.get(indexes[i])-list4.get(indexes[0]))*1000)
-                                + "   "+ (int)((list5.get(indexes[i])-list5.get(indexes[0]))*1000));
                     }
+                    for (Integer i: counts) {
+                        dz.setRow(j,0, (int)((list1.get(indexes[i])-list1.get(indexes[0]))*1000),
+                                (int)((list2.get(indexes[i])-list2.get(indexes[0]))*1000),
+                                (int)((list3.get(indexes[i])-list3.get(indexes[0]))*1000),
+                                (int)((list4.get(indexes[i])-list4.get(indexes[0]))*1000),
+                                (int)((list5.get(indexes[i])-list5.get(indexes[0]))*1000)
+                        );
+                        j++;
+                    }
+//                    System.out.println("Dz matrix");
+//                    dz.print(2,2);
+
+                    DxMatrixFinder finder = new DxMatrixFinder();
+                    finder.getDx(dz);
+                    System.out.println();
+                    System.out.println();
                     mouseClik = true;
                 }
 
             }
-
             @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
+            public void mousePressed(MouseEvent e) {}
             @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
+            public void mouseReleased(MouseEvent e) {}
             @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
+            public void mouseEntered(MouseEvent e) {}
             @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
+            public void mouseExited(MouseEvent e) {}
         });
     }
 

@@ -33,6 +33,10 @@ project(':CommunicationSerial'){
 }
 project(':ReoProcces'){
     version = '0.1'
+    dependencies{
+        compile group: 'com.googlecode.efficient-java-matrix-library', name: 'ejml', version: '0.25'
+        compile files('../lib/LocalStorage.jar')
+    }
 }
 
 project(':RichClient'){
