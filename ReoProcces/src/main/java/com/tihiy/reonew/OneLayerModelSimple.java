@@ -20,4 +20,8 @@ public class OneLayerModelSimple {
         }
         return list;
     }
+    public double getDeltaRo(double impedance){
+        double value = impedance*Math.PI/(2*b)*(a*a - b*b);
+        return -value/1000;
+    }
 }

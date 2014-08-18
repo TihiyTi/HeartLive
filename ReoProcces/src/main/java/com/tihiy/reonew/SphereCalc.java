@@ -5,12 +5,12 @@ public class SphereCalc {
     public SphereCalc(SphereModelParam param) {
         p = param;
     }
-//    public double getMeasurementFullImp(){
-//        double value = getBasePotInPoint(electrodeSystem.getUElectrode(ElectrodeSystem.El.MINUS));
-//        value -= getBasePotInPoint(electrodeSystem.getUElectrode(ElectrodeSystem.El.PLUS));
-//        value += getMeasurement();
-//        return value;
-//    }
+
+    public double getMeasurementFullImp(){
+        double value = p.roTissue*2*p.b/(Math.PI*(p.a*p.a-p.b*p.b));
+        value += getMeasurement();
+        return value;
+    }
     public double getMeasurement() {
         double value = potentialInPointFromElectrode(toA(), toM(),getCosinus(toM(),toA(), (p.a - p.b)));
         value -= potentialInPointFromElectrode(toA(), toN(),getCosinus(toN(),toA(), (p.a + p.b)));

@@ -15,6 +15,11 @@ public class SphereModelSimple {
         resetParam();
         return result;
     }
+    public double getFullImpedance(){
+        double result = calc.getMeasurementFullImp();
+        resetParam();
+        return result;
+    }
 
 
     public void resetParam(){

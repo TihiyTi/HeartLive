@@ -40,8 +40,8 @@ public class ReoProcessor {
         double dR = 0;
         double minValue = Double.MAX_VALUE;
         for(int i = -numOfStep/2; i < numOfStep/2; i++){
-            double impOld = model.getImpedance();
-            double impNew = model.setR(radius + i* stepOfRadius).setRoTissue(roTissue + deltaRo).getImpedance();
+            double impOld = model.getFullImpedance();
+            double impNew = model.setR(radius + i* stepOfRadius).setRoTissue(roTissue + deltaRo).getFullImpedance();
             double dImp = Math.abs(impNew - impOld - deltaImpedance);
             if(minValue > dImp){
                 minValue = dImp;
@@ -69,9 +69,9 @@ public class ReoProcessor {
             double impValue = listOfImpedance.get(i);
             double dRoValue = listOfDeltaRo.get(i);
             if(type){
-                listOfRadius.add(getDeltaRadius(-impValue/1000, -dRoValue));
+                listOfRadius.add(getDeltaRadius(impValue/1000, -dRoValue));
             }else{
-                listOfRadius.add(getDeltaRadius(-impValue, -dRoValue));
+                listOfRadius.add(getDeltaRadius(impValue, -dRoValue));
             }
         }
         return listOfRadius;
