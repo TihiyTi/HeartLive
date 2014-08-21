@@ -15,7 +15,13 @@ public class ReoProcessor {
     public ReoProcessor(SphereModelSimple model){
         this.model = model;
     }
-
+    public ReoProcessor(SphereModelSimple model, boolean precision){
+        if(precision){
+            numOfStep = 2000;
+            stepOfRadius = 0.001*0.01;
+        }
+        this.model = model;
+    }
     public double getDeltaRadius(double deltaImpedance){
         model.resetParam();
         double radius = model.getR();
@@ -24,7 +30,7 @@ public class ReoProcessor {
         for(int i = -numOfStep/2; i < numOfStep/2; i++){
             double impOld = model.getImpedance();
             double impNew = model.setR(radius + i* stepOfRadius).getImpedance();
-            double dImp = Math.abs(impNew - impOld - deltaImpedance);
+            double dImp = Math.abs(impNew - impOld + deltaImpedance);
             if(minValue > dImp){
                 minValue = dImp;
                 dR = i* stepOfRadius;
@@ -42,7 +48,7 @@ public class ReoProcessor {
         for(int i = -numOfStep/2; i < numOfStep/2; i++){
             double impOld = model.getFullImpedance();
             double impNew = model.setR(radius + i* stepOfRadius).setRoTissue(roTissue + deltaRo).getFullImpedance();
-            double dImp = Math.abs(impNew - impOld - deltaImpedance);
+            double dImp = Math.abs(impNew - impOld + deltaImpedance);
             if(minValue > dImp){
                 minValue = dImp;
                 dR = i* stepOfRadius;
@@ -69,9 +75,9 @@ public class ReoProcessor {
             double impValue = listOfImpedance.get(i);
             double dRoValue = listOfDeltaRo.get(i);
             if(type){
-                listOfRadius.add(getDeltaRadius(impValue/1000, -dRoValue));
+                listOfRadius.add(getDeltaRadius(impValue/1000, dRoValue));
             }else{
-                listOfRadius.add(getDeltaRadius(impValue, -dRoValue));
+                listOfRadius.add(getDeltaRadius(impValue, dRoValue));
             }
         }
         return listOfRadius;

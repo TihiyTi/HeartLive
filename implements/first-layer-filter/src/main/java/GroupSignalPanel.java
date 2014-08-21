@@ -94,6 +94,7 @@ public class GroupSignalPanel extends JPanel{
         MultiSignalPanel2 tempPanel = new MultiSignalPanel2(mc,tempMap,tempMapPosition);
         tempPanel.colorSignal(mapColor);
         JScrollPane pane = new JScrollPane(tempPanel);
+        tempPanel.setScrollPane(pane);
         tempPanel.setPreferredSize(new Dimension(5000, tempPanel.getHeight()));
         mc.addView(tempPanel);
         return pane;

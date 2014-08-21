@@ -21,11 +21,17 @@ public class DxMatrixFinder {
         dx = new SimpleMatrix(5,5);
         dz = new SimpleMatrix(5,5);
 
-        dz.setColumn(0, 0, 8, 30, 43, 65, 74);
-        dz.setColumn(1, 0, 7, 44, 60, 97, 105);
-        dz.setColumn(2, 0, 15, 38, 54, 100, 116);
-        dz.setColumn(3, 0, 1, 15, 23, 15, -15);
-        dz.setColumn(4, 0, 9, 29, 43, 68, 73);
+        dz.setColumn(0, 0, 36,56,72,156,228);
+        dz.setColumn(1, 0, 40,70,90,172,234);
+        dz.setColumn(2, 0, 31,68,84,154,214);
+        dz.setColumn(3, 0, 20,40,47,102,129);
+        dz.setColumn(4, 0, 33,52,67,150,221);
+//
+//        dz.setColumn(0, 0, 36,48,77,166,229);
+//        dz.setColumn(1, 0, 32,65,98,173,233);
+//        dz.setColumn(2, 0, 32,66,93,167,219);
+//        dz.setColumn(3, 0, 21,36,47,106,133);
+//        dz.setColumn(4, 0, 37,48,77,167,229);
 
         dx.setColumn(0, 0, 1,1,3.6,5.4,7.2);
         dx.setColumn(1, 0, 3.54,3.54,5.31,10.62,15.93);
