@@ -1,5 +1,4 @@
 import com.tihiy.rclint.view.MultiSignalPanel;
-import com.tihiy.rclint.view.MultiSignalPanel2;
 
 import javax.swing.*;
 import java.awt.*;
@@ -93,7 +92,8 @@ public class GroupSignalPanel extends JPanel{
             tempMap.put(signals[i], Collections.<Double>emptyList());
         }
 
-        MultiSignalPanel2 tempPanel = new MultiSignalPanel2(mc,tempMap,tempMapPosition);
+//        MultiSignalPanel2 tempPanel = new MultiSignalPanel2(mc,tempMap,tempMapPosition);
+        ExMultiSignalPanel tempPanel = new ExMultiSignalPanel(mc,tempMap,tempMapPosition);
         tempPanel.colorSignal(mapColor);
         JScrollPane pane = new JScrollPane(tempPanel);
         tempPanel.setScrollPane(pane);
