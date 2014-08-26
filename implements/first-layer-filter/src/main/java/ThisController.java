@@ -28,6 +28,7 @@ public class ThisController extends AbstractController {
     public static final String PRECARD_BASE_3 = "precard_base_3";
     public static final String PRECARD_BASE_4 = "precard_base_4";
     public static final String PRECARD_BASE_5 = "precard_base_5";
+    public static final String FIRST_OLD = "first_old";
     public static final String FIRST = "first";
     public static final String ECG = "ecg";
     public static final String RADIUS_1 = "radius_1";
@@ -52,8 +53,12 @@ public class ThisController extends AbstractController {
         addModel(PRECARD_4, new SignalModel(PRECARD_4));
         addModel(PRECARD_5, new SignalModel(PRECARD_5));
         addModel(FIRST, new SignalModel(FIRST));
+        addModel(FIRST_OLD, new SignalModel(FIRST_OLD));
         addModel(ECG, new SignalModel(ECG));
 
+        List<Double> firstFilter = SlayerFilter.slayerFilter(map.get(Reo32Parser.Signal.Pulse_6), 20);
+//        ((SignalModel)registeredModels.get(FIRST_OLD)).setList(map.get(Reo32Parser.Signal.Pulse_6));
+//        ((SignalModel)registeredModels.get(FIRST)).setList(firstFilter);
         ((SignalModel)registeredModels.get(FIRST)).setList(map.get(Reo32Parser.Signal.Pulse_6));
         ((SignalModel)registeredModels.get(PRECARD_1)).setList(map.get(Reo32Parser.Signal.Pulse_1));
         ((SignalModel)registeredModels.get(PRECARD_2)).setList(map.get(Reo32Parser.Signal.Pulse_2));

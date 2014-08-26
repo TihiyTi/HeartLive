@@ -24,24 +24,25 @@ public class GroupSignalPanel extends JPanel{
     }
 
     private void initComponent() {
-        String[] signalsArray = new String[]{ThisController.ECG, ThisController.FIRST,
+        String[] signalsArray = new String[]{ThisController.ECG, ThisController.FIRST,/*ThisController.FIRST_OLD, */
             ThisController.PRECARD_1, ThisController.PRECARD_2,ThisController.PRECARD_3, ThisController.PRECARD_4, ThisController.PRECARD_5,
-                ThisController.RADIUS_1, ThisController.RADIUS_2,ThisController.RADIUS_3, ThisController.RADIUS_4, ThisController.RADIUS_5,
+//                ThisController.RADIUS_1, ThisController.RADIUS_2,ThisController.RADIUS_3, ThisController.RADIUS_4, ThisController.RADIUS_5,
                 ThisController.CLEAR_1,ThisController.CLEAR_2,ThisController.CLEAR_3,ThisController.CLEAR_4,ThisController.CLEAR_5
         };
         Map<String, Integer>  signalMap = new HashMap<String, Integer>(){{
             put(ThisController.ECG, 1);
             put(ThisController.FIRST, 1);
+//            put(ThisController.FIRST_OLD, 1);
             put(ThisController.PRECARD_1, 2);
             put(ThisController.PRECARD_2, 3);
             put(ThisController.PRECARD_3, 4);
             put(ThisController.PRECARD_4, 5);
             put(ThisController.PRECARD_5, 6);
-            put(ThisController.RADIUS_1, 2);
-            put(ThisController.RADIUS_2, 3);
-            put(ThisController.RADIUS_3, 4);
-            put(ThisController.RADIUS_4, 5);
-            put(ThisController.RADIUS_5, 6);
+//            put(ThisController.RADIUS_1, 2);
+//            put(ThisController.RADIUS_2, 3);
+//            put(ThisController.RADIUS_3, 4);
+//            put(ThisController.RADIUS_4, 5);
+//            put(ThisController.RADIUS_5, 6);
             put(ThisController.CLEAR_1, 2);
             put(ThisController.CLEAR_2, 3);
             put(ThisController.CLEAR_3, 4);
@@ -52,16 +53,17 @@ public class GroupSignalPanel extends JPanel{
         Map<String, Color>  colorMap = new HashMap<String, Color>(){{
             put(ThisController.ECG, Color.RED);
             put(ThisController.FIRST, Color.BLUE);
+//            put(ThisController.FIRST_OLD, Color.CYAN.darker());
 //            put(ThisController.PRECARD_1, 2);
 //            put(ThisController.PRECARD_2, 3);
 //            put(ThisController.PRECARD_3, 4);
 //            put(ThisController.PRECARD_4, 5);
 //            put(ThisController.PRECARD_5, 6);
-            put(ThisController.RADIUS_1, Color.GREEN.darker());
-            put(ThisController.RADIUS_2, Color.GREEN.darker());
-            put(ThisController.RADIUS_3, Color.GREEN.darker());
-            put(ThisController.RADIUS_4, Color.GREEN.darker());
-            put(ThisController.RADIUS_5, Color.GREEN.darker());
+//            put(ThisController.RADIUS_1, Color.GREEN.darker());
+//            put(ThisController.RADIUS_2, Color.GREEN.darker());
+//            put(ThisController.RADIUS_3, Color.GREEN.darker());
+//            put(ThisController.RADIUS_4, Color.GREEN.darker());
+//            put(ThisController.RADIUS_5, Color.GREEN.darker());
             put(ThisController.CLEAR_1, Color.ORANGE.darker());
             put(ThisController.CLEAR_2, Color.ORANGE.darker());
             put(ThisController.CLEAR_3, Color.ORANGE.darker());
