@@ -84,6 +84,10 @@ project(':implements:simple-signal-view'){
 }
 project(':implements:first-layer-filter'){
     version = '0.0.1'
+    dependencies{
+        compile project(':RichClient')
+        compile project(':implements:radius-calculation')
+    }
 }
 project(':implements:fx-application'){
     version = '0.0.1'
