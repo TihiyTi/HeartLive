@@ -18,12 +18,12 @@ public class Reo32Parser {
         map.put(Signal.Pulse_4, new ArrayList<Double>());
         map.put(Signal.Pulse_5, new ArrayList<Double>());
         map.put(Signal.Pulse_6, new ArrayList<Double>());
-//        map.put(Signal.Base_1, new ArrayList<Double>());
-//        map.put(Signal.Base_2, new ArrayList<Double>());
-//        map.put(Signal.Base_3, new ArrayList<Double>());
-//        map.put(Signal.Base_4, new ArrayList<Double>());
-//        map.put(Signal.Base_5, new ArrayList<Double>());
-//        map.put(Signal.Base_6, new ArrayList<Double>());
+        map.put(Signal.Base_1, new ArrayList<Double>());
+        map.put(Signal.Base_2, new ArrayList<Double>());
+        map.put(Signal.Base_3, new ArrayList<Double>());
+        map.put(Signal.Base_4, new ArrayList<Double>());
+        map.put(Signal.Base_5, new ArrayList<Double>());
+        map.put(Signal.Base_6, new ArrayList<Double>());
         map.put(Signal.ECG, new ArrayList<Double>());
 //        map.put(Signal.P_TRCG, new ArrayList<Double>());
     }

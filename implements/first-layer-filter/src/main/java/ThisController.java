@@ -8,8 +8,12 @@ import com.tihiy.reonew.OneLayerModelSimple;
 import com.tihiy.reonew.ReoProcessor;
 import com.tihiy.reonew.SphereModelParam;
 import com.tihiy.reonew.SphereModelSimple;
+import com.tihiy.reonew.utils.DxMatrixFinder;
+import org.ejml.simple.SimpleMatrix;
+import settings.SistolaInterval;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,9 +60,15 @@ public class ThisController extends AbstractController {
         addModel(FIRST_OLD, new SignalModel(FIRST_OLD));
         addModel(ECG, new SignalModel(ECG));
 
+        addModel(PRECARD_BASE_1, new SignalModel(PRECARD_BASE_1));
+        addModel(PRECARD_BASE_2, new SignalModel(PRECARD_BASE_2));
+        addModel(PRECARD_BASE_3, new SignalModel(PRECARD_BASE_3));
+        addModel(PRECARD_BASE_4, new SignalModel(PRECARD_BASE_4));
+        addModel(PRECARD_BASE_5, new SignalModel(PRECARD_BASE_5));
+
         List<Double> firstFilter = SlayerFilter.slayerFilter(map.get(Reo32Parser.Signal.Pulse_6), 20);
-//        ((SignalModel)registeredModels.get(FIRST_OLD)).setList(map.get(Reo32Parser.Signal.Pulse_6));
-//        ((SignalModel)registeredModels.get(FIRST)).setList(firstFilter);
+        ((SignalModel)registeredModels.get(FIRST)).setList(map.get(Reo32Parser.Signal.Pulse_6));
+        ((SignalModel)registeredModels.get(FIRST_OLD)).setList(firstFilter);
         ((SignalModel)registeredModels.get(FIRST)).setList(map.get(Reo32Parser.Signal.Pulse_6));
         ((SignalModel)registeredModels.get(PRECARD_1)).setList(map.get(Reo32Parser.Signal.Pulse_1));
         ((SignalModel)registeredModels.get(PRECARD_2)).setList(map.get(Reo32Parser.Signal.Pulse_2));
@@ -66,6 +76,12 @@ public class ThisController extends AbstractController {
         ((SignalModel)registeredModels.get(PRECARD_4)).setList(map.get(Reo32Parser.Signal.Pulse_4));
         ((SignalModel)registeredModels.get(PRECARD_5)).setList(map.get(Reo32Parser.Signal.Pulse_5));
         ((SignalModel)registeredModels.get(ECG)).setList(map.get(Reo32Parser.Signal.ECG));
+
+        ((SignalModel)registeredModels.get(PRECARD_BASE_1)).setList(map.get(Reo32Parser.Signal.Base_1));
+        ((SignalModel)registeredModels.get(PRECARD_BASE_2)).setList(map.get(Reo32Parser.Signal.Base_2));
+        ((SignalModel)registeredModels.get(PRECARD_BASE_3)).setList(map.get(Reo32Parser.Signal.Base_3));
+        ((SignalModel)registeredModels.get(PRECARD_BASE_4)).setList(map.get(Reo32Parser.Signal.Base_4));
+        ((SignalModel)registeredModels.get(PRECARD_BASE_5)).setList(map.get(Reo32Parser.Signal.Base_5));
     }
     public void clearSignalOld(List<double[]> listOfParam){
         ReoPostProcessor rp = new ReoPostProcessor();
@@ -120,12 +136,6 @@ public class ThisController extends AbstractController {
 
             if(registeredModels.containsKey(precardio)){
                 List<Double> listOfDeltaRo = oneModel.getDeltaRoList(((SignalModel)registeredModels.get(FIRST)).getList());
-
-//                List<Double> listOfRadius = processor.getDeltaRadiusList(
-//                        ((SignalModel)registeredModels.get(precardio)).getList(),
-//                        ReoProcessor.MILLI_OMH
-//                );
-//
                 List<Double> listOfRadius = processor.getDeltaRadiusList(
                         ((SignalModel)registeredModels.get(precardio)).getList(),
                         listOfDeltaRo,
@@ -147,6 +157,105 @@ public class ThisController extends AbstractController {
                 Logger.getLogger(getClass().getName()).info("MapModel don't contain model '"+ precardio + "'! ");
             }
         }
+    }
+    public void calcMoveMatrix(){
+        DxMatrixFinder finder = new DxMatrixFinder();
+        calcMoveMatrix(finder);
+    }
+    public void calcMoveMatrix(DxMatrixFinder finder){
+        for(int k = 1; k <= SistolaInterval.getNumOfInterval(); k++){
+            System.out.println("Interval number " + k);
+            SimpleMatrix dz = new SimpleMatrix(5, 5);
+
+            List<Double> list1 = ((SignalModel)registeredModels.get("clear_1")).getList();
+            List<Double> list2 = ((SignalModel)registeredModels.get("clear_2")).getList();
+            List<Double> list3 = ((SignalModel)registeredModels.get("clear_3")).getList();
+            List<Double> list4 = ((SignalModel)registeredModels.get("clear_4")).getList();
+            List<Double> list5 = ((SignalModel)registeredModels.get("clear_5")).getList();
+
+            int numOfStep = 6;
+            int[] indexes = new int[numOfStep];
+            List<Integer> counts = Arrays.asList(1, 2, 3, 4, 5);
+            for (int i = 0; i < numOfStep; i++) {
+                indexes[i] = SistolaInterval.getPoint(k, SistolaInterval.BEGIN) +
+                        i * (SistolaInterval.getPoint(k, SistolaInterval.END) - SistolaInterval.getPoint(k, SistolaInterval.BEGIN)) / numOfStep;
+            }
+
+            int j = 0;
+            for (Integer i : counts) {
+                dz.setRow(j, 0, (int) ((list1.get(indexes[i]) - list1.get(indexes[0])) * 1000),
+                        (int) ((list2.get(indexes[i]) - list2.get(indexes[0])) * 1000),
+                        (int) ((list3.get(indexes[i]) - list3.get(indexes[0])) * 1000),
+                        (int) ((list4.get(indexes[i]) - list4.get(indexes[0])) * 1000),
+                        (int) ((list5.get(indexes[i]) - list5.get(indexes[0])) * 1000)
+                );
+                j++;
+            }
+            finder.getDx(dz);
+        }
+    }
+    public void filterFirstLayer(){
+        List<Double> firstUnFilter = ((SignalModel)registeredModels.get(FIRST)).getList();
+        List<Double> firstFilter = ((SignalModel)registeredModels.get(FIRST_OLD)).getList();
+
+        SignalModel modelSee = ((SignalModel)registeredModels.get(FIRST));
+        SignalModel modelUnSee = ((SignalModel)registeredModels.get(FIRST_OLD));
+
+        modelSee.setList(firstFilter);
+        modelUnSee.setList(firstUnFilter);
+    }
+    public void fullCacl(List<double[]> listOfParam){
+        System.out.println("SIGNAL UNfiltered");
+        clearSignal(listOfParam);
+        DxMatrixFinder finder = new DxMatrixFinder();
+        for(int i = 0; i < SistolaInterval.getNumOfInterval(); i++){
+            setKoeffMatrix(1, finder);
+            calcMoveMatrix(finder);
+        }
+
+        System.out.println("SIGNAL FILTERED");
+        filterFirstLayer();
+        clearSignal(listOfParam);
+        finder = new DxMatrixFinder();
+        for(int i = 0; i < SistolaInterval.getNumOfInterval(); i++){
+            setKoeffMatrix(1, finder);
+            calcMoveMatrix(finder);
+        }
+    }
+
+    private void setKoeffMatrix(int numOfinterval, DxMatrixFinder finder){
+        if(numOfinterval > SistolaInterval.getNumOfInterval()){
+            System.out.println("NO VALID  number of interval -  use 1 interval");
+        }
+        System.out.println("Use " + numOfinterval + " for calculation KoeffMatrix");
+        SimpleMatrix dz = new SimpleMatrix(5, 5);
+
+        List<Double> list1 = ((SignalModel)registeredModels.get("clear_1")).getList();
+        List<Double> list2 = ((SignalModel)registeredModels.get("clear_2")).getList();
+        List<Double> list3 = ((SignalModel)registeredModels.get("clear_3")).getList();
+        List<Double> list4 = ((SignalModel)registeredModels.get("clear_4")).getList();
+        List<Double> list5 = ((SignalModel)registeredModels.get("clear_5")).getList();
+
+        int numOfStep = 6;
+        int[] indexes = new int[numOfStep];
+        List<Integer> counts = Arrays.asList(1, 2, 3, 4, 5);
+        for (int i = 0; i < numOfStep; i++) {
+            indexes[i] = SistolaInterval.getPoint(numOfinterval, SistolaInterval.BEGIN) +
+                    i * (SistolaInterval.getPoint(numOfinterval, SistolaInterval.END) -
+                         SistolaInterval.getPoint(numOfinterval, SistolaInterval.BEGIN)) / numOfStep;
+        }
+
+        int j = 0;
+        for (Integer i : counts) {
+            dz.setRow(j, 0, (int) ((list1.get(indexes[i]) - list1.get(indexes[0])) * 1000),
+                    (int) ((list2.get(indexes[i]) - list2.get(indexes[0])) * 1000),
+                    (int) ((list3.get(indexes[i]) - list3.get(indexes[0])) * 1000),
+                    (int) ((list4.get(indexes[i]) - list4.get(indexes[0])) * 1000),
+                    (int) ((list5.get(indexes[i]) - list5.get(indexes[0])) * 1000)
+            );
+            j++;
+        }
+        finder.setDz(dz);
     }
 
     public void addModel(String flowName, AbstractModel model){

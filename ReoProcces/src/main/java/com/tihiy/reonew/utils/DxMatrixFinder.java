@@ -57,13 +57,13 @@ public class DxMatrixFinder {
 
     }
     private void printAll(SimpleMatrix result){
-        System.out.println("DX matrix");
-        dx.print(2,2);
+//        System.out.println("DX matrix");
+//        dx.print(2,2);
 //        System.out.println();
 
-        System.out.println("              DZ matrix");
-        dz.print(2, 2);
-        System.out.println();
+//        System.out.println("              DZ matrix");
+//        dz.print(2, 2);
+//        System.out.println();
 
 //        System.out.println("A matrix");
 //        a.print(2,2);
@@ -73,8 +73,9 @@ public class DxMatrixFinder {
 //        b.print(2,2);
 //        System.out.println();
 
-        System.out.println("RESULT matrix");
-        result.print(2,2);
+//        System.out.println("RESULT matrix");
+        SimpleMatrix forPrint = result.extractVector(true, 4);
+        forPrint.print(2,1);
         System.out.println();
     }
 }

@@ -28,6 +28,9 @@ public class ThisControlPanel extends AbstractViewPanel {
         param = new TabParamPanel();
         chooseSignal = new JButton("Choose Signal");
         clearSignal = new JButton(" Clear Signal");
+        calcMoveMatrix = new JButton("Calc Moving");
+        filterFirstLayer =  new JButton("Filter First Layer");
+        fullCalculation = new JButton("FullCalculation");
 
         GridBagConstraints constraints = new GridBagConstraints(0,0, 1,1, 0,0,
                 GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(5,5,5,5), 0,0);
@@ -36,6 +39,13 @@ public class ThisControlPanel extends AbstractViewPanel {
         add(clearSignal, constraints);
         constraints.gridy = 2;
         add(param, constraints);
+        constraints.gridy = 3;
+        add(calcMoveMatrix, constraints);
+        constraints.gridy = 4;
+        add(filterFirstLayer, constraints);
+        constraints.gridy = 6;
+        add(fullCalculation, constraints);
+
 
     }
 
@@ -61,6 +71,24 @@ public class ThisControlPanel extends AbstractViewPanel {
                 mc.clearSignal(param.getParam());
             }
         });
+        calcMoveMatrix.addActionListener(e -> mc.calcMoveMatrix());
+        filterFirstLayer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(filterFirstLayer.getText().equals("Filter First Layer")){
+                    filterFirstLayer.setText("Unfilter First Layer");
+                }else{
+                    filterFirstLayer.setText("Filter First Layer");
+                }
+                mc.filterFirstLayer();
+            }
+        });
+        fullCalculation.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mc.fullCacl(param.getParam());
+            }
+        });
     }
 
     private File chooseFile(){
@@ -81,4 +109,8 @@ public class ThisControlPanel extends AbstractViewPanel {
     private TabParamPanel param;
     private JButton chooseSignal;
     private JButton clearSignal;
+    private JButton calcMoveMatrix;
+    private JButton filterFirstLayer;
+
+    private JButton fullCalculation;
 }
