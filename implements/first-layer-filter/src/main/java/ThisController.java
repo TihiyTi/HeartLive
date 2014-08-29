@@ -208,8 +208,8 @@ public class ThisController extends AbstractController {
         System.out.println("SIGNAL UNfiltered");
         clearSignal(listOfParam);
         DxMatrixFinder finder = new DxMatrixFinder();
-        for(int i = 0; i < SistolaInterval.getNumOfInterval(); i++){
-            setKoeffMatrix(1, finder);
+        for(int i = 1; i <= SistolaInterval.getNumOfInterval(); i++){
+            setKoeffMatrix(i, finder);
             calcMoveMatrix(finder);
         }
 
@@ -217,8 +217,8 @@ public class ThisController extends AbstractController {
         filterFirstLayer();
         clearSignal(listOfParam);
         finder = new DxMatrixFinder();
-        for(int i = 0; i < SistolaInterval.getNumOfInterval(); i++){
-            setKoeffMatrix(1, finder);
+        for(int i = 1; i <= SistolaInterval.getNumOfInterval(); i++){
+            setKoeffMatrix(i, finder);
             calcMoveMatrix(finder);
         }
     }

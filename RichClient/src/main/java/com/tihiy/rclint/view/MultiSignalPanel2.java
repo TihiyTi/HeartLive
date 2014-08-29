@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.beans.PropertyChangeEvent;
+import java.text.NumberFormat;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -68,7 +69,9 @@ public class MultiSignalPanel2 extends AbstractViewPanel{
                 Font font = new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 10);
                 font = font.deriveFont((float)20);
                 g.setFont(font);
-                g.drawString(""+ key +": " + signalMap.get(key).get(mouseX), mouseX + 50, getHeight() - 20*numOfSignal);
+                NumberFormat f = NumberFormat.getInstance();
+                f.setMaximumFractionDigits(3);
+                g.drawString(""+ key +": " + f.format(signalMap.get(key).get(mouseX)), mouseX + 50, getHeight() - 20*numOfSignal);
                 numOfSignal++;
 
                 g.drawString("" + mouseX, 200, 50);

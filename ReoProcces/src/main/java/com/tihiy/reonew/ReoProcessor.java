@@ -9,7 +9,7 @@ public class ReoProcessor {
 
     private SphereModelSimple model;
 
-    private int numOfStep = 200;
+    private int numOfStep = 300;
     private double stepOfRadius = 0.001 * 0.1;
 
     public ReoProcessor(SphereModelSimple model){
