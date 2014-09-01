@@ -2,8 +2,6 @@ import com.tihiy.rclint.mvcAbstract.AbstractViewPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.io.File;
 
@@ -31,6 +29,7 @@ public class ThisControlPanel extends AbstractViewPanel {
         calcMoveMatrix = new JButton("Calc Moving");
         filterFirstLayer =  new JButton("Filter First Layer");
         fullCalculation = new JButton("FullCalculation");
+        getShortSignal = new JButton("Get Short Signal");
 
         GridBagConstraints constraints = new GridBagConstraints(0,0, 1,1, 0,0,
                 GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(5,5,5,5), 0,0);
@@ -45,50 +44,36 @@ public class ThisControlPanel extends AbstractViewPanel {
         add(filterFirstLayer, constraints);
         constraints.gridy = 6;
         add(fullCalculation, constraints);
+        constraints.gridy = 7;
+        add(getShortSignal, constraints);
 
 
     }
 
     private void initListeners(){
-        chooseSignal.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                File sourceFile;
-
-                boolean autoChooseFile = true;
-                if(autoChooseFile){
-                    String userName = System.getProperties().getProperty("user.name");
-                    sourceFile = new File("C:\\Users\\" + userName + "\\Documents\\My Box Files\\Asp\\Experiment\\20140724\\2rad.txt");
-                }else{
-                    sourceFile = chooseFile();
-                }
-                mc.addSignals(sourceFile);
+        chooseSignal.addActionListener(e -> {
+            File sourceFile;
+            boolean autoChooseFile = true;
+            if(autoChooseFile){
+                String userName = System.getProperties().getProperty("user.name");
+                sourceFile = new File("C:\\Users\\" + userName + "\\Documents\\My Box Files\\Asp\\Experiment\\20140724\\2rad.txt");
+            }else{
+                sourceFile = chooseFile();
             }
+            mc.addSignals(sourceFile);
         });
-        clearSignal.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mc.clearSignal(param.getParam());
-            }
-        });
+        clearSignal.addActionListener(e -> mc.clearSignal(param.getParam()));
         calcMoveMatrix.addActionListener(e -> mc.calcMoveMatrix());
-        filterFirstLayer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(filterFirstLayer.getText().equals("Filter First Layer")){
-                    filterFirstLayer.setText("Unfilter First Layer");
-                }else{
-                    filterFirstLayer.setText("Filter First Layer");
-                }
-                mc.filterFirstLayer();
+        filterFirstLayer.addActionListener(e -> {
+            if(filterFirstLayer.getText().equals("Filter First Layer")){
+                filterFirstLayer.setText("Unfilter First Layer");
+            }else{
+                filterFirstLayer.setText("Filter First Layer");
             }
+            mc.filterFirstLayer();
         });
-        fullCalculation.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mc.fullCacl(param.getParam());
-            }
-        });
+        fullCalculation.addActionListener(e -> mc.fullCacl(param.getParam()));
+        getShortSignal.addActionListener(e -> mc.getShortSignal());
     }
 
     private File chooseFile(){
@@ -113,4 +98,5 @@ public class ThisControlPanel extends AbstractViewPanel {
     private JButton filterFirstLayer;
 
     private JButton fullCalculation;
+    private JButton getShortSignal;
 }

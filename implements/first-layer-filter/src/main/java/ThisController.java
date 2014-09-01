@@ -11,6 +11,7 @@ import com.tihiy.reonew.SphereModelSimple;
 import com.tihiy.reonew.utils.DxMatrixFinder;
 import org.ejml.simple.SimpleMatrix;
 import settings.SistolaInterval;
+import utils.ShortSignalCreator;
 
 import java.io.File;
 import java.util.Arrays;
@@ -201,9 +202,25 @@ public class ThisController extends AbstractController {
         SignalModel modelSee = ((SignalModel)registeredModels.get(FIRST));
         SignalModel modelUnSee = ((SignalModel)registeredModels.get(FIRST_OLD));
 
+//        List<List<Double>> signals = Arrays.asList(modelSee.getList(), modelUnSee.getList());
+//        List<String> names = Arrays.asList("filter","unfilter");
+//        JFrame frame = new JFrame();
+//        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        frame.getContentPane().add(new SignalJFreePanel(signals, names));
+//        frame.setVisible(true);
+
         modelSee.setList(firstFilter);
         modelUnSee.setList(firstUnFilter);
     }
+    public void getShortSignal(){
+        String[] signalNames = new String[]{CLEAR_1,CLEAR_2,CLEAR_3,CLEAR_4, CLEAR_5};
+        List<Double>[] signals = new List[signalNames.length];
+        for (int i = 0; i < signalNames.length; i++) {
+            signals[i] = ((SignalModel) registeredModels.get(signalNames[i])).getList();
+        }
+        ShortSignalCreator.createAndViewShortMultiSignal(signalNames, signals);
+    }
+
     public void fullCacl(List<double[]> listOfParam){
         System.out.println("SIGNAL UNfiltered");
         clearSignal(listOfParam);
