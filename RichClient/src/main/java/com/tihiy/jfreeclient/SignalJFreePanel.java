@@ -32,16 +32,7 @@ public class SignalJFreePanel extends AbstractViewPanel {
         JFreeChart chartProc = ChartFactory.createXYLineChart("", "i", "mV", xydataset, PlotOrientation.VERTICAL, true, true, true);//построение
         XYPlot plot = (XYPlot)chartProc.getPlot();
         NumberAxis axis = (NumberAxis)plot.getRangeAxis();
-//        axis.setAutoRange(true);
-//
-//        axis.setAutoRangeIncludesZero(true);
-        axis.setRange(-2.5, -2);
-//        plot.setAxisOffset(new RectangleInsets(5,5,5,5));
-//        CategoryPlot plot = (CategoryPlot)chartProc.getPlot();
-
-
         return chartProc;
-
     }
 
     private List<XYSeries> bindSeries(List<List<Double>> data, List<String> names){
