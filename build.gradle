@@ -55,6 +55,12 @@ project(':RichClient'){
         compile project(':ReoProcces')
     }
 }
+project(':DigitalSignalProcessing'){
+    version = '0.1'
+    dependencies{
+        compile group: 'com.googlecode.efficient-java-matrix-library', name: 'ejml', version: '0.25'
+    }
+}
 
 project(':implements:radius-calculation'){
     version = '0.0.2'
