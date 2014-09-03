@@ -14,7 +14,7 @@ public class PolynomialApproximator {
 
     public void approx(List<Double> signal, int polynomRange){
         SimpleMatrix koeffMatrix = fillKoeffMatrix(signal.size(), polynomRange);
-        SimpleMatrix skMatrix = fillSkMatrix();
+        SimpleMatrix skMatrix = fillSkMatrix(signal, polynomRange);
         SimpleMatrix aMatrix = koeffMatrix.solve(skMatrix);
     }
 
