@@ -2,7 +2,6 @@ package com.tihiy.comm.serial;
 
 import com.tihiy.comm.serial.protocols.Protocol;
 import com.tihiy.rclint.control.Controller;
-import com.tihiy.rclint.models.SignalModelIntRT;
 import com.tihiy.rclint.implement.ControlPanel;
 import org.junit.Test;
 
@@ -14,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class ModelSignalManagerTest {
     @Test
     public void simpleTest() throws InterruptedException {
-        SignalModelIntRT modelIntRT = new SignalModelIntRT();
+        //SignalModelIntRT modelIntRT = new SignalModelIntRT();
         DefaultSimpleSignalManager signalManager = new DefaultSimpleSignalManager();
         signalManager.setProtocol(Protocol.SimpleEcg);
         ComPortListener comPortListener =  ComPortListener.getInstance(signalManager);
