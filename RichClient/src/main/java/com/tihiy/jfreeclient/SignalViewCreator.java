@@ -33,4 +33,17 @@ public class SignalViewCreator {
         frame.setVisible(true);
     }
 
+    public static void createSignalView(List<List<Double>> listOfSignal, List<List<Double>> listOfArgs){
+        JFrame frame = new JFrame("Signal");
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        List<String> listOfNames = new ArrayList<>();
+        int i = 0;
+        for (List<Double> ignored : listOfSignal) {
+            listOfNames.add(""+(++i));
+        }
+
+        frame.getContentPane().add(new SignalJFreePanel(listOfSignal, listOfArgs, listOfNames));
+        frame.setVisible(true);
+    }
 }

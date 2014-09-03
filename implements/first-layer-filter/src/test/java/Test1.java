@@ -1,6 +1,3 @@
-import com.tihiy.jfreeclient.SignalViewCreator;
-import utils.ShortSignalCreator;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +7,7 @@ public class Test1 {
 
     public static void main(String[] args) {
         System.out.println(list.toString());
-        SignalViewCreator.createSignalView(list,);
+//        SignalViewCreator.createSignalView(list,);
     }
 
     public static List<Double> simpleFilter(List<Double> list, int numOfPoint){
