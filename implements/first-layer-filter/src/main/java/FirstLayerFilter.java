@@ -14,6 +14,7 @@ public class FirstLayerFilter {
                 GroupSignalPanel signalPanel = new GroupSignalPanel(mc);
                 ThisControlPanel controlPanel = new ThisControlPanel(mc);
 
+
                 JPanel panel = new JPanel();
                 panel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
                 panel.setPreferredSize(new Dimension(800,800));
@@ -21,10 +22,19 @@ public class FirstLayerFilter {
                 panel.add(signalPanel, BorderLayout.CENTER);
                 panel.add(controlPanel, BorderLayout.EAST);
 
+                JPanel secondPanel = new JPanel();
+                secondPanel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+
+
+                JTabbedPane tabbedPane = new JTabbedPane();
+                tabbedPane.addTab("Signals", panel);
+                tabbedPane.addTab("Fringe moving", secondPanel);
+
                 JFrame frame = new JFrame("FirstLayerFilter");
                 frame.setSize(panel.getPreferredSize());
                 frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-                frame.getContentPane().add(panel);
+                frame.getContentPane().add(tabbedPane);
+//                frame.getContentPane().add(panel);
                 frame.setVisible(true);
             }
         });

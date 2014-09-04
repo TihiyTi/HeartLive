@@ -17,46 +17,45 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.BlockingQueue;
 import java.util.logging.Logger;
 
 public class ControllerFLayer extends AbstractController{
     //    }
 //        addModel(model);
-//    public static final String FIRST = "first";
-//    public static final String PRECARD_BASE_5 = "precard_base_5";
-//    public static final String PRECARD_BASE_4 = "precard_base_4";
-//    public static final String PRECARD_BASE_3 = "precard_base_3";
-//    public static final String PRECARD_BASE_2 = "precard_base_2";
-//    public static final String PRECARD_BASE_1 = "precard_base_1";
-//    public static final String PRECARD_5 = "precard_5";
-//    public static final String PRECARD_4 = "precard_4";
-//    public static final String PRECARD_3 = "precard_3";
-//    public static final String PRECARD_2 = "precard_2";
+    public static final String FIRST = "first";
+    public static final String PRECARD_BASE_5 = "precard_base_5";
+    public static final String PRECARD_BASE_4 = "precard_base_4";
+    public static final String PRECARD_BASE_3 = "precard_base_3";
+    public static final String PRECARD_BASE_2 = "precard_base_2";
+    public static final String PRECARD_BASE_1 = "precard_base_1";
+    public static final String PRECARD_5 = "precard_5";
+    public static final String PRECARD_4 = "precard_4";
+    public static final String PRECARD_3 = "precard_3";
+    public static final String PRECARD_2 = "precard_2";
 //    private final Map<String, BlockingQueue<Integer>> signalMap = new HashMap<>();
 
 
     private SignalMapper signalMapper;
     private final Map<String, AbstractModel> registeredModels = new HashMap<>();
 
-//    public static final String PRECARD_1 = "precard_1";
-
-//    public void addSignal(String name, File file) throws IOException {
-//        if(file != null){
-//            List<Double> list =  ReadingFiles.readFile(file);
-//            if(registeredModels.containsKey(name)){
-//                ((SignalModel)registeredModels.get(name)).setList(list);
-//            }else{
-//                addModel(name, new SignalModel(name));
-//                ((SignalModel)registeredModels.get(name)).setList(list);
-//            }
-//        }else{
-//            Logger.getLogger(getClass().getName()).info("File didn't choosen.");
-//        }
-//    }
+    public static final String PRECARD_1 = "precard_1";
+//
+    public void addSignal(String name, File file) throws IOException {
+        if(file != null){
+            List<Double> list =  ReadingFiles.readFile(file);
+            if(registeredModels.containsKey(name)){
+                ((SignalModel)registeredModels.get(name)).setList(list);
+            }else{
+                addModel(name, new SignalModel(name));
+                ((SignalModel)registeredModels.get(name)).setList(list);
+            }
+        }else{
+            Logger.getLogger(getClass().getName()).info("File didn't choosen.");
+        }
+    }
     public void addSignals(File file) throws IOException {
         Reo32Parser parser = new Reo32Parser();
-        List<List<Double>> lists =  parser.parse((new FileSignalReader()).readFile(file));
+        Map<Reo32Parser.Signal, List<Double>> lists =  parser.parse((new FileSignalReader()).readFile(file));
         for(String name: signalMapper.getMapSet()){
             if(registeredModels.containsKey(name)){
                 ((SignalModelLite)registeredModels.get(name)).setArray(lists.get(signalMapper.getIndex(name)));

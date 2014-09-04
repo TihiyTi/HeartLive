@@ -1,6 +1,9 @@
 package com.tihiy.jfreeclient;
 
+import com.tihiy.WindowUtils;
+
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +39,7 @@ public class SignalViewCreator {
     public static void createSignalView(List<List<Double>> listOfSignal, List<List<Double>> listOfArgs){
         JFrame frame = new JFrame("Signal");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setSize(new Dimension(800,500));
 
         List<String> listOfNames = new ArrayList<>();
         int i = 0;
@@ -44,6 +48,9 @@ public class SignalViewCreator {
         }
 
         frame.getContentPane().add(new SignalJFreePanel(listOfSignal, listOfArgs, listOfNames));
-        frame.setVisible(true);
+//        frame.setVisible(true);
+//        frame.setSize(WindowUtils.getDimensionFromPercent(50, 70)); // определяет размеры окна
+//        frame.setResizable(false);
+        WindowUtils.centerOnScreenAndSetVisible(frame);
     }
 }

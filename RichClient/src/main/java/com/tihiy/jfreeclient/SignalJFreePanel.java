@@ -40,9 +40,11 @@ public class SignalJFreePanel extends AbstractViewPanel {
         XYSeriesCollection xydataset = new XYSeriesCollection(); // добавление контейнера для построение 1 графика
         xydataset.setAutoWidth(true);
         series.forEach(xydataset::addSeries);
-        JFreeChart chartProc = ChartFactory.createXYLineChart("", "i", "mV", xydataset, PlotOrientation.VERTICAL, true, true, true);//построение
+        JFreeChart chartProc = ChartFactory.createXYLineChart("", "i", "", xydataset, PlotOrientation.VERTICAL, true, true, true);//построение
         XYPlot plot = (XYPlot)chartProc.getPlot();
         NumberAxis axis = (NumberAxis)plot.getRangeAxis();
+        chartProc.setBorderVisible(false);
+//        chartProc.set
         return chartProc;
     }
 
