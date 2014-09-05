@@ -2,10 +2,7 @@ package com.tihiy.comm.parse;
 
 import com.google.common.base.Splitter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Reo32Parser {
     Map<Signal, List<Double>> map;
@@ -33,6 +30,8 @@ public class Reo32Parser {
 //        CharMatcher trimmer = CharMatcher.JAVA_LETTER;
         Splitter splitter = Splitter.on("\n").trimResults().omitEmptyStrings();
         List<String> list = splitter.splitToList(string);
+        System.out.println(list.get(0));
+        System.out.println(list.get(1));
         for(int i = 2 ; i < list.size(); i++){
             splitter = Splitter.on("\t").trimResults().omitEmptyStrings();
             List<String> st = splitter.splitToList(list.get(i));
@@ -53,6 +52,41 @@ public class Reo32Parser {
             map.get(Signal.ECG).add(Double.valueOf(st.get(st.size()-1)));
         }
         return map;
+    }
+
+    public Map<Signal, List<Double>> parse(Scanner scanner) {
+        //        CharMatcher trimmer = CharMatcher.JAVA_LETTER;
+        List<String> list = new ArrayList<>();
+        while(scanner.hasNextLine()){
+            list.add(scanner.nextLine());
+        }
+        Splitter splitter = Splitter.on("\n").trimResults().omitEmptyStrings();
+        splitter = Splitter.on("\t").trimResults().omitEmptyStrings();
+        List<String> s = splitter.splitToList(list.get(0));
+//        System.out.println(list.get(0));
+//        System.out.println(s.toString());
+//        System.out.println(list.get(1));
+        for(int i = 2 ; i < list.size(); i++){
+            List<String> st = splitter.splitToList(list.get(i));
+
+            map.get(Signal.Pulse_1).add(Double.valueOf(st.get(0)));
+            map.get(Signal.Pulse_2).add(Double.valueOf(st.get(2)));
+            map.get(Signal.Pulse_3).add(Double.valueOf(st.get(4)));
+            map.get(Signal.Pulse_4).add(Double.valueOf(st.get(6)));
+            map.get(Signal.Pulse_5).add(Double.valueOf(st.get(8)));
+            map.get(Signal.Pulse_6).add(Double.valueOf(st.get(10)));
+//            map.get(Signal.Base_1).add(Double.valueOf(st.get(1)));
+//            map.get(Signal.Base_2).add(Double.valueOf(st.get(3)));
+//            map.get(Signal.Base_3).add(Double.valueOf(st.get(5)));
+//            map.get(Signal.Base_4).add(Double.valueOf(st.get(7)));
+//            map.get(Signal.Base_5).add(Double.valueOf(st.get(9)));
+//            map.get(Signal.Base_6).add(Double.valueOf(st.get(11)));
+
+            map.get(Signal.ECG).add(Double.valueOf(st.get(st.size()-1)));
+        }
+        return map;
+
+
     }
 
     public enum Signal {
