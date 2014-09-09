@@ -85,6 +85,11 @@ public class ThisController extends AbstractController {
         ((SignalModel)registeredModels.get(PRECARD_BASE_4)).setList(map.get(Reo32Parser.Signal.Base_4));
         ((SignalModel)registeredModels.get(PRECARD_BASE_5)).setList(map.get(Reo32Parser.Signal.Base_5));
     }
+//    public void addSignalsNew(File dataFile){
+//        FileSignalReader reader =  new FileSignalReader();
+//        Map
+//    }
+//
     public void clearSignalOld(List<double[]> listOfParam){
         ReoPostProcessor rp = new ReoPostProcessor();
         for(int i = 0; i < 5; i++){
@@ -274,6 +279,11 @@ public class ThisController extends AbstractController {
             j++;
         }
         finder.setDz(dz);
+    }
+
+    //Рассчет
+    public void calcDeltaRadius(){
+
     }
 
     public void addModel(String flowName, AbstractModel model){

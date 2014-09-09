@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class FileSignalReader {
-    private boolean useNewReader = true;
+    private boolean useNewReader = false;
     public String readFile(String fileName) throws IOException {
         Path path = Paths.get(fileName);
         System.out.println(path);
@@ -30,7 +30,8 @@ public class FileSignalReader {
 
     public Map<Reo32Parser.Signal, List<Double>> readFileToMap(File file){
         if(useNewReader){
-            return readFileToMapNew(file);
+//            return readFileToMapNew(file);
+            return null;
         }else{
             return readFileToMapOld(file);
         }
@@ -46,7 +47,7 @@ public class FileSignalReader {
         }
         return parser.parse(string);
     }
-    private Map<Reo32Parser.Signal, List<Double>> readFileToMapNew(File file){
+    private Map<String, List<Double>> readFileToMapNew(File file){
         Reo32Parser parser = new Reo32Parser();
         Scanner scanner = null;
         try {

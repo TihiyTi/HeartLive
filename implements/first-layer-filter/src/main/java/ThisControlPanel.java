@@ -30,6 +30,7 @@ public class ThisControlPanel extends AbstractViewPanel {
         filterFirstLayer =  new JButton("Filter First Layer");
         fullCalculation = new JButton("FullCalculation");
         getShortSignal = new JButton("Get Short Signal");
+        getRadius = new JButton("Get radius");
 
         GridBagConstraints constraints = new GridBagConstraints(0,0, 1,1, 0,0,
                 GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(5,5,5,5), 0,0);
@@ -47,6 +48,8 @@ public class ThisControlPanel extends AbstractViewPanel {
         constraints.gridy = 7;
         add(getShortSignal, constraints);
 
+        constraints.gridy = 8;
+        add(getRadius, constraints);
 
     }
 
@@ -74,6 +77,7 @@ public class ThisControlPanel extends AbstractViewPanel {
         });
         fullCalculation.addActionListener(e -> mc.fullCacl(param.getParam()));
         getShortSignal.addActionListener(e -> mc.getShortSignal());
+        getRadius.addActionListener(e -> mc.calcDeltaRadius());
     }
 
     private File chooseFile(){
@@ -99,4 +103,6 @@ public class ThisControlPanel extends AbstractViewPanel {
 
     private JButton fullCalculation;
     private JButton getShortSignal;
+
+    private JButton getRadius;
 }
