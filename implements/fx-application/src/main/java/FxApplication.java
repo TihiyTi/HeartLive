@@ -21,7 +21,8 @@ public class FxApplication extends Application{
         Button openFile = new Button("Open file");
         openFile.setOnAction(event -> {
             if(autoChooseFile){
-                file = new File("C:\\Users\\Alex\\Documents\\My Box Files\\Asp\\Experiment\\20140724\\2rad.txt");
+                String st = System.getProperties().getProperty("user.name");
+                file = new File("C:\\Users\\" + st + "\\Documents\\My Box Files\\Asp\\Experiment\\20140724\\2rad.txt");
             }else{
                 FileChooser fileChooser = new FileChooser();
                 file = fileChooser.showOpenDialog(new Stage());
