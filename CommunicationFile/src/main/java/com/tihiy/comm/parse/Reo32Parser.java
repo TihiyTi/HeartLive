@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Reo32Parser {
     Map<Signal, List<Double>> map;
-    Map<String, List<Double>> map2;
+    Map<String, List<Double>> map2 = new HashMap<>();
 
     public Reo32Parser() {
         map = new HashMap<>();

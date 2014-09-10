@@ -37,6 +37,17 @@ public class FileSignalReader {
         }
     }
 
+    public Map<String, List<Double>> readFileToMapNew(File file){
+        Reo32Parser parser = new Reo32Parser();
+        Scanner scanner = null;
+        try {
+            scanner = readFileNew(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return parser.parse(scanner);
+    }
+
     private Map<Reo32Parser.Signal, List<Double>> readFileToMapOld(File file){
         Reo32Parser parser = new Reo32Parser();
         String string = null;
@@ -46,16 +57,6 @@ public class FileSignalReader {
             e.printStackTrace();
         }
         return parser.parse(string);
-    }
-    private Map<String, List<Double>> readFileToMapNew(File file){
-        Reo32Parser parser = new Reo32Parser();
-        Scanner scanner = null;
-        try {
-            scanner = readFileNew(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return parser.parse(scanner);
     }
 
 

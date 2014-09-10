@@ -1,8 +1,5 @@
-import com.tihiy.rclint.mvcAbstract.AbstractViewPanel;
-
 import javax.swing.*;
 import java.awt.*;
-import java.beans.PropertyChangeEvent;
 import java.io.File;
 
 /**
@@ -11,7 +8,7 @@ import java.io.File;
  * Date: 28.07.14
  * Time: 14:16
  */
-public class ThisControlPanel extends AbstractViewPanel {
+public class ThisControlPanel extends JPanel{
     private final ThisController mc;
 
     public ThisControlPanel(ThisController mc) {
@@ -63,7 +60,8 @@ public class ThisControlPanel extends AbstractViewPanel {
             }else{
                 sourceFile = chooseFile();
             }
-            mc.addSignals(sourceFile);
+//            mc.addSignals(sourceFile);
+            mc.addSignalsNew(sourceFile);
         });
         clearSignal.addActionListener(e -> mc.clearSignal(param.getParam()));
         calcMoveMatrix.addActionListener(e -> mc.calcMoveMatrix());
@@ -90,10 +88,6 @@ public class ThisControlPanel extends AbstractViewPanel {
         return fileChooser.getSelectedFile();
     }
 
-    @Override
-    public void modelPropertyChange(PropertyChangeEvent evt) {
-
-    }
 
     private TabParamPanel param;
     private JButton chooseSignal;
