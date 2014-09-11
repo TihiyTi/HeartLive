@@ -2,12 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Alex
- * Date: 28.07.14
- * Time: 14:16
- */
 public class ThisControlPanel extends JPanel{
     private final ThisController mc;
 

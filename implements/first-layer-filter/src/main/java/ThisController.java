@@ -1,6 +1,7 @@
 import com.ak.util.GenericStorage;
 import com.tihiy.comm.FileSignalReader;
 import com.tihiy.comm.parse.Reo32Parser;
+import com.tihiy.jfreeclient.SignalViewCreator;
 import com.tihiy.rclint.models.SignalModel;
 import com.tihiy.rclint.mvcAbstract.AbstractController;
 import com.tihiy.rclint.mvcAbstract.AbstractModel;
@@ -19,6 +20,8 @@ import utils.SlayerFilter;
 import java.io.File;
 import java.util.*;
 import java.util.logging.Logger;
+
+import static settings.SistolaInterval.*;
 
 public class ThisController extends AbstractController {
     private final Map<String, AbstractModel> registeredModels = new HashMap<>();
@@ -122,7 +125,7 @@ public class ThisController extends AbstractController {
         Map<String, List<Double>>  dataMap = confimModel.getDataMap();
         map.keySet().forEach(e -> {
             addModel(e, new SignalModel(e));
-            System.out.println(e);
+//            System.out.println(e);
             SignalModel model = (SignalModel) registeredModels.get(e);
             List<Double> list = dataMap.get(map.get(e));
             model.setList(list);
@@ -334,5 +337,37 @@ public class ThisController extends AbstractController {
     public void addModel(String flowName, AbstractModel model){
         registeredModels.put(flowName, model);
         model.addPropertyChangeListener(this);
+    }
+
+    public void correlation(){
+        String signalName = PRECARD_1;
+//        String signalName = CLEAR_1;
+        List<Double> bigSignal = ((SignalModel) registeredModels.get(signalName)).getList();
+        List<Double> signal = new ArrayList<>();
+        signal.addAll(bigSignal.subList(getPoint(1, BEGIN), getPoint(1, END)));
+        signal = Invertor.invert(signal);
+
+        List<Double> moveBadList =  Arrays.asList(0.,0.,0.,0.,3.6,5.4,5.4,7.2,7.2);
+
+        List<Double> signalsArg = new ArrayList<>();
+        for (int i = 0; i < signal.size(); i++) {
+            signalsArg.add(i*1.*(moveBadList.size()-1)/signal.size());
+        }
+
+        List<Double> moveBadListArg = new ArrayList<>();
+        for (int i = 0; i < moveBadList.size(); i++) {
+            moveBadListArg.add((double)i);
+        }
+
+        PolynomialApproximator approximator = new PolynomialApproximator();
+        List<Double> moveApprox = approximator.getApproxSignal(moveBadList, signalsArg, 5);
+
+        Correlation cor = new Correlation();
+        System.out.println("Correlation = " + cor.correlation(moveApprox, signal));
+
+        SignalViewCreator.createSignalView(
+                Arrays.asList(signal, moveBadList, moveApprox),
+                Arrays.asList(signalsArg, moveBadListArg, signalsArg)
+        );
     }
 }

@@ -64,6 +64,9 @@ public class DxMatrixFinder {
         return result;
 
     }
+    public SimpleMatrix getOriginDx(){
+        return dx;
+    }
     private void printAll(SimpleMatrix result){
 //        System.out.println("DX matrix");
 //        dx.print(2,2);

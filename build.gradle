@@ -59,6 +59,7 @@ project(':DigitalSignalProcessing'){
     version = '0.1'
     dependencies{
         compile group: 'com.googlecode.efficient-java-matrix-library', name: 'ejml', version: '0.25'
+        compile group: 'org.apache.commons', name: 'commons-math3', version:'3.2'
     }
 }
 
@@ -93,6 +94,7 @@ project(':implements:first-layer-filter'){
     dependencies{
         compile project(':RichClient')
         compile project(':implements:radius-calculation')
+        compile project(':DigitalSignalProcessing')
     }
 }
 project(':implements:fx-application'){

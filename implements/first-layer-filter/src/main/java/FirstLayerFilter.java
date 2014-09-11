@@ -18,6 +18,7 @@ public class FirstLayerFilter {
 
                 ConformityPanel conformityPanel = new ConformityPanel(mc);
                 ConformityModel conformityModel = new ConformityModel(ThisController.CONFIRM_VIEW);
+                SecondControlPanel secondControlPanel =  new SecondControlPanel(mc);
                 mc.addModel(ThisController.CONFIRM_VIEW, conformityModel);
                 mc.addView(conformityPanel);
 
@@ -30,7 +31,9 @@ public class FirstLayerFilter {
 
                 JPanel secondPanel = new JPanel();
                 secondPanel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
-                secondPanel.add(conformityPanel);
+                secondPanel.setLayout(new BorderLayout());
+                secondPanel.add(secondControlPanel,BorderLayout.EAST);
+                secondPanel.add(conformityPanel,BorderLayout.WEST);
 
                 JTabbedPane tabbedPane = new JTabbedPane();
                 tabbedPane.addTab("Signals", panel);
