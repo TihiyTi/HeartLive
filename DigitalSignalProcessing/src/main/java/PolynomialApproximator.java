@@ -35,6 +35,13 @@ public class PolynomialApproximator {
         args.forEach(e-> approxSignal.add(polynome(e, aMatrix)));
         return approxSignal;
     }
+    public List<Double> getApproxSignal(List<Double> list, int sizeOfReturnList, int polynomRange){
+        List<Double> args= new ArrayList<>();
+        for (int i = 0; i < sizeOfReturnList; i++) {
+            args.add(i*1.*(list.size()-1)/(sizeOfReturnList-1));
+        }
+        return getApproxSignal(list, args, polynomRange);
+    }
 
     private SimpleMatrix fillKoeffMatrix(int signalLength ,int polynomRange){
         SimpleMatrix matrix = new SimpleMatrix(polynomRange + 1, polynomRange + 1);

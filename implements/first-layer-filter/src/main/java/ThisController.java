@@ -342,32 +342,43 @@ public class ThisController extends AbstractController {
     public void correlation(){
         String signalName = PRECARD_1;
 //        String signalName = CLEAR_1;
-        List<Double> bigSignal = ((SignalModel) registeredModels.get(signalName)).getList();
-        List<Double> signal = new ArrayList<>();
-        signal.addAll(bigSignal.subList(getPoint(1, BEGIN), getPoint(1, END)));
+        List<Double> signal = ((SignalModel) registeredModels.get(signalName)).getList();
         signal = Invertor.invert(signal);
-
         List<Double> moveBadList =  Arrays.asList(0.,0.,0.,0.,3.6,5.4,5.4,7.2,7.2);
+        PolynomialApproximator approximator = new PolynomialApproximator();
+        List<Double> moveApprox = approximator.getApproxSignal(moveBadList, signal.size(), 5);
+
+        MySpesificCorrelation myCor = new MySpesificCorrelation(signal, moveBadList, moveApprox);
+        List<List<Double>> miniLists = myCor.exportMiniLists();
+        List<List<Double>> miniListsArgs = new ArrayList<>();
+        miniLists.forEach(e ->{
+            List<Double> miniArgs = new ArrayList<>();
+            for (int i = 0; i < e.size(); i++) {
+                miniArgs.add(i*1.*(moveBadList.size()-1)/e.size());
+            }
+            miniListsArgs.add(miniArgs);
+        });
 
         List<Double> signalsArg = new ArrayList<>();
-        for (int i = 0; i < signal.size(); i++) {
-            signalsArg.add(i*1.*(moveBadList.size()-1)/signal.size());
-        }
-
         List<Double> moveBadListArg = new ArrayList<>();
         for (int i = 0; i < moveBadList.size(); i++) {
             moveBadListArg.add((double)i);
         }
-
-        PolynomialApproximator approximator = new PolynomialApproximator();
-        List<Double> moveApprox = approximator.getApproxSignal(moveBadList, signalsArg, 5);
-
         Correlation cor = new Correlation();
         System.out.println("Correlation = " + cor.correlation(moveApprox, signal));
 
+        List<List<Double>> sigForView =  new ArrayList<>();
+        sigForView.add(moveBadList);
+        sigForView.add(moveApprox);
+        sigForView.addAll(miniLists);
+        List<List<Double>> argForView =  new ArrayList<>();
+        argForView.add(moveBadListArg);
+        argForView.add(signalsArg);
+        argForView.addAll(miniListsArgs);
+
         SignalViewCreator.createSignalView(
-                Arrays.asList(signal, moveBadList, moveApprox),
-                Arrays.asList(signalsArg, moveBadListArg, signalsArg)
+                sigForView,
+                argForView
         );
     }
 }

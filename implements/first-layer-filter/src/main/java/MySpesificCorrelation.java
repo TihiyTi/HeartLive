@@ -23,14 +23,22 @@ public class MySpesificCorrelation {
 
     public List<Double> getImpedMoveCorrelation(){
         List<Double> listOfCorrelation = new ArrayList<>();
-        List<List<Double>> miniList = getMiniSignal();
-        return null;
+        int size = movingSignal.size();
+        miniLists.forEach(e->{
+            List<Double> miniListCut = new ArrayList<>();
+            for (int i = 0; i < size - 1; i++) {
+                double newMiniListCutElement = 1.*e.size()/(size -1)*i;
+                miniListCut.add(newMiniListCutElement);
+            }
+            double corElement = cor.correlation(miniListCut, movingSignal);
+            listOfCorrelation.add(corElement);
+        });
+        return listOfCorrelation;
     }
 
     public List<Double> getImpexApproxMoveCorrelation(){
         List<Double> listOfCorrelation = new ArrayList<>();
-        List<List<Double>> miniList = getMiniSignal();
-        miniList.forEach(e -> listOfCorrelation.add(cor.correlation(e,movingApproxSignal)));
+        miniLists.forEach(e -> listOfCorrelation.add(cor.correlation(e,movingApproxSignal)));
         return listOfCorrelation;
     }
 
