@@ -241,11 +241,11 @@ public class ThisController extends AbstractController {
         }
     }
     public void filterFirstLayer(){
-        if(!registeredModels.containsKey(FIRST_OLD)){
+//        if(!registeredModels.containsKey(FIRST_OLD)){
             addModel(FIRST_OLD, new SignalModel(FIRST_OLD));
-            List<Double> firstFilter = SlayerFilter.slayerFilter(((SignalModel)registeredModels.get(FIRST)).getList(), 20);
-            ((SignalModel)registeredModels.get(FIRST_OLD)).setList(firstFilter);
-        }
+            List<Double> filter = SlayerFilter.slayerFilter(((SignalModel)registeredModels.get(FIRST)).getList(), 20);
+            ((SignalModel)registeredModels.get(FIRST_OLD)).setList(filter);
+//        }
 
         List<Double> firstUnFilter = ((SignalModel)registeredModels.get(FIRST)).getList();
         List<Double> firstFilter = ((SignalModel)registeredModels.get(FIRST_OLD)).getList();
