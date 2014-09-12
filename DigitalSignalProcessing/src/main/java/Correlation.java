@@ -3,7 +3,9 @@ import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
 import java.util.List;
 
 public class Correlation {
-
+    /*
+    Реализует приведение List<Double>  к double[] используемому в библиотеке Apache
+     */
     public double correlation(List<Double> aList, List<Double> bList){
         PearsonsCorrelation correlation = new PearsonsCorrelation();
         double[] a = new double[aList.size()];

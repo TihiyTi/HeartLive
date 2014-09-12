@@ -1,58 +1,78 @@
+import com.tihiy.WindowUtils;
+import com.tihiy.jfreeclient.SignalJFreePanel;
+
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static settings.SistolaInterval.*;
 
 public class MySpesificCorrelation {
-    private List<Double> multyPeriodicSignal;
-    private List<List<Double>> miniLists;
-    private List<Double> movingSignal;
-    private List<Double> movingApproxSignal;
-    private Correlation cor;
+    List<Double> moveList;
+    List<Double> impedance;
+    List<List<Double>> shortImpedances;
+    List<List<Double>> cutShortImpedances;
+    int polynomeRange;
 
-    public MySpesificCorrelation(){
-
+    public MySpesificCorrelation(List<Double> moveList, List<Double> impedance, int polynomeRange) {
+        this.moveList = moveList;
+        this.impedance = impedance;
+        this.polynomeRange = polynomeRange;
+        shortImpedances = getMiniSignal();
+        cutShortImpedances = getCutShortImpedances();
     }
 
-    public MySpesificCorrelation(List<Double> multyPeriodicSignal, List<Double> movingSignal, List<Double> movingApproxSignal) {
-        this.multyPeriodicSignal = multyPeriodicSignal;
-        this.movingSignal = movingSignal;
-        this.movingApproxSignal = movingApproxSignal;
-        miniLists = getMiniSignal();
-    }
-
-    public List<Double> getImpedMoveCorrelation(){
-        List<Double> listOfCorrelation = new ArrayList<>();
-        int size = movingSignal.size();
-        miniLists.forEach(e->{
-            List<Double> miniListCut = new ArrayList<>();
-            for (int i = 0; i < size - 1; i++) {
-                double newMiniListCutElement = 1.*e.size()/(size -1)*i;
-                miniListCut.add(newMiniListCutElement);
-            }
-            double corElement = cor.correlation(miniListCut, movingSignal);
-            listOfCorrelation.add(corElement);
+    public List<Double> getCorrel(){
+        List<Double> values = new ArrayList<>();
+        Correlation cor = new Correlation();
+        cutShortImpedances.forEach(e->{
+            values.add(cor.correlation(moveList,e));
         });
-        return listOfCorrelation;
+        return values;
     }
 
-    public List<Double> getImpexApproxMoveCorrelation(){
-        List<Double> listOfCorrelation = new ArrayList<>();
-        miniLists.forEach(e -> listOfCorrelation.add(cor.correlation(e,movingApproxSignal)));
-        return listOfCorrelation;
-    }
 
-    public List<List<Double>> exportMiniLists(){
-        return miniLists;
+    public JPanel getSignal(){
+        List<List<Double>> listOfSignal = new ArrayList<>();
+        listOfSignal.add(moveList);
+        listOfSignal.addAll(cutShortImpedances);
+        List<String> listOfNames = new ArrayList<>();
+        listOfNames.add("MoveFromMRI");
+        listOfNames.addAll(Arrays.asList("1","2","3","4","5","6","7","8","9","10"));
+        return new SignalJFreePanel(listOfSignal, listOfNames);
+    }
+    public void getSignalInFrame(){
+        JFrame frame = new JFrame("Signal");
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setSize(new Dimension(800, 500));
+        frame.getContentPane().add(getSignal());
+        WindowUtils.centerOnScreenAndSetVisible(frame);
     }
 
     private List<List<Double>> getMiniSignal() {
         List<List<Double>> miniLists = new ArrayList<>();
         for(int i = 1; i <= getNumOfInterval(); i++){
-            miniLists.add(multyPeriodicSignal.subList(getPoint(i, BEGIN), getPoint(i, END)));
+            miniLists.add(impedance.subList(getPoint(i, BEGIN), getPoint(i, END)));
         }
         return miniLists;
     }
+    private List<List<Double>> getCutShortImpedances(){
+        List<List<Double>> values = new ArrayList<>();
+        shortImpedances.forEach(e->{
+            List<Double> impedanceCut = new ArrayList<>();
+            for (int i = 0; i < moveList.size() - 1; i++) {
+                int index = (int)(1.*i*(e.size()-1)/(moveList.size() - 1));
+                impedanceCut.add(e.get(index));
+            }
+            impedanceCut.add(e.get(e.size()-1));
+            values.add(impedanceCut);
 
-
+        });
+        return values;
+    }
+    public JPanel getAproxSignal(){
+        return null;
+    }
 }
