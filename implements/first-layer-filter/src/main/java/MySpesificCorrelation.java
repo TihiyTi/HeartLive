@@ -14,13 +14,8 @@ public class MySpesificCorrelation {
     private List<Double> impedance;
     private List<List<Double>> shortImpedances;
     private List<List<Double>> cutShortImpedances;
+    private List<List<Double>> approxMovies;
     private int polynomeRange;
-    List<Double> moveList;
-    List<Double> impedance;
-    List<List<Double>> shortImpedances;
-    List<List<Double>> cutShortImpedances;
-    List<List<Double>> approxMovies;
-    int polynomeRange;
 
     public MySpesificCorrelation(List<Double> moveList, List<Double> impedance, int polynomeRange) {
         this.moveList = moveList;
