@@ -10,11 +10,11 @@ import java.util.List;
 import static settings.SistolaInterval.*;
 
 public class MySpesificCorrelation {
-    List<Double> moveList;
-    List<Double> impedance;
-    List<List<Double>> shortImpedances;
-    List<List<Double>> cutShortImpedances;
-    int polynomeRange;
+    private List<Double> moveList;
+    private List<Double> impedance;
+    private List<List<Double>> shortImpedances;
+    private List<List<Double>> cutShortImpedances;
+    private int polynomeRange;
 
     public MySpesificCorrelation(List<Double> moveList, List<Double> impedance, int polynomeRange) {
         this.moveList = moveList;
@@ -27,9 +27,7 @@ public class MySpesificCorrelation {
     public List<Double> getCorrel(){
         List<Double> values = new ArrayList<>();
         Correlation cor = new Correlation();
-        cutShortImpedances.forEach(e->{
-            values.add(cor.correlation(moveList,e));
-        });
+        cutShortImpedances.forEach(e-> values.add(cor.correlation(moveList,e)));
         return values;
     }
 
@@ -71,8 +69,5 @@ public class MySpesificCorrelation {
 
         });
         return values;
-    }
-    public JPanel getAproxSignal(){
-        return null;
     }
 }

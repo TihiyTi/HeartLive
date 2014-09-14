@@ -4,6 +4,7 @@ import java.io.File;
 
 public class ThisControlPanel extends JPanel{
     private final ThisController mc;
+    boolean autoChooseFile = true;
 
     public ThisControlPanel(ThisController mc) {
         this.mc = mc;
@@ -47,7 +48,6 @@ public class ThisControlPanel extends JPanel{
     private void initListeners(){
         chooseSignal.addActionListener(e -> {
             File sourceFile;
-            boolean autoChooseFile = true;
             if(autoChooseFile){
                 String userName = System.getProperties().getProperty("user.name");
                 sourceFile = new File("C:\\Users\\" + userName + "\\Documents\\My Box Files\\Asp\\Experiment\\20140724\\21rad.txt");
@@ -55,7 +55,7 @@ public class ThisControlPanel extends JPanel{
                 sourceFile = chooseFile();
             }
 //            mc.addSignals(sourceFile);
-            mc.addSignalsNew(sourceFile);
+            mc.addSignals(sourceFile);
         });
         clearSignal.addActionListener(e -> mc.clearSignal(param.getParam()));
         calcMoveMatrix.addActionListener(e -> mc.calcMoveMatrix());
@@ -69,7 +69,6 @@ public class ThisControlPanel extends JPanel{
         });
         fullCalculation.addActionListener(e -> mc.fullCacl(param.getParam()));
         getShortSignal.addActionListener(e -> mc.getShortSignal());
-        getRadius.addActionListener(e -> mc.calcDeltaRadius());
     }
 
     private File chooseFile(){
