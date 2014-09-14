@@ -82,7 +82,6 @@ public class ThisController extends AbstractController {
         Map<String, List<Double>>  dataMap = confimModel.getDataMap();
         map.keySet().forEach(e -> {
             addModel(e, new SignalModel(e));
-//            System.out.println(e);
             SignalModel model = (SignalModel) registeredModels.get(e);
             List<Double> list = dataMap.get(map.get(e));
             model.setList(list);
@@ -113,7 +112,6 @@ public class ThisController extends AbstractController {
                 );
 
                 List<Double> listOfImpedance = processor.getImpedanceList(listOfRadius);
-
 
                 SignalModel modelRad = new SignalModel(radius);
                 addModel(radius, modelRad);
@@ -165,11 +163,11 @@ public class ThisController extends AbstractController {
         }
     }
     public void filterFirstLayer(){
-//        if(!registeredModels.containsKey(FIRST_OLD)){
+        if(!registeredModels.containsKey(FIRST_OLD)){
             addModel(FIRST_OLD, new SignalModel(FIRST_OLD));
             List<Double> filter = SlayerFilter.slayerFilter(((SignalModel)registeredModels.get(FIRST)).getList(), 20);
             ((SignalModel)registeredModels.get(FIRST_OLD)).setList(filter);
-//        }
+        }
 
         List<Double> firstUnFilter = ((SignalModel)registeredModels.get(FIRST)).getList();
         List<Double> firstFilter = ((SignalModel)registeredModels.get(FIRST_OLD)).getList();
@@ -253,10 +251,15 @@ public class ThisController extends AbstractController {
         List<Double> signal = ((SignalModel) registeredModels.get(signalName)).getList();
         signal = Invertor.invert(signal);
         List<Double> moveBadList =  Arrays.asList(0.,0.,0.,0.,3.6,5.4,5.4,7.2,7.2);
+
         MySpesificCorrelation myCor = new MySpesificCorrelation(moveBadList, signal, 5);
         System.out.println("First channel");
-        myCor.getSignalInFrame();
+        myCor.getSignalInFrame(false);
         System.out.println("Corellation ");
         myCor.getCorrel().forEach(e-> System.out.printf("%.3f  ", e));
+        myCor.getSignalInFrame(true);
+        System.out.println("Corellation after approximation");
+        myCor.getCorrelAprox().forEach(e-> System.out.printf("%.3f  ", e));
+
     }
 }
