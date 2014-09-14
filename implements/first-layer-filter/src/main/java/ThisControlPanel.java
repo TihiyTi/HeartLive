@@ -69,7 +69,7 @@ public class ThisControlPanel extends JPanel{
         });
         fullCalculation.addActionListener(e -> mc.fullCacl(param.getParam()));
         getShortSignal.addActionListener(e -> mc.getShortSignal());
-        getRadius.addActionListener(e -> mc.calcDeltaRadius());
+//        getRadius.addActionListener(e -> mc.calcDeltaRadius());
     }
 
     private File chooseFile(){
