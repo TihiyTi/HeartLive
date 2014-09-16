@@ -22,7 +22,7 @@ public class ThisControlPanel extends JPanel{
         filterFirstLayer =  new JButton("Filter First Layer");
         fullCalculation = new JButton("FullCalculation");
         getShortSignal = new JButton("Get Short Signal");
-        getRadius = new JButton("Get radius");
+        unipolarFirst = new JButton("Unipolar First Layer");
 
         GridBagConstraints constraints = new GridBagConstraints(0,0, 1,1, 0,0,
                 GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(5,5,5,5), 0,0);
@@ -41,7 +41,7 @@ public class ThisControlPanel extends JPanel{
         add(getShortSignal, constraints);
 
         constraints.gridy = 8;
-        add(getRadius, constraints);
+        add(unipolarFirst, constraints);
 
     }
 
@@ -69,6 +69,7 @@ public class ThisControlPanel extends JPanel{
         });
         fullCalculation.addActionListener(e -> mc.fullCacl(param.getParam()));
         getShortSignal.addActionListener(e -> mc.getShortSignal());
+        unipolarFirst.addActionListener(e -> mc.unipolarFirst());
     }
 
     private File chooseFile(){
@@ -91,5 +92,5 @@ public class ThisControlPanel extends JPanel{
     private JButton fullCalculation;
     private JButton getShortSignal;
 
-    private JButton getRadius;
+    private JButton unipolarFirst;
 }

@@ -48,8 +48,9 @@ public class ThisController extends AbstractController {
     public static final String CLEAR_4 = "clear_4";
     public static final String CLEAR_5 = "clear_5";
 
-    public static final List<String> models = Arrays.asList(ECG, FIRST, PRECARD_1, PRECARD_2, PRECARD_3, PRECARD_4, PRECARD_5,
+    public static final List<String> MODELS = Arrays.asList(ECG, FIRST, PRECARD_1, PRECARD_2, PRECARD_3, PRECARD_4, PRECARD_5,
             PRECARD_BASE_1, PRECARD_BASE_2,PRECARD_BASE_3, PRECARD_BASE_4, PRECARD_BASE_5);
+    public static final List<String> CLEAR_SIGNALS = Arrays.asList(CLEAR_1,CLEAR_2,CLEAR_3,CLEAR_4,CLEAR_5);
 
     public void addSignals(File dataFile){
         identityPatient = dataFile.getName();
@@ -63,13 +64,13 @@ public class ThisController extends AbstractController {
         Map<String,String> saveMap = GenericStorage.newMapStorage(identityPatient+ "confirm","").load();
         if(saveMap!=null){
             ConformityModel confimModel = (ConformityModel)registeredModels.get(CONFIRM_VIEW);
-            confimModel.setInItem(models);
+            confimModel.setInItem(MODELS);
             confimModel.setOutItem(listOfInItem);
             confimModel.setDataMap(map);
             confirmSignal(saveMap);
         }else{
             ConformityModel confimModel = (ConformityModel)registeredModels.get(CONFIRM_VIEW);
-            confimModel.setInItem(models);
+            confimModel.setInItem(MODELS);
             confimModel.setOutItem(listOfInItem);
             confimModel.setDataMap(map);
         }
@@ -87,6 +88,11 @@ public class ThisController extends AbstractController {
             model.setList(list);
         });
     }
+     public void unipolarFirst(){
+         List<Double> unipolarFirst = SignalProccesor.makeSignalUnipolar(((SignalModel) registeredModels.get(FIRST)).getList());
+         SignalModel model = (SignalModel)registeredModels.get(FIRST);
+         model.setList(unipolarFirst);
+     }
 
     public void clearSignal(List<double[]> listOfParam){
         for(int i = 0; i < 5; i++){
@@ -247,19 +253,46 @@ public class ThisController extends AbstractController {
     }
 
     public void correlation(){
-        String signalName = PRECARD_1;
-        List<Double> signal = ((SignalModel) registeredModels.get(signalName)).getList();
-        signal = Invertor.invert(signal);
-        List<Double> moveBadList =  Arrays.asList(0.,0.,0.,0.,3.6,5.4,5.4,7.2,7.2);
+        List<Double> moveOrigin_1 =  Arrays.asList(0.,0.,0.,0.,3.6,5.4,5.4,7.2,7.2);
+        List<Double> moveOrigin_2 =  Arrays.asList(1.77,3.54,3.54,3.54,5.31,7.08,10.62,12.39,15.93);
+        List<Double> moveOrigin_3 =  Arrays.asList(0.,1.75,1.75,3.5,7.,8.75,10.5,12.25,14.2);
+        List<Double> moveOrigin_4 =  Arrays.asList(-1.75,-1.75,0.,1.775,3.5,5.25,8.75,10.5,12.25);
+        List<Double> moveOrigin_5 =  Arrays.asList(1.71,3.42,5.13,6.84,8.55,10.26,11.97,11.97,13.68);
+        List<List<Double>> listOfMoveOrigin = new ArrayList<>();
+        listOfMoveOrigin.addAll(Arrays.asList(moveOrigin_1,moveOrigin_2,moveOrigin_3,moveOrigin_4,moveOrigin_5));
+        int i = 0;
+        for (String signalName : CLEAR_SIGNALS) {
+            System.out.println("Channel #"+i);
+            List<Double> signal = ((SignalModel) registeredModels.get(signalName)).getList();
+//            signal = SignalProccesor.invert(signal);   Not need for CLEAR signal
+            List<Double> moveBadList =  listOfMoveOrigin.get(i);
 
-        MySpesificCorrelation myCor = new MySpesificCorrelation(moveBadList, signal, 5);
-        System.out.println("First channel");
-        myCor.getSignalInFrame(false);
-        System.out.println("Corellation ");
-        myCor.getCorrel().forEach(e-> System.out.printf("%.3f  ", e));
-        myCor.getSignalInFrame(true);
-        System.out.println("Corellation after approximation");
-        myCor.getCorrelAprox().forEach(e-> System.out.printf("%.3f  ", e));
+            MySpesificCorrelation myCor = new MySpesificCorrelation(moveBadList, signal, 5);
+            myCor.getSignalInFrame(false, signalName);
+            System.out.println("Corellation ");
+            myCor.getCorrel().forEach(e-> System.out.printf("%.3f  ", e));
+            System.out.println();
+            myCor.getSignalInFrame(true, signalName);
+            System.out.println("Corellation after approximation");
+            myCor.getCorrelAprox().forEach(e-> System.out.printf("%.3f  ", e));
+            System.out.println();
+
+            i++;
+        }
+
+//        String signalName = CLEAR_1;
+//        List<Double> signal = ((SignalModel) registeredModels.get(signalName)).getList();
+//        signal = SignalProccesor.invert(signal);
+//        List<Double> moveBadList =  Arrays.asList(0.,0.,0.,0.,3.6,5.4,5.4,7.2,7.2);
+//
+//        MySpesificCorrelation myCor = new MySpesificCorrelation(moveBadList, signal, 5);
+//        System.out.println("First channel");
+//        myCor.getSignalInFrame(false);
+//        System.out.println("Corellation ");
+//        myCor.getCorrel().forEach(e-> System.out.printf("%.3f  ", e));
+//        myCor.getSignalInFrame(true);
+//        System.out.println("Corellation after approximation");
+//        myCor.getCorrelAprox().forEach(e-> System.out.printf("%.3f  ", e));
 
     }
 }

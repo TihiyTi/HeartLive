@@ -16,7 +16,7 @@ public class PolynomialApproximator {
         SimpleMatrix koeffMatrix = fillKoeffMatrix(signal.size(), polynomRange);
         SimpleMatrix skMatrix = fillSkMatrix(signal, polynomRange);
         SimpleMatrix aMatrix = koeffMatrix.solve(skMatrix);
-        aMatrix.print(4, 6);
+//        aMatrix.print(4, 6);
         return aMatrix;
     }
     public List<Double> getApproxSignal(List<Double> list, int polynomRange){
@@ -120,32 +120,47 @@ public class PolynomialApproximator {
 //        approximator.approxKoef(list1, 7);
 //        System.out.println(approximator.getApproxSignal(list1, 7).toString());
         System.out.println("Signal 1");
-        System.out.println(approximator.getApproxSignal(list1, listOfApproxArgs, 5).toString());
+//        System.out.println(approximator.getApproxSignal(list1, listOfApproxArgs, 5).toString());
+        approximator.getApproxSignal(list1, 5, 5).forEach(e-> System.out.printf("%.1f  ",e));
+        System.out.println();
+//        System.out.println(approximator.getApproxSignal(list1, 5, 5).toString());
 //        SignalViewCreator.createSignalView(
 //                Arrays.asList(list1, approximator.getApproxSignal(list1, listOfApproxArgs, 3), approximator.getApproxSignal(list1, listOfApproxArgs, 4), approximator.getApproxSignal(list1, listOfApproxArgs, 5)),
 //                Arrays.asList(listOfArgs, listOfApproxArgs, listOfApproxArgs, listOfApproxArgs));
 
 
         System.out.println("Signal 2");
-        System.out.println(approximator.getApproxSignal(list2, listOfApproxArgs, 4).toString());
+//        System.out.println(approximator.getApproxSignal(list2, listOfApproxArgs, 4).toString());
+        approximator.getApproxSignal(list2, 5, 4).forEach(e-> System.out.printf("%.1f  ",e));
+        System.out.println();
+//        System.out.println(approximator.getApproxSignal(list2, 5, 4).toString());
 //        SignalViewCreator.createSignalView(
 //                Arrays.asList(list2, approximator.getApproxSignal(list2, listOfApproxArgs, 3),approximator.getApproxSignal(list2, listOfApproxArgs, 4),approximator.getApproxSignal(list2, listOfApproxArgs, 5)),
 //                Arrays.asList(listOfArgs, listOfApproxArgs, listOfApproxArgs, listOfApproxArgs));
 
         System.out.println("Signal 3");
-        System.out.println(approximator.getApproxSignal(list3, listOfApproxArgs, 5).toString());
+//        System.out.println(approximator.getApproxSignal(list3, listOfApproxArgs, 5).toString());
+        approximator.getApproxSignal(list3, 5, 5).forEach(e-> System.out.printf("%.1f  ",e));
+        System.out.println();
+//        System.out.println(approximator.getApproxSignal(list3, 5, 5).toString());
 //        SignalViewCreator.createSignalView(
 //                Arrays.asList(list3, approximator.getApproxSignal(list3, listOfApproxArgs, 3),approximator.getApproxSignal(list3, listOfApproxArgs, 4),approximator.getApproxSignal(list3, listOfApproxArgs, 5)),
 //                Arrays.asList(listOfArgs, listOfApproxArgs, listOfApproxArgs, listOfApproxArgs));
 
         System.out.println("Signal 4");
-        System.out.println(approximator.getApproxSignal(list4, listOfApproxArgs, 3).toString());
+//        System.out.println(approximator.getApproxSignal(list4, listOfApproxArgs, 3).toString());
+        approximator.getApproxSignal(list4, 5, 3).forEach(e-> System.out.printf("%.1f  ",e));
+        System.out.println();
+//        System.out.println(approximator.getApproxSignal(list4, 5, 3).toString());
 //        SignalViewCreator.createSignalView(
 //                Arrays.asList(list4, approximator.getApproxSignal(list4, listOfApproxArgs, 3),approximator.getApproxSignal(list4, listOfApproxArgs, 4),approximator.getApproxSignal(list4, listOfApproxArgs, 5)),
 //                Arrays.asList(listOfArgs, listOfApproxArgs, listOfApproxArgs, listOfApproxArgs));
 
         System.out.println("Signal 5");
-        System.out.println(approximator.getApproxSignal(list5, listOfApproxArgs, 5).toString());
+//        System.out.println(approximator.getApproxSignal(list5, listOfApproxArgs, 5).toString());
+        approximator.getApproxSignal(list5, 5, 5).forEach(e-> System.out.printf("%.1f  ",e));
+        System.out.println();
+//        System.out.println(approximator.getApproxSignal(list5, 5, 5).toString());
 //        SignalViewCreator.createSignalView(
 //                Arrays.asList(list5, approximator.getApproxSignal(list5, listOfApproxArgs, 3),approximator.getApproxSignal(list5, listOfApproxArgs, 4),approximator.getApproxSignal(list5, listOfApproxArgs, 5)),
 //                Arrays.asList(listOfArgs, listOfApproxArgs, listOfApproxArgs, listOfApproxArgs));

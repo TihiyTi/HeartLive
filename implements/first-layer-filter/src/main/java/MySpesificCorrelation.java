@@ -59,8 +59,12 @@ public class MySpesificCorrelation {
     }
 
     public void getSignalInFrame(boolean isApproxSignal){
+        getSignalInFrame(isApproxSignal, "");
+    }
+    public void getSignalInFrame(boolean isApproxSignal, String frameName){
         JFrame frame = new JFrame("Signal");
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setTitle(frameName);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setSize(new Dimension(800, 500));
         if(isApproxSignal){
             frame.getContentPane().add(getApproxSignal());
