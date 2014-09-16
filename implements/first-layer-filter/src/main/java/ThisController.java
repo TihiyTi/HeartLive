@@ -262,18 +262,18 @@ public class ThisController extends AbstractController {
         listOfMoveOrigin.addAll(Arrays.asList(moveOrigin_1,moveOrigin_2,moveOrigin_3,moveOrigin_4,moveOrigin_5));
         int i = 0;
         for (String signalName : CLEAR_SIGNALS) {
-            System.out.println("Channel #"+i);
+            System.out.println("Channel #"+(i+1));
             List<Double> signal = ((SignalModel) registeredModels.get(signalName)).getList();
 //            signal = SignalProccesor.invert(signal);   Not need for CLEAR signal
             List<Double> moveBadList =  listOfMoveOrigin.get(i);
 
             MySpesificCorrelation myCor = new MySpesificCorrelation(moveBadList, signal, 5);
             myCor.getSignalInFrame(false, signalName);
-            System.out.println("Corellation ");
+            System.out.println("Correlation ");
             myCor.getCorrel().forEach(e-> System.out.printf("%.3f  ", e));
             System.out.println();
             myCor.getSignalInFrame(true, signalName);
-            System.out.println("Corellation after approximation");
+            System.out.println("Correlation after approximation");
             myCor.getCorrelAprox().forEach(e-> System.out.printf("%.3f  ", e));
             System.out.println();
 

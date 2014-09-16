@@ -18,22 +18,34 @@ import java.util.Collections;
 import java.util.List;
 
 public class SignalJFreePanel extends AbstractViewPanel {
-//    private int fDiscret = 500;
+    List<Double> scales = new ArrayList<>();
+
     public SignalJFreePanel(List<List<Double>> data, List<String> names){
         List<XYSeries> listOfseries = bindSeries(data, names);
         ChartPanel chartPanel = new ChartPanel(getChart(listOfseries));
         chartPanel.getChart().getXYPlot().getRangeAxis().setRange(autoRange(data));
         add(chartPanel);
     }
+    public SignalJFreePanel(List<List<Double>> data, List<String> names, boolean flag, List<Double> scales){
+        this.scales = scales;
+        List<XYSeries> listOfseries = bindSeries(data, names);
+        ChartPanel chartPanel = new ChartPanel(getChart(listOfseries));
+        chartPanel.getChart().getXYPlot().getRangeAxis().setRange(autoRange(data));
+        add(chartPanel);
+    }
+
     public SignalJFreePanel(List<List<Double>> data, List<List<Double>> args, List<String> names){
         List<XYSeries> listOfseries = bindSeries(data, args, names);
         ChartPanel chartPanel = new ChartPanel(getChart(listOfseries));
         chartPanel.getChart().getXYPlot().getRangeAxis().setRange(autoRange(data));
         add(chartPanel);
     }
-
-    private void initPanel(){
-
+    public SignalJFreePanel(List<List<Double>> data, List<List<Double>> args, List<String> names, List<Double> scales){
+        this.scales = scales;
+        List<XYSeries> listOfseries = bindSeries(data, args, names);
+        ChartPanel chartPanel = new ChartPanel(getChart(listOfseries));
+        chartPanel.getChart().getXYPlot().getRangeAxis().setRange(autoRange(data));
+        add(chartPanel);
     }
 
     private JFreeChart getChart(List<XYSeries> series){
@@ -52,10 +64,19 @@ public class SignalJFreePanel extends AbstractViewPanel {
         List<XYSeries> listOfSeies = new ArrayList<>();
         for(int i = 0; i < data.size(); i++){
             XYSeries series = new XYSeries(names.get(i));
-            int j = 0;
-            for (Double d : data.get(i)) {
-                series.add(j++, d);
+//            int j = 0;
+//            for (Double d : data.get(i)) {
+//                series.add(j++, d);
+//            }
+            List<Double> yData = data.get(i);
+            double yScale = 1;
+            for(int k = 0; k < yData.size(); k++){
+//                if(scales.size() > k){
+                    yScale = scales.get(k);
+//                }
+                series.add(k, yData.get(k)*yScale);
             }
+
             listOfSeies.add(series);
         }
         return listOfSeies;
