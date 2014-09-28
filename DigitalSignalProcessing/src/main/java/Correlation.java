@@ -1,5 +1,6 @@
 import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Correlation {
@@ -16,56 +17,17 @@ public class Correlation {
         }
         return correlation.correlation(a,b);
     }
-//    public List<Double> correlationVector(List<Double> aList, List<Double> bList){
-//        PearsonsCorrelation correlation = new PearsonsCorrelation();
-//        double[] a = new double[aList.size()];
-//        double[] b = new double[bList.size()];
-//        for (int i = 0; i < aList.size(); i++) {
-//            a[i] = aList.get(i);
-//            b[i] = bList.get(i);
-//        }
-//        correlation.
-//    }
+    public double correlationWithoutTrends(List<Double> aList, List<Double> bList){
+        return correlation(removeTrend(aList), removeTrend(bList));
+    }
 
-    @Deprecated
-    public double[] correlation(double[] a, double[] b){
-        double[] result =  new double[a.length];
-        for (int i = 0; i < a.length; i++) {
-            result[i] = covar(a,b,i)/(Math.sqrt(meanValue(a)*meanValue(b)));
+    private List<Double> removeTrend(List<Double> list){
+        List<Double> clear = new ArrayList<>();
+        PolynomialApproximator approximator = new PolynomialApproximator();
+        List<Double> listNoTrends = approximator.getApproxSignal(list,1);
+        for (int i = 0; i < list.size(); i++) {
+            clear.add(list.get(i) - listNoTrends.get(i));
         }
-        return result;
-    }
-    @Deprecated
-    public double koeffCorrellation(double[] a, double[] b){
-        double[] result = correlation(a,b);
-        double max = Double.MIN_VALUE;
-        for (double aResult : result) {
-            if (max < aResult) {
-                max = aResult;
-            }
-        }
-        return max;
-    }
-    @Deprecated
-    public double meanValue(double[] x){
-        double sum = 0;
-        for (double aX : x) {
-            sum += (aX * aX);
-        }
-        return sum/x.length;
-    }
-    @Deprecated
-    public double covar(double[] a, double[] b, int shift){
-        double sum = 0;
-        for (int i = 0; i < a.length; i++) {
-            double second;
-            if(i - shift >= 0){
-                second = b[i - shift];
-            }else{
-                second = 0;
-            }
-            sum += a[i]*second;
-        }
-        return sum/a.length;
+        return clear;
     }
 }

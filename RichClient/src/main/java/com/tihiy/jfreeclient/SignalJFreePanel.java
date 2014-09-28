@@ -1,6 +1,7 @@
 package com.tihiy.jfreeclient;
 
 
+import com.tihiy.WindowUtils;
 import com.tihiy.rclint.mvcAbstract.AbstractViewPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -12,13 +13,15 @@ import org.jfree.data.Range;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+import javax.swing.*;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class SignalJFreePanel extends AbstractViewPanel {
-    List<Double> scales = new ArrayList<>();
+    List<Double> scales;
 
     public SignalJFreePanel(List<List<Double>> data, List<String> names){
         List<XYSeries> listOfseries = bindSeries(data, names);
@@ -33,7 +36,6 @@ public class SignalJFreePanel extends AbstractViewPanel {
         chartPanel.getChart().getXYPlot().getRangeAxis().setRange(autoRange(data));
         add(chartPanel);
     }
-
     public SignalJFreePanel(List<List<Double>> data, List<List<Double>> args, List<String> names){
         List<XYSeries> listOfseries = bindSeries(data, args, names);
         ChartPanel chartPanel = new ChartPanel(getChart(listOfseries));
@@ -48,6 +50,22 @@ public class SignalJFreePanel extends AbstractViewPanel {
         add(chartPanel);
     }
 
+
+    public void getSignalInFrame(){
+        JFrame frame = new JFrame("Signal");
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        frame.setSize(new Dimension(800, 500));
+        frame.getContentPane().add(this);
+        WindowUtils.centerOnScreenAndSetVisible(frame);
+    }
+    public void getSignalInFrame(boolean exitOnClose){
+        JFrame frame = new JFrame("Signal");
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setSize(new Dimension(800, 500));
+        frame.getContentPane().add(this);
+        WindowUtils.centerOnScreenAndSetVisible(frame);
+    }
+
     private JFreeChart getChart(List<XYSeries> series){
         XYSeriesCollection xydataset = new XYSeriesCollection(); // добавление контейнера для построение 1 графика
         xydataset.setAutoWidth(true);
@@ -59,7 +77,6 @@ public class SignalJFreePanel extends AbstractViewPanel {
 //        chartProc.set
         return chartProc;
     }
-
     private List<XYSeries> bindSeries(List<List<Double>> data, List<String> names){
         List<XYSeries> listOfSeies = new ArrayList<>();
         for(int i = 0; i < data.size(); i++){
@@ -71,9 +88,11 @@ public class SignalJFreePanel extends AbstractViewPanel {
             List<Double> yData = data.get(i);
             double yScale = 1;
             for(int k = 0; k < yData.size(); k++){
-//                if(scales.size() > k){
-                    yScale = scales.get(k);
-//                }
+                if(scales != null) {
+                    if (scales.size() > k) {
+                        yScale = scales.get(k);
+                    }
+                }
                 series.add(k, yData.get(k)*yScale);
             }
 
@@ -92,7 +111,6 @@ public class SignalJFreePanel extends AbstractViewPanel {
         }
         return listOfSeies;
     }
-
     private Range autoRange(List<List<Double>> data){
         List<Double> listOfLocalMax = new ArrayList<>();
         List<Double> listOfLocalMin = new ArrayList<>();

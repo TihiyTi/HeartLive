@@ -268,6 +268,7 @@ public class ThisController extends AbstractController {
             List<Double> moveBadList =  listOfMoveOrigin.get(i);
 
             MySpesificCorrelation myCor = new MySpesificCorrelation(moveBadList, signal, 5);
+            myCor.removeTrends = true;
             myCor.getSignalInFrame(false, signalName);
             System.out.println("Correlation ");
             myCor.getCorrel().forEach(e-> System.out.printf("%.3f  ", e));

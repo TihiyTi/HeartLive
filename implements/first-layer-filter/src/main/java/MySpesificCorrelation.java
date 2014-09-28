@@ -16,6 +16,7 @@ public class MySpesificCorrelation {
     private List<List<Double>> cutShortImpedances;
     private List<List<Double>> approxMovies;
     private int polynomeRange;
+    public boolean removeTrends = false;
 
     public MySpesificCorrelation(List<Double> moveList, List<Double> impedance, int polynomeRange) {
         this.moveList = moveList;
@@ -29,14 +30,23 @@ public class MySpesificCorrelation {
     public List<Double> getCorrel(){
         List<Double> values = new ArrayList<>();
         Correlation cor = new Correlation();
-        cutShortImpedances.forEach(e-> values.add(cor.correlation(moveList,e)));
+        if(removeTrends){
+            cutShortImpedances.forEach(e-> values.add(cor.correlationWithoutTrends(moveList,e)));
+        }else {
+            cutShortImpedances.forEach(e-> values.add(cor.correlation(moveList,e)));
+        }
         return values;
     }
     public List<Double> getCorrelAprox(){
         List<Double> values =  new ArrayList<>();
         Correlation cor = new Correlation();
         for (int i = 0; i < shortImpedances.size(); i++) {
-            values.add(cor.correlation(shortImpedances.get(i), approxMovies.get(i)));
+            if(removeTrends){
+                values.add(cor.correlationWithoutTrends(shortImpedances.get(i), approxMovies.get(i)));
+            }else {
+                values.add(cor.correlation(shortImpedances.get(i), approxMovies.get(i)));
+            }
+
         }
         return values;
     }
