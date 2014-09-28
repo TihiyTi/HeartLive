@@ -25,7 +25,8 @@ import java.util.Map;
 public abstract class AbstractController implements PropertyChangeListener {
     //  Vectors that hold a list of the registered models and views for this controller.
     private ArrayList<AbstractViewPanel> registeredViews;
-    private final Map<String, AbstractModel> registeredModels;
+    protected Map<String, AbstractModel> registeredModels = new HashMap<>();
+//    private final Map<String, AbstractModel> registeredModels;
 
     /** Creates a new instance of Controller */
     public AbstractController() {
