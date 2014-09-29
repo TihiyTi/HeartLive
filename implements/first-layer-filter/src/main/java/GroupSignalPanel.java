@@ -1,5 +1,3 @@
-import com.tihiy.rclint.view.MultiSignalPanel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.Collections;
@@ -7,12 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Alex
- * Date: 28.07.14
- * Time: 13:53
- */
 public class GroupSignalPanel extends JPanel{
     ThisController mc;
 
@@ -72,27 +64,13 @@ public class GroupSignalPanel extends JPanel{
         }};
         add(addMultiPanel2(signalsArray, signalMap, colorMap));
     }
-    private JScrollPane addPanel(String nameSignal, String nameSignal_2){
-        Map<String, List<Double>> tempMap = new HashMap<>();
-        tempMap.put(mc.ECG, Collections.<Double>emptyList());
-        tempMap.put(nameSignal, Collections.<Double>emptyList());
-        if(nameSignal_2!=null){
-            tempMap.put(nameSignal_2, Collections.<Double>emptyList());
-        }
-        MultiSignalPanel tempPanel = new MultiSignalPanel(mc,tempMap);
-        JScrollPane pane = new JScrollPane(tempPanel);
-        tempPanel.setPreferredSize(new Dimension(5000, tempPanel.getHeight()));
-        mc.addView(tempPanel);
-        return pane;
-    }
+
     private JScrollPane addMultiPanel2(String[] signals, Map<String, Integer> tempMapPosition, Map<String, Color> mapColor){
         Map<String, List<Double>> tempMap = new HashMap<>();
         tempMap.put(mc.ECG, Collections.<Double>emptyList());
         for(int i = 0; i < signals.length; i++){
             tempMap.put(signals[i], Collections.<Double>emptyList());
         }
-
-//        MultiSignalPanel2 tempPanel = new MultiSignalPanel2(mc,tempMap,tempMapPosition);
         ExMultiSignalPanel tempPanel = new ExMultiSignalPanel(mc,tempMap,tempMapPosition);
         tempPanel.colorSignal(mapColor);
         JScrollPane pane = new JScrollPane(tempPanel);

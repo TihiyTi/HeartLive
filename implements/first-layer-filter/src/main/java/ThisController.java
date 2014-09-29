@@ -19,7 +19,7 @@ import java.util.*;
 import java.util.logging.Logger;
 
 public class ThisController extends AbstractController {
-    private final Map<String, AbstractModel> registeredModels = new HashMap<>();
+    //private final Map<String, AbstractModel> registeredModels = new HashMap<>();
     private String identityPatient;
 
     public static final String CONFIRM_VIEW = "confirm";
