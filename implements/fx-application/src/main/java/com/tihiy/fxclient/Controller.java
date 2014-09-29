@@ -55,7 +55,7 @@ public class Controller implements Initializable{
         tab2Controller = fxmlLoader2.getController();
 
 
-//        tab1Controller.bindProperties(tab2Controller.getProperties());
+        tab1Controller.bindProperties(tab2Controller.getProperties());
 
 
 

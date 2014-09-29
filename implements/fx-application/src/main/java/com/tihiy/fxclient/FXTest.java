@@ -34,15 +34,15 @@ public class FXTest extends Application {
             Class clazz = FXTest.class;
             URL location1 = clazz.getResource(SCENE_XML);
             FXMLLoader fxmlLoader = new FXMLLoader(location1);
-//            fxmlLoader.setControllerFactory(e -> BeanFactoryUtils.beanOfType(context, e));
+            fxmlLoader.setControllerFactory(e -> BeanFactoryUtils.beanOfType(context, e));
             Pane root = fxmlLoader.load();
 
             stage.setScene(new Scene(root));
             stage.show();
 
-//            Controller mc = (Controller) context.getBean("mc");
+            Controller mc = (Controller) context.getBean("mc");
             StringProperty prop = new SimpleStringProperty();
-//            mc.setBindProperty(prop);
+            mc.setBindProperty(prop);
             prop.addListener((observable, oldValue, newValue) -> System.out.println("TEST COMPLETE!!"));
         }catch (Exception e){
             System.out.println(e.toString());
