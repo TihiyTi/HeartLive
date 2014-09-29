@@ -50,7 +50,8 @@ public class ThisControlPanel extends JPanel{
             File sourceFile;
             if(autoChooseFile){
                 String userName = System.getProperties().getProperty("user.name");
-                sourceFile = new File("C:\\Users\\" + userName + "\\Documents\\My Box Files\\Asp\\Experiment\\20140724\\21rad.txt");
+//                sourceFile = new File("C:\\Users\\" + userName + "\\Documents\\My Box Files\\Asp\\Experiment\\20140724\\21rad.txt");
+                sourceFile = new File("C:\\Users\\" + userName + "\\Documents\\My Box Files\\Asp\\Experiment\\20140326\\Export\\1.txt");
             }else{
                 sourceFile = chooseFile();
             }

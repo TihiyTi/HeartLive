@@ -74,6 +74,16 @@ public class ThisController extends AbstractController {
             confimModel.setOutItem(listOfInItem);
             confimModel.setDataMap(map);
         }
+        signalFilterForAlex();
+    }
+
+    private void signalFilterForAlex(){
+        List<String> listSignalForFilter = Arrays.asList(PRECARD_2,PRECARD_4, PRECARD_5);
+        listSignalForFilter.forEach(e -> {
+            List<Double> list = ((SignalModel)registeredModels.get(e)).getList();
+            List<Double> filtList = SlayerFilter.slayerFilter(list, 20);
+            ((SignalModel)registeredModels.get(e)).setList(filtList);
+        });
     }
 //
     public void confirmSignal(Map<String,String> map){
@@ -253,11 +263,21 @@ public class ThisController extends AbstractController {
     }
 
     public void correlation(){
-        List<Double> moveOrigin_1 =  Arrays.asList(0.,0.,0.,0.,3.6,5.4,5.4,7.2,7.2);
-        List<Double> moveOrigin_2 =  Arrays.asList(1.77,3.54,3.54,3.54,5.31,7.08,10.62,12.39,15.93);
-        List<Double> moveOrigin_3 =  Arrays.asList(0.,1.75,1.75,3.5,7.,8.75,10.5,12.25,14.2);
-        List<Double> moveOrigin_4 =  Arrays.asList(-1.75,-1.75,0.,1.775,3.5,5.25,8.75,10.5,12.25);
-        List<Double> moveOrigin_5 =  Arrays.asList(1.71,3.42,5.13,6.84,8.55,10.26,11.97,11.97,13.68);
+        //Ivan
+//        List<Double> moveOrigin_1 =  Arrays.asList(0.,0.,0.,0.,3.6,5.4,5.4,7.2,7.2);
+//        List<Double> moveOrigin_2 =  Arrays.asList(1.77,3.54,3.54,3.54,5.31,7.08,10.62,12.39,15.93);
+//        List<Double> moveOrigin_3 =  Arrays.asList(0.,1.75,1.75,3.5,7.,8.75,10.5,12.25,14.2);
+//        List<Double> moveOrigin_4 =  Arrays.asList(-1.75,-1.75,0.,1.775,3.5,5.25,8.75,10.5,12.25);
+//        List<Double> moveOrigin_5 =  Arrays.asList(1.71,3.42,5.13,6.84,8.55,10.26,11.97,11.97,13.68);
+
+        //Alex
+        List<Double> moveOrigin_1 =  Arrays.asList(0., 0., 0., 1.7, 1.7, 5.1, 1.7, 1.7, 1.7, 1.7);
+        List<Double> moveOrigin_2 =  Arrays.asList(0., 0., 1.75, 1.75, 1.75, 5.25, 5.25, 7., 7., 7.);
+        List<Double> moveOrigin_3 =  Arrays.asList(0., 0., 1.75, 1.75, 1.75, 5.25, 5.25, 7., 7., 7.);
+        List<Double> moveOrigin_4 =  Arrays.asList(0., 1.8, 3.6, 3.6, 5.4, 5.4, 7.2, 9., 9., 9.);
+        List<Double> moveOrigin_5 =  Arrays.asList(0., 1.8, 5.4, 9., 12.6, 16.2, 16.2, 16.2, 18., 18.);
+
+
         List<List<Double>> listOfMoveOrigin = new ArrayList<>();
         listOfMoveOrigin.addAll(Arrays.asList(moveOrigin_1,moveOrigin_2,moveOrigin_3,moveOrigin_4,moveOrigin_5));
         int i = 0;

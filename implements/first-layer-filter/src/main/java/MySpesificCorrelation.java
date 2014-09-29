@@ -64,7 +64,11 @@ public class MySpesificCorrelation {
         listOfSignal.addAll(multyList);
         List<String> listOfNames = new ArrayList<>();
         listOfNames.add(oneName);
-        listOfNames.addAll(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
+        int i = 0;
+        multyList.forEach(e -> {
+            listOfNames.add("" + (multyList.indexOf(e) + 1));
+        });
+//        listOfNames.addAll(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
         List<Double> listOfScales = Arrays.asList(0.05,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.);
         SignalJFreePanel signalJFreePanel = new SignalJFreePanel(listOfSignal, listOfNames, true, listOfScales);
         return signalJFreePanel;
