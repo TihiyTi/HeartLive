@@ -35,24 +35,24 @@ public class Controller implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Class clazz = FXTest.class;
-        URL location1 = clazz.getResource("tabparam.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(location1);
-        try {
-            tab1 = fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        sid.setRight(tab1);
-        tab1Controller = fxmlLoader.getController();
-        FXMLLoader fxmlLoader2 = new FXMLLoader(location1);
-        try {
-            tab2 = fxmlLoader2.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        sid.setLeft(tab2);
-        tab2Controller = fxmlLoader2.getController();
+//        Class clazz = FXTest.class;
+//        URL location1 = clazz.getResource("tabparam.fxml");
+//        FXMLLoader fxmlLoader = new FXMLLoader(location1);
+//        try {
+//            tab1 = fxmlLoader.load();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        sid.setRight(tab1);
+//        tab1Controller = fxmlLoader.getController();
+//        FXMLLoader fxmlLoader2 = new FXMLLoader(location1);
+//        try {
+//            tab2 = fxmlLoader2.load();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        sid.setLeft(tab2);
+//        tab2Controller = fxmlLoader2.getController();
 
 
         tab1Controller.bindProperties(tab2Controller.getProperties());
