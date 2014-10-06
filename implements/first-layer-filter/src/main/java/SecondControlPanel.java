@@ -11,13 +11,15 @@ public class SecondControlPanel extends JPanel {
 
     private void initComponent(){
         viewCorrelation = new JButton("ViewCorrelation");
-
+        crossCorrelation = new JButton("CrossCorrelation");
         add(viewCorrelation);
+        add(crossCorrelation);
     }
     private void initListeners(){
         viewCorrelation.addActionListener(e-> mc.correlation());
-
+        crossCorrelation.addActionListener(e-> mc.crossCorrelation());
     }
 
     private JButton viewCorrelation;
+    private JButton crossCorrelation;
 }

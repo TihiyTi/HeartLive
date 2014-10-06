@@ -328,4 +328,8 @@ public class ThisController extends AbstractController {
 //        myCor.getCorrelAprox().forEach(e-> System.out.printf("%.3f  ", e));
 
     }
+
+    public void crossCorrelation() {
+
+    }
 }
