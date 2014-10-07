@@ -89,7 +89,7 @@ public class MySpesificCorrelation {
         }
         WindowUtils.centerOnScreenAndSetVisible(frame);
     }
-    private List<List<Double>> getMiniSignal() {
+    public List<List<Double>> getMiniSignal() {
         List<List<Double>> miniLists = new ArrayList<>();
         for(int i = 1; i <= getNumOfInterval(); i++){
             miniLists.add(impedance.subList(getPoint(i, BEGIN), getPoint(i, END)));
@@ -110,7 +110,7 @@ public class MySpesificCorrelation {
         });
         return values;
     }
-    private List<List<Double>> getApproxMovies(){
+    public List<List<Double>> getApproxMovies(){
         List<List<Double>> values = new ArrayList<>();
         PolynomialApproximator approx = new PolynomialApproximator();
         shortImpedances.forEach(e->{

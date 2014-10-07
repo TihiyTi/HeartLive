@@ -282,6 +282,10 @@ public class ThisController extends AbstractController {
         List<List<Double>> listOfMoveOrigin = new ArrayList<>();
         listOfMoveOrigin.addAll(Arrays.asList(moveOrigin_1,moveOrigin_2,moveOrigin_3,moveOrigin_4,moveOrigin_5));
         int i = 0;
+        List<List<List<Double>>> approxMoveChannelInterval = new ArrayList<>();
+        List<List<List<Double>>> impidanceChannelInterval = new ArrayList<>();
+
+
         for (String signalName : CLEAR_SIGNALS) {
             System.out.println("Channel #"+(i+1));
             List<Double> signal = ((SignalModel) registeredModels.get(signalName)).getList();
@@ -289,6 +293,8 @@ public class ThisController extends AbstractController {
             List<Double> moveBadList =  listOfMoveOrigin.get(i);
 
             MySpesificCorrelation myCor = new MySpesificCorrelation(moveBadList, signal, polinome[i]);
+            approxMoveChannelInterval.add(myCor.getApproxMovies());
+            impidanceChannelInterval.add(myCor.getMiniSignal());
             System.out.println("Корреляция до удаления тренда");
             myCor.removeTrends = false;
             myCor.getSignalInFrame(false, signalName);
@@ -312,8 +318,15 @@ public class ThisController extends AbstractController {
 
             i++;
         }
-
-//        String signalName = CLEAR_1;
+        System.out.println("CROSS CORRELATION");
+        for (int i1 = 0; i1 < approxMoveChannelInterval.size(); i1++) {
+            System.out.println("Channel "+(i1+1));
+            MyCrossCorrelation cross = new MyCrossCorrelation(approxMoveChannelInterval,impidanceChannelInterval);
+            List<Double> correlations = cross.getCorrelationMoveWithImpedanceS(i1);
+            correlations.forEach(e-> System.out.printf("%.3f  ", e));
+            System.out.println();
+        }
+//  String signalName = CLEAR_1;
 //        List<Double> signal = ((SignalModel) registeredModels.get(signalName)).getList();
 //        signal = SignalProccesor.invert(signal);
 //        List<Double> moveBadList =  Arrays.asList(0.,0.,0.,0.,3.6,5.4,5.4,7.2,7.2);
