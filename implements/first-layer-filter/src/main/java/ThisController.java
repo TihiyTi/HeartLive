@@ -326,6 +326,15 @@ public class ThisController extends AbstractController {
             correlations.forEach(e-> System.out.printf("%.3f  ", e));
             System.out.println();
         }
+        System.out.println("CROSS CORRELATION without trend");
+        for (int i1 = 0; i1 < approxMoveChannelInterval.size(); i1++) {
+            System.out.println("Channel "+(i1+1));
+            MyCrossCorrelation cross = new MyCrossCorrelation(approxMoveChannelInterval,impidanceChannelInterval);
+            cross.removeTrends = true;
+            List<Double> correlations = cross.getCorrelationMoveWithImpedanceS(i1);
+            correlations.forEach(e-> System.out.printf("%.3f  ", e));
+            System.out.println();
+        }
 //  String signalName = CLEAR_1;
 //        List<Double> signal = ((SignalModel) registeredModels.get(signalName)).getList();
 //        signal = SignalProccesor.invert(signal);

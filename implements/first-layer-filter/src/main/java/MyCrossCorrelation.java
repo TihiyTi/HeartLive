@@ -23,6 +23,14 @@ public class MyCrossCorrelation {
                 List<Double> impedanceFirstInterval = e.get(0);
                 correlations.add(cor.correlation(moveFirstInterval,impedanceFirstInterval));
             });
+        }else{
+            List<List<Double>> approxMove = approxMoveChannelInterval.get(channel);
+            List<Double> moveFirstInterval = approxMove.get(0);
+            Correlation cor = new Correlation();
+            impedanceChannelInterval.forEach(e -> {
+                List<Double> impedanceFirstInterval = e.get(0);
+                correlations.add(cor.correlationWithoutTrends(moveFirstInterval,impedanceFirstInterval));
+            });
         }
         return correlations;
     }
