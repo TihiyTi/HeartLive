@@ -271,12 +271,21 @@ public class ThisController extends AbstractController {
 //        List<Double> moveOrigin_5 =  Arrays.asList(1.71,3.42,5.13,6.84,8.55,10.26,11.97,11.97,13.68);
 //        int[] polinome = {5,4,5,5,4};
         //Alex
-        List<Double> moveOrigin_1 =  Arrays.asList(0., 0., 0., 1.7, 1.7, 5.1, 1.7, 1.7, 1.7, 1.7);
-        List<Double> moveOrigin_2 =  Arrays.asList(0., 0., 1.75, 1.75, 1.75, 5.25, 5.25, 7., 7., 7.);
-        List<Double> moveOrigin_3 =  Arrays.asList(0., 0., 1.75, 1.75, 1.75, 5.25, 5.25, 7., 7., 7.);
-        List<Double> moveOrigin_4 =  Arrays.asList(0., 1.8, 3.6, 3.6, 5.4, 5.4, 7.2, 9., 9., 9.);
-        List<Double> moveOrigin_5 =  Arrays.asList(0., 1.8, 5.4, 9., 12.6, 16.2, 16.2, 16.2, 18., 18.);
+//        List<Double> moveOrigin_1 =  Arrays.asList(0., 0., 0., 1.7, 1.7, 5.1, 1.7, 1.7, 1.7, 1.7);
+//        List<Double> moveOrigin_2 =  Arrays.asList(0., 0., 1.75, 1.75, 1.75, 5.25, 5.25, 7., 7., 7.);
+//        List<Double> moveOrigin_3 =  Arrays.asList(0., 0., 1.75, 1.75, 1.75, 5.25, 5.25, 7., 7., 7.);
+//        List<Double> moveOrigin_4 =  Arrays.asList(0., 1.8, 3.6, 3.6, 5.4, 5.4, 7.2, 9., 9., 9.);
+//        List<Double> moveOrigin_5 =  Arrays.asList(0., 1.8, 5.4, 9., 12.6, 16.2, 16.2, 16.2, 18., 18.);
+//        int[] polinome = {2,3,3,3,4};
+        //Tema
+        List<Double> moveOrigin_1 =  Arrays.asList(0., 0., 0., 0., 0., 0., 0., 0., 0.);
+        List<Double> moveOrigin_2 =  Arrays.asList(0., 1.8, 1.8, 1.8, 3.6, 5.4, 7.2, 7.2, 9.);
+        List<Double> moveOrigin_3 =  Arrays.asList(0., 1.25, 1.25, 2.5, 5., 8.75, 12.5, 13.75, 15.);
+        List<Double> moveOrigin_4 =  Arrays.asList(0., 0., 0., 1.2, 3.6, 6., 8.4, 10.8, 9.6);
+        List<Double> moveOrigin_5 =  Arrays.asList(0., 1.25, 3.75, 3.75, 5., 5., 5., 5., 5.);
         int[] polinome = {2,3,3,3,4};
+
+
 
 
         List<List<Double>> listOfMoveOrigin = new ArrayList<>();
