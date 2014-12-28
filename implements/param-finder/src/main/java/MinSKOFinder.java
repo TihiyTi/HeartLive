@@ -1,6 +1,7 @@
 import com.tihiy.reonew.SphereCalc;
 import com.tihiy.reonew.SphereModelParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MinSKOFinder {
@@ -27,10 +28,24 @@ public class MinSKOFinder {
         }
     }
 
-    private void getSKO(List<Double> experimentalList, int h, int r, double ro, int y) {
+    public Double getSKO(List<Double> experimentalList, int h, int r, double ro, int y) {
+        List<Double> modelList = new ArrayList<>();
         SphereModelParam param = new SphereModelParam(ro, 1.35, 0.05, 0.025, r, h, 0, y);
         SphereCalc calc = new SphereCalc(param);
-        calc.getMeasurementFullImp();
+        for (int i = 0; i < experimentalList.size(); i++) {
+            param.setYShift(y + 0.005*i);
+            modelList.add(calc.getMeasurementFullImp());
+        }
+        return SKO(experimentalList, modelList);
+    }
+
+    public Double SKO(List<Double> list1, List<Double> list2){
+        Double summa = (double) 0;
+        for (int i = 0; i < list1.size(); i++) {
+            Double delta = list1.get(i) - list2.get(i);
+            summa = summa + delta*delta;
+        }
+        return summa/list1.size();
     }
 
     public void setRInterval(int beginR, int endR){

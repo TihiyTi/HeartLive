@@ -20,4 +20,8 @@ public class SphereModelParam {
         this.yShift = yShift;
         this.h = h;
     }
+
+    public void setYShift(double yShift){
+        this.yShift = yShift;
+    }
 }
