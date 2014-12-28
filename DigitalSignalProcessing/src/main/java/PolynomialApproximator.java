@@ -101,11 +101,19 @@ public class PolynomialApproximator {
 //        List<Double> list4 = Arrays.asList(-1.75,-1.75, 0., 1.775, 3.5,5.25,8.75, 10.5,12.25);
 //        List<Double> list5 = Arrays.asList(1.71, 3.42,5.13,6.84,8.55,10.26,11.97,11.97,13.68);
 //      Alex moving
-        List<Double> list1 =  Arrays.asList(0., 0., 0., 1.7, 1.7, 1.7, 1.7, 1.7, 1.7, 1.7);
-        List<Double> list2 =  Arrays.asList(0., 0., 1.75, 1.75, 1.75, 5.25, 5.25, 7., 7., 7.);
-        List<Double> list3 =  Arrays.asList(0., 0., 1.75, 1.75, 1.75, 5.25, 5.25, 7., 7., 7.);
-        List<Double> list4 =  Arrays.asList(0., 1.8, 3.6, 3.6, 5.4, 5.4, 7.2, 9., 9., 9.);
-        List<Double> list5 =  Arrays.asList(0., 1.8, 5.4, 9., 12.6, 16.2, 16.2, 16.2, 18., 18.);
+//        List<Double> list1 =  Arrays.asList(0., 0., 0., 1.7, 1.7, 1.7, 1.7, 1.7, 1.7, 1.7);
+//        List<Double> list2 =  Arrays.asList(0., 0., 1.75, 1.75, 1.75, 5.25, 5.25, 7., 7., 7.);
+//        List<Double> list3 =  Arrays.asList(0., 0., 1.75, 1.75, 1.75, 5.25, 5.25, 7., 7., 7.);
+//        List<Double> list4 =  Arrays.asList(0., 1.8, 3.6, 3.6, 5.4, 5.4, 7.2, 9., 9., 9.);
+//        List<Double> list5 =  Arrays.asList(0., 1.8, 5.4, 9., 12.6, 16.2, 16.2, 16.2, 18., 18.);
+        //Tema
+        List<Double> list1 =  Arrays.asList(0., 0., 0., 0., 0., 0., 0., 0., 0.);
+        List<Double> list2 =  Arrays.asList(0., 1.8, 1.8, 1.8, 3.6, 5.4, 7.2, 7.2, 9.);
+        List<Double> list3 =  Arrays.asList(0., 1.25, 1.25, 2.5, 5., 8.75, 12.5, 13.75, 15.);
+        List<Double> list4 =  Arrays.asList(0., 0., 0., 1.2, 3.6, 6., 8.4, 10.8, 9.6);
+        List<Double> list5 =  Arrays.asList(0., 1.25, 3.75, 3.75, 5., 5., 5., 5., 5.);
+
+
 
         List<Double> listOfArgs = new ArrayList<>();
         List<Double> listOfApproxArgs = new ArrayList<>();

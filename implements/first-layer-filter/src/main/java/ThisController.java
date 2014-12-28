@@ -271,17 +271,30 @@ public class ThisController extends AbstractController {
 //        List<Double> moveOrigin_5 =  Arrays.asList(1.71,3.42,5.13,6.84,8.55,10.26,11.97,11.97,13.68);
 //        int[] polinome = {5,4,5,5,4};
         //Alex
-        List<Double> moveOrigin_1 =  Arrays.asList(0., 0., 0., 1.7, 1.7, 5.1, 1.7, 1.7, 1.7, 1.7);
-        List<Double> moveOrigin_2 =  Arrays.asList(0., 0., 1.75, 1.75, 1.75, 5.25, 5.25, 7., 7., 7.);
-        List<Double> moveOrigin_3 =  Arrays.asList(0., 0., 1.75, 1.75, 1.75, 5.25, 5.25, 7., 7., 7.);
-        List<Double> moveOrigin_4 =  Arrays.asList(0., 1.8, 3.6, 3.6, 5.4, 5.4, 7.2, 9., 9., 9.);
-        List<Double> moveOrigin_5 =  Arrays.asList(0., 1.8, 5.4, 9., 12.6, 16.2, 16.2, 16.2, 18., 18.);
+//        List<Double> moveOrigin_1 =  Arrays.asList(0., 0., 0., 1.7, 1.7, 5.1, 1.7, 1.7, 1.7, 1.7);
+//        List<Double> moveOrigin_2 =  Arrays.asList(0., 0., 1.75, 1.75, 1.75, 5.25, 5.25, 7., 7., 7.);
+//        List<Double> moveOrigin_3 =  Arrays.asList(0., 0., 1.75, 1.75, 1.75, 5.25, 5.25, 7., 7., 7.);
+//        List<Double> moveOrigin_4 =  Arrays.asList(0., 1.8, 3.6, 3.6, 5.4, 5.4, 7.2, 9., 9., 9.);
+//        List<Double> moveOrigin_5 =  Arrays.asList(0., 1.8, 5.4, 9., 12.6, 16.2, 16.2, 16.2, 18., 18.);
+//        int[] polinome = {2,3,3,3,4};
+        //Tema
+        List<Double> moveOrigin_1 =  Arrays.asList(0., 0., 0., 0., 0., 0., 0., 0., 0.);
+        List<Double> moveOrigin_2 =  Arrays.asList(0., 1.8, 1.8, 1.8, 3.6, 5.4, 7.2, 7.2, 9.);
+        List<Double> moveOrigin_3 =  Arrays.asList(0., 1.25, 1.25, 2.5, 5., 8.75, 12.5, 13.75, 15.);
+        List<Double> moveOrigin_4 =  Arrays.asList(0., 0., 0., 1.2, 3.6, 6., 8.4, 10.8, 9.6);
+        List<Double> moveOrigin_5 =  Arrays.asList(0., 1.25, 3.75, 3.75, 5., 5., 5., 5., 5.);
         int[] polinome = {2,3,3,3,4};
+
+
 
 
         List<List<Double>> listOfMoveOrigin = new ArrayList<>();
         listOfMoveOrigin.addAll(Arrays.asList(moveOrigin_1,moveOrigin_2,moveOrigin_3,moveOrigin_4,moveOrigin_5));
         int i = 0;
+        List<List<List<Double>>> approxMoveChannelInterval = new ArrayList<>();
+        List<List<List<Double>>> impidanceChannelInterval = new ArrayList<>();
+
+
         for (String signalName : CLEAR_SIGNALS) {
             System.out.println("Channel #"+(i+1));
             List<Double> signal = ((SignalModel) registeredModels.get(signalName)).getList();
@@ -289,6 +302,8 @@ public class ThisController extends AbstractController {
             List<Double> moveBadList =  listOfMoveOrigin.get(i);
 
             MySpesificCorrelation myCor = new MySpesificCorrelation(moveBadList, signal, polinome[i]);
+            approxMoveChannelInterval.add(myCor.getApproxMovies());
+            impidanceChannelInterval.add(myCor.getMiniSignal());
             System.out.println("Корреляция до удаления тренда");
             myCor.removeTrends = false;
             myCor.getSignalInFrame(false, signalName);
@@ -312,8 +327,24 @@ public class ThisController extends AbstractController {
 
             i++;
         }
-
-//        String signalName = CLEAR_1;
+        System.out.println("CROSS CORRELATION");
+        for (int i1 = 0; i1 < approxMoveChannelInterval.size(); i1++) {
+            System.out.println("Channel "+(i1+1));
+            MyCrossCorrelation cross = new MyCrossCorrelation(approxMoveChannelInterval,impidanceChannelInterval);
+            List<Double> correlations = cross.getCorrelationMoveWithImpedanceS(i1);
+            correlations.forEach(e-> System.out.printf("%.3f  ", e));
+            System.out.println();
+        }
+        System.out.println("CROSS CORRELATION without trend");
+        for (int i1 = 0; i1 < approxMoveChannelInterval.size(); i1++) {
+            System.out.println("Channel "+(i1+1));
+            MyCrossCorrelation cross = new MyCrossCorrelation(approxMoveChannelInterval,impidanceChannelInterval);
+            cross.removeTrends = true;
+            List<Double> correlations = cross.getCorrelationMoveWithImpedanceS(i1);
+            correlations.forEach(e-> System.out.printf("%.3f  ", e));
+            System.out.println();
+        }
+//  String signalName = CLEAR_1;
 //        List<Double> signal = ((SignalModel) registeredModels.get(signalName)).getList();
 //        signal = SignalProccesor.invert(signal);
 //        List<Double> moveBadList =  Arrays.asList(0.,0.,0.,0.,3.6,5.4,5.4,7.2,7.2);
@@ -326,6 +357,10 @@ public class ThisController extends AbstractController {
 //        myCor.getSignalInFrame(true);
 //        System.out.println("Corellation after approximation");
 //        myCor.getCorrelAprox().forEach(e-> System.out.printf("%.3f  ", e));
+
+    }
+
+    public void crossCorrelation() {
 
     }
 }
