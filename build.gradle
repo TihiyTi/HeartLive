@@ -107,6 +107,12 @@ project(':implements:fx-application'){
         compile group: 'org.springframework', name:'spring-context', version:'4.1.0.RELEASE'
     }
 }
+project(':implements:param-finder'){
+    version = '0.1'
+    dependencies{
+        compile project(':ReoProcces')
+    }
+}
 
 task RadiusCalculation(type:Copy, dependsOn: [':implements:radius-calculation:jar', ':implements:radius-calculation:createOut']){
     from 'implements/radius-calculation/build/libs'

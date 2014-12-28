@@ -19,7 +19,7 @@ public class SphereCalc {
         return value;
     }
 
-    public double potentialInPointFromElectrode(double toEl, double toPt, double cosElPt){
+    private double potentialInPointFromElectrode(double toEl, double toPt, double cosElPt){
         double potentialValue;
         potentialValue = p.roTissue/(Math.PI*toEl)*summaPoN(10, toPt, toEl, cosElPt);
         return potentialValue;
