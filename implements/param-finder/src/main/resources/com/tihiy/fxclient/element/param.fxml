@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2"
+      fx:controller="com.tihiy.fxclient.element.ParamController">
+    <HBox>
+        <Label text="ro1,Omh*m" />
+        <TextField fx:id="ro1begin"/>
+        <TextField fx:id="ro1end"/>
+    </HBox>
+    <HBox>
+        <Label  text="R, m    " />
+        <TextField fx:id="rBegin"/>
+        <TextField fx:id="rEnd"/>
+    </HBox>
+    <HBox>
+        <Label  text="H, m    " />
+        <TextField fx:id="hBegin"/>
+        <TextField fx:id="hEnd"/>
+    </HBox>
+    <HBox>
+        <Label  text="y, m    " />
+        <TextField fx:id="yBegin"/>
+        <TextField fx:id="yEnd"/>
+    </HBox>
+</VBox>

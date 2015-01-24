@@ -110,6 +110,7 @@ project(':implements:fx-application'){
 project(':implements:param-finder'){
     version = '0.1'
     dependencies{
+        compile group: 'org.springframework', name:'spring-context', version:'4.1.0.RELEASE'
         compile project(':ReoProcces')
     }
 }

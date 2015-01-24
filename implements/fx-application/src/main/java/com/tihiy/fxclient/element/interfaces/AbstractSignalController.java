@@ -16,7 +16,6 @@ public abstract class AbstractSignalController {
         this.models = Arrays.asList(model);
     }
 
-
     protected abstract void bindSignal();
     protected abstract void bindName();
     protected abstract void bindSampleFreq();

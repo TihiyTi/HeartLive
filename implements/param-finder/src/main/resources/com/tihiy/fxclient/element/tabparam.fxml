@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+
+<TabPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2"
+         fx:controller="com.tihiy.fxclient.element.TabParamController" tabClosingPolicy="UNAVAILABLE">
+    <Tab text="1 channel">
+        <fx:include fx:id="param1" source="param.fxml"/>
+    </Tab>
+    <Tab text="2 channel">
+        <fx:include fx:id="param2" source="param.fxml"/>
+    </Tab>
+    <Tab text="3 channel">
+        <fx:include fx:id="param3" source="param.fxml"/>
+    </Tab>
+    <Tab text="4 channel">
+        <fx:include fx:id="param4" source="param.fxml"/>
+    </Tab>
+    <Tab text="5 channel">
+        <fx:include fx:id="param5" source="param.fxml"/>
+    </Tab>
+</TabPane>

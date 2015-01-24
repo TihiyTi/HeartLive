@@ -1,3 +1,5 @@
+package com.tihiy.fxclient;
+
 import com.tihiy.WindowUtils;
 import com.tihiy.jfreeclient.SignalJFreePanel;
 import com.tihiy.reonew.SphereCalc;
@@ -23,12 +25,12 @@ public class MinSKOFinder {
     private int minH = 0;
     private double minRo = 0;
     private int minY = 0;
-    private List<Double> minModelList;
+    private double minSKO = Double.MAX_VALUE;
+    public List<Double> minModelList;
 
     public static boolean DEBUG = false;
 
     public void getParamWithMinSKO(List<Double> experimentalList){
-        Double minSKO = Double.MAX_VALUE;
         for(int h = bH; h < eH; h++){
             for(int r = bR; r < eR; r++){
                 for(double ro = bRo; ro < eRo; ro = ro + 0.1){
@@ -54,7 +56,7 @@ public class MinSKOFinder {
         }
     }
 
-    public List<Double> getModelData(int expSize, int h, int r, double ro, int y) {
+    private List<Double> getModelData(int expSize, int h, int r, double ro, int y) {
         List<Double> modelList = new ArrayList<>();
         SphereModelParam param = new SphereModelParam(ro, 1.35, 0.05, 0.025, r/1000., h/1000., 0, y/1000.);
         SphereCalc calc = new SphereCalc(param);
@@ -69,7 +71,7 @@ public class MinSKOFinder {
         return modelList;
     }
 
-    public Double SKO(List<Double> list1, List<Double> list2){
+    private Double SKO(List<Double> list1, List<Double> list2){
         Double summa = (double) 0;
         for (int i = 0; i < list1.size(); i++) {
             Double delta = list1.get(i) - list2.get(i);
@@ -99,6 +101,11 @@ public class MinSKOFinder {
         System.out.println("Min H = " + minH);
         System.out.println("Min ro = " + minRo);
         System.out.println("Min Y = " + minY);
+    }
+    public String returnResult(){
+        return "Min R = " + minR + "\r\n" + "Min H = " + minH + "\r\n"+
+                "Min ro = " + minRo  + "\r\n" + "Min Y = " + minY + "\r\n" +
+                "SKO = " +  minSKO + "\r\n";
     }
 
     public static void main(String[] args) {
@@ -131,7 +138,7 @@ public class MinSKOFinder {
         frame.getContentPane().add(getSignal(modelList, expList));
         WindowUtils.centerOnScreenAndSetVisible(frame);
     }
-    public JPanel getSignal(List<Double> modelList, List<Double> expList){
+    private JPanel getSignal(List<Double> modelList, List<Double> expList){
         return getPanelWithSignal(modelList, expList);
     }
 

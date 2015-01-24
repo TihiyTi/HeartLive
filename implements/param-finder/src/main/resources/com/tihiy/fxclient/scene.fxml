@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.tihiy.fxclient.element.Controller">
+  <bottom>
+    <Button text="Button" onAction="#calculate"/>
+  </bottom>
+  <left>
+    <fx:include fx:id="tabParam1" source="element/tabparam.fxml" />
+  </left>
+    <right>
+        <TextArea fx:id="area"/>
+    </right>
+</BorderPane>

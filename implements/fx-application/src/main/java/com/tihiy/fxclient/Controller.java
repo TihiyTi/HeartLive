@@ -21,8 +21,11 @@ public class Controller implements Initializable{
 
     public TabPane tab1;
     public TabPane tab2;
+    public TabPane tab3;
     public TabParamController tab1Controller;
     public TabParamController tab2Controller;
+    public TabParamController tab3Controller;
+
     public BorderPane sid;
 
     StringProperty bufProp1 = new SimpleStringProperty();
