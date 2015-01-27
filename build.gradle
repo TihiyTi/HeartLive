@@ -112,6 +112,7 @@ project(':implements:param-finder'){
     dependencies{
         compile group: 'org.springframework', name:'spring-context', version:'4.1.0.RELEASE'
         compile project(':ReoProcces')
+        compile project(':DigitalSignalProcessing')
     }
 }
 

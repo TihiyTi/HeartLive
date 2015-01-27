@@ -12,6 +12,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MinSKOFinder {
+    public static int PARAM_H = 0;
+    public static int PARAM_R = 1;
+    public static int PARAM_Y = 2;
+    public static int PARAM_RO1 = 3;
+
     private int bR = 0;
     private int eR = 0;
     private int bH = 0;
@@ -56,12 +61,37 @@ public class MinSKOFinder {
         }
     }
 
-    private List<Double> getModelData(int expSize, int h, int r, double ro, int y) {
+    private List<Double> getModelData(int size, int h, int r, double ro, int y) {
         List<Double> modelList = new ArrayList<>();
         SphereModelParam param = new SphereModelParam(ro, 1.35, 0.05, 0.025, r/1000., h/1000., 0, y/1000.);
         SphereCalc calc = new SphereCalc(param);
-        for (int i = 0; i < expSize; i++) {
-            param.setYShift(y/1000. + 0.005*i);
+        for (int i = 0; i < size; i++) {
+            param.setYShift(y / 1000. + 0.005 * i);
+            modelList.add(calc.getMeasurementFullImp());
+        }
+        if (DEBUG){
+            System.out.println("Ro = " + ro);
+//            System.out.println(modelList.toString());
+        }
+        return modelList;
+    }
+    public List<Double> getModelData(int size, int h, int r, double ro, int y, int stepInMillimeterOrMilliomh, int PARAM) {
+        List<Double> modelList = new ArrayList<>();
+        SphereModelParam param = new SphereModelParam(ro, 1.35, 0.05, 0.025, r/1000., h/1000., 0, y/1000.);
+        SphereCalc calc = new SphereCalc(param);
+        for (int i = 0; i < size; i++) {
+            if(PARAM == PARAM_Y){
+                param.setYShift(stepInMillimeterOrMilliomh /1000. * (i-size/2));
+            }
+            if(PARAM == PARAM_H){
+                param.setH(stepInMillimeterOrMilliomh /1000. * i);
+            }
+            if(PARAM == PARAM_R){
+                param.setrSphere(stepInMillimeterOrMilliomh /1000. * i);
+            }
+            if(PARAM == PARAM_RO1){
+                param.setRoTissue(stepInMillimeterOrMilliomh/1000. * i);
+            }
             modelList.add(calc.getMeasurementFullImp());
         }
         if (DEBUG){
@@ -146,11 +176,11 @@ public class MinSKOFinder {
         List<List<Double>> listOfSignal = new ArrayList<>();
         List<String> listOfNames = new ArrayList<>();
         listOfSignal.add(oneList);
-        listOfSignal.add(twoList);
         listOfNames.add("ModelList");
-        listOfNames.add("ExpList");
-        List<Double> listOfScales = Arrays.asList(0.05,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.);
-        SignalJFreePanel signalJFreePanel = new SignalJFreePanel(listOfSignal, listOfNames);
-        return signalJFreePanel;
+        if(twoList!=null){
+            listOfSignal.add(twoList);
+            listOfNames.add("ExpList");
+        }
+        return new SignalJFreePanel(listOfSignal, listOfNames);
     }
 }

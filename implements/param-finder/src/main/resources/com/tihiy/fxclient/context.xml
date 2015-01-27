@@ -11,6 +11,6 @@
         <property name="model" ref="tabParamModel"/>
     </bean>
     <bean class="com.tihiy.fxclient.element.ParamController" scope="prototype"/>
-
+    <bean class="com.tihiy.fxclient.element.ParamController2" scope="prototype"/>
     <bean id="tabParamModel" class="com.tihiy.fxclient.element.TabParamModel"/>
 </beans>

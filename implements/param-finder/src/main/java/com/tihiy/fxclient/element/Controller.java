@@ -1,11 +1,14 @@
 package com.tihiy.fxclient.element;
 
+import com.tihiy.fxclient.Derivative;
 import com.tihiy.fxclient.MinSKOFinder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.VBox;
 
 import java.io.PrintStream;
 import java.net.URL;
@@ -16,6 +19,10 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable{
     public TabParamModel  model;
     public TextArea area;
+    public ChoiceBox choice;
+    public VBox param2;
+
+    private ParamController2 param2Controller;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -38,6 +45,57 @@ public class Controller implements Initializable{
         s = s.concat("\n Channel 5 \r\n");
         s = s.concat(channelCalc(expList_5, 4));
         area.textProperty().setValue(s);
+    }
+
+    public void graph(ActionEvent actionEvent) {
+        MinSKOFinder finder = new MinSKOFinder();
+        if(choice.getValue().equals("Radius")){
+//            System.out.println("Radius");
+//            List<Double> listR = finder.getModelData(100,
+//                    param2Controller.get(ParamController2.H).intValue(),
+//                    param2Controller.get(ParamController2.R).intValue(),
+//                    param2Controller.get(ParamController2.RO1),
+//                    param2Controller.get(ParamController2.Y).intValue(),
+//                    1, MinSKOFinder.PARAM_R);
+            System.out.println("Radius");
+            List<Double> listR = finder.getModelData(100, model.get(0, TabParamModel.HB).intValue(), model.get(0, TabParamModel.RB).intValue(),
+                    model.get(0, TabParamModel.RO1B).intValue(),model.get(0, TabParamModel.YB).intValue(), 1,
+                    MinSKOFinder.PARAM_R);
+            List<Double> derR = Derivative.derivativeSimple(listR, 1.);
+            finder.getSignalInFrame("Zbase(Radius)", listR, null);
+            finder.getSignalInFrame("dZbase/dRadius", derR, null);
+        }
+        if(choice.getValue().equals("yShift")){
+            System.out.println("yShift");
+            List<Double> listY = finder.getModelData(200, model.get(0, TabParamModel.HB).intValue(), model.get(0, TabParamModel.RB).intValue(),
+                    model.get(0, TabParamModel.RO1B).intValue(),model.get(0, TabParamModel.YB).intValue(), 1,
+                    MinSKOFinder.PARAM_Y);
+            List<Double> derY = Derivative.derivativeSimple(listY, 1.);
+            finder.getSignalInFrame("Zbase(yShift)", listY, null);
+            finder.getSignalInFrame("dZbase/dyShift", derY, null);
+        }
+        if(choice.getValue().equals("H")){
+            System.out.println("H");
+            List<Double> listH = finder.getModelData(50, model.get(0, TabParamModel.HB).intValue(), model.get(0, TabParamModel.RB).intValue(),
+                    model.get(0, TabParamModel.RO1B).intValue(), model.get(0, TabParamModel.YB).intValue(), 1,
+                    MinSKOFinder.PARAM_H);
+            List<Double> derH = Derivative.derivativeSimple(listH, 1.);
+            finder.getSignalInFrame("Zbase(H)", listH, null);
+            finder.getSignalInFrame("dZbase/dH", derH, null);
+        }
+        if(choice.getValue().equals("Ro1")){
+            System.out.println("Ro1");
+            List<Double> listRo1 = finder.getModelData(100, model.get(0, TabParamModel.HB).intValue(), model.get(0, TabParamModel.RB).intValue(),
+                    model.get(0, TabParamModel.RO1B).intValue(),model.get(0, TabParamModel.YB).intValue(), 100,
+                    MinSKOFinder.PARAM_RO1);
+            List<Double> derRo1 = Derivative.derivativeSimple(listRo1, 1.);
+            finder.getSignalInFrame("Zbase(Ro1)", listRo1, null);
+            finder.getSignalInFrame("dZbase/dRo1", derRo1, null);
+        }
+        List<Double> listH = finder.getModelData(50, model.get(0, TabParamModel.HB).intValue(), model.get(0, TabParamModel.RB).intValue(),
+                model.get(0, TabParamModel.RO1B).intValue(),model.get(0, TabParamModel.YB).intValue(), 1, MinSKOFinder.PARAM_Y);
+        List<Double> listRo = finder.getModelData(100, model.get(0, TabParamModel.HB).intValue(), model.get(0, TabParamModel.RB).intValue(),
+                model.get(0, TabParamModel.RO1B).intValue(), model.get(0, TabParamModel.YB).intValue(), 100, MinSKOFinder.PARAM_Y);
     }
 
     public void setModel(TabParamModel model) {
