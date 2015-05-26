@@ -36,7 +36,7 @@ public class TabParamController implements Initializable{
         listOfList.add(param5Controller.getListOfProperties());
         bindProperties(model.getAllProperties());
 
-        param1Controller.setDefaultValue(2,10, 20,80, 24,28, 0,50);
+        param1Controller.setDefaultValue(4.2,10, 50,80, 24,28, -100,100);
         param2Controller.setDefaultValue(2,10, 20,80, 18,22, 0,100);
         param3Controller.setDefaultValue(2,10, 20,80, 17,21, 0,50);
         param4Controller.setDefaultValue(2,10, 20,80, 18,22, 0,40);

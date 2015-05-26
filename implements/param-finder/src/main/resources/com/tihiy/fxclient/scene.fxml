@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.tihiy.fxclient.element.Controller">
-  <bottom>
-    <Button text="Button" onAction="#calculate"/>
-  </bottom>
-  <left>
-    <fx:include fx:id="tabParam1" source="element/tabparam.fxml" />
-  </left>
+    <bottom>
+        <HBox>
+            <Button text="Button" onAction="#calculate"/>
+            <Button text="Button2" onAction="#graph"/>
+            <ChoiceBox fx:id="choice">
+                        <String fx:value="Radius"/>
+                        <String fx:value="yShift"/>
+                        <String fx:value="H"/>
+                        <String fx:value="Ro1"/>
+                        <String fx:value="All"/>
+            </ChoiceBox>
+        </HBox>
+    </bottom>
+    <left>
+        <fx:include fx:id="tabParam1" source="element/tabparam.fxml" />
+    </left>
+    <center>
+        <fx:include fx:id="param2" source="element/param2.fxml"/>
+    </center>
     <right>
         <TextArea fx:id="area"/>
     </right>
