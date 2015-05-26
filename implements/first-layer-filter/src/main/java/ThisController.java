@@ -74,7 +74,7 @@ public class ThisController extends AbstractController {
             confimModel.setOutItem(listOfInItem);
             confimModel.setDataMap(map);
         }
-        signalFilterForAlex();
+        //signalFilterForAlex();
     }
 
     private void signalFilterForAlex(){

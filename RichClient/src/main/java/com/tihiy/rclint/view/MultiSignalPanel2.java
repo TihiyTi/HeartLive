@@ -94,7 +94,8 @@ public class MultiSignalPanel2 extends AbstractViewPanel{
                 int yPoint_1 = (int)((signal.get(i) - st.translateYNorm)*st.scaleY + st.translateY);
                 int yPoint_2 = (int)((signal.get(i+1) - st.translateYNorm)*st.scaleY + st.translateY);
 //                int yPoint_2 = (int)(signal.get(i+1)*st.scaleY + st.translateY);
-                g.drawLine(i/scale,yPoint_1, (i+1)/scale,yPoint_2);
+                int height = getHeight();
+                g.drawLine(i/scale,height-yPoint_1, (i+1)/scale,height-yPoint_2);
             }
         }
     }
